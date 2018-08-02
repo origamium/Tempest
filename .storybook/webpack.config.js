@@ -13,7 +13,17 @@ module.exports = {
 				loader: 'babel-loader!ts-loader',
 				exclude: /node_modules/,
 				include
-			}
-		]
+			},
+            {
+                test: /\.stories\.tsx?$/,
+                loaders: [
+                    {
+                        loader: require.resolve('@storybook/addon-storysource/loader'),
+                        options: {parser: 'typescript'}
+                    }
+                ],
+                enforce: 'pre',
+            }
+        ]
 	}
 };
