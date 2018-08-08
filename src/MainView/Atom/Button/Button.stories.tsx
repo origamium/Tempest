@@ -8,7 +8,7 @@ import {withInfo} from "@storybook/addon-info";
 
 import IconButtonHoC from './ReactionButtonHoCs/IconButtonHoC';
 import CheckIcon from '@material-ui/icons/Check';
-import {RepeatButton_} from './CommonIconButtons/RepeatButton';
+import {RepeatButton_} from './RepeatButton';
 
 const HoCNote = `
 This Component is HoC.  

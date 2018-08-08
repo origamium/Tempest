@@ -1,19 +1,30 @@
 import * as React from 'react';
-import IconButton from '@material-ui/core/IconButton';
+import styled from 'styled-components';
+import ButtonBase from '@material-ui/core/ButtonBase';
 import {SvgIconProps} from "@material-ui/core/SvgIcon/SvgIcon";
+import {ButtonStyle} from "../StyleType/ButtonStyleObject";
 
 type Props = {
-    handleClick: Function,
+    style: ButtonStyle,
     id: string,
+    handleClick: Function,
 };
+
+const StyledButton = styled(ButtonBase)<any>`
+    && {
+        ${(props: Props)=> `
+            fill: ${props.style.color}
+        `};
+    }
+`;
 
 const IconButtonHoC = (Icon: React.ComponentType<SvgIconProps>): Function => (
     (props: Props) => (
-        <IconButton onClick={(e) => props.handleClick({
+        <StyledButton onClick={() => props.handleClick({
             id: props.id,
         })}>
             <Icon/>
-        </IconButton>
+        </StyledButton>
 ));
 
 export default IconButtonHoC;
