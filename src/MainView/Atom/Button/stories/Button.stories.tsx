@@ -15,7 +15,7 @@ This Component is HoC.
 So, Look STORYSOURCE.
 `;
 
-const sampleId = 'sample-id-0123456789'
+const sampleId = 'sample-id-0123456789';
 const negativeColor = "#7D7D7D";
 
 storiesOf('Button/IconButton', module)
