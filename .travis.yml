@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+    - "10"
+cache:
+    yarn: true
+    directories:
+        - node_modules
+install:
+    - yarn
+before_deploy:
+    - yarn run build-storybook
+deploy:
+    provider: pages
+    local-dir: "storybook-static"
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    keep-history: true
+    on:
+        branch: master
