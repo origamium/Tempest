@@ -7,6 +7,7 @@ cache:
         - node_modules
 install:
     - yarn
+script:
 before_deploy:
     - yarn run build-storybook
 deploy:
