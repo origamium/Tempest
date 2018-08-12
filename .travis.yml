@@ -8,6 +8,7 @@ cache:
 install:
     - yarn
 script:
+    - echo "nothing!"
 before_deploy:
     - yarn run build-storybook
 deploy:
