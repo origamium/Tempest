@@ -1,3 +1,4 @@
+/*tslint:disable*/
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {withNotes} from "@storybook/addon-notes";
