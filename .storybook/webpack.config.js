@@ -8,12 +8,23 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{
-				test: /\.tsx/,
-				loader: 'babel-loader!ts-loader',
-				exclude: /node_modules/,
-				include
-			},
+            {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                use: [
+                    {
+                        loader: 'url-loader'
+                    },
+                ]
+            },
+            {
+                test: /\.tsx?$/,
+                use: [
+                    require.resolve("ts-loader"),
+                    require.resolve("react-docgen-typescript-loader"),
+                ],
+                exclude: /node_modules/,
+                include
+            },
             {
                 test: /\.stories\.tsx?$/,
                 loaders: [
