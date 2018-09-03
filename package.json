@@ -15,9 +15,10 @@
     "styled-components": "^3.3.3"
   },
   "scripts": {
-    "build": "react-scripts-ts build",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "env": "cross-env NODE_PATH=./src",
+    "build": "yarn run env react-scripts-ts build",
+    "storybook": "yarn run env start-storybook -p 6006",
+    "build-storybook": "yarn run env build-storybook"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.8",
@@ -43,6 +44,7 @@
     "@types/storybook__react": "^3.0.8",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
+    "cross-env": "^5.2.0",
     "react-docgen-typescript": "^1.6.3",
     "react-docgen-typescript-loader": "^2.2.0",
     "react-intl-translations-manager": "^5.0.3",
