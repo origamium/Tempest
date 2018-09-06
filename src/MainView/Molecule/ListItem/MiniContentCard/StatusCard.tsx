@@ -26,9 +26,7 @@ const Styled = {
 
 type Props = {
     account: string,
-    id: string,
-    avatar: string,
-    content: string,
+    target: IDataType["status"],
     handleClick: Function,
 }
 
@@ -36,14 +34,14 @@ const handleClick = (props: Props) => (e: any) => {
     e.preventDefault();
     props.handleClick({
         account: props.account,
-        id: props.id,
+        id: props.target[StatusProperties.id],
     });
 };
 
 const StatusCard: React.SFC<Props> = (props: Props) => (
     <Styled.Root onClick={handleClick(props)}>
-        <Styled.Avatar src={props.avatar} />
-        <Typography variant="body1">{props.content}</Typography>
+        <Styled.Avatar src={props.target.avatarImage} />
+        <Typography variant="body1">{props.target.content}</Typography>
     </Styled.Root>
 );
 
