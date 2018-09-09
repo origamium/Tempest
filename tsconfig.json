@@ -12,7 +12,9 @@
     "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDir": "src",
+    "paths": {
+      "data": ["lib/data/src"]
+    },
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": false,

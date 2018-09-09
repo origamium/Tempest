@@ -1,6 +1,5 @@
 /*tslint:disable*/
 import * as React from 'react';
-import * as ReactMarkdown from 'react-markdown';
 import {storiesOf} from '@storybook/react';
 import {withKnobs, text} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
@@ -16,19 +15,7 @@ import Headers from '../../../../__testdata__/header/header';
 
 const sampleId = 'sample-id-0123456789';
 
-const description = `
-# Card Components
-Card コンポーネントは、引用されたステータス及びユーザー情報を表示するためのコンポーネントです。  
-
-## 制限
-横幅は100%です。Column Componentsの横幅によって大きさを変えるためです。
-`;
-
-storiesOf("Content/Card", module)
-    .add('description', () =>
-    <ReactMarkdown source={description} />);
-
-storiesOf("Content/Card/StatusCard", module)
+storiesOf("MainView|Content/Card/StatusCard", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
@@ -36,16 +23,22 @@ storiesOf("Content/Card/StatusCard", module)
             <ThemeProvider theme={Theme.Light}>
                 <StatusCard_
                     account={text('account', 'accountid@example.org')}
-                    id={text('id', sampleId)}
-                    avatar={Icons.origami}
-                    content={text("status text", "woaoooooaooao")}
+                    target={{
+                        id: text('id', sampleId),
+                        text: text('status text', 'yeah'),
+                        date: text('status date', '1234 56 78, 9:12.3'),
+                        user: {
+                            id: text('source user id', '123456789abcdef'),
+                            screenName: text('screen name', 'arclisp'),
+                        }
+                    }}
                     handleClick={action('status clicked!')}/>
             </ThemeProvider>
         )
     ))
 ;
 
-storiesOf("Content/Card/AccountCard", module)
+storiesOf("MainView|Content/Card/AccountCard", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
