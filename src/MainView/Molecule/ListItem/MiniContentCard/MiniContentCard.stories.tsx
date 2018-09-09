@@ -15,7 +15,7 @@ import Headers from '../../../../__testdata__/header/header';
 
 const sampleId = 'sample-id-0123456789';
 
-storiesOf("Content/Card/StatusCard", module)
+storiesOf("MainView|Content/Card/StatusCard", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
@@ -23,16 +23,22 @@ storiesOf("Content/Card/StatusCard", module)
             <ThemeProvider theme={Theme.Light}>
                 <StatusCard_
                     account={text('account', 'accountid@example.org')}
-                    id={text('id', sampleId)}
-                    avatar={Icons.origami}
-                    content={text("status text", "woaoooooaooao")}
+                    target={{
+                        id: text('id', sampleId),
+                        text: text('status text', 'yeah'),
+                        date: text('status date', '1234 56 78, 9:12.3'),
+                        user: {
+                            id: text('source user id', '123456789abcdef'),
+                            screenName: text('screen name', 'arclisp'),
+                        }
+                    }}
                     handleClick={action('status clicked!')}/>
             </ThemeProvider>
         )
     ))
 ;
 
-storiesOf("Content/Card/AccountCard", module)
+storiesOf("MainView|Content/Card/AccountCard", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(

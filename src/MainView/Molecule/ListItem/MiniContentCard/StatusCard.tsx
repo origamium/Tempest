@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
 import {pure} from 'recompose';
 import styled from '../../../../Theme/style';
+import {IStatus, StatusProperties} from '../../../../../lib/data/src';
 
 const Styled = {
     Avatar: styled(_Avatar)`
@@ -26,7 +27,7 @@ const Styled = {
 
 type Props = {
     account: string,
-    target: IDataType["status"],
+    target: IStatus,
     handleClick: Function,
 }
 
@@ -40,8 +41,8 @@ const handleClick = (props: Props) => (e: any) => {
 
 const StatusCard: React.SFC<Props> = (props: Props) => (
     <Styled.Root onClick={handleClick(props)}>
-        <Styled.Avatar src={props.target.avatarImage} />
-        <Typography variant="body1">{props.target.content}</Typography>
+        <Styled.Avatar src={props.target[StatusProperties.user].avatarImage} />
+        <Typography variant="body1">{props.target.text}</Typography>
     </Styled.Root>
 );
 

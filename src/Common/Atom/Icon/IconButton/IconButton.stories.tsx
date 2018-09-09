@@ -7,9 +7,9 @@ import {action} from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
 import {withInfo} from "@storybook/addon-info";
 
-import IconButtonHoC from '../ReactionButtonHoCs/IconButtonHoC';
+import IconButtonHoC from './ReactionButtonHoCs/IconButtonHoC';
 import CheckIcon from '@material-ui/icons/Check';
-import {FavoriteButton, RepeatButton, ReplyButton} from '../IconButton';
+import {FavoriteButton, RepeatButton, ReplyButton} from './IconButton';
 
 const HoCNote = `
 This Component is HoC.  
@@ -19,7 +19,7 @@ So, Look STORYSOURCE.
 const sampleId = 'sample-id-0123456789';
 const negativeColor = "#7D7D7D";
 
-storiesOf('Button/IconButton', module)
+storiesOf('Common|Button/IconButton', module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('Info',
@@ -37,7 +37,7 @@ storiesOf('Button/IconButton', module)
                 })
             )));
 
-storiesOf('Button/IconButton/Buttons', module)
+storiesOf('Common|Button/IconButton/Buttons', module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('Reply Button', () =>
@@ -60,7 +60,7 @@ storiesOf('Button/IconButton/Buttons', module)
             }}
             active={boolean('active', true)}
             handleClick={action('clicked')}/>)
-    .add('Fanorite Button', () =>
+    .add('Favorite Button', () =>
         <FavoriteButton
             id={text('id',sampleId)}
             style={{
