@@ -19,7 +19,7 @@ So, Look STORYSOURCE.
 const sampleId = 'sample-id-0123456789';
 const negativeColor = "#7D7D7D";
 
-storiesOf('Common|Button/IconButton', module)
+storiesOf('Common Components|Button/IconButton', module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('Info',
@@ -37,7 +37,7 @@ storiesOf('Common|Button/IconButton', module)
                 })
             )));
 
-storiesOf('Common|Button/IconButton/Buttons', module)
+storiesOf('Common Components|Button/IconButton/Buttons', module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('Reply Button', () =>

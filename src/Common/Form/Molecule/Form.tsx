@@ -1,14 +1,13 @@
 import * as React from 'react';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
-import Field from './Field';
+import Field from '../Atom/Field';
 
 export type FormProps = {
     /* unique key */
     id: string,
     /* accept file type.. */
     accept: string,
-
 }
 
 type FormState = {

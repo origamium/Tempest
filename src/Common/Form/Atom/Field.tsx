@@ -3,7 +3,7 @@ import { pure } from 'recompose';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 
-export type FormProps = {
+export type FieldProps = {
     /* unique key */
     id: string,
     /* text field helper text */
@@ -18,7 +18,7 @@ export type FormProps = {
     value: string,
     /* field onChange function */
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-}
+};
 
 const Styled = {
     Root: styled(TextField)`
@@ -28,14 +28,14 @@ const Styled = {
     `,
 };
 
-const getHelperText = (props: FormProps): string => {
+const getHelperText = (props: FieldProps): string => {
     if(props.error || props.warn) {
         return props.error ? props.error : props.warn || "";
     }
     return props.helperText || "";
 };
 
-const Field: React.SFC<FormProps> = (props: FormProps) => (
+const Field: React.SFC<FieldProps> = (props: FieldProps) => (
     <Styled.Root
         value={props.value}
         onChange={props.handleChange}
@@ -45,7 +45,7 @@ const Field: React.SFC<FormProps> = (props: FormProps) => (
         multiline
         margin="none"
         fullWidth
-        rowsMax={8}/>
+        rowsMax={6}/>
 );
 
 Field.defaultProps = {
@@ -54,5 +54,5 @@ Field.defaultProps = {
     maxRow: 8,
 };
 
-export const Form_ = Field;
+export const Field_ = Field;
 export default pure(Field);

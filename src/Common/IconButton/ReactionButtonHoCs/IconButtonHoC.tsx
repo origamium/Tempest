@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {SvgIconProps} from "@material-ui/core/SvgIcon/SvgIcon";
-import {IconButtonProps} from "../Types/IconButtonProps";
+import {IconButtonProps} from "../IconButton";
 
 const StyledButton = styled(ButtonBase)<any>`
     && {
