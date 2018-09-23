@@ -26,9 +26,7 @@ const IconButtonHoC = (Icon: React.ComponentType<SvgIconProps>): Function => (
         <StyledButton
             color={props.active ? props.style.activeColor : props.style.negativeColor}
             size={props.style.size}
-            onClick={() => props.handleClick({
-                id: props.id,
-            })}>
+            onClick={props.handleClick}>
             <Icon/>
         </StyledButton>
     )
