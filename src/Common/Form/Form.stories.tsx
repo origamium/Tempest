@@ -13,7 +13,7 @@ const StoryNamePrefix = "Common Components|Form/";
 
 const sampleId = 'arclisp@twitter.com:1:01';
 
-storiesOf(StoryNamePrefix + "Atom/Field", module)
+storiesOf(StoryNamePrefix + "Atom", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
@@ -22,7 +22,7 @@ storiesOf(StoryNamePrefix + "Atom/Field", module)
         )
     ))
 
-storiesOf(StoryNamePrefix + "Molecule/Form", module)
+storiesOf(StoryNamePrefix + "Molecule", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
