@@ -23,7 +23,7 @@ export type FieldProps = {
 const Styled = {
     Root: styled(TextField)`
         && {
-            // ...
+            flex: auto 1 0;
         }
     `,
 };
@@ -45,13 +45,13 @@ const Field: React.SFC<FieldProps> = (props: FieldProps) => (
         multiline
         margin="none"
         fullWidth
-        rowsMax={6}/>
+        rowsMax={props.maxRow}/>
 );
 
 Field.defaultProps = {
     error: undefined,
     warn: undefined,
-    maxRow: 8,
+    maxRow: 6,
 };
 
 export const Field_ = Field;
