@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from "@storybook/react";
 import centered from '@storybook/addon-centered';
 import { withInfo } from "@storybook/addon-info";
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Form from './Molecule/Form';
@@ -27,7 +27,6 @@ storiesOf(StoryNamePrefix + "Molecule", module)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
         () => (
-            <Form id={text("id", sampleId)}
-                accept={'image/jpeg, image/png, image/gif'}/>
+            <Form id={text("id", sampleId)} maxTextLength={number("max text length", 140)} requestPost={action('request post!')}/>
         )
     ))
