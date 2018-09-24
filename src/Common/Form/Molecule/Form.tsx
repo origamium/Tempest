@@ -40,7 +40,7 @@ const Styled = {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-    `
+    `,
 };
 
 const ButtonStyle: IconButtonStyle = {
@@ -53,7 +53,10 @@ class Form extends React.Component<FormProps, FormState> {
     constructor(props: FormProps) {
         super(props);
         this.state = Form.defaultState;
+        this.fileInput = React.createRef();
     }
+
+    private fileInput: any;
 
     static defaultState: FormState = {
         text: "",
@@ -65,15 +68,10 @@ class Form extends React.Component<FormProps, FormState> {
         const {id, accept, error} = this.props;
         const {text, warn} = this.state;
         return (
-            <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop}>
-                <Field
-                    id={id}
-                    value={text}
-                    warn={warn}
-                    error={error}
-                    handleChange={this.handleFieldChange} />
+            <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
+                <Field id={id} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
                 <Styled.Buttons>
-                    {IconButtonHoC(ClipIcon)({style: ButtonStyle, id, active: false, handleClick: this.handleOpenAddFileDIalog})}
+                    {IconButtonHoC(ClipIcon)({style: ButtonStyle, id, active: false, handleClick: () => this.fileInput.open()})}
                     {IconButtonHoC(SendIcon)({style: ButtonStyle, id, active: false, handleClick: this.handleRequestPost})}
                 </Styled.Buttons>
             </Styled.Root>
@@ -86,10 +84,6 @@ class Form extends React.Component<FormProps, FormState> {
 
     handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         this.setState({ text: event.target.value });
-    };
-
-    handleOpenAddFileDIalog = () => {
-        // TODO
     };
 
     handleFileDrop = (file: File[]): void => {
