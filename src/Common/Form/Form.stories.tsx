@@ -27,6 +27,9 @@ storiesOf(StoryNamePrefix + "Molecule", module)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
         () => (
-            <Form id={text("id", sampleId)} maxTextLength={number("max text length", 140)} requestPost={action('request post!')}/>
+            <Form id={text("id", sampleId)}
+                  maxTextLength={number("max text length", 140)}
+                  handleFileUpload={action('request file upload')}
+                  requestPost={action('request post!')}/>
         )
     ))
