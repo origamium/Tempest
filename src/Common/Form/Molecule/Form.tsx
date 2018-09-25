@@ -8,8 +8,10 @@ import ClipIcon from '@material-ui/icons/AttachFile';
 import {IconButtonStyle} from "../../IconButton/IconButton";
 
 export type FormProps = {
-    /* unique key */
+    /* unique key. column uid */
     id: string,
+    /* account id */
+    account: string,
     /* accept file type.. */
     accept?: string,
     /* open file upload dialog */
@@ -19,7 +21,7 @@ export type FormProps = {
     /* error message */
     error?: string,
     /* post it! */
-    requestPost: (Function, text: string, file?: File[]) => void,
+    requestPost: (Function, object: {account: string, id: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
 }
 
 type FormState = {
@@ -114,7 +116,9 @@ class Form extends React.Component<FormProps, FormState> {
 
     handleRequestPost = (e: Event): void => {
         e.preventDefault();
-        this.props.requestPost(this.handleClear, this.state.text, this.state.file);
+        const {account, id} = this.props;
+        const {text, file} = this.state;
+        this.props.requestPost(this.handleClear, {account, id, text, file});
     }
 }
 

@@ -11,6 +11,7 @@ import { Field_ } from "./Atom/Field";
 
 const StoryNamePrefix = "Common Components|Form/";
 
+const sampleAccountId = "arclisp@twitter.com";
 const sampleId = 'arclisp@twitter.com:1:01';
 
 storiesOf(StoryNamePrefix + "Atom", module)
@@ -27,7 +28,8 @@ storiesOf(StoryNamePrefix + "Molecule", module)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
         () => (
-            <Form id={text("id", sampleId)}
+            <Form account={text('account id', sampleAccountId)}
+                  id={text("id", sampleId)}
                   maxTextLength={number("max text length", 140)}
                   handleFileUpload={action('request file upload')}
                   requestPost={action('request post!')}/>
