@@ -6,7 +6,7 @@ import { withInfo } from "@storybook/addon-info";
 import { withKnobs, text, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import Form from './Molecule/Form';
+import Form from './Form';
 import { Field_ } from "./Atom/Field";
 
 const StoryNamePrefix = "Common Components|Form/";
@@ -14,7 +14,7 @@ const StoryNamePrefix = "Common Components|Form/";
 const sampleAccountId = "arclisp@twitter.com";
 const sampleId = 'arclisp@twitter.com:1:01';
 
-storiesOf(StoryNamePrefix + "Atom", module)
+storiesOf(StoryNamePrefix + "Atom/Field", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
@@ -23,7 +23,7 @@ storiesOf(StoryNamePrefix + "Atom", module)
         )
     ))
 
-storiesOf(StoryNamePrefix + "Molecule", module)
+storiesOf("Common Components|Form", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(

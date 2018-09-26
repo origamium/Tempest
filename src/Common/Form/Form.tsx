@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
-import Field from '../Atom/Field';
-import IconButtonHoC from "../../IconButton/ReactionButtonHoCs/IconButtonHoC";
+import Field from './Atom/Field';
+import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
 import SendIcon from '@material-ui/icons/Send';
 import ClipIcon from '@material-ui/icons/AttachFile';
-import {IconButtonStyle} from "../../IconButton/IconButton";
+import {IconButtonStyle} from "../IconButton/IconButton";
 
 export type FormProps = {
     /* unique key. column uid */
