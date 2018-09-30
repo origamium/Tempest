@@ -3,7 +3,7 @@ import IconButtonHoC from './ReactionButtonHoCs/IconButtonHoC';
 import {Clear, Reply, Repeat, Favorite, Send, AttachFile} from "@material-ui/icons";
 
 export type IconButtonStyle = {
-    activeColor: string,
+    activeColor?: string,
     negativeColor: string,
     size: number,
 };
