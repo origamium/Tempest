@@ -9,12 +9,12 @@ import { action } from "@storybook/addon-actions";
 import Form from './Form';
 import { Field_ } from "./Field";
 
-const StoryNamePrefix = "Common Components|Form/";
+const StoryNamePrefix = "Common Components|Form";
 
 const sampleAccountId = "arclisp@twitter.com";
 const sampleId = 'arclisp@twitter.com:1:01';
 
-storiesOf(StoryNamePrefix + "Atom/Field", module)
+storiesOf(StoryNamePrefix + "/Field", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
@@ -23,15 +23,25 @@ storiesOf(StoryNamePrefix + "Atom/Field", module)
         )
     ))
 
-storiesOf("Common Components|Form", module)
+storiesOf(StoryNamePrefix, module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
-    .add('info', withInfo("")(
+    .add('simple info', withInfo("")(
         () => (
             <Form account={text('account id', sampleAccountId)}
                   columnId={text('column id', '123456')}
                   id={text("id", sampleId)}
                   maxTextLength={number("max text length", 140)}
+                  requestPost={action('request post!')}/>
+        )
+    ))
+    .add('need file upload procedure' ,withInfo("")(
+        () => (
+            <Form account={text('account id', sampleAccountId)}
+                  columnId={text('column id', '123456')}
+                  id={text("id", sampleId)}
+                  maxTextLength={number("max text length", 140)}
+                  handleFileUpload={action('file upload procedure')}
                   requestPost={action('request post!')}/>
         )
     ))

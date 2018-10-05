@@ -20,10 +20,10 @@ export type ThumbnailListProps = {
     isDeletable: boolean,
 
     /* image clicked */
-    handleClick: Function,
+    handleClick?: (Object) => void,
 
     /* if isDeletable enabled, delete button onClick handler */
-    handleDelete: Function,
+    handleDelete: (index) => void,
 };
 
 const Styled = {
@@ -49,12 +49,14 @@ const ExtractionUri = (source: Array<any>): Array<string> =>
 const handleClick = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();
     const src = ExtractionUri(props.lists);
-    props.handleClick({
-        account: props.account,
-        columnId: props.columnId,
-        src,
-        index
-    });
+    if(props.handleClick) {
+        props.handleClick({
+            account: props.account,
+            columnId: props.columnId,
+            src,
+            index
+        });
+    }
 };
 
 const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
@@ -66,9 +68,8 @@ const Thumbnails = (props: ThumbnailListProps) => {
     const lists: string[] = ExtractionUri(props.lists);
     return lists.map((v, i) => (
         <Thumbnail key={i} index={i} source={v}
-            handleClick={handleClick(props, i)}
-            handleDelete={props.isDeletable ? handleDelete(props, i) : undefined}
-        />
+            handleClick={props.handleClick ? handleClick(props, i) : undefined}
+            handleDelete={props.isDeletable ? handleDelete(props, i) : undefined} />
         )
     )
 };

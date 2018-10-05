@@ -21,6 +21,8 @@ export type FormProps = {
     handleFileUpload?: (Function, file: File[]) => void,
     /* max text length, will occur warn. */
     maxTextLength?: number,
+    /* max file amount */
+    maxFileLength?: number, // TODO
     /* error message */
     error?: string,
     /* post it! */
@@ -96,7 +98,6 @@ class Form extends React.Component<FormProps, FormState> {
                             columnId={columnId}
                             lists={this.state.file}
                             isDeletable
-                            handleClick={() => {}}
                             handleDelete={this.handleDeleteFile}/>
                     </Styled.Row>
                 </Styled.Body>
