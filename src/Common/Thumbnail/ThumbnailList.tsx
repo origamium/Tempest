@@ -4,48 +4,88 @@ import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
 export type ThumbnailListProps = {
+    /* unique account id */
     account: string,
+
+    /* unique column id */
+    columnId: string,
+
+    /* source id is content. */
+    sourceId?: string,
+
+    /* file or uri list */
     lists: File[] | string[],
+
+    /* deletable? */
     isDeletable: boolean,
-    handleClick?: (e: React.MouseEvent<HTMLImageElement>) => void,
+
+    /* image clicked */
+    handleClick: Function,
+
+    /* if isDeletable enabled, delete button onClick handler */
+    handleDelete: Function,
 };
 
 const Styled = {
     Root: styled.div`
-        
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
     `,
 };
 
-const ExtractionUri = (source: Array<File | string>): Array<string> =>
-    source.map((v: File | string): string => {
+const ExtractionUri = (source: Array<any>): Array<string> =>
+    source.map((v: any): string => {
         if (typeof v === "string"){
             return v;
-        } else if (v instanceof File) {
-            return v.name;
+        } else if (v.preview) { // File
+            return v.preview.toString();
         } else {
             throw new Error();
         }
     });
 
-const handleClick = (props: ThumbnailListProps) => (e: React.MouseEvent<HTMLImageElement>) => {
+const handleClick = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();
+    const src = ExtractionUri(props.lists);
+    props.handleClick({
+        account: props.account,
+        columnId: props.columnId,
+        src,
+        index
+    });
+};
 
+const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    props.handleDelete({
+        account: props.account,
+        columnId: props.columnId,
+        index,
+    });
+};
+
+const Thumbnails = (props: ThumbnailListProps) => {
+    const lists: string[] = ExtractionUri(props.lists);
+    return lists.map((v, i) => (
+        <Thumbnail key={i} index={i} source={v}
+            handleClick={handleClick(props, i)}
+            handleDelete={props.isDeletable ? handleDelete(props, i) : undefined}
+        />
+        )
+    )
 };
 
 export const ThumbnailList: React.SFC<ThumbnailListProps> = (props: ThumbnailListProps) => (
     <>
         {props.lists ?
             <Styled.Root>
-                {props.lists.map((v, i) =>
-                    <Thumbnail
-                        key={i}
-                        handleClick={props.handleClick}/>)}
+                {Thumbnails(props)}
             </Styled.Root>:
             <div />
         }
     </>
 );
-
-あきた
 
 export default pure(ThumbnailList);
