@@ -4,10 +4,14 @@ const include = path.resolve(__dirname, '../');
 module.exports = {
 	// Add '.ts' and '.tsx' as resolvable extensions.
 	resolve: {
-		extensions: [".ts", ".tsx", ".js"]
+		extensions: [".css", ".ts", ".tsx", ".js"]
 	},
 	module: {
 		rules: [
+		    {
+                test: /\.css$/,
+                use: [ 'style-loader', 'css-loader' ]
+            },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 use: [

@@ -1,6 +1,6 @@
 import {configure} from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
-
+import '../src/reset.css';
 const req = require.context('../src', true, /.stories.tsx$/);
 
 setOptions({
