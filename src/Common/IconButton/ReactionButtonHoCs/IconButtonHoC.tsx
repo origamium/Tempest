@@ -6,13 +6,13 @@ import {IconButtonProps} from "../IconButton";
 
 const StyledButton = styled(ButtonBase)<any>`
     && {
-        ${({size, color, active})=> `
+        ${({size, color})=> `
             width: ${size};
             height: ${size};
             border-radius: 50%;
             
             & > *{
-                fill: ${active ? color.active || color.negative : color.negative};
+                fill: ${color};
                 width: 100%;
                 height: 100%;
             }
@@ -23,8 +23,7 @@ const StyledButton = styled(ButtonBase)<any>`
 const IconButtonHoC = (Icon: React.ComponentType<SvgIconProps>): Function => (
     (props: IconButtonProps) => (
         <StyledButton
-            color={{active: props.style.activeColor, negative: props.style.negativeColor}}
-            active={props.active}
+            color={props.active ? props.style.activeColor || props.style.negativeColor : props.style.negativeColor}
             size={props.style.size}
             onClick={props.handleClick}>
             <Icon/>

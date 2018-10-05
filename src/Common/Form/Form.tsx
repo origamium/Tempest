@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
-import Field from './Atom/Field';
+import Field from './Field';
+import {ThumbnailList} from '../Thumbnail';
 import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
 import SendIcon from '@material-ui/icons/Send';
 import ClipIcon from '@material-ui/icons/AttachFile';
@@ -12,6 +13,8 @@ export type FormProps = {
     id: string,
     /* account id */
     account: string,
+    /* unique column id */
+    columnId: string,
     /* accept file type.. */
     accept?: string,
     /* open file upload dialog */
@@ -33,7 +36,15 @@ type FormState = {
 const Styled = {
     Root: styled(Dropzone)`
         width: 100%;
+    `,
+    Body: styled.div`
         display: flex;
+        flex-direction: column;
+        width: 100%;
+    `,
+    Row: styled.div`
+        display: flex;
+        width: 100%;
         align-items: flex-end;
     `,
     Buttons: styled.div`
@@ -67,15 +78,28 @@ class Form extends React.Component<FormProps, FormState> {
     };
 
     render() {
-        const {id, accept, error} = this.props;
+        const {id, account, columnId, accept, error} = this.props;
         const {text, warn} = this.state;
         return (
             <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
-                <Field id={id} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
-                <Styled.Buttons>
-                    {IconButtonHoC(ClipIcon)({style: ButtonStyle, id, active: false, handleClick: () => this.fileInput.open()})}
-                    {IconButtonHoC(SendIcon)({style: ButtonStyle, id, active: false, handleClick: this.handleRequestPost})}
-                </Styled.Buttons>
+                <Styled.Body>
+                    <Styled.Row>
+                        <Field id={id} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
+                        <Styled.Buttons>
+                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id, active: false, handleClick: () => this.fileInput.open()})}
+                            {IconButtonHoC(SendIcon)({style: ButtonStyle, id, active: false, handleClick: this.handleRequestPost})}
+                        </Styled.Buttons>
+                    </Styled.Row>
+                    <Styled.Row>
+                        <ThumbnailList
+                            account={account}
+                            columnId={columnId}
+                            lists={this.state.file}
+                            isDeletable
+                            handleClick={() => {}}
+                            handleDelete={this.handleDeleteFile}/>
+                    </Styled.Row>
+                </Styled.Body>
             </Styled.Root>
         )
     }

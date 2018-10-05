@@ -7,7 +7,7 @@ import { withKnobs, text, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Form from './Form';
-import { Field_ } from "./Atom/Field";
+import { Field_ } from "./Field";
 
 const StoryNamePrefix = "Common Components|Form/";
 
@@ -29,9 +29,9 @@ storiesOf("Common Components|Form", module)
     .add('info', withInfo("")(
         () => (
             <Form account={text('account id', sampleAccountId)}
+                  columnId={text('column id', '123456')}
                   id={text("id", sampleId)}
                   maxTextLength={number("max text length", 140)}
-                  handleFileUpload={action('request file upload')}
                   requestPost={action('request post!')}/>
         )
     ))

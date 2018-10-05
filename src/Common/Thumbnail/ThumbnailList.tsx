@@ -59,11 +59,7 @@ const handleClick = (props: ThumbnailListProps, index: number) => (e: React.Mous
 
 const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    props.handleDelete({
-        account: props.account,
-        columnId: props.columnId,
-        index,
-    });
+    props.handleDelete(index);
 };
 
 const Thumbnails = (props: ThumbnailListProps) => {
