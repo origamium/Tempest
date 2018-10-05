@@ -10,9 +10,10 @@ import {Thumbnail} from "./Thumbnail";
 import origamiIcon from '../../__testdata__/icon/origami.png';
 import simulaculaIcon from '../../__testdata__/icon/simulacla.jpg';
 
-
 import {withNotes} from "@storybook/addon-notes";
 import {ThumbnailList} from "./ThumbnailList";
+
+const box = (story) => <div style={{width: "50vw", height: "50vh"}}>{story()}</div>;
 
 storiesOf('Common Components|Thumbnail', module)
     .addDecorator(centered)
@@ -34,6 +35,7 @@ storiesOf('Common Components|Thumbnail', module)
 storiesOf('Common Components|ThumbnailList', module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
+    .addDecorator(box)
     .add('ThumbnailList info', withNotes('')(
         withInfo('')(
             () => <div style={{width: "50vw", height: "50vh"}}>

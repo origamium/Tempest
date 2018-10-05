@@ -19,8 +19,11 @@ const Styled = {
         
         background: url(${({src}) => src}) center center;
         background-size: cover;
-        flex: 1 0 50%;
+        min-width: 64px;
+        min-height: 64px;
+        width: 100%;
         height: auto;
+        flex: 1 0 50%;
     `,
     DeleteButton: styled.div`
         position: absolute;
