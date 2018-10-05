@@ -13,7 +13,7 @@ import simulaculaIcon from '../../__testdata__/icon/simulacla.jpg';
 import {withNotes} from "@storybook/addon-notes";
 import {ThumbnailList} from "./ThumbnailList";
 
-const box = (story) => <div style={{width: "50vw", height: "50vh"}}>{story()}</div>;
+const box = (story) => <div style={{width: "50vw"}}>{story()}</div>;
 
 storiesOf('Common Components|Thumbnail', module)
     .addDecorator(centered)

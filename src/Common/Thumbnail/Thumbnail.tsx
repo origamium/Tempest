@@ -20,8 +20,8 @@ const Styled = {
         background: url(${({src}) => src}) center center;
         background-size: cover;
         min-width: 64px;
-        min-height: 64px;
         width: 100%;
+        min-height: 64px;
         height: auto;
         flex: 1 0 50%;
     `,
