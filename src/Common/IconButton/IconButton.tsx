@@ -5,13 +5,13 @@ import {Clear, Reply, Repeat, Favorite, Send, AttachFile} from "@material-ui/ico
 export type IconButtonStyle = {
     activeColor?: string,
     negativeColor: string,
-    size: number,
+    size: string,
 };
 
 export type IconButtonProps = {
     style: IconButtonStyle,
     id: string,
-    active: boolean,
+    active?: boolean,
     handleClick: Function,
 };
 

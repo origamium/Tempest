@@ -7,15 +7,14 @@ import {IconButtonProps} from "../IconButton";
 const StyledButton = styled(ButtonBase)<any>`
     && {
         ${({size, color, active})=> `
-            width: ${size}px;
-            height: ${size}px;
+            width: ${size};
+            height: ${size};
             border-radius: 50%;
             
             & > *{
                 fill: ${active ? color.active || color.negative : color.negative};
-                padding: 3px;
-                width: ${size - 6}px;
-                height: ${size - 6}px;
+                width: 100%;
+                height: 100%;
             }
         `}
     }

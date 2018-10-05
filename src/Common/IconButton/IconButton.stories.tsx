@@ -30,7 +30,7 @@ storiesOf('Common Components|Button/IconButton', module)
                     style: {
                         activeColor: color("active color", "#4E66FF"),
                         negativeColor: color("negative color", negativeColor),
-                        size: number("size", 32),
+                        size: number("size", 32)+"px",
                     },
                     active: boolean('active', true),
                     handleClick: action('clicked'),
@@ -46,7 +46,7 @@ storiesOf('Common Components|Button/IconButton/Buttons', module)
             style={{
                 activeColor: color("active color", "#49A4EF"),
                 negativeColor: color("negative color", negativeColor),
-                size: number("size", 32),
+                size: number("size", 32)+"px",
             }}
             active={boolean('active', true)}
             handleClick={action('clicked')}/>)
@@ -56,7 +56,7 @@ storiesOf('Common Components|Button/IconButton/Buttons', module)
             style={{
                 activeColor: color("active color", "#4EBD67"),
                 negativeColor: color("negative color", negativeColor),
-                size: number("size", 32),
+                size: number("size", 32)+"px",
             }}
             active={boolean('active', true)}
             handleClick={action('clicked')}/>)
@@ -66,7 +66,7 @@ storiesOf('Common Components|Button/IconButton/Buttons', module)
             style={{
                 activeColor: color("active color", "#D2255F"),
                 negativeColor: color("negative color", negativeColor),
-                size: number("size", 32),
+                size: number("size", 32)+"px",
             }}
             active={boolean('active', true)}
             handleClick={action('clicked')}/>)

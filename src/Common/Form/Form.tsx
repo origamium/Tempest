@@ -46,7 +46,7 @@ const Styled = {
 };
 
 const ButtonStyle: IconButtonStyle = {
-    size: 32,
+    size: "32px",
     activeColor: "#7D7D7D",
     negativeColor: "7D7D7D",
 };
