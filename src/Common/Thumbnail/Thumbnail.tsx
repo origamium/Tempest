@@ -14,8 +14,8 @@ const Styled = {
     Root: styled.div<any>`
         position: relative;
         overflow: hidden;
-        border: solid 1px gray;
-        border-radius: 2%;
+        padding: 1px;
+        border-radius: 3%;
         
         background: url(${({src}) => src}) center center;
         background-size: cover;
