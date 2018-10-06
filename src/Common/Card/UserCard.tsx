@@ -3,7 +3,7 @@ import Paper, {PaperProps} from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
 import {pure} from 'recompose';
-import styled, {ITheme} from '../../../../Theme/style'
+import styled, {ITheme} from '../../Theme/style'
 
 type Props = {
     account: string,

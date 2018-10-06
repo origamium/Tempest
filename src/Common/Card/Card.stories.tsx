@@ -5,13 +5,13 @@ import {withKnobs, text} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
 import {withInfo} from "@storybook/addon-info";
-import {Theme, ThemeProvider} from '../../../../Theme/style'
+import {Theme, ThemeProvider} from '../../Theme/style'
 
 import {StatusCard_} from "./StatusCard";
 import {UserCard_} from "./UserCard";
 
-import Icons from '../../../../__testdata__/icon/icon';
-import Headers from '../../../../__testdata__/header/header';
+import Icons from '../../__testdata__/icon/icon';
+import Headers from '../../__testdata__/header/header';
 
 const sampleId = 'sample-id-0123456789';
 
