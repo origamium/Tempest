@@ -28,23 +28,24 @@ const Styled = {
 type Props = {
     account: string,
     target: IStatus,
-    handleClick: Function,
+    handleClick?: (payload: Object) => void,
 }
 
 const handleClick = (props: Props) => (e: any) => {
     e.preventDefault();
-    props.handleClick({
-        account: props.account,
-        id: props.target[StatusProperties.id],
-    });
+    if(props.handleClick) {
+        props.handleClick({
+            account: props.account,
+            id: props.target[StatusProperties.id],
+        });
+    }
 };
 
-const StatusCard: React.SFC<Props> = (props: Props) => (
+export const StatusCard: React.SFC<Props> = (props: Props) => (
     <Styled.Root onClick={handleClick(props)}>
         <Styled.Avatar src={props.target[StatusProperties.user].avatarImage} />
         <Typography variant="body1">{props.target.text}</Typography>
     </Styled.Root>
 );
 
-export const StatusCard_ = StatusCard;
 export default pure(StatusCard);

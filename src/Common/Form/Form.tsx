@@ -7,6 +7,8 @@ import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
 import SendIcon from '@material-ui/icons/Send';
 import ClipIcon from '@material-ui/icons/AttachFile';
 import {IconButtonStyle} from "../IconButton/IconButton";
+import StatusCard from '../Card/StatusCard';
+import {IStatus} from "../../../lib/data/src/index";
 
 export type FormProps = {
     /* unique key. column uid */
@@ -15,6 +17,8 @@ export type FormProps = {
     account: string,
     /* unique column id */
     columnId: string,
+    /* reply source */
+    replySource?: IStatus
     /* accept file type.. */
     accept?: string,
     /* open file upload dialog */
@@ -80,7 +84,7 @@ class Form extends React.Component<FormProps, FormState> {
     };
 
     render() {
-        const {id, account, columnId, accept, error} = this.props;
+        const {id, account, columnId, accept, error, replySource} = this.props;
         const {text, warn} = this.state;
         return (
             <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
@@ -99,6 +103,9 @@ class Form extends React.Component<FormProps, FormState> {
                             lists={this.state.file}
                             isDeletable
                             handleDelete={this.handleDeleteFile}/>
+                    </Styled.Row>
+                    <Styled.Row>
+                        {replySource ? <StatusCard account={account} target={replySource}/> : <div />}
                     </Styled.Row>
                 </Styled.Body>
             </Styled.Root>

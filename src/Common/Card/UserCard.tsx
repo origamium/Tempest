@@ -43,7 +43,7 @@ const handleClick = (props: Props) => (e: any) => {
     });
 };
 
-const UserCard: React.SFC<Props> = (props: Props) => (
+export const UserCard: React.SFC<Props> = (props: Props) => (
     <Styled.Root header={props.header} onClick={handleClick(props)}>
         <Avatar src={props.avatar} />
         <Typography variant={"body1"}>{props.displayName}</Typography>
@@ -51,5 +51,4 @@ const UserCard: React.SFC<Props> = (props: Props) => (
     </Styled.Root>
 );
 
-export const UserCard_ = UserCard;
 export default pure(UserCard);

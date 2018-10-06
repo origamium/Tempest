@@ -7,21 +7,22 @@ import centered from '@storybook/addon-centered';
 import {withInfo} from "@storybook/addon-info";
 import {Theme, ThemeProvider} from '../../Theme/style'
 
-import {StatusCard_} from "./StatusCard";
-import {UserCard_} from "./UserCard";
+import {StatusCard} from "./StatusCard";
+import {UserCard} from "./UserCard";
 
 import Icons from '../../__testdata__/icon/icon';
 import Headers from '../../__testdata__/header/header';
+import icon from "../../__testdata__/icon/icon";
 
 const sampleId = 'sample-id-0123456789';
-
-storiesOf("MainView|Content/Card/StatusCard", module)
+const StoryPrefix = 'Common Components|Card';
+storiesOf(StoryPrefix+"/StatusCard", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
         () => (
             <ThemeProvider theme={Theme.Light}>
-                <StatusCard_
+                <StatusCard
                     account={text('account', 'accountid@example.org')}
                     target={{
                         id: text('id', sampleId),
@@ -30,6 +31,7 @@ storiesOf("MainView|Content/Card/StatusCard", module)
                         user: {
                             id: text('source user id', '123456789abcdef'),
                             screenName: text('screen name', 'arclisp'),
+                            avatarImage: icon.simulacla,
                         }
                     }}
                     handleClick={action('status clicked!')}/>
@@ -38,13 +40,13 @@ storiesOf("MainView|Content/Card/StatusCard", module)
     ))
 ;
 
-storiesOf("MainView|Content/Card/AccountCard", module)
+storiesOf(StoryPrefix+"/AccountCard", module)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
         () => (
             <ThemeProvider theme={Theme.Light}>
-                <UserCard_
+                <UserCard
                     account={text('account', 'accountid@example.org')}
                     id={text('id', sampleId)}
                     displayName={text("displayName", "シミュラクラ")}
