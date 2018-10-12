@@ -11,9 +11,9 @@ import StatusCard from '../Card/StatusCard';
 import {IStatus} from "../../../lib/data/src/index";
 
 export type FormProps = {
-    /* accountKey id */
+    /* unique account key */
     accountKey: string,
-    /* unique column id */
+    /* unique column key */
     columnKey: string,
     /* accept file type.. */
     accept?: string,
