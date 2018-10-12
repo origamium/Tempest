@@ -12,7 +12,7 @@ type Props = {
     screenName?: string,
     avatar: string,
     header?: string,
-    handleClick: Function,
+    handleClick?: Function,
 };
 
 const Styled = {
@@ -37,10 +37,12 @@ const Styled = {
 
 const handleClick = (props: Props) => (e: any) => {
     e.preventDefault();
-    props.handleClick({
-        account: props.account,
-        id: props.id,
-    });
+    if(props.handleClick){
+        props.handleClick({
+            account: props.account,
+            id: props.id,
+        });
+    }
 };
 
 export const UserCard: React.SFC<Props> = (props: Props) => (
