@@ -15,6 +15,7 @@ const Styled = {
         position: relative;
         overflow: hidden;
         padding: 1px;
+        border: solid 1px white;
         border-radius: 3%;
         
         background: url(${({src}) => src}) center center;

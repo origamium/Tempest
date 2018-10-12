@@ -28,7 +28,9 @@ export type FormProps = {
     /* reply source clicked */
     handleClickReply: (object: {accountKey: string, columnKey: string, sourceId: string}) => void,
     /* post it! */
-    requestPost: (Function, object: {accountKey: string, columnKey: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
+    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
+    /* register reducer. */
+    registerColumn: (object: {handleAddReply: Function}) => void,
 }
 
 type FormState = {
@@ -112,6 +114,10 @@ class Form extends React.Component<FormProps, FormState> {
         )
     }
 
+    componentDidMount() {
+        this.props.registerColumn({handleAddReply: this.handleAddReply});
+    }
+
     shouldComponentUpdate(nextProps: FormProps, nextState: FormState): boolean{
         return true; // TODO
     }
@@ -162,7 +168,7 @@ class Form extends React.Component<FormProps, FormState> {
         e.preventDefault();
         const {accountKey, columnKey} = this.props;
         const {text, file} = this.state;
-        this.props.requestPost(this.handleClear, {accountKey, columnKey, text, file});
+        this.props.requestPost({handleClear: this.handleClear, accountKey, columnKey, text, file});
     }
 }
 
