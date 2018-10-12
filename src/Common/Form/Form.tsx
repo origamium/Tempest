@@ -69,7 +69,7 @@ const ButtonStyle: IconButtonStyle = {
     negativeColor: "7D7D7D",
 };
 
-class Form extends React.Component<FormProps, FormState> {
+class Form extends React.PureComponent<FormProps, FormState> {
     constructor(props: FormProps) {
         super(props);
         this.state = Form.defaultState;
@@ -116,10 +116,6 @@ class Form extends React.Component<FormProps, FormState> {
 
     componentDidMount() {
         this.props.registerColumn({handleAddReply: this.handleAddReply});
-    }
-
-    shouldComponentUpdate(nextProps: FormProps, nextState: FormState): boolean{
-        return true; // TODO
     }
 
     handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
