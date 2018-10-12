@@ -15,8 +15,6 @@ export type FormProps = {
     account: string,
     /* unique column id */
     columnId: string,
-    /* reply source */
-    replySource?: IStatus
     /* accept file type.. */
     accept?: string,
     /* open file upload dialog */
@@ -27,17 +25,18 @@ export type FormProps = {
     maxFileLength?: number, // TODO
     /* error message */
     error?: string,
-    /* delete reply... */
-    requestDeleteReply: (object: {account: string, columnId: string}) => void,
+    /* reply source clicked */
+    handleClickReply: (object: {account: string, columnId: string, sourceId: string}) => void,
     /* post it! */
     requestPost: (Function, object: {account: string, columnId: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
 }
 
 type FormState = {
     text: string,
+    replySource?: IStatus,
     file: File[],
     warn?: string,
-}
+};
 
 const Styled = {
     Root: styled(Dropzone)`
@@ -80,12 +79,13 @@ class Form extends React.Component<FormProps, FormState> {
     static defaultState: FormState = {
         text: "",
         file: [],
+        replySource: undefined,
         warn: undefined,
     };
 
     render() {
-        const {account, columnId, accept, error, replySource} = this.props;
-        const {text, warn} = this.state;
+        const {account, columnId, accept, error} = this.props;
+        const {text, warn, replySource} = this.state;
         return (
             <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
                 <Styled.Body>
@@ -120,9 +120,16 @@ class Form extends React.Component<FormProps, FormState> {
         this.setState({ text: event.target.value });
     };
 
+    handleAddReply = (source: IStatus): void => {
+        this.setState({
+            replySource: source,
+        });
+    };
+
     handleDeleteReply = (): void => {
-        const {account, columnId} = this.props;
-        this.props.requestDeleteReply({account, columnId});
+        this.setState({
+            replySource: undefined
+        });
     };
 
     handleFileDrop = (file: File[]): void => {
