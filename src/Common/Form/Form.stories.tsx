@@ -30,8 +30,8 @@ storiesOf(StoryNamePrefix, module)
         () => (
             <Form account={text('account id', sampleAccountId)}
                   columnId={text('column id', '123456')}
-                  id={text("id", sampleId)}
                   maxTextLength={number("max text length", 140)}
+                  requestDeleteReply={action('request delete reply')}
                   requestPost={action('request post!')}/>
         )
     ))
@@ -39,9 +39,9 @@ storiesOf(StoryNamePrefix, module)
         () => (
             <Form account={text('account id', sampleAccountId)}
                   columnId={text('column id', '123456')}
-                  id={text("id", sampleId)}
                   maxTextLength={number("max text length", 140)}
                   handleFileUpload={action('file upload procedure')}
+                  requestDeleteReply={action('request delete reply')}
                   requestPost={action('request post!')}/>
         )
     ))

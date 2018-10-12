@@ -11,8 +11,6 @@ import StatusCard from '../Card/StatusCard';
 import {IStatus} from "../../../lib/data/src/index";
 
 export type FormProps = {
-    /* unique key. column uid */
-    id: string,
     /* account id */
     account: string,
     /* unique column id */
@@ -29,8 +27,10 @@ export type FormProps = {
     maxFileLength?: number, // TODO
     /* error message */
     error?: string,
+    /* delete reply... */
+    requestDeleteReply: (object: {account: string, columnId: string}) => void,
     /* post it! */
-    requestPost: (Function, object: {account: string, id: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
+    requestPost: (Function, object: {account: string, columnId: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
 }
 
 type FormState = {
@@ -84,16 +84,16 @@ class Form extends React.Component<FormProps, FormState> {
     };
 
     render() {
-        const {id, account, columnId, accept, error, replySource} = this.props;
+        const {account, columnId, accept, error, replySource} = this.props;
         const {text, warn} = this.state;
         return (
             <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
                 <Styled.Body>
                     <Styled.Row>
-                        <Field id={id} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
+                        <Field id={columnId} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
                         <Styled.Buttons>
-                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id, active: false, handleClick: () => this.fileInput.open()})}
-                            {IconButtonHoC(SendIcon)({style: ButtonStyle, id, active: false, handleClick: this.handleRequestPost})}
+                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnId, active: false, handleClick: () => this.fileInput.open()})}
+                            {IconButtonHoC(SendIcon)({style: ButtonStyle, id: columnId, active: false, handleClick: this.handleRequestPost})}
                         </Styled.Buttons>
                     </Styled.Row>
                     <Styled.Row>
@@ -118,6 +118,11 @@ class Form extends React.Component<FormProps, FormState> {
 
     handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         this.setState({ text: event.target.value });
+    };
+
+    handleDeleteReply = (): void => {
+        const {account, columnId} = this.props;
+        this.props.requestDeleteReply({account, columnId});
     };
 
     handleFileDrop = (file: File[]): void => {
@@ -148,9 +153,9 @@ class Form extends React.Component<FormProps, FormState> {
 
     handleRequestPost = (e: Event): void => {
         e.preventDefault();
-        const {account, id} = this.props;
+        const {account, columnId} = this.props;
         const {text, file} = this.state;
-        this.props.requestPost(this.handleClear, {account, id, text, file});
+        this.props.requestPost(this.handleClear, {account, columnId, text, file});
     }
 }
 
