@@ -26,7 +26,7 @@ const Styled = {
 };
 
 type Props = {
-    account: string,
+    accountKey: string,
     target: IStatus,
     handleClick?: (payload: Object) => void,
 }
@@ -35,7 +35,7 @@ const handleClick = (props: Props) => (e: any) => {
     e.preventDefault();
     if(props.handleClick) {
         props.handleClick({
-            account: props.account,
+            account: props.accountKey,
             id: props.target[StatusProperties.id],
         });
     }

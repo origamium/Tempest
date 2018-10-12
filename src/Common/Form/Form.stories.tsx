@@ -28,8 +28,8 @@ storiesOf(StoryNamePrefix, module)
     .addDecorator(withKnobs)
     .add('simple info', withInfo("")(
         () => (
-            <Form account={text('account id', sampleAccountId)}
-                  columnId={text('column id', '123456')}
+            <Form accountKey={text('account id', sampleAccountId)}
+                  columnKey={text('column id', '123456')}
                   maxTextLength={number("max text length", 140)}
                   handleClickReply={action('reply source clicked!')}
                   requestPost={action('request post!')}/>
@@ -37,8 +37,8 @@ storiesOf(StoryNamePrefix, module)
     ))
     .add('need file upload procedure' ,withInfo("")(
         () => (
-            <Form account={text('account id', sampleAccountId)}
-                  columnId={text('column id', '123456')}
+            <Form accountKey={text('account id', sampleAccountId)}
+                  columnKey={text('column id', '123456')}
                   maxTextLength={number("max text length", 140)}
                   handleFileUpload={action('file upload procedure')}
                   handleClickReply={action('reply source clicked!')}

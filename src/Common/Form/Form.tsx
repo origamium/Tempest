@@ -11,10 +11,10 @@ import StatusCard from '../Card/StatusCard';
 import {IStatus} from "../../../lib/data/src/index";
 
 export type FormProps = {
-    /* account id */
-    account: string,
+    /* accountKey id */
+    accountKey: string,
     /* unique column id */
-    columnId: string,
+    columnKey: string,
     /* accept file type.. */
     accept?: string,
     /* open file upload dialog */
@@ -26,9 +26,9 @@ export type FormProps = {
     /* error message */
     error?: string,
     /* reply source clicked */
-    handleClickReply: (object: {account: string, columnId: string, sourceId: string}) => void,
+    handleClickReply: (object: {accountKey: string, columnKey: string, sourceId: string}) => void,
     /* post it! */
-    requestPost: (Function, object: {account: string, columnId: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
+    requestPost: (Function, object: {accountKey: string, columnKey: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
 }
 
 type FormState = {
@@ -84,28 +84,28 @@ class Form extends React.Component<FormProps, FormState> {
     };
 
     render() {
-        const {account, columnId, accept, error} = this.props;
+        const {accountKey, columnKey, accept, error} = this.props;
         const {text, warn, replySource} = this.state;
         return (
             <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
                 <Styled.Body>
                     <Styled.Row>
-                        <Field id={columnId} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
+                        <Field id={columnKey} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
                         <Styled.Buttons>
-                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnId, active: false, handleClick: () => this.fileInput.open()})}
-                            {IconButtonHoC(SendIcon)({style: ButtonStyle, id: columnId, active: false, handleClick: this.handleRequestPost})}
+                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: () => this.fileInput.open()})}
+                            {IconButtonHoC(SendIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: this.handleRequestPost})}
                         </Styled.Buttons>
                     </Styled.Row>
                     <Styled.Row>
                         <ThumbnailList
-                            account={account}
-                            columnId={columnId}
+                            account={accountKey}
+                            columnId={columnKey}
                             lists={this.state.file}
                             isDeletable
                             handleDelete={this.handleDeleteFile}/>
                     </Styled.Row>
                     <Styled.Row>
-                        {replySource ? <StatusCard account={account} target={replySource}/> : <div />}
+                        {replySource ? <StatusCard accountKey={accountKey} target={replySource}/> : <div />}
                     </Styled.Row>
                 </Styled.Body>
             </Styled.Root>
@@ -160,9 +160,9 @@ class Form extends React.Component<FormProps, FormState> {
 
     handleRequestPost = (e: Event): void => {
         e.preventDefault();
-        const {account, columnId} = this.props;
+        const {accountKey, columnKey} = this.props;
         const {text, file} = this.state;
-        this.props.requestPost(this.handleClear, {account, columnId, text, file});
+        this.props.requestPost(this.handleClear, {accountKey, columnKey, text, file});
     }
 }
 

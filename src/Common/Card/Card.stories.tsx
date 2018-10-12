@@ -23,7 +23,7 @@ storiesOf(StoryPrefix+"/StatusCard", module)
         () => (
             <ThemeProvider theme={Theme.Light}>
                 <StatusCard
-                    account={text('account', 'accountid@example.org')}
+                    accountKey={text('accountKey', 'accountid@example.org')}
                     target={{
                         id: text('id', sampleId),
                         text: text('status text', 'yeah'),
@@ -47,7 +47,7 @@ storiesOf(StoryPrefix+"/AccountCard", module)
         () => (
             <ThemeProvider theme={Theme.Light}>
                 <UserCard
-                    account={text('account', 'accountid@example.org')}
+                    account={text('accountKey', 'accountid@example.org')}
                     id={text('id', sampleId)}
                     displayName={text("displayName", "シミュラクラ")}
                     screenName={text("screenName", "twitter.com@arclisp")}

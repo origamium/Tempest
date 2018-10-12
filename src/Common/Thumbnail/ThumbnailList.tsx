@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
 export type ThumbnailListProps = {
-    /* unique account id */
+    /* unique accountKey id */
     account: string,
 
     /* unique column id */
