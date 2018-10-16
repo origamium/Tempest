@@ -100,8 +100,8 @@ class Form extends React.PureComponent<FormProps, FormState> {
                     </Styled.Row>
                     <Styled.Row>
                         <ThumbnailList
-                            account={accountKey}
-                            columnId={columnKey}
+                            accountKey={accountKey}
+                            columnKey={columnKey}
                             lists={this.state.file}
                             isDeletable
                             handleDelete={this.handleDeleteFile}/>

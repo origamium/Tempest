@@ -41,7 +41,7 @@ storiesOf('Common Components|ThumbnailList', module)
             () => <div style={{width: "50vw", height: "50vh"}}>
                 <ThumbnailList
                     account={''}
-                    columnId={''}
+                    columnKey={''}
                     lists={[origamiIcon, simulaculaIcon, simulaculaIcon]}
                     isDeletable={boolean('isDeletable', true)}
                     handleClick={action('Thumbnail Clicked')}

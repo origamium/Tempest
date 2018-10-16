@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
 export type ThumbnailListProps = {
-    /* unique accountKey id */
-    account: string,
+    /* unique account key*/
+    accountKey: string,
 
-    /* unique column id */
-    columnId: string,
+    /* unique column key */
+    columnKey: string,
 
     /* source id is content. */
     sourceId?: string,
@@ -17,13 +17,13 @@ export type ThumbnailListProps = {
     lists: File[] | string[],
 
     /* deletable? */
-    isDeletable: boolean,
+    isDeletable?: boolean,
 
     /* image clicked */
     handleClick?: (Object) => void,
 
     /* if isDeletable enabled, delete button onClick handler */
-    handleDelete: (index) => void,
+    handleDelete?: (index) => void,
 };
 
 const Styled = {
@@ -52,8 +52,8 @@ const handleClick = (props: ThumbnailListProps, index: number) => (e: React.Mous
     const src = ExtractionUri(props.lists);
     if(props.handleClick) {
         props.handleClick({
-            account: props.account,
-            columnId: props.columnId,
+            account: props.accountKey,
+            columnId: props.columnKey,
             src,
             index
         });
@@ -62,7 +62,9 @@ const handleClick = (props: ThumbnailListProps, index: number) => (e: React.Mous
 
 const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    props.handleDelete(index);
+    if(props.handleDelete) {
+        props.handleDelete(index);
+    }
 };
 
 const Thumbnails = (props: ThumbnailListProps) => {
