@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import {pure} from 'recompose';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-//import ThumbnailList from '../../Thumbnail/ThumbnailList';
+import ThumbnailList from '../../Thumbnail/ThumbnailList';
 import {IStatus, UserProperties} from "../../../../lib/data/src";
-import ThumbnailList from "../../Thumbnail/ThumbnailList";
 
 export type StatusProps = IStatus & {
     accountKey: string,
