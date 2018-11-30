@@ -7,6 +7,8 @@ import centered from '@storybook/addon-centered';
 import {withInfo} from "@storybook/addon-info";
 import {Theme, ThemeProvider} from '../../Theme/style'
 
+import {ArticleType} from "../../../lib/data";
+
 import {StatusCard} from "./StatusCard";
 import {UserCard} from "./UserCard";
 
@@ -25,6 +27,7 @@ storiesOf(StoryPrefix+"/StatusCard", module)
                 <StatusCard
                     accountKey={text('accountKey', 'accountid@example.org')}
                     target={{
+                        type: ArticleType.status,
                         id: text('id', sampleId),
                         text: text('status text', 'yeah'),
                         date: text('status date', '1234 56 78, 9:12.3'),
@@ -32,7 +35,8 @@ storiesOf(StoryPrefix+"/StatusCard", module)
                             id: text('source user id', '123456789abcdef'),
                             screenName: text('screen name', 'arclisp'),
                             avatarImage: icon.simulacla,
-                        }
+                        },
+                        isThread: false,
                     }}
                     handleClick={action('status clicked!')}/>
             </ThemeProvider>
