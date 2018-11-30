@@ -484,10 +484,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/storybook__addon-links@^3.3.1":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@types/storybook__addon-links/-/storybook__addon-links-3.3.2.tgz#913f6dae27903da7b1f117e9b51ca473770dba50"
-  integrity sha512-Fu1CG6WmIMCe8wZFmz17lnneJzNYrcLw4NKi/g+AKJisq0K/smGE9CRz4/Bj23vp3rz298bDJBIH/lStZRIW0A==
+"@types/storybook__addon-links@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@types/storybook__addon-links/-/storybook__addon-links-3.3.3.tgz#fb920aadcab0e86233888240ec81a04fab0ec473"
+  integrity sha512-Nu+XyDRgyfqbuv1AF8rnJ2RjXKUGunbIYN32IrLkrxzNt2mhyvam+op7Mn4s6XGgeKJtXbMhl2ZetAc+F2i5IQ==
   dependencies:
     "@types/react" "*"
 
@@ -8667,7 +8667,12 @@ react-docgen-typescript-loader@^2.2.0:
     ajv "^6.5.0"
     react-docgen-typescript "^1.6.0"
 
-react-docgen-typescript@^1.6.0, react-docgen-typescript@^1.6.3:
+react-docgen-typescript@^1.12.2:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.12.2.tgz#d5fb578d12f6876efdde69176f4ea658e75a9a29"
+  integrity sha512-pcot0jGiMIyhmwNeSU83GvClNwk9NbcnYHcGf4pKMmw5J43d5OzYRcTzrZTGlIOWjYfYazYhvTxjujE625P3Mw==
+
+react-docgen-typescript@^1.6.0:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.12.1.tgz#b0f83c140c838bc6090178b102ef75f73bb45dac"
   integrity sha512-wrV2YlYgLAw84pvuFl8YYkHetPf35vT5gLMtJH86YiQvuR35dJst+06O25oNLFCpUNw/bB6B3uszRyAKO+SU8Q==
