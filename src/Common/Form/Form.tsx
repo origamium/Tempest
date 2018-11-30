@@ -8,7 +8,7 @@ import SendIcon from '@material-ui/icons/Send';
 import ClipIcon from '@material-ui/icons/AttachFile';
 import {IconButtonStyle} from "../IconButton/IconButton";
 import StatusCard from '../Card/StatusCard';
-import {IStatus} from "../../../lib/data/src/index";
+import {IStatus} from "../../../lib/data";
 
 export type FormProps = {
     /* unique account key */

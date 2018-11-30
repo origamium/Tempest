@@ -4,7 +4,7 @@ import {pure} from 'recompose';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ThumbnailList from '../../Thumbnail/ThumbnailList';
-import {IStatus, UserProperties} from "../../../../lib/data/src";
+import {IStatus, UserProperties} from "../../../../lib/data";
 
 export type StatusProps = IStatus & {
     accountKey: string,
