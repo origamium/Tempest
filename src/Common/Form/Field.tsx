@@ -21,10 +21,8 @@ export type FieldProps = {
 };
 
 const Styled = {
-    Root: styled(TextField)`
-        && {
-            flex: auto 1 0;
-        }
+    Root: styled.div`
+        flex: auto 1 0;
     `,
 };
 
@@ -35,17 +33,19 @@ const getHelperText = (props: FieldProps): string => {
     return props.helperText || "";
 };
 
-const Field: React.SFC<FieldProps> = (props: FieldProps) => (
-    <Styled.Root
-        value={props.value}
-        onChange={props.handleChange}
-        helperText={getHelperText(props)}
-        id={props.id}
-        error={!!props.error}
-        multiline
-        margin="none"
-        fullWidth
-        rowsMax={props.maxRow}/>
+export const Field: React.FunctionComponent<FieldProps> = (props: FieldProps) => (
+    <Styled.Root>
+        <TextField
+            value={props.value}
+            onChange={props.handleChange}
+            helperText={getHelperText(props)}
+            id={props.id}
+            error={!!props.error}
+            multiline
+            margin="none"
+            fullWidth
+            rowsMax={props.maxRow} />
+    </Styled.Root>
 );
 
 Field.defaultProps = {
@@ -54,5 +54,4 @@ Field.defaultProps = {
     maxRow: 6,
 };
 
-export const Field_ = Field;
 export default pure(Field);

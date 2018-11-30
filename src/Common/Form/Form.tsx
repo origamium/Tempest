@@ -8,7 +8,7 @@ import SendIcon from '@material-ui/icons/Send';
 import ClipIcon from '@material-ui/icons/AttachFile';
 import {IconButtonStyle} from "../IconButton/IconButton";
 import StatusCard from '../Card/StatusCard';
-import {IStatus} from "../../../lib/data/src/index";
+import {IStatus} from "../../../lib/data";
 
 export type FormProps = {
     /* unique account key */
@@ -69,7 +69,7 @@ const ButtonStyle: IconButtonStyle = {
     negativeColor: "7D7D7D",
 };
 
-class Form extends React.Component<FormProps, FormState> {
+class Form extends React.PureComponent<FormProps, FormState> {
     constructor(props: FormProps) {
         super(props);
         this.state = Form.defaultState;
@@ -100,8 +100,8 @@ class Form extends React.Component<FormProps, FormState> {
                     </Styled.Row>
                     <Styled.Row>
                         <ThumbnailList
-                            account={accountKey}
-                            columnId={columnKey}
+                            accountKey={accountKey}
+                            columnKey={columnKey}
                             lists={this.state.file}
                             isDeletable
                             handleDelete={this.handleDeleteFile}/>
@@ -116,10 +116,6 @@ class Form extends React.Component<FormProps, FormState> {
 
     componentDidMount() {
         this.props.registerColumn({handleAddReply: this.handleAddReply});
-    }
-
-    shouldComponentUpdate(nextProps: FormProps, nextState: FormState): boolean{
-        return true; // TODO
     }
 
     handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

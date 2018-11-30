@@ -7,7 +7,7 @@ import { withKnobs, text, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Form from './Form';
-import { Field_ } from "./Field";
+import { Field } from "./Field";
 // import icon from "../../__testdata__/icon/icon";
 
 const StoryNamePrefix = "Common Components|Form";
@@ -48,7 +48,7 @@ storiesOf(StoryNamePrefix + "/Field", module)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
         () => (
-            <Field_ id={text("id", sampleId)} value={text('value', "yeah")} handleChange={action('field onChange')}/>
+            <Field id={text("id", sampleId)} value={text('value', "yeah")} handleChange={action('field onChange')}/>
         )
     ))
 

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
 import {pure} from 'recompose';
 import styled from '../../Theme/style';
-import {IStatus, StatusProperties} from '../../../lib/data/src/index';
+import {IStatus, StatusProperties} from "../../../lib/data";
 
 const Styled = {
     Avatar: styled(_Avatar)`
