@@ -28,7 +28,7 @@ export type FormProps = {
     /* reply source clicked */
     handleClickReply: (object: {accountKey: string, columnKey: string, sourceId: string}) => void,
     /* post it! */
-    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
+    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: Blob[]}) => void, //TODO: object type move tsuruclient/data
     /* register reducer. */
     registerColumn: (object: {handleAddReply: Function}) => void,
 }
@@ -36,7 +36,7 @@ export type FormProps = {
 type FormState = {
     text: string,
     replySource?: IStatus,
-    file: File[],
+    file: string[],
     warn?: string,
 };
 
@@ -76,7 +76,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         this.fileInput = React.createRef();
     }
 
-    private fileInput: any;
+    private readonly fileInput: any;
 
     static defaultState: FormState = {
         text: "",
@@ -125,6 +125,34 @@ class Form extends React.PureComponent<FormProps, FormState> {
         }
     };
 
+    handleFileDrop = (file: File[]): void => {
+        if (this.props.handleFileUpload) {
+            this.props.handleFileUpload((source: string) => this.setState({text: this.state.text + source}), file);
+        } else {
+            this.handleAddFile(file);
+        }
+    };
+
+    handleAddFile = (file: File[]): void => {
+        file.forEach((v) => {
+            const reader: FileReader = new FileReader();
+            reader.addEventListener("load", () => {
+                this.setState({
+                    file: [...this.state.file, reader.result as string],
+                });
+            });
+            reader.readAsDataURL(v);
+        });
+    };
+
+    handleDeleteFile = (index: number): void => {
+        let newFileArray = this.state.file.concat();
+        newFileArray.splice(index,1);
+        this.setState({
+            file: newFileArray
+        });
+    };
+
     handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         this.setState({ text: event.target.value });
     };
@@ -141,28 +169,6 @@ class Form extends React.PureComponent<FormProps, FormState> {
         });
     };
 
-    handleFileDrop = (file: File[]): void => {
-        if (this.props.handleFileUpload) {
-            this.props.handleFileUpload((source: string) => this.setState({text: this.state.text + source}), file);
-        } else {
-            this.handleAddFile(file);
-        }
-    };
-
-    handleAddFile = (file: File[]): void => {
-        this.setState({
-            file: [...this.state.file, ...file],
-        });
-    };
-
-    handleDeleteFile = (index: number): void => {
-        let newFileArray = this.state.file.concat();
-        newFileArray.splice(index,1);
-        this.setState({
-            file: newFileArray
-        });
-    };
-
     handleClear = (): void => {
         this.setState(Form.defaultState);
     };
@@ -171,7 +177,29 @@ class Form extends React.PureComponent<FormProps, FormState> {
         e.preventDefault();
         const {accountKey, columnKey} = this.props;
         const {text, file} = this.state;
-        this.props.requestPost({handleClear: this.handleClear, accountKey, columnKey, text, file});
+
+        // https://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
+        const files = file.map((v: string): Blob => {
+            const byteString = atob(v.split(',')[1]);
+
+            // separate out the mime component
+            const mimeString = v.split(',')[0].split(':')[1].split(';')[0]
+
+            // write the bytes of the string to an ArrayBuffer
+            const ab = new ArrayBuffer(byteString.length);
+
+            // create a view into the buffer
+            const ia = new Uint8Array(ab);
+
+            // set the bytes of the buffer to the correct values
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+
+            // write the ArrayBuffer to a blob, and you're done
+            return new Blob([ab], {type: mimeString});
+        });
+        this.props.requestPost({handleClear: this.handleClear, accountKey, columnKey, text, file: files});
     }
 }
 

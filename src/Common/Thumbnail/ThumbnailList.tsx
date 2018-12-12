@@ -14,7 +14,7 @@ export type ThumbnailListProps = {
     sourceId?: string,
 
     /* file or uri list */
-    lists: File[] | string[],
+    lists: string[],
 
     /* deletable? */
     isDeletable?: boolean,
@@ -36,20 +36,9 @@ const Styled = {
     `,
 };
 
-const ExtractionUri = (source: Array<any>): Array<string> =>
-    source.map((v: any): string => {
-        if (typeof v === "string"){
-            return v;
-        } else if (v.preview) { // File
-            return v.preview.toString();
-        } else {
-            throw new Error();
-        }
-    });
-
 const handleClick = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();
-    const src = ExtractionUri(props.lists);
+    const src = props.lists;
     if(props.handleClick) {
         props.handleClick({
             account: props.accountKey,
@@ -68,8 +57,7 @@ const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.Mou
 };
 
 const Thumbnails = (props: ThumbnailListProps) => {
-    const lists: string[] = ExtractionUri(props.lists);
-    return lists.map((v, i) => (
+    return props.lists.map((v, i) => (
         <Thumbnail key={i} index={i} source={v}
             handleClick={props.handleClick ? handleClick(props, i) : undefined}
             handleDelete={props.isDeletable ? handleDelete(props, i) : undefined} />
