@@ -89,12 +89,12 @@ class Form extends React.PureComponent<FormProps, FormState> {
         const {accountKey, columnKey, accept, error} = this.props;
         const {text, warn, replySource} = this.state;
         return (
-            <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
+            <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} ref={this.fileInput}>
                 <Styled.Body>
                     <Styled.Row>
                         <Field id={columnKey} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
                         <Styled.Buttons>
-                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: () => this.fileInput.open()})}
+                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: this.handleAddFileDialogOpen})}
                             {IconButtonHoC(SendIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: this.handleRequestPost})}
                         </Styled.Buttons>
                     </Styled.Row>
@@ -117,6 +117,13 @@ class Form extends React.PureComponent<FormProps, FormState> {
     componentDidMount() {
         this.props.registerColumn({handleAddReply: this.handleAddReply});
     }
+
+    handleAddFileDialogOpen = (event: React.MouseEvent<any>): void => {
+        event.preventDefault();
+        if(this.fileInput.current) {
+            this.fileInput.current.open();
+        }
+    };
 
     handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         this.setState({ text: event.target.value });
