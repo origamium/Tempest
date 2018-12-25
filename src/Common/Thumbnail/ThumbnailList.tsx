@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { pure } from 'recompose';
 import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
@@ -43,6 +42,7 @@ const ExtractionUri = (source: Array<any>): Array<string> =>
         } else if (v.preview) { // File
             return v.preview.toString();
         } else {
+            console.log(v);
             throw new Error();
         }
     });
@@ -88,4 +88,4 @@ export const ThumbnailList: React.SFC<ThumbnailListProps> = (props: ThumbnailLis
     </>
 );
 
-export default pure(ThumbnailList);
+export default React.memo(ThumbnailList);

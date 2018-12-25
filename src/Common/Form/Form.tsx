@@ -36,7 +36,7 @@ export type FormProps = {
 type FormState = {
     text: string,
     replySource?: IStatus,
-    file: File[],
+    file: {source: File, thumbnail: string}[],
     warn?: string,
 };
 
@@ -73,9 +73,11 @@ class Form extends React.PureComponent<FormProps, FormState> {
     constructor(props: FormProps) {
         super(props);
         this.state = Form.defaultState;
+        this.reader = new FileReader;
         this.fileInput = React.createRef();
     }
 
+    private reader: FileReader;
     private fileInput: any;
 
     static defaultState: FormState = {
@@ -115,8 +117,12 @@ class Form extends React.PureComponent<FormProps, FormState> {
     }
 
     componentDidMount() {
+        this.reader = new FileReader;
+        this.reader.addEventListener("load", () => {
+            this.imgParser(reader.result);
+        }, false)
         this.props.registerColumn({handleAddReply: this.handleAddReply});
-    }
+    };
 
     handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         this.setState({ text: event.target.value });
@@ -142,9 +148,16 @@ class Form extends React.PureComponent<FormProps, FormState> {
         }
     };
 
+    private imgParser = (): void => {
+
+    };
+
     handleAddFile = (file: File[]): void => {
         this.setState({
-            file: [...this.state.file, ...file],
+            file: [...this.state.file, ...file.map((v: File) => ({source: v, thumbnail: ""}))],
+        });
+        file.forEach((v: File) => {
+            this.reader.readAsDataURL();
         });
     };
 
