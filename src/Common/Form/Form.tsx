@@ -28,7 +28,7 @@ export type FormProps = {
     /* reply source clicked */
     handleClickReply: (object: {accountKey: string, columnKey: string, sourceId: string}) => void,
     /* post it! */
-    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: File[]}) => void, //TODO: object type move tsuruclient/data
+    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: string[]}) => void, //TODO: object type move tsuruclient/data
     /* register reducer. */
     registerColumn: (object: {handleAddReply: Function}) => void,
 }
