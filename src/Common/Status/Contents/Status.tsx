@@ -18,6 +18,9 @@ const Styled = {
     `,
     Body: styled.div`
         display: flex;
+        & > * {
+            margin: 0 2px;
+        }
     `,
     Text: styled.section`
         word-wrap : break-word;
@@ -31,10 +34,12 @@ export const Status: React.FunctionComponent<StatusProps> = React.memo((props: S
     return (
         <Styled.Root>
             <Styled.Body>
-                <Avatar src={user[UserProperties.avatarImage]}/>
+                {user[UserProperties.avatarImage] ?
+                    <Avatar src={user[UserProperties.avatarImage]}/> :
+                    <Avatar>{"?"}</Avatar>}
                 <Styled.Text>
                     <Typography variant="caption">{user[UserProperties.displayName] + "@" + user[UserProperties.screenName]}</Typography>
-                    <Typography variant="body1">{text}</Typography>
+                    <Typography variant="body1">{text || ""}</Typography>
                 </Styled.Text>
             </Styled.Body>
             {image ? <ThumbnailList accountKey={accountKey} columnKey={columnKey} lists={image}/>
