@@ -1,8 +1,8 @@
 /*tslint:disable*/
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {withKnobs/*, text*/} from '@storybook/addon-knobs';
-//import {action} from '@storybook/addon-actions';
+import {withKnobs, text} from '@storybook/addon-knobs';
+import {action} from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
 import {withInfo} from "@storybook/addon-info";
 //import {Theme, ThemeProvider} from '../../Theme/style'
@@ -19,14 +19,17 @@ storiesOf(StoryPrefix+"/Status", module)
     .addDecorator(withKnobs)
     .add('info', withInfo("")(
     () => (
-        <div style={{border: "solid 1px black"}}>
-            <Status accountKey={""} columnKey={""}
+        <div style={{border: "solid 1px black", width: "280px"}}>
+            <Status
+                accountKey={""}
+                columnKey={""}
+                handleLinkClick={action('link clicked')}
                 type={ArticleType.status}
                 id={"arclisp"}
                 user={{
                     id: "12345678",
                 }}
-                text={"yeah"}
+                text={text('text', "1245690923480284340182304710735401485729304175984721905731928074589123705912470957140295701 #yeah https://superrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrlongurl.origamium.net")}
                 date={Date.now().toString()}
                 isThread={false}/>
         </div>
