@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import {pure} from 'recompose';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ThumbnailList from '../../Thumbnail/ThumbnailList';
@@ -27,7 +26,7 @@ const Styled = {
     `,
 };
 
-export const Status = (props: StatusProps) => {
+export const Status: React.FunctionComponent<StatusProps> = React.memo((props: StatusProps) => {
     const {user, text, image, columnKey, accountKey} = props;
     return (
         <Styled.Root>
@@ -42,6 +41,6 @@ export const Status = (props: StatusProps) => {
                 : <div />}
         </Styled.Root>
     )
-};
+});
 
-export default pure(Status);
+export default Status;

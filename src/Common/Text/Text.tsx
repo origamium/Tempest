@@ -34,14 +34,15 @@ const linkifyOption = (props: TextProps) => ({
     }
 });
 
-export const Text = (props: TextProps) => (
-    <Linkify options={linkifyOption(props)}>
-        <Typography variant="body1">{props.text}</Typography>
-    </Linkify>
-);
+export const Text = onlyUpdateForKeys(['text'])(
+    (props: TextProps) => (
+        <Linkify options={linkifyOption(props)}>
+            <Typography variant="body1">{props.text}</Typography>
+        </Linkify>
+));
 
 Text.defaultProps = {
     maxLinkLength: 64,
 };
 
-export default onlyUpdateForKeys(['text'])(Text);
+export default Text;

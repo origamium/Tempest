@@ -67,7 +67,7 @@ const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.Mou
     }
 };
 
-const Thumbnails = (props: ThumbnailListProps) => {
+const Thumbnails = (props: ThumbnailListProps): React.ReactNode => {
     const lists: string[] = ExtractionUri(props.lists);
     return lists.map((v, i) => (
         <Thumbnail key={i} index={i} source={v}
@@ -77,7 +77,7 @@ const Thumbnails = (props: ThumbnailListProps) => {
     )
 };
 
-export const ThumbnailList: React.SFC<ThumbnailListProps> = (props: ThumbnailListProps) => (
+export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = React.memo((props: ThumbnailListProps) => (
     <>
         {props.lists ?
             <Styled.Root>
@@ -86,6 +86,6 @@ export const ThumbnailList: React.SFC<ThumbnailListProps> = (props: ThumbnailLis
             <div />
         }
     </>
-);
+));
 
-export default React.memo(ThumbnailList);
+export default ThumbnailList;

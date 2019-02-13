@@ -1,8 +1,7 @@
+import * as React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Paper, {PaperProps} from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import * as React from 'react';
-import {pure} from 'recompose';
 import styled, {ITheme} from '../../Theme/style'
 
 type Props = {
@@ -45,12 +44,12 @@ const handleClick = (props: Props) => (e: any) => {
     }
 };
 
-export const UserCard: React.SFC<Props> = (props: Props) => (
+export const UserCard: React.FunctionComponent<Props> = React.memo((props: Props) => (
     <Styled.Root header={props.header} onClick={handleClick(props)}>
         <Avatar src={props.avatar} />
         <Typography variant={"body1"}>{props.displayName}</Typography>
         <Typography variant={'caption'}>{props.screenName || ""}</Typography>
     </Styled.Root>
-);
+));
 
-export default pure(UserCard);
+export default UserCard;
