@@ -5,6 +5,7 @@ import * as linkify from 'linkifyjs';
 import Linkify from 'linkifyjs/react';
 import hashtag from 'linkifyjs/plugins/hashtag';
 import mention from 'linkifyjs/plugins/mention';
+import {ThemeStyle} from "@material-ui/core/styles/createTypography";
 
 // apply plugin
 hashtag(linkify);
@@ -12,8 +13,9 @@ mention(linkify);
 
 export type TextProps = {
     text: string,
+    variant?: ThemeStyle,
     maxLinkLength?: number,
-    handleLinkClick: (text: string) => void,
+    handleLinkClick: (href: string) => void,
 }
 
 const linkifyOption = (props: TextProps) => ({
@@ -42,7 +44,7 @@ const linkifyOption = (props: TextProps) => ({
 export const Text = onlyUpdateForKeys(['text'])(
     (props: TextProps) => (
         <Linkify options={linkifyOption(props)}>
-            <Typography variant="body1">{props.text}</Typography>
+            <Typography variant={props.variant}>{props.text}</Typography>
         </Linkify>
 ));
 
