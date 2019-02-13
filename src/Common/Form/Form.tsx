@@ -78,7 +78,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
     }
 
     private reader: FileReader;
-    private fileInput: any;
+    private readonly fileInput: React.RefObject<any>;
 
     static defaultState: FormState = {
         text: "",
@@ -91,12 +91,12 @@ class Form extends React.PureComponent<FormProps, FormState> {
         const {accountKey, columnKey, accept, error} = this.props;
         const {text, warn, replySource} = this.state;
         return (
-            <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} innerRef={node => this.fileInput = node}>
+            <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} ref={this.fileInput}>
                 <Styled.Body>
                     <Styled.Row>
                         <Field id={columnKey} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
                         <Styled.Buttons>
-                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: () => this.fileInput.open()})}
+                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: this.handleAddFileClicked})}
                             {IconButtonHoC(SendIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: this.handleRequestPost})}
                         </Styled.Buttons>
                     </Styled.Row>
@@ -135,6 +135,12 @@ class Form extends React.PureComponent<FormProps, FormState> {
             replySource: source,
         });
     };
+
+    handleAddFileClicked = (event: React.MouseEvent<HTMLInputElement>) => {
+        if(this.fileInput && this.fileInput.current){
+            this.fileInput.current.open();
+        }
+    }
 
     handleDeleteReply = (): void => {
         this.setState({
