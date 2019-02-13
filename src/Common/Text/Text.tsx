@@ -27,8 +27,12 @@ const linkifyOption = (props: TextProps) => ({
         onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();
             const target: HTMLAnchorElement = e.target as HTMLAnchorElement;
-            if (target.textContent) {
-                props.handleLinkClick(target.textContent);
+            if (target.href) {
+                if(target.text[0] === "h"){
+                    props.handleLinkClick(target.href)
+                } else {
+                    props.handleLinkClick(target.text);
+                }
             }
         }
     }
