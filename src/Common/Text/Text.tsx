@@ -19,7 +19,7 @@ export type TextProps = {
 const linkifyOption = (props: TextProps) => ({
     format: (value, type) => {
         if(type === "url" && value.length > 64){
-            return value.slice(0, 64 - 12) + '…';
+            return value.slice(0, (props.maxLinkLength || 64) - 12) + '…';
         }
         return value;
     },
@@ -38,6 +38,7 @@ const linkifyOption = (props: TextProps) => ({
     }
 });
 
+// TODO: multibyte-text hashtag
 export const Text = onlyUpdateForKeys(['text'])(
     (props: TextProps) => (
         <Linkify options={linkifyOption(props)}>
