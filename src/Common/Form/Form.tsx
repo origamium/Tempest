@@ -49,6 +49,9 @@ const Styled = {
         flex-direction: column;
         width: 100%;
     `,
+    Input: styled.input`
+        display: none;
+    `,
     Row: styled.div`
         display: flex;
         width: 100%;
@@ -91,27 +94,41 @@ class Form extends React.PureComponent<FormProps, FormState> {
         const {accountKey, columnKey, accept, error} = this.props;
         const {text, warn, replySource} = this.state;
         return (
-            <Styled.Root disableClick accept={accept} onDrop={this.handleFileDrop} ref={this.fileInput}>
-                <Styled.Body>
-                    <Styled.Row>
-                        <Field id={columnKey} value={text} warn={warn} error={error} handleChange={this.handleFieldChange} />
-                        <Styled.Buttons>
-                            {IconButtonHoC(ClipIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: this.handleAddFileClicked})}
-                            {IconButtonHoC(SendIcon)({style: ButtonStyle, id: columnKey, active: false, handleClick: this.handleRequestPost})}
-                        </Styled.Buttons>
-                    </Styled.Row>
-                    <Styled.Row>
-                        <ThumbnailList
-                            accountKey={accountKey}
-                            columnKey={columnKey}
-                            lists={this.state.file}
-                            isDeletable
-                            handleDelete={this.handleDeleteFile}/>
-                    </Styled.Row>
-                    <Styled.Row>
-                        {replySource ? <StatusCard accountKey={accountKey} target={replySource}/> : <div />}
-                    </Styled.Row>
-                </Styled.Body>
+            <Styled.Root accept={accept} onDrop={this.handleFileDrop}>
+                {({getRootProps, getInputProps}) =>
+                    <Styled.Body {...getRootProps()}>
+                        <Styled.Input {...getInputProps()} ref={this.fileInput} />
+                        <Styled.Row>
+                            <Field id={columnKey} value={text} warn={warn} error={error}
+                                   handleChange={this.handleFieldChange}/>
+                            <Styled.Buttons>
+                                {IconButtonHoC(ClipIcon)({
+                                    style: ButtonStyle,
+                                    id: columnKey,
+                                    active: false,
+                                    handleClick: this.handleAddFileClicked
+                                })}
+                                {IconButtonHoC(SendIcon)({
+                                    style: ButtonStyle,
+                                    id: columnKey,
+                                    active: false,
+                                    handleClick: this.handleRequestPost
+                                })}
+                            </Styled.Buttons>
+                        </Styled.Row>
+                        <Styled.Row>
+                            <ThumbnailList
+                                accountKey={accountKey}
+                                columnKey={columnKey}
+                                lists={this.state.file}
+                                isDeletable
+                                handleDelete={this.handleDeleteFile}/>
+                        </Styled.Row>
+                        <Styled.Row>
+                            {replySource ? <StatusCard accountKey={accountKey} target={replySource}/> : <div/>}
+                        </Styled.Row>
+                    </Styled.Body>
+                }
             </Styled.Root>
         )
     }
@@ -138,7 +155,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     handleAddFileClicked = (event: React.MouseEvent<HTMLInputElement>) => {
         if(this.fileInput && this.fileInput.current){
-            this.fileInput.current.open();
+            this.fileInput.current.click();
         }
     }
 
@@ -148,11 +165,11 @@ class Form extends React.PureComponent<FormProps, FormState> {
         });
     };
 
-    handleFileDrop = (file: File[]): void => {
+    handleFileDrop = (acceptFile: File[], rejectedFile: File[]): void => {
         if (this.props.handleFileUpload) {
-            this.props.handleFileUpload((source: string) => this.setState({text: this.state.text + source}), file);
+            this.props.handleFileUpload((source: string) => this.setState({text: this.state.text + source}), acceptFile);
         } else {
-            this.handleAddFile(file);
+            this.handleAddFile(acceptFile);
         }
     };
 
