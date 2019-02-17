@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "build/dist",
-    "module": "esnext",
+    "module": "commonjs",
     "target": "es5",
     "lib": [
       "es6",
@@ -13,7 +13,8 @@
     "jsx": "react",
     "moduleResolution": "node",
     "paths": {
-      "data": ["lib/data/src"]
+      "data": ["lib/data/src"],
+      "events": ["lib/events/src"]
     },
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
