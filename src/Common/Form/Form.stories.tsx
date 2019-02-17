@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from "@storybook/react";
 import centered from '@storybook/addon-centered';
-import { withInfo } from "@storybook/addon-info";
-import { withKnobs, text, number } from "@storybook/addon-knobs";
+import { text, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Form from './Form';
@@ -45,39 +44,35 @@ class FormReplyComponent extends React.Component {
 
 storiesOf(StoryNamePrefix + "/Field", module)
     .addDecorator(centered)
-    .addDecorator(withKnobs)
-    .add('info', withInfo("")(
-        () => (
-            <Field id={text("id", sampleId)} value={text('value', "yeah")} handleChange={action('field onChange')}/>
-        )
-    ))
-
+    .add('info',() => (
+        <Field id={text("id", sampleId)} value={text('value', "yeah")} handleChange={action('field onChange')}/>
+    ),
+        {}
+    )
+;
 storiesOf(StoryNamePrefix, module)
     .addDecorator(centered)
-    .addDecorator(withKnobs)
-    .add('simple info', withInfo("")(
-        () => (
-            <Form accountKey={text('account id', sampleAccountId)}
-                  columnKey={text('column id', '123456')}
-                  maxTextLength={number("max text length", 140)}
-                  handleClickReply={action('reply source clicked!')}
-                  requestPost={action('request post!')}
-                  registerColumn={action('registered!')}/>
-        )
-    ))
-    .add('need file upload procedure' ,withInfo("")(
-        () => (
-            <Form accountKey={text('account id', sampleAccountId)}
-                  columnKey={text('column id', '123456')}
-                  maxTextLength={number("max text length", 140)}
-                  handleFileUpload={action('file upload procedure')}
-                  handleClickReply={action('reply source clicked!')}
-                  requestPost={action('request post!')}
-                  registerColumn={action('registered!')}/>
-        )
-    ))
-    .add('reply data', withInfo("")(
-        () => (
-            <FormReplyComponent/>
-        )
-    ))
+    .add('simple info', () => (
+        <Form accountKey={text('account id', sampleAccountId)}
+            columnKey={text('column id', '123456')}
+            maxTextLength={number("max text length", 140)}
+            handleClickReply={action('reply source clicked!')}
+            requestPost={action('request post!')}
+            registerColumn={action('registered!')}/>
+        ),
+        {})
+    .add('need file upload procedure',() => (
+        <Form accountKey={text('account id', sampleAccountId)}
+            columnKey={text('column id', '123456')}
+            maxTextLength={number("max text length", 140)}
+            handleFileUpload={action('file upload procedure')}
+            handleClickReply={action('reply source clicked!')}
+            requestPost={action('request post!')}
+            registerColumn={action('registered!')}/>
+        ),
+        {})
+    .add('reply data', () => (
+        <FormReplyComponent/>
+    ),
+        {})
+;

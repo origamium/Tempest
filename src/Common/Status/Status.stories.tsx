@@ -1,10 +1,9 @@
 /*tslint:disable*/
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {withKnobs, text} from '@storybook/addon-knobs';
+import {text} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
-import {withInfo} from "@storybook/addon-info";
 //import {Theme, ThemeProvider} from '../../Theme/style'
 
 // import Content from './Content';
@@ -16,9 +15,7 @@ import {ArticleType} from "../../../lib/data";
 const StoryPrefix = "Common Components|Status";
 storiesOf(StoryPrefix+"/Status", module)
     .addDecorator(centered)
-    .addDecorator(withKnobs)
-    .add('info', withInfo("")(
-    () => (
+    .add('info',() => (
         <div style={{border: "solid 1px black", width: "280px"}}>
             <Status
                 accountKey={""}
@@ -33,5 +30,5 @@ storiesOf(StoryPrefix+"/Status", module)
                 date={Date.now().toString()}
                 isThread={false}/>
         </div>
-    )
-))
+    ), {})
+;
