@@ -1,17 +1,15 @@
 // from https://www.styled-components.com/docs/api#typescript
-import * as styledComponents from 'styled-components';
-import { ThemedStyledComponentsModule } from 'styled-components';
+import * as styledComponents from "styled-components";
 
-import {ITheme} from './ITheme';
-import Theme from './Theme';
+import ThemeInterface from "./ITheme";
 
 const {
     default: styled,
     css,
-    injectGlobal,
+    createGlobalStyle,
     keyframes,
     ThemeProvider
-} = styledComponents as ThemedStyledComponentsModule<ITheme>;
+} = styledComponents as styledComponents.ThemedStyledComponentsModule<ThemeInterface>;
 
-export { css, injectGlobal, keyframes, ThemeProvider, Theme, ITheme};
+export { css, createGlobalStyle, keyframes, ThemeProvider };
 export default styled;
