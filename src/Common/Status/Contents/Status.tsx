@@ -9,7 +9,6 @@ import {IStatus, UserProperties} from "../../../../lib/data";
 export type StatusProps = IStatus & {
     accountKey: string,
     columnKey: string,
-    handleLinkClick: (href: string, accountKey: string) => void,
 };
 
 const Styled = {
@@ -32,8 +31,33 @@ const Styled = {
 };
 
 const handleLinkClick = (props: StatusProps) => (href: string): void => {
-    props.handleLinkClick(href, props.accountKey);
+    document.dispatchEvent(new CustomEvent<any>(
+        'tsuru-link-click',
+        {
+            detail: {
+                href,
+                accountKey: props.accountKey,
+                columnKey: props.columnKey,
+            }
+        }));
 }
+
+const handleAccountClick = (props: StatusProps, id: string) => (e): void => {
+    document.dispatchEvent(new CustomEvent<any>(
+        'tsuru-account-click',
+        {
+            detail: {
+                id,
+                accountKey: props.accountKey,
+                columnKey: props.columnKey,
+            }
+        }
+    ))
+}
+
+const screenName = (name?: string) => (
+    name ? "@" + name : ""
+);
 
 export const Status: React.FunctionComponent<StatusProps> = React.memo((props: StatusProps) => {
     const {user, text, image, columnKey, accountKey} = props;
@@ -41,10 +65,13 @@ export const Status: React.FunctionComponent<StatusProps> = React.memo((props: S
         <Styled.Root>
             <Styled.Body>
                 {user[UserProperties.avatarImage] ?
-                    <Avatar src={user[UserProperties.avatarImage]}/> :
-                    <Avatar>{"?"}</Avatar>}
+                    <Avatar src={user[UserProperties.avatarImage]}
+                        onClick={handleAccountClick(props, user[UserProperties.id])} /> :
+                    <Avatar onClick={handleAccountClick(props, user[UserProperties.id])}>{"?"}</Avatar>}
                 <Styled.Text>
-                    <Typography variant="caption">{user[UserProperties.displayName] + "@" + user[UserProperties.screenName]}</Typography>
+                    <Typography variant="caption">
+                        {(user[UserProperties.displayName] || "") + screenName(user[UserProperties.screenName])}
+                    </Typography>
                     <Text variant="body1" text={(text || "")} handleLinkClick={handleLinkClick(props)}/>
                 </Styled.Text>
             </Styled.Body>

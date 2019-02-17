@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {text} from '@storybook/addon-knobs';
-import {action} from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
 //import {Theme, ThemeProvider} from '../../Theme/style'
 
@@ -20,7 +19,6 @@ storiesOf(StoryPrefix+"/Status", module)
             <Status
                 accountKey={""}
                 columnKey={""}
-                handleLinkClick={action('link clicked')}
                 type={ArticleType.status}
                 id={"arclisp"}
                 user={{
