@@ -28,7 +28,7 @@ export type FormProps = {
     /* reply source clicked */
     handleClickReply: (object: {accountKey: string, columnKey: string, sourceId: string}) => void,
     /* post it! */
-    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: string[]}) => void, //TODO: object type move tsuruclient/data
+    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: string[]}) => void, // TODO: object type move tsuruclient/data
     /* register reducer. */
     registerColumn: (object: {handleAddReply: Function}) => void,
 }
@@ -83,14 +83,14 @@ class Form extends React.PureComponent<FormProps, FormState> {
     private reader: FileReader;
     private readonly fileInput: React.RefObject<any>;
 
-    static defaultState: FormState = {
+    public static defaultState: FormState = {
         text: "",
         file: [],
         replySource: undefined,
         warn: undefined,
     };
 
-    render() {
+    public render() {
         const {accountKey, columnKey, accept, error} = this.props;
         const {text, warn, replySource} = this.state;
         return (
@@ -121,7 +121,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
                                 accountKey={accountKey}
                                 columnKey={columnKey}
                                 lists={this.state.file}
-                                isDeletable
+                                isDeletable={true}
                                 handleDelete={this.handleDeleteFile}/>
                         </Styled.Row>
                         <Styled.Row>
@@ -133,7 +133,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         )
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         this.reader = new FileReader;
             this.reader.addEventListener("load", () => {
                 this.setState({
@@ -143,29 +143,29 @@ class Form extends React.PureComponent<FormProps, FormState> {
         this.props.registerColumn({handleAddReply: this.handleAddReply});
     };
 
-    handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    public handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         this.setState({ text: event.target.value });
     };
 
-    handleAddReply = (source: IStatus): void => {
+    public handleAddReply = (source: IStatus): void => {
         this.setState({
             replySource: source,
         });
     };
 
-    handleAddFileClicked = (event: React.MouseEvent<HTMLInputElement>) => {
+    public handleAddFileClicked = (event: React.MouseEvent<HTMLInputElement>) => {
         if(this.fileInput && this.fileInput.current){
             this.fileInput.current.click();
         }
     }
 
-    handleDeleteReply = (): void => {
+    public handleDeleteReply = (): void => {
         this.setState({
             replySource: undefined
         });
     };
 
-    handleFileDrop = (acceptFile: File[], rejectedFile: File[]): void => {
+    public handleFileDrop = (acceptFile: File[], rejectedFile: File[]): void => {
         if (this.props.handleFileUpload) {
             this.props.handleFileUpload((source: string) => this.setState({text: this.state.text + source}), acceptFile);
         } else {
@@ -173,25 +173,25 @@ class Form extends React.PureComponent<FormProps, FormState> {
         }
     };
 
-    handleAddFile = (file: File[]): void => {
+    public handleAddFile = (file: File[]): void => {
         file.forEach((v: File) => {
             this.reader.readAsDataURL(v);
         });
     };
 
-    handleDeleteFile = (index: number): void => {
-        let newFileArray = this.state.file.concat();
+    public handleDeleteFile = (index: number): void => {
+        const newFileArray = this.state.file.concat();
         newFileArray.splice(index,1);
         this.setState({
             file: newFileArray
         });
     };
 
-    handleClear = (): void => {
+    public handleClear = (): void => {
         this.setState(Form.defaultState);
     };
 
-    handleRequestPost = (e: Event): void => {
+    public handleRequestPost = (e: Event): void => {
         e.preventDefault();
         const {accountKey, columnKey} = this.props;
         const {text, file} = this.state;

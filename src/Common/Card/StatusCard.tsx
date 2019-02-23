@@ -6,14 +6,14 @@ import styled from '../../Theme/style';
 import {IStatus, StatusProperties} from "../../../lib/data";
 
 const Styled = {
-    Avatar: styled(_Avatar)`
+    Avatar: styled(_Avatar)<any>`
         &&{
             margin: 6px;
             width: 32px;
             height: 32px;
         }
     `,
-    Root: styled(_Paper)`
+    Root: styled(_Paper)<any>`
         && {
             width: 100%;
             max-height: 60px;
@@ -30,7 +30,7 @@ type Props = {
     handleClick?: (payload: Object) => void,
 }
 
-const handleClick = (props: Props) => (e: any) => {
+const handleClick = (props: Props) => (e: React.MouseEvent<any>) => {
     e.preventDefault();
     if(props.handleClick) {
         props.handleClick({
@@ -40,11 +40,11 @@ const handleClick = (props: Props) => (e: any) => {
     }
 };
 
-export const StatusCard: React.FunctionComponent<Props> = React.memo((props: Props) => (
-    <Styled.Root onClick={handleClick(props)}>
-        <Styled.Avatar src={props.target[StatusProperties.user].avatarImage} />
+export const StatusCard: React.FunctionComponent<Props> = React.memo((props: Props) => {
+    return(<Styled.Root onClick={handleClick(props)}>
+        <Styled.Avatar src={props.target[StatusProperties.user].avatarImage}/>
         <Typography variant="body1">{props.target.text}</Typography>
-    </Styled.Root>
-));
+    </Styled.Root>);
+});
 
 export default StatusCard;

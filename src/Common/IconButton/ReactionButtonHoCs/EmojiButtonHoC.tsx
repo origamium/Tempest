@@ -6,13 +6,16 @@ type Props = {
     id: string,
 };
 
+
 const EmojiButtonHoC = (Emoji: String): Function => (
-    (props: Props) => (
-        <IconButton onClick={(e) => props.handleClick({
-            id: props.id,
-        })}>
+    (props: Props) => {
+        const handleClick = (e: React.MouseEvent<any>): void => {
+            props.handleClick({id: props.id});
+        }
+
+        return (<IconButton onClick={handleClick}>
             {Emoji}
-        </IconButton>
-    ));
+        </IconButton>);
+    });
 
 export default EmojiButtonHoC;

@@ -35,14 +35,13 @@ const Styled = {
     `,
 };
 
-const ExtractionUri = (source: Array<any>): Array<string> =>
+const ExtractionUri = (source: any[]): string[] =>
     source.map((v: any): string => {
         if (typeof v === "string"){
             return v;
         } else if (v.preview) { // File
             return v.preview.toString();
         } else {
-            console.log(v);
             throw new Error();
         }
     });

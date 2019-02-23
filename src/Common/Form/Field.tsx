@@ -40,9 +40,9 @@ export const Field: React.FunctionComponent<FieldProps> = React.memo((props: Fie
             helperText={getHelperText(props)}
             id={props.id}
             error={!!props.error}
-            multiline
+            multiline={true}
             margin="none"
-            fullWidth
+            fullWidth={true}
             rowsMax={props.maxRow} />
     </Styled.Root>
 ));
