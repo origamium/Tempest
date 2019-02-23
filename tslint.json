@@ -1,21 +1,20 @@
 {
-  "extends": [
-    "tslint:recommended",
-    "tslint-react",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": [
-      "config/**/*.js",
-      "node_modules/**/*.ts"
-    ]
+    "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
   },
   "rules": {
     "interface-over-type-literal": false,
     "object-literal-sort-keys": [false],
     "member-ordering": [false],
     "ordered-imports": [false],
-    "variable-name": [true, "check-format", "allow-leading-underscore", "allow-trailing-underscore", "allow-pascal-case"],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-leading-underscore",
+      "allow-trailing-underscore",
+      "allow-pascal-case"
+    ],
     "ban-types": [false]
   }
 }
