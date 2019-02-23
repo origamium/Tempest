@@ -16,6 +16,7 @@
       "data": ["lib/data/src"],
       "events": ["lib/events/src"]
     },
+    "pretty": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": false,
@@ -26,6 +27,7 @@
   },
   "exclude": [
     "node_modules",
+    "lib",
     "build",
     "scripts",
     "acceptance-tests",
