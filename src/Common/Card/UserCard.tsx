@@ -2,7 +2,7 @@ import * as React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import {default as Paper, PaperProps} from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import styled, {ThemeInterface} from '@styled/style'
+import styled, {ThemeInterface} from '../../Theme/style'
 
 type Props = {
     account: string,

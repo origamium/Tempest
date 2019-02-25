@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Dropzone from 'react-dropzone';
+import Dropzone from 'react-dropzone/dist/index';
 import styled from 'styled-components';
 import Field from './Field';
 import {ThumbnailList} from '../Thumbnail';
@@ -8,7 +8,7 @@ import SendIcon from '@material-ui/icons/Send';
 import ClipIcon from '@material-ui/icons/AttachFile';
 import {IconButtonStyle} from "../IconButton/IconButton";
 import StatusCard from '../Card/StatusCard';
-import {IStatus} from "../../../lib/data";
+import {IStatus} from "@data/index";
 
 export type FormProps = {
     /* unique account key */
@@ -41,9 +41,6 @@ type FormState = {
 };
 
 const Styled = {
-    Root: styled(Dropzone)`
-        width: 100%;
-    `,
     Body: styled.div`
         display: flex;
         flex-direction: column;
@@ -94,7 +91,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         const {accountKey, columnKey, accept, error} = this.props;
         const {text, warn, replySource} = this.state;
         return (
-            <Styled.Root accept={accept} onDrop={this.handleFileDrop}>
+            <Dropzone accept={accept} onDrop={this.handleFileDrop}>
                 {({getRootProps, getInputProps}) =>
                     <Styled.Body {...getRootProps()}>
                         <Styled.Input {...getInputProps()} ref={this.fileInput} />
@@ -129,7 +126,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
                         </Styled.Row>
                     </Styled.Body>
                 }
-            </Styled.Root>
+            </Dropzone>
         )
     }
 
