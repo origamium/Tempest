@@ -6,8 +6,8 @@ import {boolean} from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import {Thumbnail} from "./Thumbnail";
 
-import origamiIcon from '../../__testdata__/icon/origami.png';
-import simulaculaIcon from '../../__testdata__/icon/simulacla.jpg';
+import * as origamiIcon from '../../__testdata__/icon/origami.png';
+import * as simulaculaIcon from '../../__testdata__/icon/simulacla.jpg';
 
 
 import {ThumbnailList} from "./ThumbnailList";

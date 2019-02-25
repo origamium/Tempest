@@ -4,7 +4,6 @@ import {storiesOf} from '@storybook/react';
 import {text} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
-import {Theme, ThemeProvider} from '../../Theme/style'
 
 import {ArticleType} from "../../../lib/data";
 
@@ -20,7 +19,6 @@ const StoryPrefix = 'Common Components|Card';
 storiesOf(StoryPrefix+"/StatusCard", module)
     .addDecorator(centered)
     .add('info', () => (
-        <ThemeProvider theme={Theme.Light}>
             <StatusCard
                 accountKey={text('accountKey', 'accountid@example.org')}
                 target={{
@@ -36,7 +34,6 @@ storiesOf(StoryPrefix+"/StatusCard", module)
                     isThread: false,
                 }}
                 handleClick={action('status clicked!')}/>
-        </ThemeProvider>
         ),
         {}
     )
@@ -45,7 +42,6 @@ storiesOf(StoryPrefix+"/StatusCard", module)
 storiesOf(StoryPrefix+"/AccountCard", module)
     .addDecorator(centered)
     .add('info', () => (
-        <ThemeProvider theme={Theme.Light}>
             <UserCard
                 account={text('accountKey', 'accountid@example.org')}
                 id={text('id', sampleId)}
@@ -54,7 +50,6 @@ storiesOf(StoryPrefix+"/AccountCard", module)
                 avatar={Icons.origami}
                 header={Headers.sample}
                 handleClick={action('status clicked!')}/>
-        </ThemeProvider>
         ),
         {}
     )
