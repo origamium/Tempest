@@ -10,8 +10,9 @@
     "jsx": "react",
     "moduleResolution": "node",
     "paths": {
-      "data": ["lib/data/src"],
-      "events": ["lib/events/src"]
+      "@styled/*": ["src/Theme/*"],
+      "@data/*": ["lib/data/*"],
+      "@events/*": ["lib/events/*"]
     },
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
@@ -24,7 +25,6 @@
   },
   "exclude": [
     "node_modules",
-    "lib",
     "build",
     "scripts",
     "acceptance-tests",
