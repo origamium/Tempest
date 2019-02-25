@@ -4,7 +4,7 @@ const include = path.resolve(__dirname, '../');
 module.exports = {
 	// Add '.ts' and '.tsx' as resolvable extensions.
 	resolve: {
-		extensions: [".css", ".ts", ".tsx", ".js"]
+		extensions: [".css", ".ts", ".tsx", ".js"],
 	},
 	module: {
 		rules: [
@@ -23,7 +23,7 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 use: [
-                    require.resolve("awesome-typescript-loader"),
+                    require.resolve("ts-loader"),
                     require.resolve("react-docgen-typescript-loader"),
                 ],
                 exclude: /node_modules/,

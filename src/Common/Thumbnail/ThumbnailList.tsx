@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { pure } from 'recompose';
 import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
@@ -36,7 +35,7 @@ const Styled = {
     `,
 };
 
-const ExtractionUri = (source: Array<any>): Array<string> =>
+const ExtractionUri = (source: any[]): string[] =>
     source.map((v: any): string => {
         if (typeof v === "string"){
             return v;
@@ -67,7 +66,7 @@ const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.Mou
     }
 };
 
-const Thumbnails = (props: ThumbnailListProps) => {
+const Thumbnails = (props: ThumbnailListProps): React.ReactNode => {
     const lists: string[] = ExtractionUri(props.lists);
     return lists.map((v, i) => (
         <Thumbnail key={i} index={i} source={v}
@@ -77,7 +76,7 @@ const Thumbnails = (props: ThumbnailListProps) => {
     )
 };
 
-export const ThumbnailList: React.SFC<ThumbnailListProps> = (props: ThumbnailListProps) => (
+export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = React.memo((props: ThumbnailListProps) => (
     <>
         {props.lists ?
             <Styled.Root>
@@ -86,6 +85,6 @@ export const ThumbnailList: React.SFC<ThumbnailListProps> = (props: ThumbnailLis
             <div />
         }
     </>
-);
+));
 
-export default pure(ThumbnailList);
+export default ThumbnailList;

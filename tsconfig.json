@@ -2,19 +2,19 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "build/dist",
-    "module": "esnext",
+    "module": "es6",
     "target": "es5",
-    "lib": [
-      "es6",
-      "dom"
-    ],
+    "lib": ["es6", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
     "paths": {
-      "data": ["lib/data/src"]
+      "@styled/*": ["src/Theme/*"],
+      "@data/*": ["lib/data/*"],
+      "@events/*": ["lib/events/*"]
     },
+    "pretty": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": false,

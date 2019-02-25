@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { pure } from 'recompose';
 import styled from 'styled-components';
 import { ClearButton } from "../IconButton/IconButton";
 
@@ -35,7 +34,7 @@ const Styled = {
     `,
 };
 
-export const Thumbnail: React.SFC<ThumbnailProps> = (props: ThumbnailProps) => (
+export const Thumbnail: React.FunctionComponent<ThumbnailProps> = (props: ThumbnailProps) => (
     <Styled.Root src={props.source} onClick={props.handleClick}
         style={{cursor: props.handleClick ? "pointer" : "default"}}>
         {props.handleDelete ?
@@ -50,4 +49,4 @@ export const Thumbnail: React.SFC<ThumbnailProps> = (props: ThumbnailProps) => (
     </Styled.Root>
 );
 
-export default pure(Thumbnail);
+export default React.memo(Thumbnail);

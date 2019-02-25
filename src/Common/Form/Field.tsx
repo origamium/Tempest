@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { pure } from 'recompose';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 
@@ -33,7 +32,7 @@ const getHelperText = (props: FieldProps): string => {
     return props.helperText || "";
 };
 
-export const Field: React.FunctionComponent<FieldProps> = (props: FieldProps) => (
+export const Field: React.FunctionComponent<FieldProps> = React.memo((props: FieldProps) => (
     <Styled.Root>
         <TextField
             value={props.value}
@@ -41,12 +40,12 @@ export const Field: React.FunctionComponent<FieldProps> = (props: FieldProps) =>
             helperText={getHelperText(props)}
             id={props.id}
             error={!!props.error}
-            multiline
+            multiline={true}
             margin="none"
-            fullWidth
+            fullWidth={true}
             rowsMax={props.maxRow} />
     </Styled.Root>
-);
+));
 
 Field.defaultProps = {
     error: undefined,
@@ -54,4 +53,4 @@ Field.defaultProps = {
     maxRow: 6,
 };
 
-export default pure(Field);
+export default Field;
