@@ -7,9 +7,9 @@ import styled, {ThemeInterface} from '../../Theme/style'
 type Props = {
     account: string,
     id: string,
-    displayName: string,
+    displayName?: string,
     screenName?: string,
-    avatar: string,
+    avatar?: string,
     header?: string,
     handleClick?: Function,
 };
@@ -46,8 +46,8 @@ const handleClick = (props: Props) => (e: any) => {
 
 export const UserCard: React.FunctionComponent<Props> = React.memo((props: Props) => (
     <Styled.Root header={props.header} onClick={handleClick(props)}>
-        <Avatar src={props.avatar} />
-        <Typography variant={"body1"}>{props.displayName}</Typography>
+        {props.avatar ? <Avatar src={props.avatar} /> : <Avatar>{"?"}</Avatar>}
+        <Typography variant={"body1"}>{props.displayName || ""}</Typography>
         <Typography variant={'caption'}>{props.screenName || ""}</Typography>
     </Styled.Root>
 ));
