@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "@styled/style";
 import { IUser, UserProperties } from "@data/src/Contents/User";
 import { UserCard } from "../../Card/UserCard";
+import { Typography } from "@material-ui/core";
 
 interface UserEventComponentProps extends IUser {
     account: string,
@@ -20,6 +21,7 @@ const Styled = {
 export const UserEvent: React.FC<UserEventComponentProps> = React.memo((props: UserEventComponentProps) => {
     return (
         <Styled.Root>
+            <Typography>{"not yet"}</Typography>
             <UserCard
                 account={props.account}
                 id={props[UserProperties.id]}
@@ -29,7 +31,7 @@ export const UserEvent: React.FC<UserEventComponentProps> = React.memo((props: U
                 header={props[UserProperties.headerImage]}
             />
         </Styled.Root>
-    )
+    );
 })
 
 export default UserEvent
