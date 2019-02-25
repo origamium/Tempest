@@ -7,7 +7,7 @@ import centered from '@storybook/addon-centered';
 
 // import Content from './Content';
 import Status from './Contents/Status';
-import {ArticleType} from "../../../lib/data";
+import {ArticleType} from "@data";
 // import Event from './Contents/Event';
 // import UserEvent from './Contents/UserEvenet';
 

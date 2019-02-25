@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@styled/style";
-import { IUser, UserProperties } from "@data/src/Contents/User";
+import { IUser, UserProperties } from "@data";
 import { UserCard } from "../../Card/UserCard";
 import { Typography } from "@material-ui/core";
 

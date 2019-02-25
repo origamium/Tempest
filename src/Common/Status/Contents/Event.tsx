@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@styled/style";
-import { EventProperties, IEvent } from "@data/src/Contents/Article/Event";
+import { EventProperties, IEvent } from "@data";
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
 
