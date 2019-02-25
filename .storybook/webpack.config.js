@@ -1,12 +1,15 @@
 const path = require("path");
 const include = path.resolve(__dirname, '../');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
 	// Add '.ts' and '.tsx' as resolvable extensions.
 	resolve: {
 		extensions: [".css", ".ts", ".tsx", ".js"],
-        plugins: [new TsconfigPathsPlugin({})],
+        alias: {
+		    "@data": path.resolve(__dirname, "../lib/data"),
+		    "@events": path.resolve(__dirname, "../lib/events"),
+            "@styled": path.resolve(__dirname, "../src/Theme")
+        }
 	},
 	module: {
 		rules: [

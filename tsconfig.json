@@ -11,8 +11,8 @@
     "moduleResolution": "node",
     "paths": {
       "@styled/*": ["src/Theme/*"],
-      "@data/*": ["lib/data/*"],
-      "@events/*": ["lib/events/*"]
+      "@data": ["lib/data"],
+      "@events": ["lib/events"]
     },
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
