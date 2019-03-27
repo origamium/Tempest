@@ -32,7 +32,8 @@ module.exports = {
                     {
                         loader: "ts-loader",
                         options: {
-                            transpileOnly: true
+                            transpileOnly: true,
+                            configFile: __dirname + "/../tsconfig.json"
                         },
                     },
                     {
@@ -55,6 +56,8 @@ module.exports = {
         ]
 	},
     plugins: [
-        new ForkTsCheckerWebpackPlugin()
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: __dirname + "/../tsconfig.json"
+        })
     ]
 };
