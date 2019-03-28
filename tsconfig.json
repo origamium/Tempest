@@ -2,9 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "build/dist",
-    "module": "es6",
+    "module": "commonjs",
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": ["es6", "es7", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
