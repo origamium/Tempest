@@ -1,5 +1,6 @@
 const path = require("path");
 const include = path.resolve(__dirname, '../');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
 	// Add '.ts' and '.tsx' as resolvable extensions.
@@ -28,8 +29,16 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 use: [
-                    require.resolve("ts-loader"),
-                    require.resolve("react-docgen-typescript-loader"),
+                    {
+                        loader: "ts-loader",
+                        options: {
+                            transpileOnly: true,
+                            configFile: __dirname + "/../tsconfig.json"
+                        },
+                    },
+                    {
+                        loader: "react-docgen-typescript-loader"
+                    }
                 ],
                 exclude: /node_modules/,
                 include
@@ -45,5 +54,10 @@ module.exports = {
                 enforce: 'pre',
             }
         ]
-	}
+	},
+    plugins: [
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: __dirname + "/../tsconfig.json"
+        })
+    ]
 };
