@@ -1,5 +1,5 @@
 import * as React from 'react';
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton } from "@material-ui/core";
 
 type Props = {
     handleClick: Function,
@@ -11,7 +11,7 @@ const EmojiButtonHoC = (Emoji: String): Function => (
     (props: Props) => {
         const handleClick = (e: React.MouseEvent<any>): void => {
             props.handleClick({id: props.id});
-        }
+        };
 
         return (<IconButton onClick={handleClick}>
             {Emoji}

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import {default as Paper, PaperProps} from '@material-ui/core/Paper';
+import { Paper, Avatar } from "@material-ui/core";
+import { PaperProps } from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 import styled, {ThemeInterface} from '../../Theme/style'
 

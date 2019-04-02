@@ -1,11 +1,10 @@
 import * as React from 'react';
-import Dropzone from 'react-dropzone/dist/index';
+import Dropzone from "react-dropzone";
 import styled from 'styled-components';
 import Field from './Field';
 import {ThumbnailList} from '../Thumbnail';
 import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
-import SendIcon from '@material-ui/icons/Send';
-import ClipIcon from '@material-ui/icons/AttachFile';
+import { Send as SendIcon, AttachFile as ClipIcon } from "@material-ui/icons";
 import {IconButtonStyle} from "../IconButton/IconButton";
 import StatusCard from '../Card/StatusCard';
 import {IStatus} from "@data";
