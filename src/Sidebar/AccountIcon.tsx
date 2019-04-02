@@ -9,7 +9,7 @@ interface AccountIconProps extends IUser{}
 
 const Styled = {
     Root: styled((props: TooltipProps) => (
-        <Tooltip title={props.title} placement={props.placement} classes={{ popper: 'popper' }}>
+        <Tooltip title={props.title} placement={props.placement}>
             {props.children}
         </Tooltip>))``,
     Name: styled((props: TypographyProps) => (
