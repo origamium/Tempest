@@ -24,6 +24,7 @@ const Styled = {
             align-content: center;
             align-items: center;
             justify-items: center;
+            padding: 0.4em 0;
             
             ${(props: Props & {theme: ThemeInterface}) => (props.header ?
                 "background-image: url(" + props.header + ")":
