@@ -16,7 +16,7 @@ const Styled = {
     Root: styled.div`
         display: flex;
         flex-direction: column;
-        padding: 6px;
+        padding: 0.5em;
     `,
     Body: styled.div`
         display: flex;
