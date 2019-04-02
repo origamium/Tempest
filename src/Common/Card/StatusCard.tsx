@@ -43,7 +43,9 @@ const handleClick = (props: Props) => (e: React.MouseEvent<any>) => {
 export const StatusCard: React.FunctionComponent<Props> = React.memo((props: Props) => {
     return(<Styled.Root onClick={handleClick(props)}>
         <Styled.Avatar src={props.target[StatusProperties.user].avatarImage}/>
-        <Typography variant="body1">{props.target.text}</Typography>
+        <Typography variant="body1" style={{wordWrap: "break-word", wordBreak: "break-all"}}>
+            {props.target.text}
+        </Typography>
     </Styled.Root>);
 });
 
