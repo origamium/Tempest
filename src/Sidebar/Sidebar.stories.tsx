@@ -5,6 +5,7 @@ import centered from '@storybook/addon-centered';
 import {AccountIcon} from "./AccountIcon";
 import * as origamiIcon from '../__testdata__/icon/origami.png'
 import { IUser } from "@data";
+import { action } from "@storybook/addon-actions";
 
 const User1: IUser = {
     id: "123456",
@@ -24,5 +25,5 @@ const StoryPrefix = 'Sidebar|';
 storiesOf(StoryPrefix+'AccountIcon', module)
     .addDecorator(centered)
     .add('info', () => (
-        <AccountIcon {...User1}/>
+        <AccountIcon {...User1} handleClick={action('account clicked')}/>
     ))
