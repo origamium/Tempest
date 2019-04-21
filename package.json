@@ -1,28 +1,29 @@
 {
-  "name": "tsuru-ui",
+  "name": "@tsuruclient/ui",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
-    "events": "https://github.com/tsuruclient/events.git",
+    "@tsuruclient/datatype": "^1.0.5",
+    "@tsuruclient/events": "^1.0.3",
     "linkifyjs": "^2.1.8",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^10.1.1",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.0.6",
     "react-i18next": "^10.6.0",
-    "react-scripts-ts": "^3.1.0",
     "react-virtualized": "^9.20.1",
     "recompose": "^0.30.0",
-    "styled-components": "^4.2.0",
-    "tsuru-data": "https://github.com/tsuruclient/data.git"
+    "styled-components": "^4.2.0"
   },
   "scripts": {
-    "env": "cross-env NODE_PATH=./src",
-    "build": "yarn run env react-scripts-ts build",
-    "storybook": "yarn run env start-storybook -p 6006",
-    "build-storybook": "yarn run env build-storybook",
+    "build": "react-scripts build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "prettier": "prettier --write \"{,!(node_modules|lib|dist|\\.storybook|public|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
     "pre-commit": "yarn tslint:fix && yarn prettier",
     "tslint": "tslint --project tsconfig.json",
@@ -63,11 +64,18 @@
     "react-docgen-typescript": "^1.12.3",
     "react-docgen-typescript-loader": "^3.0.1",
     "react-markdown": "^4.0.6",
+    "react-scripts": "^2.1.8",
     "style-loader": "^0.23.0",
     "ts-loader": "^5.3.3",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.4000",
     "url-loader": "^1.1.1"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
