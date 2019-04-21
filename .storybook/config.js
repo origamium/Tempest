@@ -3,7 +3,6 @@ import { withOptions } from '@storybook/addon-options';
 import { withInfo } from "@storybook/addon-info";
 import { withNotes } from "@storybook/addon-notes";
 import { withKnobs } from "@storybook/addon-knobs";
-import '../src/reset.css';
 const req = require.context('../src', true, /.stories.tsx$/);
 
 addDecorator(withOptions({
