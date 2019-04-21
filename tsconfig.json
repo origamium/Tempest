@@ -39,5 +39,6 @@
   ],
   "include": [
     "src"
-  ]
+  ],
+  "extends": "./tsconfig.paths"
 }
