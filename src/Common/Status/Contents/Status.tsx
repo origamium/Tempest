@@ -1,22 +1,21 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import { Avatar, Typography } from "@material-ui/core";
 import ThumbnailList from '../../Thumbnail/ThumbnailList';
 import Text from '../../Text/Text';
-import {IStatus, UserProperties} from "@data";
-import {rendererEvents} from "@events";
+import {IStatus, UserProperties} from "@tsuruclient/datatype";
+import {rendererEvents} from "@tsuruclient/events";
 
 export interface IStatusProps extends IStatus  {
     accountKey: string,
     columnKey: string,
-};
+}
 
 const Styled = {
     Root: styled.div`
         display: flex;
         flex-direction: column;
-        padding: 6px;
+        padding: 0.5em;
     `,
     Body: styled.div`
         display: flex;

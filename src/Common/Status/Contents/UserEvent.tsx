@@ -1,27 +1,34 @@
 import * as React from "react";
-import styled from "@styled/style";
-import { IUser, UserProperties } from "@data";
+import {styled} from "@styled";
+import { IUser, UserProperties } from "@tsuruclient/datatype";
 import { UserCard } from "../../Card/UserCard";
 import { Typography } from "@material-ui/core";
 
 interface UserEventComponentProps extends IUser {
-    account: string,
-    column: string,
+    eventContext: string;
+    account: string;
+    column: string;
 }
 
 const Styled = {
     Root: styled.div`
         width: 100%;
         display: flex;
-        justify-content: center;
-        padding: 1em 0.5em;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0.5em;
+        
+        & > * {
+            margin: 0.4em 0;
+        }
     `,
 }
 
 export const UserEvent: React.FC<UserEventComponentProps> = React.memo((props: UserEventComponentProps) => {
     return (
         <Styled.Root>
-            <Typography>{"not yet"}</Typography>
+            <Typography>{props[UserProperties.displayName] + " " + props.eventContext}</Typography>
             <UserCard
                 account={props.account}
                 id={props[UserProperties.id]}
@@ -34,4 +41,4 @@ export const UserEvent: React.FC<UserEventComponentProps> = React.memo((props: U
     );
 })
 
-export default UserEvent
+export default UserEvent;

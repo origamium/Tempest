@@ -1,11 +1,10 @@
 language: node_js
 node_js:
-    - "10"
+    - "11"
 cache:
     yarn: true
     directories:
         - node_modules
-# https://stackoverflow.com/questions/15674064/how-to-fix-a-permission-denied-publickey-error-for-a-git-submodule-update-in-t/24600210
 git:
     submodules: false
 before_install:
@@ -16,12 +15,20 @@ install:
 script:
     - echo "nothing!"
 before_deploy:
+    - yarn run build
     - yarn run build-storybook
 deploy:
-    provider: pages
+    - provider: pages
     local-dir: "storybook-static"
     skip-cleanup: true
     github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
     keep-history: true
     on:
         branch: master
+    - provider: npm
+    email: onoueorigami@gmail.com
+    skip_cleanup: true
+    api_key:
+        secure: hWq5NZkDYk1VkP/sa149v280m5xHxlHY2rJeX4tywoNPGx6I8XeGIZ/t5lMeXYrTIeaca9ulFubx7dtbWNk5NtpNttquLhLqmxu8BpinqIAcOc6R53/4nk5Wf2x2bu863o+xwjhiKUEhH8PmJbaKk9CH9ArwYKlTLBqjiol2LXcSdH5LvW7ma5IKeHbsf3PZESfPcNSTGxpyW1S4vngePB+PEYkajxePVC0BOEFNptjjsnrFy4+vuDrHQaMw40g7V8fFUNxekG/3WvBWxRoVM8ktx7JT9j0C5o5Fziy41S5uVuYjrYtRTbSP4Q5Xz3isj5+hsXRAvw/2PDpxmfxudCMyYJmMvBK01FMOvJQK83AbzuCr/JhQT5owMeOeq7/07turdpcwYMP1NtQ5IPlqAraH8HQ+C5LHALbEW58xEO6XbIF0oXR5AfPCsGE2bv2dlCstqxVeOIKGjQHJx3SVXmZwvlcX7U2j4ho8J7iOfWtI53Bsr0wWFxGL4RLPeOPpUEs9vljHoMNPAgLPSFrod8iZhFaEV+dyhdEPEPXrGK7V4V3aT5JnWX4mMmM4VAZF3fldAHZsVzppEX0qtVV6nSsODcd9lioVmj4QCW+0opr0Gt9Hf5mICfwdT5+rp9VwoNonEgCzP1/JCqojUv+PFu6SnguiZmU+JDCYZDFTNRM=
+    on:
+        tags: true

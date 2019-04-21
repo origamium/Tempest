@@ -1,19 +1,17 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "build/dist",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
-    "lib": ["es6", "es7", "dom"],
+    "lib": [
+      "es6",
+      "es7",
+      "dom"
+    ],
     "sourceMap": true,
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "moduleResolution": "node",
-    "paths": {
-      "@styled/*": ["src/Theme/*"],
-      "@data": ["lib/data"],
-      "@events": ["lib/events"]
-    },
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -21,7 +19,14 @@
     "noImplicitAny": false,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "exclude": [
     "node_modules",
@@ -31,5 +36,9 @@
     "webpack",
     "jest",
     "src/setupTests.ts"
-  ]
+  ],
+  "include": [
+    "src"
+  ],
+  "extends": "./tsconfig.paths"
 }

@@ -5,12 +5,12 @@ import ThemeInterface from "./ITheme";
 import Theme from "./Theme";
 
 const {
-    default: styled,
+    default: _styled,
     css,
     createGlobalStyle,
     keyframes,
     ThemeProvider
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<ThemeInterface>;
 
-export { css, createGlobalStyle, keyframes, ThemeProvider, Theme, ThemeInterface };
-export default styled;
+export { css, createGlobalStyle, keyframes, ThemeProvider, Theme };
+export const styled = _styled;

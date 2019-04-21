@@ -1,14 +1,13 @@
 import * as React from 'react';
-import Dropzone from 'react-dropzone/dist/index';
+import Dropzone from "react-dropzone";
 import styled from 'styled-components';
 import Field from './Field';
 import {ThumbnailList} from '../Thumbnail';
 import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
-import SendIcon from '@material-ui/icons/Send';
-import ClipIcon from '@material-ui/icons/AttachFile';
+import { Send as SendIcon, AttachFile as ClipIcon } from "@material-ui/icons";
 import {IconButtonStyle} from "../IconButton/IconButton";
 import StatusCard from '../Card/StatusCard';
-import {IStatus} from "@data";
+import {IStatus} from "@tsuruclient/datatype";
 
 export type FormProps = {
     /* unique account key */
@@ -73,11 +72,9 @@ class Form extends React.PureComponent<FormProps, FormState> {
     constructor(props: FormProps) {
         super(props);
         this.state = Form.defaultState;
-        this.reader = new FileReader;
         this.fileInput = React.createRef();
     }
 
-    private reader: FileReader;
     private readonly fileInput: React.RefObject<any>;
 
     public static defaultState: FormState = {
@@ -131,12 +128,6 @@ class Form extends React.PureComponent<FormProps, FormState> {
     }
 
     public componentDidMount() {
-        this.reader = new FileReader;
-            this.reader.addEventListener("load", () => {
-                this.setState({
-                    file: [...this.state.file, this.reader.result as string]
-                });
-        }, false);
         this.props.registerColumn({handleAddReply: this.handleAddReply});
     };
 
@@ -154,7 +145,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         if(this.fileInput && this.fileInput.current){
             this.fileInput.current.click();
         }
-    }
+    };
 
     public handleDeleteReply = (): void => {
         this.setState({
@@ -166,25 +157,24 @@ class Form extends React.PureComponent<FormProps, FormState> {
         if (this.props.handleFileUpload) {
             this.props.handleFileUpload((source: string) => this.setState({text: this.state.text + source}), acceptFile);
         } else {
-            this.handleAddFile(acceptFile);
+            this.handleAddFile(acceptFile.map((v: File) => URL.createObjectURL(v)));
         }
     };
 
-    public handleAddFile = (file: File[]): void => {
-        file.forEach((v: File) => {
-            this.reader.readAsDataURL(v);
-        });
+    public handleAddFile = (file: string[]): void => {
+        this.setState({ file: [...this.state.file, ...file] });
     };
 
     public handleDeleteFile = (index: number): void => {
         const newFileArray = this.state.file.concat();
-        newFileArray.splice(index,1);
+        newFileArray.splice(index, 1).forEach((v: string) => URL.revokeObjectURL(v));
         this.setState({
             file: newFileArray
         });
     };
 
     public handleClear = (): void => {
+        this.state.file.forEach((v: string) => URL.revokeObjectURL(v));
         this.setState(Form.defaultState);
     };
 

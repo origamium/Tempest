@@ -1,9 +1,7 @@
-import _Avatar from '@material-ui/core/Avatar';
-import _Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
-import styled from '../../Theme/style';
-import {IStatus, StatusProperties} from "../../../lib/data";
+import { Avatar as _Avatar, Paper as _Paper, Typography } from "@material-ui/core";
+import { styled } from '@styled';
+import { IStatus, StatusProperties } from "@tsuruclient/datatype";
 
 const Styled = {
     Avatar: styled(_Avatar)<any>`
@@ -17,7 +15,6 @@ const Styled = {
         && {
             width: 100%;
             max-height: 60px;
-            margin: 4px;
             display: flex;
             overflow: hidden;
         }
@@ -41,10 +38,14 @@ const handleClick = (props: Props) => (e: React.MouseEvent<any>) => {
 };
 
 export const StatusCard: React.FunctionComponent<Props> = React.memo((props: Props) => {
-    return(<Styled.Root onClick={handleClick(props)}>
-        <Styled.Avatar src={props.target[StatusProperties.user].avatarImage}/>
-        <Typography variant="body1">{props.target.text}</Typography>
-    </Styled.Root>);
+    return (
+        <Styled.Root onClick={handleClick(props)}>
+            <Styled.Avatar src={props.target[StatusProperties.user].avatarImage}/>
+            <Typography variant="body1" style={{ wordWrap: "break-word", wordBreak: "break-all" }}>
+                {props.target.text}
+            </Typography>
+        </Styled.Root>
+    );
 });
 
 export default StatusCard;

@@ -7,8 +7,6 @@ module.exports = {
 	resolve: {
 		extensions: [".css", ".ts", ".tsx", ".js"],
         alias: {
-		    "@data": path.resolve(__dirname, "../lib/data"),
-		    "@events": path.resolve(__dirname, "../lib/events"),
             "@styled": path.resolve(__dirname, "../src/Theme")
         }
 	},
@@ -16,10 +14,16 @@ module.exports = {
 		rules: [
 		    {
                 test: /\.css$/,
-                use: [ 'style-loader', 'css-loader' ]
+                include,
+                use: [ {
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader'
+                } ]
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
+                include,
                 use: [
                     {
                         loader: 'url-loader'

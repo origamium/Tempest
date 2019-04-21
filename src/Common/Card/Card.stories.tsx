@@ -4,8 +4,7 @@ import {storiesOf} from '@storybook/react';
 import {text} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
-
-import {ArticleType} from "../../../lib/data";
+import {ArticleType} from "@tsuruclient/datatype";
 
 import {StatusCard} from "./StatusCard";
 import {UserCard} from "./UserCard";
