@@ -7,7 +7,7 @@ import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
 import { Send as SendIcon, AttachFile as ClipIcon } from "@material-ui/icons";
 import {IconButtonStyle} from "../IconButton/IconButton";
 import StatusCard from '../Card/StatusCard';
-import {IStatus} from "@data";
+import {IStatus} from "@tsuruclient/datatype";
 
 export type FormProps = {
     /* unique account key */

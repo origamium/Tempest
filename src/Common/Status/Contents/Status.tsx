@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Avatar, Typography } from "@material-ui/core";
 import ThumbnailList from '../../Thumbnail/ThumbnailList';
 import Text from '../../Text/Text';
-import {IStatus, UserProperties} from "@data";
-import {rendererEvents} from "@events";
+import {IStatus, UserProperties} from "@tsuruclient/datatype";
+import {rendererEvents} from "@tsuruclient/events";
 
 export interface IStatusProps extends IStatus  {
     accountKey: string,

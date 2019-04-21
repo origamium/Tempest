@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import centered from '@storybook/addon-centered';
 import {AccountIcon} from "./AccountIcon";
 import * as origamiIcon from '../__testdata__/icon/origami.png'
-import { IUser } from "@data";
+import { IUser } from "@tsuruclient/datatype";
 import { action } from "@storybook/addon-actions";
 
 const User1: IUser = {

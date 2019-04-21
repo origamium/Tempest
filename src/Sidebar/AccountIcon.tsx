@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Avatar, Tooltip, Typography, ButtonBase } from "@material-ui/core";
-import { IUser, UserProperties } from "@data";
+import { IUser, UserProperties } from "@tsuruclient/datatype";
 import { TooltipProps } from "@material-ui/core/Tooltip";
 import { TypographyProps } from "@material-ui/core/Typography";
 

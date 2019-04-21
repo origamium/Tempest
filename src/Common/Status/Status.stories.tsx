@@ -3,11 +3,10 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {text} from '@storybook/addon-knobs';
 import centered from '@storybook/addon-centered';
-//import {Theme, ThemeProvider} from '../../Theme/style'
 
 // import Content from './Content';
 import Status from './Contents/Status';
-import { ArticleType, EventType, IEvent, IStatus, IUser } from "@data";
+import { ArticleType, EventType, IEvent, IStatus, IUser } from "@tsuruclient/datatype";
 import Event from './Contents/Event';
 import UserEvent from './Contents/UserEvent';
 

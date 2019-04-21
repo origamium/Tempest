@@ -1,6 +1,6 @@
 import * as React from "react";
-import styled from "@styled/style";
-import { EventProperties, IEvent, UserProperties } from "@data";
+import {styled} from "@styled";
+import { EventProperties, IEvent, UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
 

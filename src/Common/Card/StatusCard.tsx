@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Avatar as _Avatar, Paper as _Paper, Typography } from "@material-ui/core";
-import styled from '../../Theme/style';
-import { IStatus, StatusProperties } from "@data";
+import { styled } from '@styled';
+import { IStatus, StatusProperties } from "@tsuruclient/datatype";
 
 const Styled = {
     Avatar: styled(_Avatar)<any>`

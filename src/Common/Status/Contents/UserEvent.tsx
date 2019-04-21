@@ -1,6 +1,6 @@
 import * as React from "react";
-import styled from "@styled/style";
-import { IUser, UserProperties } from "@data";
+import {styled} from "@styled";
+import { IUser, UserProperties } from "@tsuruclient/datatype";
 import { UserCard } from "../../Card/UserCard";
 import { Typography } from "@material-ui/core";
 

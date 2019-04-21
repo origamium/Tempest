@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Paper, Avatar } from "@material-ui/core";
+import { Paper, Avatar, Typography } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
-import Typography from '@material-ui/core/Typography';
-import styled, {ThemeInterface} from '../../Theme/style'
+import {styled, ITheme} from "@styled";
 
 type Props = {
     account: string,
@@ -26,7 +25,7 @@ const Styled = {
             justify-items: center;
             padding: 0.4em 0;
             
-            ${(props: Props & {theme: ThemeInterface}) => (props.header ?
+            ${(props: Props & {theme: ITheme}) => (props.header ?
                 "background-image: url(" + props.header + ")":
                 "background-color: white")};
             background-size: cover;
