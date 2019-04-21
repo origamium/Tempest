@@ -7,8 +7,6 @@ module.exports = {
 	resolve: {
 		extensions: [".css", ".ts", ".tsx", ".js"],
         alias: {
-		    "@data": path.resolve(__dirname, "../lib/data"),
-		    "@events": path.resolve(__dirname, "../lib/events"),
             "@styled": path.resolve(__dirname, "../src/Theme")
         }
 	},

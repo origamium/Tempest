@@ -1,3 +1,5 @@
+const path = require("path")
+
 module.exports = {
     mode: "production",
     output: {
@@ -7,7 +9,10 @@ module.exports = {
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".tsx", ".js"],
+        alias: {
+            "@styled": path.resolve(__dirname, "../src/Theme")
+        }
     },
     module: {
         rules: [
