@@ -1,41 +1,115 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Avatar, Tooltip, Typography, ButtonBase } from "@material-ui/core";
-import { IUser, UserProperties } from "@tsuruclient/datatype";
+import { Avatar, ButtonBase, MenuItem, MenuList, Popover, Tooltip, Typography } from "@material-ui/core";
+import { IUser, UIAction, UserProperties } from "@tsuruclient/datatype";
 import { TooltipProps } from "@material-ui/core/Tooltip";
 import { TypographyProps } from "@material-ui/core/Typography";
 
-interface AccountIconProps extends IUser{
-    handleClick: (e: React.MouseEvent<HTMLElement>) => void
+interface AccountIconProps extends IUser {
+    actions: UIAction[];
 }
 
 const Styled = {
-    Root: styled((props: TooltipProps) => (
-        <Tooltip title={props.title} placement={props.placement}>
-            {props.children}
-        </Tooltip>))``,
+    Root: styled((props: TooltipProps) => <Tooltip {...props}>{props.children}</Tooltip>)``,
     Name: styled((props: TypographyProps) => (
-        <Typography {...props} classes={{root: 'root'}}>
+        <Typography {...props} classes={{ root: "root" }}>
             {props.children}
         </Typography>
     ))`
-        &.root{
+        &.root {
             color: white;
         }
-    `,
+    `
+};
+
+interface PopoverMenuProps extends AccountIconProps {
+    menuOpen: boolean;
+    handleMenuClose: () => void;
+    anchorEl: React.RefObject<any>;
 }
 
+const extractUserInfo = (props: AccountIconProps): IUser =>
+    Object.keys(UserProperties)
+        .map(key => props[key])
+        .reduce((prev, curr) => ({ ...prev, curr }), {});
+
+const PopOverMenuItem: React.FC<PopoverMenuProps & { uiAction: UIAction }> = props => {
+    const handleClick = React.useCallback(() => {
+        props.uiAction.action({
+            ...extractUserInfo(props),
+            uiActionId: props.uiAction.id
+        });
+        props.handleMenuClose();
+    }, [props]);
+
+    return <MenuItem onClick={handleClick}>{props.uiAction.name}</MenuItem>;
+};
+
+const PopOverMenu: React.FC<PopoverMenuProps> = (props: PopoverMenuProps) => {
+    return (
+        <Popover
+            open={props.menuOpen}
+            onClose={props.handleMenuClose}
+            anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right"
+            }}
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "left"
+            }}
+            anchorEl={props.anchorEl.current}
+        >
+            <MenuList>
+                {props.actions.length > 0 ? (
+                    props.actions.map((v, i) => <PopOverMenuItem key={i} {...props} uiAction={v} />)
+                ) : (
+                    <MenuItem>{"account actions not registered"}</MenuItem>
+                )}
+            </MenuList>
+        </Popover>
+    );
+};
 
 export const AccountIcon = React.memo((props: AccountIconProps) => {
+    const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
+    const [tooltipOpen, setTooltipOpen] = React.useState<boolean>(false);
+    const anchorEl = React.useRef(null);
     const avatar = props[UserProperties.avatarImage];
-    const name = (props[UserProperties.providerDomain] ? props[UserProperties.providerDomain] + "@" : "") + props[UserProperties.screenName];
-    return (
-        <Styled.Root title={<Styled.Name>{name}</Styled.Name>} placement="right">
-            <ButtonBase disableRipple onClick={props.handleClick}>
-                {avatar ? <Avatar alt={name} src={avatar} /> : <Avatar alt={name}>{"?"}</Avatar>}
-            </ButtonBase>
-        </Styled.Root>
-    )
-})
+    const name =
+        (props[UserProperties.providerDomain] ? props[UserProperties.providerDomain] + "@" : "") +
+        props[UserProperties.screenName];
 
-export default AccountIcon
+    const handleMouseOver = () => {
+        setTooltipOpen(true);
+    };
+
+    const handleMouseOut = () => {
+        if (!menuOpen) {
+            setTooltipOpen(false);
+        }
+    };
+
+    const handleAvatarClick = () => {
+        setMenuOpen(true);
+        setTooltipOpen(true);
+    };
+
+    const handleMenuClose = () => {
+        setMenuOpen(false);
+        setTooltipOpen(false);
+    };
+
+    return (
+        <>
+            <Styled.Root open={tooltipOpen} title={<Styled.Name>{name}</Styled.Name>} placement="right">
+                <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+                    <ButtonBase disableRipple onClick={handleAvatarClick} buttonRef={anchorEl}>
+                        {avatar ? <Avatar alt={name} src={avatar} /> : <Avatar alt={name}>{"?"}</Avatar>}
+                    </ButtonBase>
+                </div>
+            </Styled.Root>
+            <PopOverMenu {...props} menuOpen={menuOpen} handleMenuClose={handleMenuClose} anchorEl={anchorEl} />
+        </>
+    );
+});
