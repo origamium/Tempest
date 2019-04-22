@@ -25,7 +25,7 @@ const Styled = {
 interface PopoverMenuProps extends AccountIconProps {
     menuOpen: boolean;
     handleMenuClose: () => void;
-    anchorEl: React.RefObject<any>;
+    anchorEl: React.RefObject<HTMLElement>;
 }
 
 const extractUserInfo = (props: AccountIconProps): IUser =>
@@ -33,7 +33,10 @@ const extractUserInfo = (props: AccountIconProps): IUser =>
         .map(key => props[key])
         .reduce((prev, curr) => ({ ...prev, curr }), {});
 
-const PopOverMenuItem: React.FC<PopoverMenuProps & { uiAction: UIAction }> = props => {
+interface IPopoverMenuItemProps extends PopoverMenuProps {
+    uiAction: UIAction;
+}
+const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = (props: IPopoverMenuItemProps) => {
     const handleClick = React.useCallback(() => {
         props.uiAction.action({
             ...extractUserInfo(props),
@@ -71,7 +74,7 @@ const PopOverMenu: React.FC<PopoverMenuProps> = (props: PopoverMenuProps) => {
     );
 };
 
-const RenderName: React.FC<{ name: string }> = ({ name }) => <Styled.Name>{name}</Styled.Name>;
+const RenderName: React.FC<{ name: string }> = ({ name }: { name: string }) => <Styled.Name>{name}</Styled.Name>;
 
 export const AccountIcon = React.memo((props: AccountIconProps) => {
     const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
