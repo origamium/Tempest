@@ -42,7 +42,7 @@ storiesOf(StoryPrefix + "AccountIcon", module)
 
 storiesOf(StoryPrefix + "AccountList", module)
     .addDecorator(centered)
-    .add("info", () => <AccountList Accounts={[
+    .add("info", () => <AccountList accounts={[
         {
             user: User1,
             actions: []
