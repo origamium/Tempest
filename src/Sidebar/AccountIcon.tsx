@@ -71,6 +71,8 @@ const PopOverMenu: React.FC<PopoverMenuProps> = (props: PopoverMenuProps) => {
     );
 };
 
+const RenderName: React.FC<{ name: string }> = ({ name }) => <Styled.Name>{name}</Styled.Name>;
+
 export const AccountIcon = React.memo((props: AccountIconProps) => {
     const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
     const [tooltipOpen, setTooltipOpen] = React.useState<boolean>(false);
@@ -102,7 +104,7 @@ export const AccountIcon = React.memo((props: AccountIconProps) => {
 
     return (
         <>
-            <Styled.Root open={tooltipOpen} title={<Styled.Name>{name}</Styled.Name>} placement="right">
+            <Styled.Root open={tooltipOpen} title={RenderName({ name })} placement="right">
                 <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                     <ButtonBase disableRipple onClick={handleAvatarClick} buttonRef={anchorEl}>
                         {avatar ? <Avatar alt={name} src={avatar} /> : <Avatar alt={name}>{"?"}</Avatar>}
