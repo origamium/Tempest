@@ -5,6 +5,7 @@ import { AccountIcon } from "./AccountIcon";
 import * as origamiIcon from "../__testdata__/icon/origami.png";
 import { IUser, UIAction } from "@tsuruclient/datatype";
 import { action } from "@storybook/addon-actions";
+import { AccountList } from "./AccountList";
 
 const User1: IUser = {
     id: "123456",
@@ -38,3 +39,16 @@ storiesOf(StoryPrefix + "AccountIcon", module)
     .addDecorator(centered)
     .add("no actions", () => <AccountIcon {...User1} actions={[]} />)
     .add("Actions", () => <AccountIcon {...User1} actions={AccountActions} />);
+
+storiesOf(StoryPrefix + "AccountList", module)
+    .addDecorator(centered)
+    .add("info", () => <AccountList Accounts={[
+        {
+            user: User1,
+            actions: []
+        },
+        {
+            user: User1,
+            actions: AccountActions
+        }
+    ]}/> )
