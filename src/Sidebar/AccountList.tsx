@@ -3,17 +3,18 @@ import { styled } from "@styled";
 import { AccountIcon } from "./AccountIcon";
 import { IUser, UIAction, UserProperties } from "@tsuruclient/datatype";
 
-interface IAccountProps {
+export interface IAccountProps {
     user: IUser;
     actions: UIAction[];
 }
 
-interface IAccountListProps {
+export interface IAccountListProps {
     accounts: IAccountProps[];
 }
 
 const Styled = {
     Root: styled.div`
+        margin: 4px 4px;;
         display: flex;
         flex-direction: column;
         overflow-y: auto;
