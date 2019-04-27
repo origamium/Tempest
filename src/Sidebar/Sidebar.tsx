@@ -12,9 +12,10 @@ const Styled = {
     Root: styled.div`
         position: relative;
         height: 100%;
-
+        padding: 4px 0;
         & > * {
-            margin-left: 4px;
+            margin-left: -4px;
+            padding-left: 8px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;

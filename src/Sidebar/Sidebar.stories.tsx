@@ -57,5 +57,5 @@ storiesOf(StoryPrefix + "AccountList", module)
     .add("info", () => <AccountList accounts={AccountList1}/> )
 
 storiesOf(StoryPrefix + "Sidebar", module)
-    .addDecorator((story => <div style={{height: "100vh", border: "solid 1px gray"}}>{story()}</div>))
+    .addDecorator((story => <div style={{height: "100vh"}}>{story()}</div>))
     .add("info", () => <Sidebar accounts={AccountList1}/>)
