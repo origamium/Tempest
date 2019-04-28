@@ -9,7 +9,7 @@ export interface IColumnProps {
 }
 
 const Styled = {
-    Root: styled.article`
+    Root: styled.article<{ width: number }>`
         padding: 4px;
         width: ${({ width }) => width}px;
         height: 100%;
