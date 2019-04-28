@@ -8,15 +8,15 @@ export interface IColumnProps {
     width: number;
 }
 
-interface TsuruColumnPaperProps extends PaperProps {
-    width: number;
-}
-
 const Styled = {
-    Paper: styled(({ width, ...rest }: TsuruColumnPaperProps) => <Paper {...rest}>{rest.children}</Paper>)`
+    Root: styled.article`
+        padding: 4px;
+        width: ${({ width }) => width}px;
+        height: 100%;
+    `,
+    Paper: styled((props: PaperProps) => <Paper {...props}>{props.children}</Paper>)`
         && {
-            margin: 4px;
-            width: ${({ width }) => width}px;
+            width: 100%;
             height: 100%;
         }
     `
@@ -24,11 +24,13 @@ const Styled = {
 
 const _Column: React.FC<IColumnProps> = (props: IColumnProps) => {
     return (
-        <Styled.Paper width={props.width}>
-            <header />
-            <main>はいじゃないが</main>
-            <footer />
-        </Styled.Paper>
+        <Styled.Root width={props.width}>
+            <Styled.Paper>
+                <header />
+                <main>はいじゃないが</main>
+                <footer />
+            </Styled.Paper>
+        </Styled.Root>
     );
 };
 
