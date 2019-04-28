@@ -43,19 +43,25 @@ const AccountList1 = [
         user: User1,
         actions: AccountActions
     }
-]
+];
 
 const StoryPrefix = "Sidebar|";
 
 storiesOf(StoryPrefix + "AccountIcon", module)
     .addDecorator(centered)
     .add("no actions", () => <AccountIcon {...User1} actions={[]} />)
-    .add("Actions", () => <AccountIcon {...User1} actions={AccountActions} />);
+    .add("Actions", () => <AccountIcon {...User1} actions={AccountActions} />)
+;
 
 storiesOf(StoryPrefix + "AccountList", module)
     .addDecorator(centered)
-    .add("info", () => <AccountList accounts={AccountList1}/> )
+    .add("info", () => <AccountList accounts={AccountList1}/>)
+;
 
 storiesOf(StoryPrefix + "Sidebar", module)
     .addDecorator((story => <div style={{height: "100vh"}}>{story()}</div>))
-    .add("info", () => <Sidebar accounts={AccountList1}/>)
+    .add("info", () => <Sidebar
+        addAction={action("add action")}
+        settingAction={action("setting action")}
+        accounts={AccountList1} />)
+;

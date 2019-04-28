@@ -6,6 +6,8 @@ import { Add, Settings } from "@material-ui/icons";
 
 export interface ISidebarProps {
     accounts: IAccountProps[];
+    addAction: () => void;
+    settingAction: () => void;
 }
 
 const Styled = {
@@ -33,7 +35,7 @@ export const Sidebar: React.FC<ISidebarProps> = (props: ISidebarProps) => {
         <Styled.Root>
             <Paper>
                 <div>
-                    <IconButton>
+                    <IconButton onClick={props.addAction}>
                         <Add />
                     </IconButton>
                 </div>
@@ -41,7 +43,7 @@ export const Sidebar: React.FC<ISidebarProps> = (props: ISidebarProps) => {
                     <AccountList accounts={props.accounts} />
                 </div>
                 <div>
-                    <IconButton>
+                    <IconButton onClick={props.settingAction}>
                         <Settings />
                     </IconButton>
                 </div>
