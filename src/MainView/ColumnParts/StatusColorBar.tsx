@@ -6,12 +6,12 @@ import { LinearProgressProps } from "@material-ui/core/es/LinearProgress";
 export enum progressStatus {
     none = "none",
     inProgress = "progress",
-    streaming = "streaming",
-    error = "error"
+    streaming = "streaming"
 }
 
 interface StatusBarProps {
     status: progressStatus;
+    error: boolean;
 }
 
 interface BlankBarProps {
@@ -56,13 +56,13 @@ const renderProgressBar: React.FC<StatusBarProps & { err: boolean }> = props => 
 export const StatusBar: React.FC<StatusBarProps> = (props: StatusBarProps) => {
     const [err, raiseErr] = React.useState<boolean>(false);
     React.useEffect(() => {
-        if (props.status === progressStatus.error) {
+        if (props.error) {
             raiseErr(true);
             setTimeout(() => {
                 raiseErr(false);
             }, 3000);
         }
-    }, [props]);
+    }, [props.error]);
 
     return <Styled.Root>{renderProgressBar({ ...props, err })}</Styled.Root>;
 };
