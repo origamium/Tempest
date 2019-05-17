@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@styled";
+import { css, styled } from "@styled";
 import { LinearProgress } from "@material-ui/core";
 import { LinearProgressProps } from "@material-ui/core/es/LinearProgress";
 
@@ -11,49 +11,56 @@ export enum progressStatus {
 
 interface StatusBarProps {
     status: progressStatus;
-    error: boolean;
+    error?: boolean;
 }
 
-interface BlankBarProps {
-    error?: boolean;
-    streaming?: boolean;
-}
+const childCss = css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+`;
 
 const Styled = {
     Root: styled.div`
         width: 100%;
         height: 4px;
+        position: relative;
+        background-color: gray;
     `,
-    ProgressBar: styled(({ ...rest }: LinearProgressProps) => <LinearProgress {...rest} />)`
+    Progress: styled(({ ...rest }: LinearProgressProps) => <LinearProgress {...rest} />)`
         && {
-            width: 100%;
-            height: 100%;
+            ${childCss};
         }
     `,
-    BlankBar: styled.div<BlankBarProps>`
-        width: 100%;
-        height: 100%;
-        background-color: ${({ error, streaming }: BlankBarProps) =>
-            error ? "#d50000" : streaming ? "#1e88e5" : "gray"};
+    Streaming: styled.div<{ streaming: boolean }>`
+        ${childCss};
+        background-color: ${({ streaming }) => (streaming ? "#1e88e5" : "none")};
+        transition: background-color 200ms;
+    `,
+    Error: styled.div<{ err: boolean }>`
+        ${childCss};
+        background-color: ${({ err }) => (err ? "#d50000" : "none")};
+        transition: background-color 200ms;
     `
 };
 
-const renderProgressBar: React.FC<StatusBarProps & { err: boolean }> = props => {
-    if (!props.err) {
-        switch (props.status) {
-            case progressStatus.inProgress:
-                return <Styled.ProgressBar />;
-            case progressStatus.streaming:
-                return <Styled.BlankBar streaming />;
-            default:
-                return <Styled.BlankBar />;
-        }
-    } else {
-        return <Styled.BlankBar error />;
-    }
+interface RenderProgressBar {
+    status: progressStatus;
+    err: boolean;
+}
+const renderProgressBar: React.FC<RenderProgressBar> = ({ status, err }: RenderProgressBar) => {
+    return (
+        <Styled.Root>
+            <Styled.Streaming streaming={status === progressStatus.streaming} />
+            {status === progressStatus.inProgress && <Styled.Progress />}
+            <Styled.Error err={err} />
+        </Styled.Root>
+    );
 };
 
-export const StatusBar: React.FC<StatusBarProps> = (props: StatusBarProps) => {
+export const StatusColorBar: React.FC<StatusBarProps> = (props: StatusBarProps) => {
     const [err, raiseErr] = React.useState<boolean>(false);
     React.useEffect(() => {
         if (props.error) {
@@ -64,5 +71,5 @@ export const StatusBar: React.FC<StatusBarProps> = (props: StatusBarProps) => {
         }
     }, [props.error]);
 
-    return <Styled.Root>{renderProgressBar({ ...props, err })}</Styled.Root>;
+    return <Styled.Root>{renderProgressBar({ status: props.status, err })}</Styled.Root>;
 };

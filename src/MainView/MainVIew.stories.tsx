@@ -1,8 +1,8 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { select } from "@storybook/addon-knobs";
+import { select, boolean } from "@storybook/addon-knobs";
 import { Column } from "./Column";
-import { progressStatus, StatusBar } from "./Organism/StatusBar";
+import { progressStatus, StatusColorBar } from "./ColumnParts/StatusColorBar";
 
 const StoryPrefix = "MainView|";
 
@@ -17,11 +17,14 @@ const statusBarOptions = {
     none: progressStatus.none,
     inProgress: progressStatus.inProgress,
     streaming: progressStatus.streaming,
-    error: progressStatus.error
 };
 const statusBarDefaultValue = progressStatus.none;
-const statusBarGroupId = 'GROUP-ID1';
 
-storiesOf(StoryPrefix + "ColumnHeader/StatusBar", module)
+const raiseErrorLabel = "error";
+
+
+storiesOf(StoryPrefix + "ColumnHeader/StatusColorBar", module)
     .addDecorator(height100percent)
-    .add("info", () => <StatusBar status={select(statusBarLabel, statusBarOptions, statusBarDefaultValue, statusBarGroupId)}/>)
+    .add("info", () => <StatusColorBar
+        error={boolean(raiseErrorLabel, false)}
+        status={select(statusBarLabel, statusBarOptions, statusBarDefaultValue)}/>)
