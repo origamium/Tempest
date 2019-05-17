@@ -1,5 +1,5 @@
 import * as React from "react";
-import {styled} from "@styled";
+import { styled } from "@styled";
 import { IUser, UserProperties } from "@tsuruclient/datatype";
 import { UserCard } from "../../Card/UserCard";
 import { Typography } from "@material-ui/core";
@@ -18,14 +18,14 @@ const Styled = {
         justify-content: flex-start;
         align-items: flex-start;
         padding: 0.5em;
-        
+
         & > * {
             margin: 0.4em 0;
         }
-    `,
-}
+    `
+};
 
-export const UserEvent: React.FC<UserEventComponentProps> = React.memo((props: UserEventComponentProps) => {
+export const UserEvent: React.FC<UserEventComponentProps> = (props: UserEventComponentProps) => {
     return (
         <Styled.Root>
             <Typography>{props[UserProperties.displayName] + " " + props.eventContext}</Typography>
@@ -39,6 +39,4 @@ export const UserEvent: React.FC<UserEventComponentProps> = React.memo((props: U
             />
         </Styled.Root>
     );
-})
-
-export default UserEvent;
+};

@@ -5,10 +5,10 @@ import {text} from '@storybook/addon-knobs';
 import centered from '@storybook/addon-centered';
 
 // import Content from './Content';
-import Status from './Contents/Status';
+import {Status} from './Contents/Status';
 import { ArticleType, EventType, IEvent, IStatus, IUser } from "@tsuruclient/datatype";
-import Event from './Contents/Event';
-import UserEvent from './Contents/UserEvent';
+import {Event} from './Contents/Event';
+import {UserEvent} from './Contents/UserEvent';
 
 const User1: IUser = {
     id: "123456",
