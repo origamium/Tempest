@@ -77,7 +77,8 @@ const Thumbnails = (props: ThumbnailListProps): React.ReactNode => {
     ));
 };
 
-const _ThumbnailList: React.FunctionComponent<ThumbnailListProps> = (props: ThumbnailListProps) =>
-    props.lists ? <Styled.Root>{Thumbnails(props)}</Styled.Root> : <div />;
+export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = (props: ThumbnailListProps) => {
+    return props.lists ? <Styled.Root>{Thumbnails(props)}</Styled.Root> : <div />;
+};
 
-export const ThumbnailList = memo(_ThumbnailList);
+export default memo(ThumbnailList);

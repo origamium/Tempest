@@ -9,7 +9,7 @@ import { IconButtonStyle } from "../IconButton/IconButton";
 import { StatusCard } from "../Card/StatusCard";
 import { IStatus, IUICommonAttribuite } from "@tsuruclient/datatype";
 
-export interface FormProps extends IUICommonAttribuite{
+export interface FormProps extends IUICommonAttribuite {
     /* accept file type.. */
     accept?: string;
     /* open file upload dialog */
