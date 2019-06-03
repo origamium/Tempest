@@ -6,35 +6,10 @@ import centered from '@storybook/addon-centered';
 
 // import Content from './Content';
 import {Status} from './Contents/Status';
-import { ArticleType, EventType, IEvent, IStatus, IUser } from "@tsuruclient/datatype";
+import { ArticleType, EventType, IEvent, IStatus } from "@tsuruclient/datatype";
 import {Event} from './Contents/Event';
 import {UserEvent} from './Contents/UserEvent';
-
-const User1: IUser = {
-    id: "123456",
-    screenName: "arclisp",
-    displayName: "東武鉄道遅延伝説2019",
-    providerDomain: undefined,
-    avatarImage: undefined,
-    headerImage: undefined,
-    introduction: undefined,
-    location: undefined,
-    userWebPageUrl: undefined,
-    pinnedObject: undefined
-}
-
-const User2: IUser = {
-    id: "123456",
-    screenName: "arclisp",
-    displayName: "東武鉄道遅延伝説2019",
-    providerDomain: undefined,
-    avatarImage: undefined,
-    headerImage: undefined,
-    introduction: undefined,
-    location: undefined,
-    userWebPageUrl: undefined,
-    pinnedObject: undefined
-}
+import { User1, User2 } from "../../__testdata__/User";
 
 const Status1: IStatus = {
     type: ArticleType.status,
