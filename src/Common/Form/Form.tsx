@@ -6,7 +6,7 @@ import { ThumbnailList } from "../Thumbnail";
 import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
 import { Send as SendIcon, AttachFile as ClipIcon } from "@material-ui/icons";
 import { IconButtonStyle } from "../IconButton/IconButton";
-import StatusCard from "../Card/StatusCard";
+import { StatusCard } from "../Card/StatusCard";
 import { IStatus, IUICommonAttribuite } from "@tsuruclient/datatype";
 
 export interface FormProps extends IUICommonAttribuite{
