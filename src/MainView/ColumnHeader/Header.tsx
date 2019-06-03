@@ -1,13 +1,10 @@
 import React from "react";
 import { styled } from "@styled";
 import { Toolbar } from "@material-ui/core";
-import { IUICommonAttribuite, IUser } from "@tsuruclient/datatype";
 import { Title } from "./Title";
 import { progressStatus, StatusColorBar } from "./StatusColorBar";
-import { Form } from "../../Common/Form";
 
-export interface HeaderProps extends IUICommonAttribuite {
-    owner: IUser;
+export interface HeaderProps {
     columnName: string;
     status: progressStatus;
 }
@@ -22,7 +19,7 @@ export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
     return (
         <Styled.Root>
             <Toolbar>
-                <Title {...props} />
+                <Title columnName={props.columnName} />
             </Toolbar>
             <StatusColorBar status={props.status} />
         </Styled.Root>

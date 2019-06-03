@@ -1,15 +1,16 @@
-import React from "react";
-import { IUICommonAttribuite, IUser, UserProperties } from "@tsuruclient/datatype";
+import React, { useContext } from "react";
+import { UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
+import { OwnerContext } from "../Column";
 
-interface IHeaderProps extends IUICommonAttribuite {
+interface IHeaderProps {
     columnName: string;
-    owner: IUser;
 }
 
 export const Title: React.FC<IHeaderProps> = (props: IHeaderProps) => {
+    const owner = useContext(OwnerContext);
     const ownerString =
-        (props.owner[UserProperties.providerDomain] || "") + "@" + props.owner[UserProperties.screenName];
+        (owner[UserProperties.providerDomain] || "") + "@" + owner[UserProperties.screenName];
 
     return (
         <div>

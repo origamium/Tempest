@@ -7,6 +7,7 @@ import { IUICommonAttribuite } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
 import { User1 } from "../__testdata__/User";
 import centered from "@storybook/addon-centered";
+import { ColumnContextProviderForStorybook } from "../__testdata__/Context";
 
 const StoryPrefix = "MainView|";
 
@@ -44,9 +45,7 @@ storiesOf(StoryPrefix + "ColumnHeader/StatusColorBar", module)
         status={select(statusBarLabel, statusBarOptions, statusBarDefaultValue)}/>)
 
 storiesOf(StoryPrefix + "ColumnHeader", module)
-.addDecorator(centered)
-.add("info", () => <Header
-    owner={User1}
-    columnName={"Home Timeline"}
-    status={progressStatus.inProgress}
-    {...UIColumnAttribute}/>)
+    .addDecorator(centered)
+    .addDecorator(ColumnContextProviderForStorybook)
+    .add("info", () =>
+        <Header columnName={"Home Timeline"} status={progressStatus.inProgress}/>)
