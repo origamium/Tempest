@@ -1,29 +1,24 @@
-import * as React from 'react';
+import React, { memo } from "react";
 import { styled } from "@styled";
-import Thumbnail from './Thumbnail';
+import Thumbnail from "./Thumbnail";
+import { IUICommonAttribuite } from "@tsuruclient/datatype";
 
-export type ThumbnailListProps = {
-    /* unique account key*/
-    accountKey: string,
-
-    /* unique column key */
-    columnKey: string,
-
+export interface ThumbnailListProps extends IUICommonAttribuite {
     /* source id is content. */
-    sourceId?: string,
+    sourceId?: string;
 
     /* file or uri list */
-    lists: File[] | string[],
+    lists: File[] | string[];
 
     /* deletable? */
-    isDeletable?: boolean,
+    isDeletable?: boolean;
 
     /* image clicked */
-    handleClick?: (Object) => void,
+    handleClick?: (Object) => void;
 
     /* if isDeletable enabled, delete button onClick handler */
-    handleDelete?: (index) => void,
-};
+    handleDelete?: (index) => void;
+}
 
 const Styled = {
     Root: styled.div`
@@ -32,27 +27,30 @@ const Styled = {
         margin: 0.2em;
         height: 100%;
         width: 100%;
-    `,
+    `
 };
 
 const ExtractionUri = (source: any[]): string[] =>
-    source.map((v: any): string => {
-        if (typeof v === "string"){
-            return v;
-        } else if (v.preview) { // File
-            return v.preview.toString();
-        } else {
-            throw new Error();
+    source.map(
+        (v: any): string => {
+            if (typeof v === "string") {
+                return v;
+            } else if (v.preview) {
+                // File
+                return v.preview.toString();
+            } else {
+                throw new Error();
+            }
         }
-    });
+    );
 
 const handleClick = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();
     const src = ExtractionUri(props.lists);
-    if(props.handleClick) {
+    if (props.handleClick) {
         props.handleClick({
-            account: props.accountKey,
-            columnId: props.columnKey,
+            account: props.account,
+            columnId: props.column,
             src,
             index
         });
@@ -61,7 +59,7 @@ const handleClick = (props: ThumbnailListProps, index: number) => (e: React.Mous
 
 const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    if(props.handleDelete) {
+    if (props.handleDelete) {
         props.handleDelete(index);
     }
 };
@@ -69,22 +67,17 @@ const handleDelete = (props: ThumbnailListProps, index: number) => (e: React.Mou
 const Thumbnails = (props: ThumbnailListProps): React.ReactNode => {
     const lists: string[] = ExtractionUri(props.lists);
     return lists.map((v, i) => (
-        <Thumbnail key={i} index={i} source={v}
+        <Thumbnail
+            key={i}
+            index={i}
+            source={v}
             handleClick={props.handleClick ? handleClick(props, i) : undefined}
-            handleDelete={props.isDeletable ? handleDelete(props, i) : undefined} />
-        )
-    )
+            handleDelete={props.isDeletable ? handleDelete(props, i) : undefined}
+        />
+    ));
 };
 
-export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = React.memo((props: ThumbnailListProps) => (
-    <>
-        {props.lists ?
-            <Styled.Root>
-                {Thumbnails(props)}
-            </Styled.Root>:
-            <div />
-        }
-    </>
-));
+const _ThumbnailList: React.FunctionComponent<ThumbnailListProps> = (props: ThumbnailListProps) =>
+    props.lists ? <Styled.Root>{Thumbnails(props)}</Styled.Root> : <div />;
 
-export default ThumbnailList;
+export const ThumbnailList = memo(_ThumbnailList);
