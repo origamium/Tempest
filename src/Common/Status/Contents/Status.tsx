@@ -1,15 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Avatar, Typography } from "@material-ui/core";
-import ThumbnailList from "../../Thumbnail/ThumbnailList";
+import { ThumbnailList } from "../../Thumbnail/ThumbnailList";
 import Text from "../../Text/Text";
-import { IStatus, UserProperties } from "@tsuruclient/datatype";
+import { IStatus, IUICommonAttribuite, UserProperties } from "@tsuruclient/datatype";
 import { rendererEvents } from "@tsuruclient/events";
 
-export interface IStatusProps extends IStatus {
-    accountKey: string;
-    columnKey: string;
-}
+export interface IStatusProps extends IStatus, IUICommonAttribuite {}
 
 const Styled = {
     Root: styled.div`
@@ -31,14 +28,14 @@ const Styled = {
 };
 
 export const Status: React.FunctionComponent<IStatusProps> = (props: IStatusProps) => {
-    const { user, text, image, columnKey, accountKey } = props;
+    const { user, text, image, column, account } = props;
 
     const handleLinkClick = (href: string): void => {
-        rendererEvents.handleLinkClick(accountKey, columnKey, href);
+        rendererEvents.handleLinkClick(account, column, href);
     };
 
     const handleAccountClick = (e): void => {
-        rendererEvents.handleUserClick(accountKey, columnKey, user[UserProperties.id]);
+        rendererEvents.handleUserClick(account, column, user[UserProperties.id]);
     };
 
     const screenName = (name?: string) => (name ? "@" + name : "");
@@ -58,7 +55,7 @@ export const Status: React.FunctionComponent<IStatusProps> = (props: IStatusProp
                     <Text variant="body1" text={text || ""} handleLinkClick={handleLinkClick} />
                 </Styled.Text>
             </Styled.Body>
-            {image ? <ThumbnailList accountKey={accountKey} columnKey={columnKey} lists={image} /> : <div />}
+            {image ? <ThumbnailList account={account} column={column} lists={image} /> : <div />}
         </Styled.Root>
     );
 };

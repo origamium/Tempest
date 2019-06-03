@@ -1,12 +1,12 @@
-/*tslint:disable*/
-import * as React from 'react';
+/*eslint:disable*/
+import React from 'react';
 import {storiesOf} from '@storybook/react';
 import {text} from '@storybook/addon-knobs';
 import centered from '@storybook/addon-centered';
 
 // import Content from './Content';
 import {Status} from './Contents/Status';
-import { ArticleType, EventType, IEvent, IStatus } from "@tsuruclient/datatype";
+import { ArticleType, EventType, IEvent, IStatus, IUICommonAttribuite } from "@tsuruclient/datatype";
 import {Event} from './Contents/Event';
 import {UserEvent} from './Contents/UserEvent';
 import { User1, User2 } from "../../__testdata__/User";
@@ -35,14 +35,18 @@ const Event2: IEvent = {
     target: Status1
 }
 
+const UIColumnAttr: IUICommonAttribuite = {
+    account: "8372890750982",
+    column: "3824984847479"
+}
+
 const StoryPrefix = "Common Components|Status";
 storiesOf(StoryPrefix+"/Status", module)
     .addDecorator(centered)
     .add('info',() => (
         <div style={{border: "solid 1px black", width: "280px"}}>
             <Status
-                accountKey={""}
-                columnKey={""}
+                {...UIColumnAttr}
                 type={ArticleType.status}
                 id={"arclisp"}
                 user={{
@@ -59,12 +63,12 @@ storiesOf(StoryPrefix+"/Event", module)
     .addDecorator(centered)
     .add('info', () => (
         <div style={{border: "solid 1px black", width: "280px"}}>
-            <Event account={"moha"} column={"yeah"} eventContext={"retweeted you"} {...Event1}/>
+            <Event {...UIColumnAttr} eventContext={"retweeted you"} {...Event1}/>
         </div>
     ))
     .add('Multiple source user', () => (
       <div style={{border: "solid 1px black", width: "280px"}}>
-          <Event account={"moha"} column={"yeah"} eventContext={"liked your tweet"} {...Event2}/>
+          <Event {...UIColumnAttr} eventContext={"liked your tweet"} {...Event2}/>
       </div>
   ))
 ;

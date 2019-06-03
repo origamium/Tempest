@@ -1,13 +1,11 @@
 import * as React from "react";
 import { styled } from "@styled";
-import { EventProperties, IEvent, UserProperties } from "@tsuruclient/datatype";
+import { EventProperties, IEvent, IUICommonAttribuite, UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
 
-interface EventComponentProps extends IEvent {
+interface EventComponentProps extends IEvent, IUICommonAttribuite{
     eventContext: string;
-    account: string;
-    column: string;
 }
 
 const Styled = {
@@ -41,7 +39,7 @@ export const Event: React.FC<EventComponentProps> = (props: EventComponentProps)
             {target && (
                 <Styled.Body>
                     {" "}
-                    <StatusCard accountKey={props.account} target={target} />{" "}
+                    <StatusCard account={props.account} target={target} />{" "}
                 </Styled.Body>
             )}
         </Styled.Root>
