@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext } from "react";
 import { styled } from "@styled";
 import { Paper } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
@@ -40,25 +40,29 @@ const Styled = {
     `
 };
 
+const ColumnAttrContextSkeleton: IUICommonAttribuite = {
+    account: "0",
+    column: "0"
+};
+export const ColumnAttrContext = createContext<IUICommonAttribuite>(ColumnAttrContextSkeleton);
+const ColumnAttrProvider = ColumnAttrContext.Provider;
+
+export const OwnerContextSkeleton: IUser = {
+    id: "0"
+};
+export const OwnerContext = createContext<IUser>(OwnerContextSkeleton);
+const OwnerContextProvider= OwnerContext.Provider;
+
 const _Column: React.FC<IColumnProps> = (props: IColumnProps) => {
-    const [UIAttribute, setUIAttribute] = useState<IUICommonAttribuite>({
-        account: props.account,
-        column: props.column
-    });
-
-    useEffect(() => {
-        setUIAttribute({
-            account: props.account,
-            column: props.column
-        });
-    }, [props.account, props.column]);
-
     return (
         <Styled.Root width={props.width}>
             <Styled.Paper>
-                <Header {...UIAttribute} owner={props.owner} columnName={props.name} status={props.status} />
-                <main />
-                <footer />
+                <ColumnAttrProvider value={{account: props.account, column: props.column}}>
+                    <OwnerContextProvider value={props.owner} >
+                        <Header columnName={props.name} status={props.status} />
+                        <main />
+                    </OwnerContextProvider>
+                </ColumnAttrProvider>
             </Styled.Paper>
         </Styled.Root>
     );
