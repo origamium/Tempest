@@ -1,8 +1,8 @@
 import React from "react";
-import { IUser, UserProperties } from "@tsuruclient/datatype";
+import { IUICommonAttribuite, IUser, UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
 
-interface IHeaderProps {
+interface IHeaderProps extends IUICommonAttribuite {
     columnName: string;
     owner: IUser;
 }
