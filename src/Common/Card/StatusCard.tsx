@@ -2,17 +2,16 @@ import React, { memo } from "react";
 import { Avatar as _Avatar, Paper as _Paper, Typography } from "@material-ui/core";
 import { styled } from "@styled";
 import { IStatus, StatusProperties } from "@tsuruclient/datatype";
-import { PaperProps } from "@material-ui/core/Paper";
 
 const Styled = {
-    Avatar: styled(_Avatar)<PaperProps>`
+    Avatar: styled(_Avatar)<any>`
         && {
             margin: 6px;
             width: 32px;
             height: 32px;
         }
     `,
-    Root: styled(_Paper)<PaperProps>`
+    Root: styled(_Paper)<any>`
         && {
             width: 100%;
             max-height: 60px;
@@ -49,4 +48,4 @@ const _StatusCard: React.FunctionComponent<Props> = (props: Props) => {
     );
 };
 
-export const StatusCard = memo(_StatusCard);
+export const StatusCard  = memo(_StatusCard);
