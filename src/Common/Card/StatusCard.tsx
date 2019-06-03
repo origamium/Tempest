@@ -1,51 +1,52 @@
-import * as React from 'react';
+import React, { memo } from "react";
 import { Avatar as _Avatar, Paper as _Paper, Typography } from "@material-ui/core";
-import { styled } from '@styled';
+import { styled } from "@styled";
 import { IStatus, StatusProperties } from "@tsuruclient/datatype";
+import { PaperProps } from "@material-ui/core/Paper";
 
 const Styled = {
-    Avatar: styled(_Avatar)<any>`
-        &&{
+    Avatar: styled(_Avatar)<PaperProps>`
+        && {
             margin: 6px;
             width: 32px;
             height: 32px;
         }
     `,
-    Root: styled(_Paper)<any>`
+    Root: styled(_Paper)<PaperProps>`
         && {
             width: 100%;
             max-height: 60px;
             display: flex;
             overflow: hidden;
         }
-    `,
+    `
 };
 
-type Props = {
-    accountKey: string,
-    target: IStatus,
-    handleClick?: (payload: Object) => void,
+interface Props {
+    account: string;
+    target: IStatus;
+    handleClick?: (payload: Record<string, any>) => void;
 }
 
 const handleClick = (props: Props) => (e: React.MouseEvent<any>) => {
     e.preventDefault();
-    if(props.handleClick) {
+    if (props.handleClick) {
         props.handleClick({
-            account: props.accountKey,
-            id: props.target[StatusProperties.id],
+            account: props.account,
+            id: props.target[StatusProperties.id]
         });
     }
 };
 
-export const StatusCard: React.FunctionComponent<Props> = React.memo((props: Props) => {
+const _StatusCard: React.FunctionComponent<Props> = (props: Props) => {
     return (
         <Styled.Root onClick={handleClick(props)}>
-            <Styled.Avatar src={props.target[StatusProperties.user].avatarImage}/>
+            <Styled.Avatar src={props.target[StatusProperties.user].avatarImage} />
             <Typography variant="body1" style={{ wordWrap: "break-word", wordBreak: "break-all" }}>
                 {props.target.text}
             </Typography>
         </Styled.Root>
     );
-});
+};
 
-export default StatusCard;
+export const StatusCard = memo(_StatusCard);
