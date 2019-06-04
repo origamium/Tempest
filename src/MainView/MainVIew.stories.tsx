@@ -8,6 +8,7 @@ import { Header } from "./ColumnHeader/Header";
 import { User1 } from "../__testdata__/User";
 import centered from "@storybook/addon-centered";
 import { ColumnContextProviderForStorybook } from "../__testdata__/Context";
+import { Columns } from "./Columns";
 
 const StoryPrefix = "MainView|";
 
@@ -28,6 +29,17 @@ const statusBarDefaultValue = progressStatus.none;
 
 const raiseErrorLabel = "error";
 
+const UICAttrList: IUICommonAttribuite[] = [
+    {account: "48398892", column: "384279910003"},
+    {account: "48493101029", column: "3999337271"},
+    {account: "41000001226626", column: "30585837777"},
+    {account: "38931100100230", column: "8889989990003"},
+    {account: "949099090926", column: "3055715537"},
+    {account: "228884056", column: "30518282977"},
+]
+
+storiesOf(StoryPrefix + "Columns", module)
+    .add("info", () => <Columns tabId={"83832859950909209"} columns={UICAttrList}/>)
 
 storiesOf(StoryPrefix + "Column", module)
     .addDecorator(height100percent)
@@ -38,13 +50,13 @@ storiesOf(StoryPrefix + "Column", module)
         status={select(statusBarLabel, statusBarOptions, statusBarDefaultValue)}
         name={"はいじゃない"} />)
 
-storiesOf(StoryPrefix + "ColumnHeader/StatusColorBar", module)
+storiesOf(StoryPrefix + "Column/Header/StatusColorBar", module)
     .addDecorator(height100percent)
     .add("info", () => <StatusColorBar
         error={boolean(raiseErrorLabel, false)}
         status={select(statusBarLabel, statusBarOptions, statusBarDefaultValue)}/>)
 
-storiesOf(StoryPrefix + "ColumnHeader", module)
+storiesOf(StoryPrefix + "Column/Header", module)
     .addDecorator(centered)
     .addDecorator(ColumnContextProviderForStorybook)
     .add("info", () =>
