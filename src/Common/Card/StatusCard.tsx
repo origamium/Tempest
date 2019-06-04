@@ -27,17 +27,19 @@ interface Props {
     handleClick?: (payload: Record<string, any>) => void;
 }
 
-
 const _StatusCard: React.FunctionComponent<Props> = (props: Props) => {
-    const handleClick = useCallback((props: Props) => (e: React.MouseEvent<any>) => {
-        e.preventDefault();
-        if (props.handleClick) {
-            props.handleClick({
-                account: props.account,
-                id: props.target[StatusProperties.id]
-            });
-        }
-    }, []);
+    const handleClick = useCallback(
+        (props: Props) => (e: React.MouseEvent<any>) => {
+            e.preventDefault();
+            if (props.handleClick) {
+                props.handleClick({
+                    account: props.account,
+                    id: props.target[StatusProperties.id]
+                });
+            }
+        },
+        []
+    );
 
     return (
         <Styled.Root onClick={handleClick(props)}>

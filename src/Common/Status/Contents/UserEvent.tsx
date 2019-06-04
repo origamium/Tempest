@@ -29,7 +29,7 @@ const Styled = {
 export const UserEvent: React.FC<UserEventComponentProps> = (props: UserEventComponentProps) => {
     const sourceUsersDisplayName = props.sourceUser.reduce(
         (prev, curr, i, source) =>
-            prev + curr[UserProperties.displayName] || "no name" + (source.length !== i ? ", " : ""),
+            prev + curr[UserProperties.displayName] || "no name" + (source.length - 1 !== i ? ", " : ""),
         ""
     );
     return (
