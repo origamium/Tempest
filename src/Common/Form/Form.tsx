@@ -1,43 +1,45 @@
-import * as React from 'react';
+import * as React from "react";
 import Dropzone from "react-dropzone";
-import styled from 'styled-components';
-import Field from './Field';
-import {ThumbnailList} from '../Thumbnail';
+import styled from "styled-components";
+import Field from "./Field";
+import { ThumbnailList } from "../Thumbnail";
 import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
 import { Send as SendIcon, AttachFile as ClipIcon } from "@material-ui/icons";
-import {IconButtonStyle} from "../IconButton/IconButton";
-import StatusCard from '../Card/StatusCard';
-import {IStatus} from "@tsuruclient/datatype";
+import { IconButtonStyle } from "../IconButton/IconButton";
+import { StatusCard } from "../Card/StatusCard";
+import { IStatus, IUICommonAttribuite } from "@tsuruclient/datatype";
 
-export type FormProps = {
-    /* unique account key */
-    accountKey: string,
-    /* unique column key */
-    columnKey: string,
+export interface FormProps extends IUICommonAttribuite {
     /* accept file type.. */
-    accept?: string,
+    accept?: string;
     /* open file upload dialog */
-    handleFileUpload?: (Function, file: File[]) => void,
+    handleFileUpload?: (Function, file: File[]) => void;
     /* max text length, will occur warn. */
-    maxTextLength?: number,
+    maxTextLength?: number;
     /* max file amount */
-    maxFileLength?: number, // TODO
+    maxFileLength?: number; // TODO
     /* error message */
-    error?: string,
+    error?: string;
     /* reply source clicked */
-    handleClickReply: (object: {accountKey: string, columnKey: string, sourceId: string}) => void,
+    handleClickReply: (object: { account: string; column: string; sourceId: string }) => void;
     /* post it! */
-    requestPost: (object: {handleClear: Function, accountKey: string, columnKey: string, text: string, file?: string[]}) => void, // TODO: object type move tsuruclient/data
+    requestPost: (object: {
+        handleClear: Function;
+        account: string;
+        column: string;
+        text: string;
+        file?: string[];
+    }) => void; // TODO: object type move tsuruclient/data
     /* register reducer. */
-    registerColumn: (object: {handleAddReply: Function}) => void,
+    registerColumn: (object: { handleAddReply: Function }) => void;
 }
 
-type FormState = {
-    text: string,
-    replySource?: IStatus,
-    file: string[],
-    warn?: string,
-};
+interface FormState {
+    text: string;
+    replySource?: IStatus;
+    file: string[];
+    warn?: string;
+}
 
 const Styled = {
     Body: styled.div`
@@ -59,17 +61,17 @@ const Styled = {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-    `,
+    `
 };
 
 const ButtonStyle: IconButtonStyle = {
     size: "32px",
     activeColor: "#7D7D7D",
-    negativeColor: "7D7D7D",
+    negativeColor: "7D7D7D"
 };
 
 class Form extends React.PureComponent<FormProps, FormState> {
-    constructor(props: FormProps) {
+    public constructor(props: FormProps) {
         super(props);
         this.state = Form.defaultState;
         this.fileInput = React.createRef();
@@ -81,30 +83,35 @@ class Form extends React.PureComponent<FormProps, FormState> {
         text: "",
         file: [],
         replySource: undefined,
-        warn: undefined,
+        warn: undefined
     };
 
     public render() {
-        const {accountKey, columnKey, accept, error} = this.props;
-        const {text, warn, replySource} = this.state;
+        const { account, column, accept, error } = this.props;
+        const { text, warn, replySource } = this.state;
         return (
             <Dropzone accept={accept} onDrop={this.handleFileDrop}>
-                {({getRootProps, getInputProps}) =>
+                {({ getRootProps, getInputProps }) => (
                     <Styled.Body {...getRootProps()}>
                         <Styled.Input {...getInputProps()} ref={this.fileInput} />
                         <Styled.Row>
-                            <Field id={columnKey} value={text} warn={warn} error={error}
-                                   handleChange={this.handleFieldChange}/>
+                            <Field
+                                id={column}
+                                value={text}
+                                warn={warn}
+                                error={error}
+                                handleChange={this.handleFieldChange}
+                            />
                             <Styled.Buttons>
                                 {IconButtonHoC(ClipIcon)({
                                     style: ButtonStyle,
-                                    id: columnKey,
+                                    id: column,
                                     active: false,
                                     handleClick: this.handleAddFileClicked
                                 })}
                                 {IconButtonHoC(SendIcon)({
                                     style: ButtonStyle,
-                                    id: columnKey,
+                                    id: column,
                                     active: false,
                                     handleClick: this.handleRequestPost
                                 })}
@@ -112,24 +119,25 @@ class Form extends React.PureComponent<FormProps, FormState> {
                         </Styled.Row>
                         <Styled.Row>
                             <ThumbnailList
-                                accountKey={accountKey}
-                                columnKey={columnKey}
+                                account={account}
+                                column={column}
                                 lists={this.state.file}
                                 isDeletable={true}
-                                handleDelete={this.handleDeleteFile}/>
+                                handleDelete={this.handleDeleteFile}
+                            />
                         </Styled.Row>
                         <Styled.Row>
-                            {replySource ? <StatusCard accountKey={accountKey} target={replySource}/> : <div/>}
+                            {replySource ? <StatusCard account={account} target={replySource} /> : <div />}
                         </Styled.Row>
                     </Styled.Body>
-                }
+                )}
             </Dropzone>
-        )
+        );
     }
 
     public componentDidMount() {
-        this.props.registerColumn({handleAddReply: this.handleAddReply});
-    };
+        this.props.registerColumn({ handleAddReply: this.handleAddReply });
+    }
 
     public handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         this.setState({ text: event.target.value });
@@ -137,12 +145,12 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     public handleAddReply = (source: IStatus): void => {
         this.setState({
-            replySource: source,
+            replySource: source
         });
     };
 
     public handleAddFileClicked = (event: React.MouseEvent<HTMLInputElement>) => {
-        if(this.fileInput && this.fileInput.current){
+        if (this.fileInput && this.fileInput.current) {
             this.fileInput.current.click();
         }
     };
@@ -155,7 +163,10 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     public handleFileDrop = (acceptFile: File[], rejectedFile: File[]): void => {
         if (this.props.handleFileUpload) {
-            this.props.handleFileUpload((source: string) => this.setState({text: this.state.text + source}), acceptFile);
+            this.props.handleFileUpload(
+                (source: string) => this.setState({ text: this.state.text + source }),
+                acceptFile
+            );
         } else {
             this.handleAddFile(acceptFile.map((v: File) => URL.createObjectURL(v)));
         }
@@ -180,10 +191,10 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     public handleRequestPost = (e: Event): void => {
         e.preventDefault();
-        const {accountKey, columnKey} = this.props;
-        const {text, file} = this.state;
-        this.props.requestPost({handleClear: this.handleClear, accountKey, columnKey, text, file});
-    }
+        const { account, column } = this.props;
+        const { text, file } = this.state;
+        this.props.requestPost({ handleClear: this.handleClear, account, column, text, file });
+    };
 }
 
 export default Form;

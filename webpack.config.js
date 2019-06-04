@@ -1,11 +1,11 @@
-const path = require("path")
+const path = require("path");
 
 module.exports = {
     mode: "production",
     output: {
-        library: '@tsuruclient/ui',
-        libraryTarget: 'umd',
-        filename: 'dist.js',
+        library: "@tsuruclient/ui",
+        libraryTarget: "umd",
+        filename: "dist.js"
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
@@ -15,9 +15,7 @@ module.exports = {
         }
     },
     module: {
-        rules: [
-            { test: /\.tsx?$/, loader: "ts-loader" }
-        ]
+        rules: [{ test: /\.tsx?$/, loader: "ts-loader" }]
     },
     plugins: []
-}
+};
