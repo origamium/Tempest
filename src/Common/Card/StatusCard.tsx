@@ -24,12 +24,11 @@ const Styled = {
 interface Props {
     account: string;
     target: IStatus;
-    handleClick?: (payload: Record<string, any>) => void;
+    handleClick?: (payload: Record<string, string>) => void;
 }
 
-
 const _StatusCard: React.FunctionComponent<Props> = (props: Props) => {
-    const handleClick = useCallback((props: Props) => (e: React.MouseEvent<any>) => {
+    const handleClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if (props.handleClick) {
             props.handleClick({
@@ -40,7 +39,7 @@ const _StatusCard: React.FunctionComponent<Props> = (props: Props) => {
     }, []);
 
     return (
-        <Styled.Root onClick={handleClick(props)}>
+        <Styled.Root onClick={handleClick}>
             <Styled.Avatar src={props.target[StatusProperties.user].avatarImage} />
             <Typography variant="body1" style={{ wordWrap: "break-word", wordBreak: "break-all" }}>
                 {props.target.text}
