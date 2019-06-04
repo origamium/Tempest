@@ -4,7 +4,9 @@ import { EventProperties, IEvent, IUICommonAttribuite, UserProperties } from "@t
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
 
-interface EventComponentProps extends IEvent, IUICommonAttribuite{
+interface EventComponentProps {
+    uiCommonAttr: IUICommonAttribuite;
+    target: IEvent;
     eventContext: string;
 }
 
@@ -24,12 +26,14 @@ const Styled = {
 };
 
 export const Event: React.FC<EventComponentProps> = (props: EventComponentProps) => {
-    const target = props[EventProperties.target];
+    const target = props.target[EventProperties.target];
 
     const headingText: string =
-        props[EventProperties.sourceUser][0][UserProperties.displayName] +
-        (props[EventProperties.sourceUser].length > 1 ? " and some user " : " ") +
-        props.eventContext;
+        props.target[EventProperties.sourceUser].reduce(
+            (prev, curr, i, source) =>
+                prev + (curr[UserProperties.displayName] || "no name") + (source.length - 1 !== i ? ", " : " "),
+            ""
+        ) + props.eventContext;
 
     return (
         <Styled.Root>
@@ -38,8 +42,7 @@ export const Event: React.FC<EventComponentProps> = (props: EventComponentProps)
             </Styled.Header>
             {target && (
                 <Styled.Body>
-                    {" "}
-                    <StatusCard account={props.account} target={target} />{" "}
+                    <StatusCard account={props.uiCommonAttr.account} target={target} />
                 </Styled.Body>
             )}
         </Styled.Root>

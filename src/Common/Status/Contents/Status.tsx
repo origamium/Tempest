@@ -3,10 +3,14 @@ import styled from "styled-components";
 import { Avatar, Typography } from "@material-ui/core";
 import { ThumbnailList } from "../../Thumbnail/ThumbnailList";
 import Text from "../../Text/Text";
-import { IStatus, IUICommonAttribuite, UserProperties } from "@tsuruclient/datatype";
+import { IStatus, UserProperties } from "@tsuruclient/datatype";
 import { rendererEvents } from "@tsuruclient/events";
 
-export interface IStatusProps extends IStatus, IUICommonAttribuite {}
+export interface IStatusProps {
+    account: string;
+    column: string;
+    target: IStatus;
+}
 
 const Styled = {
     Root: styled.div`
@@ -28,13 +32,14 @@ const Styled = {
 };
 
 export const Status: React.FunctionComponent<IStatusProps> = (props: IStatusProps) => {
-    const { user, text, image, column, account } = props;
+    const { column, account } = props;
+    const { user, text, image } = props.target;
 
     const handleLinkClick = (href: string): void => {
         rendererEvents.handleLinkClick(account, column, href);
     };
 
-    const handleAccountClick = (e): void => {
+    const handleAccountClick = (): void => {
         rendererEvents.handleUserClick(account, column, user[UserProperties.id]);
     };
 
