@@ -1,10 +1,13 @@
 import * as React from "react";
 import { styled } from "@styled";
-import { EventProperties, IEvent, IUICommonAttribuite, UserProperties } from "@tsuruclient/datatype";
+import { EventProperties, IEvent, UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
 
-interface EventComponentProps extends IEvent, IUICommonAttribuite{
+interface EventComponentProps {
+    account: string;
+    column: string;
+    target: IEvent;
     eventContext: string;
 }
 
@@ -24,7 +27,7 @@ const Styled = {
 };
 
 export const Event: React.FC<EventComponentProps> = (props: EventComponentProps) => {
-    const target = props[EventProperties.target];
+    const target = props.target[EventProperties.target];
 
     const headingText: string =
         props[EventProperties.sourceUser][0][UserProperties.displayName] +

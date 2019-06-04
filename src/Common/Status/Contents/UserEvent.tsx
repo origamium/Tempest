@@ -4,7 +4,8 @@ import { IUser, UserProperties } from "@tsuruclient/datatype";
 import { UserCard } from "../../Card/UserCard";
 import { Typography } from "@material-ui/core";
 
-interface UserEventComponentProps extends IUser {
+interface UserEventComponentProps {
+    sourceUser: IUser[];
     eventContext: string;
     account: string;
     column: string;
@@ -26,17 +27,25 @@ const Styled = {
 };
 
 export const UserEvent: React.FC<UserEventComponentProps> = (props: UserEventComponentProps) => {
+    const sourceUsersDisplayName = props.sourceUser.reduce(
+        (prev, curr, i, source) =>
+            prev + curr[UserProperties.displayName] || "no name" + (source.length !== i ? ", " : ""),
+        ""
+    );
     return (
         <Styled.Root>
-            <Typography>{props[UserProperties.displayName] + " " + props.eventContext}</Typography>
-            <UserCard
-                account={props.account}
-                id={props[UserProperties.id]}
-                displayName={props[UserProperties.displayName]}
-                screenName={props[UserProperties.screenName]}
-                avatar={props[UserProperties.avatarImage]}
-                header={props[UserProperties.headerImage]}
-            />
+            <Typography>{sourceUsersDisplayName + " " + props.eventContext}</Typography>
+            {props.sourceUser.map(v => (
+                <UserCard
+                    key={v[UserProperties.id]}
+                    account={props.account}
+                    id={v[UserProperties.id]}
+                    displayName={v[UserProperties.displayName]}
+                    screenName={v[UserProperties.screenName]}
+                    avatar={v[UserProperties.avatarImage]}
+                    header={v[UserProperties.headerImage]}
+                />
+            ))}
         </Styled.Root>
     );
 };
