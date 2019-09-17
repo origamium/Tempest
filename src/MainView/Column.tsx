@@ -51,14 +51,14 @@ export const OwnerContextSkeleton: IUser = {
     id: "0"
 };
 export const OwnerContext = createContext<IUser>(OwnerContextSkeleton);
-const OwnerContextProvider= OwnerContext.Provider;
+const OwnerContextProvider = OwnerContext.Provider;
 
 const _Column: React.FC<IColumnProps> = (props: IColumnProps) => {
     return (
         <Styled.Root width={props.width}>
             <Styled.Paper>
-                <ColumnAttrProvider value={{account: props.account, column: props.column}}>
-                    <OwnerContextProvider value={props.owner} >
+                <ColumnAttrProvider value={{ account: props.account, column: props.column }}>
+                    <OwnerContextProvider value={props.owner}>
                         <Header columnName={props.name} status={props.status} />
                         <main />
                     </OwnerContextProvider>
