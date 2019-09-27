@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { boolean, select } from "@storybook/addon-knobs";
-import { Column } from "./Column";
+import { Column_ } from "./Column";
 import { progressStatus, StatusColorBar } from "./ColumnHeader/StatusColorBar";
 import { IUICommonAttribuite } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
