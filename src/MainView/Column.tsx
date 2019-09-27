@@ -53,7 +53,7 @@ export const OwnerContextSkeleton: IUser = {
 export const OwnerContext = createContext<IUser>(OwnerContextSkeleton);
 const OwnerContextProvider = OwnerContext.Provider;
 
-const _Column: React.FC<IColumnProps> = (props: IColumnProps) => {
+export const Column_: React.FC<IColumnProps> = (props: IColumnProps) => {
     return (
         <Styled.Root width={props.width}>
             <Styled.Paper>
@@ -68,4 +68,4 @@ const _Column: React.FC<IColumnProps> = (props: IColumnProps) => {
     );
 };
 
-export const Column = React.memo(_Column);
+export const Column = React.memo(Column_);
