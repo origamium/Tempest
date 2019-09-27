@@ -68,7 +68,7 @@ storiesOf(StoryPrefix, module)
         <Content uiCommonAttr={UIColumnAttr} target={SampleStatus} />
     )
     .add("event", () =>
-        <Event uiCommonAttr={UIColumnAttr} target={Event2} eventContext={"やりました"}/>
+        <Event {...UIColumnAttr} target={Event2} eventContext={"やりました"}/>
     )
 
 storiesOf(StoryPrefix+"/Element/Status", module)
@@ -86,12 +86,12 @@ storiesOf(StoryPrefix+"/Element/Event", module)
     .addDecorator(centered)
     .add('info', () => (
         <div style={{border: "solid 1px black", width: "280px"}}>
-            <Event uiCommonAttr={UIColumnAttr} eventContext={"retweeted you"} target={Event1}/>
+            <Event {...UIColumnAttr} eventContext={"retweeted you"} target={Event1}/>
         </div>
     ))
     .add('Multiple source user', () => (
       <div style={{border: "solid 1px black", width: "280px"}}>
-          <Event uiCommonAttr={UIColumnAttr} eventContext={"liked your tweet"} target={Event2}/>
+          <Event {...UIColumnAttr} eventContext={"liked your tweet"} target={Event2}/>
       </div>
   ))
 ;

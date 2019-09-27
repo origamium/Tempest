@@ -19,9 +19,9 @@ storiesOf(StoryPrefix+"/StatusCard", module)
     .addDecorator(centered)
     .add('info', () => (
             <StatusCard
-                accountKey={text('accountKey', 'accountid@example.org')}
+                account={text('accountKey', 'accountid@example.org')}
                 target={{
-                    type: ArticleType.status,
+                    article: {articleType: ArticleType.status},
                     id: text('id', sampleId),
                     text: text('status text', 'yeah'),
                     date: text('status date', '1234 56 78, 9:12.3'),

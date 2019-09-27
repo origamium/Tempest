@@ -31,8 +31,8 @@ class FormReplyComponent extends React.Component {
     render(){
         return (
             <div style={{width: "320px"}}>
-            <Form accountKey={text('account id', sampleAccountId)}
-                  columnKey={text('column id', '123456')}
+            <Form account={text('account id', sampleAccountId)}
+                  column={text('column id', '123456')}
                   maxTextLength={number("max text length", 140)}
                   handleClickReply={action('reply source clicked!')}
                   requestPost={action('request post!')}
@@ -53,8 +53,8 @@ storiesOf(StoryNamePrefix + "/Field", module)
 storiesOf(StoryNamePrefix, module)
     .addDecorator(centered)
     .add('simple info', () => (
-        <Form accountKey={text('account id', sampleAccountId)}
-            columnKey={text('column id', '123456')}
+        <Form account={text('account id', sampleAccountId)}
+            column={text('column id', '123456')}
             maxTextLength={number("max text length", 140)}
             handleClickReply={action('reply source clicked!')}
             requestPost={action('request post!')}
@@ -62,8 +62,8 @@ storiesOf(StoryNamePrefix, module)
         ),
         {})
     .add('need file upload procedure',() => (
-        <Form accountKey={text('account id', sampleAccountId)}
-            columnKey={text('column id', '123456')}
+        <Form account={text('account id', sampleAccountId)}
+            column={text('column id', '123456')}
             maxTextLength={number("max text length", 140)}
             handleFileUpload={action('file upload procedure')}
             handleClickReply={action('reply source clicked!')}
