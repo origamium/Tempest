@@ -18,4 +18,4 @@ Text.defaultProps = {
     maxLinkLength: 64
 };
 
-export default Text;
+export const Text = onlyUpdateForKeys(["text"])(Text_);
