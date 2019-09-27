@@ -13,15 +13,6 @@ module.exports = async ({config, mode}) => {
 
     newConfig.module.rules.unshift(...[
         {
-            test: /\.css$/,
-            include,
-            use: [ {
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader'
-            } ]
-        },
-        {
             test: /\.tsx?$/,
             use: [
                 {
