@@ -46,14 +46,18 @@ module.exports = {
                 "react/prop-types": "off"
             }
         },
-        {
-            files: ["**/__tests__/**", "**/*.test.tsx", "**/*.test.ts"],
-            env: {
-                jest: true
-            },
-            rules: {
-                "no-invalid-this": 0
-            }
-        }
-    ]
-}
+        ecmaVersion: 2018,
+        project: "./tsconfig.json",
+        sourceType: "module"
+    },
+    plugins: ["@typescript-eslint", "react-hooks"],
+    rules: {
+        "prettier/prettier": "error",
+        "ordered-imports": 0,
+        "object-literal-sort-keys": 0,
+        "no-console": ["warn", {allow: ["warn", "error"]}],
+        "react/prop-types": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/interface-name-prefix": 0
+    }
+};
