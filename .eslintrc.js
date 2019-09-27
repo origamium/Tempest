@@ -28,7 +28,8 @@ module.exports = {
         "prettier/prettier": "error",
         "ordered-imports": 0,
         "object-literal-sort-keys": 0,
-        "no-console": "warn",
+        "no-console": ["warn", {allow: ["warn", "error"]}],
+        "react/prop-types": 0,
         "@typescript-eslint/explicit-function-return-type": 0,
         "@typescript-eslint/interface-name-prefix": 0
     }
