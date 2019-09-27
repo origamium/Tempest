@@ -4,8 +4,7 @@ import { EventProperties, IEvent, IUICommonAttribuite, UserProperties } from "@t
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
 
-interface EventComponentProps {
-    uiCommonAttr: IUICommonAttribuite;
+interface EventComponentProps extends IUICommonAttribuite {
     target: IEvent;
     eventContext: string;
 }
@@ -42,7 +41,7 @@ export const Event: React.FC<EventComponentProps> = (props: EventComponentProps)
             </Styled.Header>
             {target && (
                 <Styled.Body>
-                    <StatusCard account={props.uiCommonAttr.account} target={target} />
+                    <StatusCard account={props.account} target={target} />
                 </Styled.Body>
             )}
         </Styled.Root>

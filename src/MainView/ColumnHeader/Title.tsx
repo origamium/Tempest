@@ -13,7 +13,7 @@ export const Title: React.FC<IHeaderProps> = (props: IHeaderProps) => {
 
     return (
         <div>
-            <Typography variant={"headline"} style={{ marginBottom: "-8px" }}>
+            <Typography variant={"h6"} style={{ marginBottom: "-8px" }}>
                 {props.columnName}
             </Typography>
             <br />

@@ -43,12 +43,14 @@ const handleClick = (props: Props) => (e: any) => {
     }
 };
 
-export const UserCard: React.FunctionComponent<Props> = React.memo((props: Props) => (
-    <Styled.Root header={props.header} onClick={handleClick(props)}>
-        {props.avatar ? <Avatar src={props.avatar} /> : <Avatar>{"?"}</Avatar>}
-        <Typography variant={"body1"}>{props.displayName || ""}</Typography>
-        <Typography variant={"caption"}>{props.screenName || ""}</Typography>
-    </Styled.Root>
-));
+export const UserCard: React.FC<Props> = props => {
+    return (
+        <Styled.Root header={props.header} onClick={handleClick(props)}>
+            {props.avatar ? <Avatar src={props.avatar} /> : <Avatar>{"?"}</Avatar>}
+            <Typography variant={"body1"}>{props.displayName || ""}</Typography>
+            <Typography variant={"caption"}>{props.screenName || ""}</Typography>
+        </Styled.Root>
+    );
+}
 
 export default UserCard;
