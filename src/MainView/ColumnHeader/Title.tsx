@@ -1,22 +1,21 @@
-import React, { useContext } from "react";
-import { UserProperties } from "@tsuruclient/datatype";
+import React from "react";
+import { IUser, UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
-import { OwnerContext } from "../Column";
 
 interface IHeaderProps {
+    owner: IUser;
     columnName: string;
 }
 
 export const Title: React.FC<IHeaderProps> = (props: IHeaderProps) => {
-    const owner = useContext(OwnerContext);
-    const ownerString = (owner[UserProperties.providerDomain] || "") + "@" + owner[UserProperties.screenName];
+    const ownerString =
+        (props.owner[UserProperties.providerDomain] || "") + "@" + props.owner[UserProperties.screenName];
 
     return (
         <div>
-            <Typography variant={"h6"} style={{ marginBottom: "-8px" }}>
+            <Typography variant={"h6" /* TODO: fix this */} style={{ marginBottom: "-8px" }}>
                 {props.columnName}
             </Typography>
-            <br />
             <Typography variant={"caption"} style={{ marginTop: "-8px" }}>
                 {ownerString}
             </Typography>
