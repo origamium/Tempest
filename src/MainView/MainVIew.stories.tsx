@@ -3,12 +3,13 @@ import { storiesOf } from "@storybook/react";
 import { boolean, select } from "@storybook/addon-knobs";
 import { Column_ } from "./Column";
 import { progressStatus, StatusColorBar } from "./ColumnHeader/StatusColorBar";
-import { IUICommonAttribuite } from "@tsuruclient/datatype";
+import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
 import { User1 } from "../__testdata__/User";
 import centered from "@storybook/addon-centered";
-import { ColumnContextProviderForStorybook } from "../__testdata__/Context";
+import { ColumnContextProviderForStorybook } from "../__testdata__/UIProsp";
 import { Columns } from "./Columns";
+import { action } from "@storybook/addon-actions";
 
 const StoryPrefix = "MainView|";
 
