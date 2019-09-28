@@ -3,10 +3,15 @@ import { storiesOf } from "@storybook/react";
 import centered from "@storybook/addon-centered";
 import { AccountIcon } from "./AccountIcon";
 import * as origamiIcon from "../__testdata__/icon/origami.png";
-import { IUser, UIAction } from "@tsuruclient/datatype";
+import { IUICommonAttribuite, IUser, UIAction } from "@tsuruclient/datatype";
 import { action } from "@storybook/addon-actions";
 import { AccountList } from "./AccountList";
 import { Sidebar } from "./Sidebar";
+
+const uiCommonAttr: IUICommonAttribuite = {
+    account: "",
+    column: ""
+};
 
 const User1: IUser = {
     id: "123456",
@@ -37,11 +42,13 @@ const AccountActions: UIAction[] = [
 const AccountList1 = [
     {
         user: User1,
-        actions: []
+        actions: [],
+        uiCommonAttr
     },
     {
         user: User1,
-        actions: AccountActions
+        actions: AccountActions,
+        uiCommonAttr
     }
 ];
 
@@ -49,13 +56,20 @@ const StoryPrefix = "Sidebar|";
 
 storiesOf(StoryPrefix + "AccountIcon", module)
     .addDecorator(centered)
-    .add("no actions", () => <AccountIcon {...User1} actions={[]} />)
-    .add("Actions", () => <AccountIcon {...User1} actions={AccountActions} />)
+    .add("no uiActions", () => <AccountIcon
+        {...User1}
+        uiActions={[]}
+        uiCommonAttr={uiCommonAttr} />)
+    .add("Actions", () => <AccountIcon
+        {...User1}
+        uiActions={AccountActions}
+        uiCommonAttr={uiCommonAttr} />)
 ;
 
 storiesOf(StoryPrefix + "AccountList", module)
     .addDecorator(centered)
-    .add("info", () => <AccountList accounts={AccountList1}/>)
+    .add("info", () => <AccountList
+        accounts={AccountList1}/>)
 ;
 
 storiesOf(StoryPrefix + "Sidebar", module)
