@@ -14,10 +14,10 @@ export const User1: IUser = {
 };
 
 export const User2: IUser = {
-    id: "123456",
-    screenName: "arclisp",
+    id: "7988239329",
+    screenName: "origami",
     displayName: "東武鉄道遅延伝説2019",
-    providerDomain: undefined,
+    providerDomain: "pawoo.net",
     avatarImage: undefined,
     headerImage: undefined,
     introduction: undefined,
