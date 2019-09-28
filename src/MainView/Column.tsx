@@ -1,12 +1,14 @@
-import React, { createContext } from "react";
+import React from "react";
 import { styled } from "@styled";
 import { Paper } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
-import { IUICommonAttribuite, IUser } from "@tsuruclient/datatype";
+import { IUICommonAttribuite, IUser, UIAction } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
 import { progressStatus } from "./ColumnHeader/StatusColorBar";
 
-export interface IColumnProps extends IUICommonAttribuite {
+export interface IColumnProps {
+    uiColumnAttr: IUICommonAttribuite;
+    columnUiActions: UIAction[];
     name: string;
     owner: IUser;
     status: progressStatus;
@@ -40,29 +42,19 @@ const Styled = {
     `
 };
 
-const ColumnAttrContextSkeleton: IUICommonAttribuite = {
-    account: "0",
-    column: "0"
-};
-export const ColumnAttrContext = createContext<IUICommonAttribuite>(ColumnAttrContextSkeleton);
-const ColumnAttrProvider = ColumnAttrContext.Provider;
-
-export const OwnerContextSkeleton: IUser = {
-    id: "0"
-};
-export const OwnerContext = createContext<IUser>(OwnerContextSkeleton);
-const OwnerContextProvider = OwnerContext.Provider;
-
-export const Column_: React.FC<IColumnProps> = (props: IColumnProps) => {
+export const Column_: React.FC<IColumnProps> = props => {
+    const { uiColumnAttr, columnUiActions, width, owner, name, status } = props;
     return (
-        <Styled.Root width={props.width}>
+        <Styled.Root width={width}>
             <Styled.Paper>
-                <ColumnAttrProvider value={{ account: props.account, column: props.column }}>
-                    <OwnerContextProvider value={props.owner}>
-                        <Header columnName={props.name} status={props.status} />
-                        <main />
-                    </OwnerContextProvider>
-                </ColumnAttrProvider>
+                <Header
+                    columnName={name}
+                    status={status}
+                    owner={owner}
+                    uiActions={columnUiActions}
+                    uiColumnAttr={uiColumnAttr}
+                />
+                <main />
             </Styled.Paper>
         </Styled.Root>
     );
