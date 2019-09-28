@@ -7,7 +7,6 @@ import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
 import { User1 } from "../__testdata__/User";
 import centered from "@storybook/addon-centered";
-import { ColumnContextProviderForStorybook } from "../__testdata__/UIProsp";
 import { Columns } from "./Columns";
 import { action } from "@storybook/addon-actions";
 
@@ -76,7 +75,6 @@ storiesOf(StoryPrefix + "Column/Header/StatusColorBar", module)
 
 storiesOf(StoryPrefix + "Column/Header", module)
     .addDecorator(centered)
-    .addDecorator(ColumnContextProviderForStorybook)
     .add("info", () =>
         <Header
             owner={User1}
