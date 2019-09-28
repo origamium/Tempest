@@ -3,12 +3,13 @@ import { storiesOf } from "@storybook/react";
 import { boolean, select } from "@storybook/addon-knobs";
 import { Column_ } from "./Column";
 import { progressStatus, StatusColorBar } from "./ColumnHeader/StatusColorBar";
-import { IUICommonAttribuite } from "@tsuruclient/datatype";
+import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
 import { User1 } from "../__testdata__/User";
 import centered from "@storybook/addon-centered";
-import { ColumnContextProviderForStorybook } from "../__testdata__/Context";
+import { ColumnContextProviderForStorybook } from "../__testdata__/UIProsp";
 import { Columns } from "./Columns";
+import { action } from "@storybook/addon-actions";
 
 const StoryPrefix = "MainView|";
 
@@ -18,6 +19,19 @@ const UIColumnAttribute: IUICommonAttribuite = {
     account: "3902047509399",
     column: "82477795091294"
 }
+
+const actions: UIAction[] = [
+    {
+        id: "1234",
+        name: "Start Streaming",
+        action: action("Start Streaming")
+    },
+    {
+        id: "5678",
+        name: "Sign Out",
+        action: action("Sign Out")
+    }
+];
 
 const statusBarLabel = 'Status';
 const statusBarOptions = {
@@ -39,7 +53,9 @@ const UICAttrList: IUICommonAttribuite[] = [
 ]
 
 storiesOf(StoryPrefix + "Columns", module)
-    .add("info", () => <Columns tabId={"83832859950909209"} columns={UICAttrList}/>)
+    .add("info", () => <Columns
+        tabId={"83832859950909209"}
+        columns={UICAttrList} />)
 
 storiesOf(StoryPrefix + "Column", module)
     .addDecorator(height100percent)
@@ -48,7 +64,9 @@ storiesOf(StoryPrefix + "Column", module)
         width={320}
         owner={User1}
         status={select(statusBarLabel, statusBarOptions, statusBarDefaultValue)}
-        name={"はいじゃない"} />)
+        name={"はいじゃない"}
+        columnUiActions={actions}
+        uiColumnAttr={UIColumnAttribute}/>)
 
 storiesOf(StoryPrefix + "Column/Header/StatusColorBar", module)
     .addDecorator(height100percent)
@@ -60,4 +78,9 @@ storiesOf(StoryPrefix + "Column/Header", module)
     .addDecorator(centered)
     .addDecorator(ColumnContextProviderForStorybook)
     .add("info", () =>
-        <Header columnName={"Home Timeline"} status={progressStatus.inProgress}/>)
+        <Header
+            owner={User1}
+            columnName={"Home Timeline"}
+            status={progressStatus.inProgress}
+            uiColumnAttr={UIColumnAttribute}
+            uiActions={actions} />)
