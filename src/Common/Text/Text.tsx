@@ -1,11 +1,11 @@
 import * as React from "react";
 import { onlyUpdateForKeys } from "recompose";
 import { Typography } from "@material-ui/core";
-import { ThemeStyle } from "@material-ui/core/styles/createTypography";
+import { Variant } from "@material-ui/core/styles/createTypography";
 
 export type TextProps = {
     text: string;
-    variant?: ThemeStyle;
+    variant?: Variant;
     maxLinkLength?: number;
     handleLinkClick: (href: string) => void;
 };
