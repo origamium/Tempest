@@ -1,12 +1,11 @@
 import React, { useCallback } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { IUICommonAttribuite } from "@tsuruclient/datatype";
 import { styled } from "@styled";
-// import { Column } from "./Column";
+import { Column, ColumnProps } from "./Column";
 
-interface ColumnsProps {
+export interface ColumnsProps {
     tabId: string;
-    columns: IUICommonAttribuite[];
+    columns: ColumnProps[];
 }
 
 const Styled = {
@@ -15,12 +14,6 @@ const Styled = {
         overflow: auto;
         display: flex;
         justify-content: flex-start;
-    `,
-    Item: styled.div`
-        user-select: none;
-        margin: 0 4px;
-        padding: 4px 0;
-        background-color: gray;
     `
 };
 
@@ -49,19 +42,18 @@ export const Columns = (props: ColumnsProps) => {
             onDragEnd={handleDragEnd}
         >
             <Droppable droppableId={props.tabId} direction="horizontal">
-                {(provided, snapshot) => (
+                {provided => (
                     <Styled.Container ref={provided.innerRef} {...provided.droppableProps}>
                         {props.columns.map((v, i) => (
-                            <Draggable key={v.column} index={i} draggableId={v.column}>
-                                {(provided, snapshot) => (
-                                    <Styled.Item
+                            <Draggable key={v.uiColumnAttr.column} index={i} draggableId={v.uiColumnAttr.column}>
+                                {provided => (
+                                    <div
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
                                         style={{ ...provided.draggableProps.style }}
                                     >
-                                        {v.column}
-                                    </Styled.Item>
+                                        <Column handle={provided.dragHandleProps} {...v} />
+                                    </div>
                                 )}
                             </Draggable>
                         ))}

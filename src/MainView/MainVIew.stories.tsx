@@ -1,11 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { boolean, select } from "@storybook/addon-knobs";
-import { Column_ } from "./Column";
+import { Column_, ColumnProps } from "./Column";
 import { progressStatus, StatusColorBar } from "./ColumnHeader/StatusColorBar";
 import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
-import { User1 } from "../__testdata__/User";
+import { User1, User2 } from "../__testdata__/User";
 import centered from "@storybook/addon-centered";
 import { Columns } from "./Columns";
 import { action } from "@storybook/addon-actions";

@@ -5,8 +5,10 @@ import { PaperProps } from "@material-ui/core/Paper";
 import { IUICommonAttribuite, IUser, UIAction } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
 import { progressStatus } from "./ColumnHeader/StatusColorBar";
+import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
 
-export interface IColumnProps {
+export interface ColumnProps {
+    handle?: DraggableProvidedDragHandleProps;
     uiColumnAttr: IUICommonAttribuite;
     columnUiActions: UIAction[];
     name: string;
@@ -42,12 +44,13 @@ const Styled = {
     `
 };
 
-export const Column_: React.FC<IColumnProps> = props => {
-    const { uiColumnAttr, columnUiActions, width, owner, name, status } = props;
+export const Column_: React.FC<ColumnProps> = props => {
+    const { uiColumnAttr, columnUiActions, width, owner, name, status, handle} = props;
     return (
         <Styled.Root width={width}>
             <Styled.Paper>
                 <Header
+                    handle={handle}
                     columnName={name}
                     status={status}
                     owner={owner}
