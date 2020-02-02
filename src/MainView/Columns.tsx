@@ -1,11 +1,13 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { styled } from "@styled";
 import { Column, ColumnProps } from "./Column";
+import { useColumns } from "../hooks/useColumns";
 
 export interface ColumnsProps {
     tabId: string;
     columns: ColumnProps[];
+    handleUpdate: (result: ColumnProps[]) => void;
 }
 
 const Styled = {
@@ -18,21 +20,7 @@ const Styled = {
 };
 
 export const Columns = (props: ColumnsProps) => {
-    const handleBeforeDragStart = useCallback(() => {
-        /*...*/
-    }, []);
-
-    const handleDragStart = useCallback(() => {
-        /*...*/
-    }, []);
-
-    const handleDragUpdate = useCallback(() => {
-        /*...*/
-    }, []);
-
-    const handleDragEnd = useCallback(() => {
-        // the only one that is required
-    }, []);
+    const { handleBeforeDragStart, handleDragStart, handleDragUpdate, handleDragEnd } = useColumns();
 
     return (
         <DragDropContext
