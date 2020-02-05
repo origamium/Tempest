@@ -6,7 +6,7 @@ export interface ColumnList extends IUICommonAttribuite {
 
 }
 
-export const ColumnList: React.FC<ColumnList> {
+export const ColumnList: React.FC<ColumnList> = () {
 
     return (<AutoSizer>
 
