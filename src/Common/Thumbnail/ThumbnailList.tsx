@@ -31,18 +31,16 @@ const Styled = {
 };
 
 const ExtractionUri = (source: any[]): string[] =>
-    source.map(
-        (v: any): string => {
-            if (typeof v === "string") {
-                return v;
-            } else if (v.preview) {
-                // File
-                return v.preview.toString();
-            } else {
-                throw new Error();
-            }
+    source.map((v: any): string => {
+        if (typeof v === "string") {
+            return v;
+        } else if (v.preview) {
+            // File
+            return v.preview.toString();
+        } else {
+            throw new Error();
         }
-    );
+    });
 
 const handleClick = (props: ThumbnailListProps, index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();

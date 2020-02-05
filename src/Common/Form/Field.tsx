@@ -1,32 +1,32 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 
 export type FieldProps = {
     /* unique key */
-    id: string,
+    id: string;
     /* text field helper text */
-    helperText?: string,
+    helperText?: string;
     /* warn? */
-    warn?: string,
+    warn?: string;
     /* error*/
-    error?: string,
+    error?: string;
     /* text field max row */
-    maxRow?: number,
+    maxRow?: number;
     /* field string */
-    value: string,
+    value: string;
     /* field onChange function */
-    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Styled = {
     Root: styled.div`
         flex: auto 1 0;
-    `,
+    `
 };
 
 const getHelperText = (props: FieldProps): string => {
-    if(props.error || props.warn) {
+    if (props.error || props.warn) {
         return props.error ? props.error : props.warn || "";
     }
     return props.helperText || "";
@@ -43,14 +43,15 @@ export const Field: React.FunctionComponent<FieldProps> = React.memo((props: Fie
             multiline={true}
             margin="none"
             fullWidth={true}
-            rowsMax={props.maxRow} />
+            rowsMax={props.maxRow}
+        />
     </Styled.Root>
 ));
 
 Field.defaultProps = {
     error: undefined,
     warn: undefined,
-    maxRow: 6,
+    maxRow: 6
 };
 
 export default Field;

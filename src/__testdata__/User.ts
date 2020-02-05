@@ -11,7 +11,7 @@ export const User1: IUser = {
     location: undefined,
     userWebPageUrl: undefined,
     pinnedObject: undefined
-}
+};
 
 export const User2: IUser = {
     id: "123456",
@@ -24,4 +24,4 @@ export const User2: IUser = {
     location: undefined,
     userWebPageUrl: undefined,
     pinnedObject: undefined
-}
+};

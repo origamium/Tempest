@@ -1,9 +1,12 @@
 /* tslint:disable */
 export default {
     short: "便利",
-    normal: "To see a World in a Grain of Sand And a Heaven in a Wild Flower, Hold Infinity in the palm of your hand And Eternity in an hour.",
-    long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis, odio in varius hendrerit, dolor dolor consequat lorem, eget tempor dolor nibh vitae sapien. Maecenas vulputate, arcu vitae vestibulum tempus, felis sem dignissim lacus, vitae molestie libero nisl eu ante. Integer congue velit eget est feugiat rutrum. Nunc sit amet ultricies massa.",
-    tooLong: "昨日、近所の吉野家行ったんです。吉野家。 \n" +
+    normal:
+        "To see a World in a Grain of Sand And a Heaven in a Wild Flower, Hold Infinity in the palm of your hand And Eternity in an hour.",
+    long:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis, odio in varius hendrerit, dolor dolor consequat lorem, eget tempor dolor nibh vitae sapien. Maecenas vulputate, arcu vitae vestibulum tempus, felis sem dignissim lacus, vitae molestie libero nisl eu ante. Integer congue velit eget est feugiat rutrum. Nunc sit amet ultricies massa.",
+    tooLong:
+        "昨日、近所の吉野家行ったんです。吉野家。 \n" +
         "そしたらなんか人がめちゃくちゃいっぱいで座れないんです。 \n" +
         "で、よく見たらなんか垂れ幕下がってて、１５０円引き、とか書いてあるんです。 \n" +
         "もうね、アホかと。馬鹿かと。 \n" +
@@ -28,5 +31,5 @@ export default {
         "で、それに大盛りギョク（玉子）。これ最強。 \n" +
         "しかしこれを頼むと次から店員にマークされるという危険も伴う、諸刃の剣。 \n" +
         "素人にはお薦め出来ない。 \n" +
-        "まあお前らド素人は、牛鮭定食でも食ってなさいってこった。 ",
+        "まあお前らド素人は、牛鮭定食でも食ってなさいってこった。 "
 };

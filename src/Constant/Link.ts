@@ -7,6 +7,5 @@ export default {
 export enum LinkType {
     url,
     mention,
-    hashtag,
-};
-
+    hashtag
+}

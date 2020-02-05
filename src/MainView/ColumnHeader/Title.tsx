@@ -9,8 +9,7 @@ interface IHeaderProps {
 
 export const Title: React.FC<IHeaderProps> = (props: IHeaderProps) => {
     const owner = useContext(OwnerContext);
-    const ownerString =
-        (owner[UserProperties.providerDomain] || "") + "@" + owner[UserProperties.screenName];
+    const ownerString = (owner[UserProperties.providerDomain] || "") + "@" + owner[UserProperties.screenName];
 
     return (
         <div>

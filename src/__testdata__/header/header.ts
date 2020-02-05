@@ -1,3 +1,3 @@
 export default {
-    sample: require('./seitoubouei.jpg'),
+    sample: require("./seitoubouei.jpg")
 };
