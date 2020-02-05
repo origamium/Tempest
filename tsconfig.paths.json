@@ -1,8 +1,8 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@styled": ["src/Theme"]
-        }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styled": ["src/Theme"]
     }
+  }
 }
