@@ -26,6 +26,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "typecheck": "tsc --project tsconfig.json #",
+    "typecheck:watch": "tsc --noEmit --watch",
     "lint:ts": "eslint ./src/**/*.ts ./src/**/*.tsx  --cache",
     "lint:js": "eslint ./*.js --cache",
     "lint:json": "prettier \"*.json\"",
