@@ -30,7 +30,7 @@
     "lint:js": "eslint ./*.js --cache",
     "lint:json": "prettier \"*.json\"",
     "lint:style": "stylelint \"./src/**/*.tsx\" --syntax css-in-js",
-    "lint": "run-p -l -n -c --aggregate-output lint:*",
+    "lint": "run-p -l -n -c --aggregate-output lint:*"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.13",
@@ -83,6 +83,10 @@
     "react-markdown": "^4.3.1",
     "react-scripts": "^3.4.0",
     "style-loader": "^1.1.3",
+    "stylelint": "^13.2.0",
+    "stylelint-config-recess-order": "^2.0.3",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
     "ts-loader": "^6.2.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "tslint-config-prettier": "^1.18.0",
