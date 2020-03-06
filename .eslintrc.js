@@ -44,6 +44,15 @@ module.exports = {
                 "@typescript-eslint/explicit-function-return-type": "off",
                 "react/prop-types": "off"
             },
+        },
+        {
+            files: ["**/__tests__/**", "**/*.test.tsx", "**/*.test.ts"],
+            env: {
+                jest: true
+            },
+            rules: {
+                "no-invalid-this": 0
+            }
         }
     ]
 };
