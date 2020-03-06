@@ -30,7 +30,6 @@ module.exports = {
         {
             files: ["**/*.ts", "**/*.tsx"],
             rules: {
-                "semi": 1,
                 "no-console": ["warn", {allow: ["info", "warn", "error"]}],
                 "no-unused-vars": 0,
                 "@typescript-eslint/no-unused-vars": [2, { args: "none" }],
