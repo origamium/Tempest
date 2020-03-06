@@ -26,6 +26,10 @@ module.exports = {
             tryExtensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".node"]
         }
     },
+    rules: {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+    },
     overrides: [
         {
             files: ["**/*.ts", "**/*.tsx"],
@@ -39,8 +43,6 @@ module.exports = {
                 "@typescript-eslint/no-unnecessary-type-assertion": 2,
                 "@typescript-eslint/restrict-plus-operands": 2,
                 '@typescript-eslint/return-await': 'error',
-                "react-hooks/rules-of-hooks": "error",
-                "react-hooks/exhaustive-deps": "warn",
                 "@typescript-eslint/explicit-function-return-type": "off",
                 "react/prop-types": "off"
             },
