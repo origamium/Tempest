@@ -1,10 +1,6 @@
 {
   "name": "@tsuruclient/ui",
   "version": "0.1.0",
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "@material-ui/core": "^4.9.5",
     "@material-ui/icons": "^4.9.1",
