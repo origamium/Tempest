@@ -7,12 +7,11 @@ export const ColumnDataProvider = ColumnDataContext.Provider;
 
 export const useColumnDataCtx = (): ColumnProps[] => {
     const ctx = useContext(ColumnDataContext);
-    if (!ctx) throw new Error("Not children of DataContext.Provider")
+    if (!ctx) throw new Error("Not children of DataContext.Provider");
     return ctx;
-}
+};
 
 export const useColumns = () => {
-
     const handleBeforeDragStart = useCallback((initial: DragStart) => {
         /*...*/
     }, []);
@@ -26,7 +25,7 @@ export const useColumns = () => {
     }, []);
 
     const handleDragEnd = useCallback((result: DropResult, provided: ResponderProvided) => {
-        handleUpdate(result.source)
+        handleUpdate(result.source);
     }, []);
 
     return {

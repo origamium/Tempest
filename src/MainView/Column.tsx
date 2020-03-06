@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@styled";
 import { Paper } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
-import { IUICommonAttribuite, IUser, UIAction } from "@tsuruclient/datatype";
+import { IUICommonAttribuite, IUser, UIAction } from "../datatype/UI/UIAction";
 import { Header } from "./ColumnHeader/Header";
 import { progressStatus } from "./ColumnHeader/StatusColorBar";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
@@ -44,8 +44,8 @@ const Styled = {
     `
 };
 
-export const Column_: React.FC<ColumnProps> = props => {
-    const { uiColumnAttr, columnUiActions, width, owner, name, status, handle} = props;
+export const Column: React.FC<ColumnProps> = props => {
+    const { uiColumnAttr, columnUiActions, width, owner, name, status, handle } = props;
     return (
         <Styled.Root width={width}>
             <Styled.Paper>
@@ -62,5 +62,3 @@ export const Column_: React.FC<ColumnProps> = props => {
         </Styled.Root>
     );
 };
-
-export const Column = React.memo(Column_);
