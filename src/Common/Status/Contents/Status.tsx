@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Avatar, Typography } from "@material-ui/core";
 import { ThumbnailList } from "../../Thumbnail/ThumbnailList";
 import { Text } from "../../Text/Text";
-import { IStatus, UserProperties } from "@tsuruclient/datatype";
-import { rendererEvents } from "@tsuruclient/events";
+import { IStatus } from "../../../datatype/Contents/Article/Status";
+import { UserProperties } from "../../../datatype/Contents/User";
 
 export interface IStatusProps {
     account: string;
@@ -36,11 +36,11 @@ export const Status: React.FunctionComponent<IStatusProps> = (props: IStatusProp
     const { user, text, image } = props.target;
 
     const handleLinkClick = (href: string): void => {
-        rendererEvents.handleLinkClick(account, column, href);
+        //rendererEvents.handleLinkClick(account, column, href);
     };
 
     const handleAccountClick = (): void => {
-        rendererEvents.handleUserClick(account, column, user[UserProperties.id]);
+        //rendererEvents.handleUserClick(account, column, user[UserProperties.id]);
     };
 
     const screenName = (name?: string) => (name ? "@" + name : "");

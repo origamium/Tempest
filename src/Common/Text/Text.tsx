@@ -10,11 +10,11 @@ export type TextProps = {
     handleLinkClick: (href: string) => void;
 };
 
-export const Text = onlyUpdateForKeys(["text"])((props: TextProps) => (
+export const Text_ = onlyUpdateForKeys(["text"])((props: TextProps) => (
     <Typography variant={props.variant}>{props.text}</Typography>
 ));
 
-Text.defaultProps = {
+Text_.defaultProps = {
     maxLinkLength: 64
 };
 

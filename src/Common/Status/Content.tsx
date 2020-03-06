@@ -1,11 +1,14 @@
 import React from "react";
-import { ArticleType, EventProperties, EventType, IEvent, IStatus, IUICommonAttribuite } from "@tsuruclient/datatype";
 import { Status } from "./Contents/Status";
 import { Event } from "./Contents/Event";
 import { UserEvent } from "./Contents/UserEvent";
+import { IStatus } from "../../datatype/Contents/Article/Status";
+import { EventProperties, IEvent } from "../../datatype/Contents/Article/Event";
+import { ArticleType, EventType } from "../../datatype/Contents/Article/Enum";
+import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
 export interface ContentProps {
-    uiCommonAttr: IUICommonAttribuite;
+    uiCommonAttr: IUICommonAttribute;
     target: IStatus | IEvent;
 }
 

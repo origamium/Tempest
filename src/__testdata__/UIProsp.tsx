@@ -1,6 +1,7 @@
-import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
+import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
+import { UIAction } from "../datatype/UI/UIAction";
 
-export const UICommonAttr: IUICommonAttribuite = {
+export const UICommonAttr: IUICommonAttribute = {
     account: "0",
     column: "0"
 };

@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
 import { PopOverMenu } from "../../Common/Action/PopoverMenus";
+import { UIAction } from "../../datatype/UI/UIAction";
+import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
 export interface MenuProps {
-    uiCommonAttr: IUICommonAttribuite;
+    uiCommonAttr: IUICommonAttribute;
     uiActions: UIAction[];
 }
 

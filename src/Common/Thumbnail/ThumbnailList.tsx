@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { styled } from "@styled";
 import Thumbnail from "./Thumbnail";
-import { IUICommonAttribuite } from "@tsuruclient/datatype";
+import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
-export interface ThumbnailListProps extends IUICommonAttribuite {
+export interface ThumbnailListProps extends IUICommonAttribute {
     /* source id is content. */
     sourceId?: string;
 

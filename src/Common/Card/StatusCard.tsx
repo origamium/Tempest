@@ -1,7 +1,7 @@
-import React, { memo, useCallback } from "react";
+import React, { useCallback } from "react";
 import { Avatar as _Avatar, Paper as _Paper, Typography } from "@material-ui/core";
 import { styled } from "@styled";
-import { IStatus, StatusProperties } from "@tsuruclient/datatype";
+import { IStatus, StatusProperties } from "../../datatype/Contents/Article/Status";
 
 const Styled = {
     Avatar: styled(_Avatar)<any>`
@@ -27,25 +27,26 @@ interface Props {
     handleClick?: (payload: Record<string, string>) => void;
 }
 
-const _StatusCard: React.FunctionComponent<Props> = (props: Props) => {
-    const handleClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        if (props.handleClick) {
-            props.handleClick({
-                account: props.account,
-                id: props.target[StatusProperties.id]
-            });
-        }
-    }, []);
+export const StatusCard: React.FunctionComponent<Props> = ({ account, target, handleClick: handleClick_ }) => {
+    const handleClick = useCallback(
+        (e: React.MouseEvent<HTMLElement>) => {
+            e.preventDefault();
+            if (handleClick_) {
+                handleClick_({
+                    account: account,
+                    id: target[StatusProperties.id]
+                });
+            }
+        },
+        [account, target, handleClick_]
+    );
 
     return (
         <Styled.Root onClick={handleClick}>
-            <Styled.Avatar src={props.target[StatusProperties.user].avatarImage} />
+            <Styled.Avatar src={target[StatusProperties.user].avatarImage} />
             <Typography variant="body1" style={{ wordWrap: "break-word", wordBreak: "break-all" }}>
-                {props.target.text}
+                {target.text}
             </Typography>
         </Styled.Root>
     );
 };
-
-export const StatusCard = memo(_StatusCard);

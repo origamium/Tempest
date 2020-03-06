@@ -1,10 +1,12 @@
 import * as React from "react";
 import { styled } from "@styled";
-import { EventProperties, IEvent, IUICommonAttribuite, UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
+import { UserProperties } from "../../../datatype/Contents/User";
+import { EventProperties, IEvent } from "../../../datatype/Contents/Article/Event";
+import { IUICommonAttribute } from "../../../datatype/UI/UICommonAttribute";
 
-interface EventComponentProps extends IUICommonAttribuite {
+interface EventComponentProps extends IUICommonAttribute {
     target: IEvent;
     eventContext: string;
 }

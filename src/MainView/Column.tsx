@@ -2,14 +2,16 @@ import React from "react";
 import { styled } from "@styled";
 import { Paper } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
-import { IUICommonAttribuite, IUser, UIAction } from "../datatype/UI/UIAction";
 import { Header } from "./ColumnHeader/Header";
 import { progressStatus } from "./ColumnHeader/StatusColorBar";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
+import { UIAction } from "../datatype/UI/UIAction";
+import { IUser } from "../datatype/Contents/User";
+import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
 
 export interface ColumnProps {
     handle?: DraggableProvidedDragHandleProps;
-    uiColumnAttr: IUICommonAttribuite;
+    uiColumnAttr: IUICommonAttribute;
     columnUiActions: UIAction[];
     name: string;
     owner: IUser;

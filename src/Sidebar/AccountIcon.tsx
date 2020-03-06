@@ -1,13 +1,15 @@
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Avatar, ButtonBase, Tooltip, Typography } from "@material-ui/core";
-import { IUICommonAttribuite, IUser, UIAction, UserProperties } from "@tsuruclient/datatype";
 import { TooltipProps } from "@material-ui/core/Tooltip";
 import { TypographyProps } from "@material-ui/core/Typography";
 import { PopOverMenu } from "../Common/Action/PopoverMenus";
+import { IUser, UserProperties } from "../datatype/Contents/User";
+import { UIAction } from "../datatype/UI/UIAction";
+import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
 
 interface AccountIconProps extends IUser {
-    uiCommonAttr: IUICommonAttribuite;
+    uiCommonAttr: IUICommonAttribute;
     uiActions: UIAction[];
 }
 

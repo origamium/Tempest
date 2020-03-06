@@ -1,10 +1,11 @@
 import React from "react";
 import { MenuItem, MenuList, Popover } from "@material-ui/core";
-import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
 import { PopoverOrigin } from "@material-ui/core/Popover";
+import { UIAction } from "../../datatype/UI/UIAction";
+import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
 export interface PopoverMenuProps {
-    uiCommonAttr: IUICommonAttribuite;
+    uiCommonAttr: IUICommonAttribute;
     anchorEl: HTMLElement | null;
     handleMenuClose: () => void;
     uiActions: UIAction[];

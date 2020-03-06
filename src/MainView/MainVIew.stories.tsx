@@ -1,14 +1,14 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { boolean, select } from "@storybook/addon-knobs";
-import { Column_, ColumnProps } from "./Column";
+import { Column } from "./Column";
 import { progressStatus, StatusColorBar } from "./ColumnHeader/StatusColorBar";
-import { IUICommonAttribuite, UIAction } from "@tsuruclient/datatype";
 import { Header } from "./ColumnHeader/Header";
-import { User1, User2 } from "../__testdata__/User";
+import { User1 } from "../__testdata__/User";
 import centered from "@storybook/addon-centered";
 import { Columns } from "./Columns";
 import { action } from "@storybook/addon-actions";
+import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
 
 const StoryPrefix = "MainView|";
 
@@ -16,7 +16,7 @@ const height100percent = story => (
     <div style={{ height: "100vh", display: "flex", alignItems: "center" }}>{story()}</div>
 );
 
-const UIColumnAttribute: IUICommonAttribuite = {
+const UIColumnAttribute: IUICommonAttribute = {
     account: "3902047509399",
     column: "82477795091294"
 };
@@ -31,7 +31,7 @@ const statusBarDefaultValue = progressStatus.none;
 
 const raiseErrorLabel = "error";
 
-const UICAttrList: IUICommonAttribuite[] = [
+const UICAttrList: IUICommonAttribute[] = [
     { account: "48398892", column: "384279910003" },
     { account: "48493101029", column: "3999337271" },
     { account: "41000001226626", column: "30585837777" },
@@ -41,7 +41,7 @@ const UICAttrList: IUICommonAttribuite[] = [
 ];
 
 storiesOf(StoryPrefix + "Columns", module).add("info", () => (
-    <Columns tabId={"83832859950909209"} columns={UICAttrList} />
+    <Columns tabId={"83832859950909209"} columns={UICAttrList}  handleUpdate={action("column update")} />
 ));
 
 storiesOf(StoryPrefix + "Column", module)
@@ -67,5 +67,4 @@ storiesOf(StoryPrefix + "Column/Header/StatusColorBar", module)
 
 storiesOf(StoryPrefix + "Column/Header", module)
     .addDecorator(centered)
-    .addDecorator(ColumnContextProviderForStorybook)
     .add("info", () => <Header columnName={"Home Timeline"} status={progressStatus.inProgress} />);

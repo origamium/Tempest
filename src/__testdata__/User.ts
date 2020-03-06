@@ -1,4 +1,4 @@
-import { IUser } from "@tsuruclient/datatype";
+import { IUser } from "../datatype/Contents/User";
 
 export const User1: IUser = {
     id: "123456",

@@ -3,12 +3,14 @@ import { storiesOf } from "@storybook/react";
 import centered from "@storybook/addon-centered";
 import { AccountIcon } from "./AccountIcon";
 import * as origamiIcon from "../__testdata__/icon/origami.png";
-import { IUICommonAttribuite, IUser, UIAction } from "@tsuruclient/datatype";
 import { action } from "@storybook/addon-actions";
 import { AccountList } from "./AccountList";
 import { Sidebar } from "./Sidebar";
+import { IUser } from "../datatype/Contents/User";
+import { UIAction } from "../datatype/UI/UIAction";
+import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
 
-const uiCommonAttr: IUICommonAttribuite = {
+const uiCommonAttr: IUICommonAttribute = {
     account: "",
     column: ""
 };

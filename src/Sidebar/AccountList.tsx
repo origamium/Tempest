@@ -1,12 +1,14 @@
 import React from "react";
 import { styled } from "@styled";
 import { AccountIcon } from "./AccountIcon";
-import { IUICommonAttribuite, IUser, UIAction, UserProperties } from "@tsuruclient/datatype";
+import { IUser, UserProperties } from "../datatype/Contents/User";
+import { UIAction } from "../datatype/UI/UIAction";
+import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
 
 export interface IAccountProps {
     user: IUser;
     actions: UIAction[];
-    uiCommonAttr: IUICommonAttribuite;
+    uiCommonAttr: IUICommonAttribute;
 }
 
 export interface IAccountListProps {

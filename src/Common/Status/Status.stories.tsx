@@ -6,11 +6,14 @@ import centered from "@storybook/addon-centered/react";
 
 // import Content from './Content';
 import { Status } from "./Contents/Status";
-import { ArticleType, EventType, IEvent, IStatus, IUICommonAttribuite } from "@tsuruclient/datatype";
 import { Event } from "./Contents/Event";
 import { UserEvent } from "./Contents/UserEvent";
 import { User1, User2 } from "../../__testdata__/User";
 import { Content } from "./Content";
+import { IStatus } from "../../datatype/Contents/Article/Status";
+import { IEvent } from "../../datatype/Contents/Article/Event";
+import { ArticleType, EventType } from "../../datatype/Contents/Article/Enum";
+import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
 const Status1: IStatus = {
     article: {
@@ -43,7 +46,7 @@ const Event2: IEvent = {
     target: Status1
 };
 
-const UIColumnAttr: IUICommonAttribuite = {
+const UIColumnAttr: IUICommonAttribute = {
     account: "8372890750982",
     column: "3824984847479"
 };

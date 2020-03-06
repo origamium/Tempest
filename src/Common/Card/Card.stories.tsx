@@ -4,7 +4,6 @@ import { storiesOf } from "@storybook/react";
 import { text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import centered from "@storybook/addon-centered";
-import { ArticleType } from "@tsuruclient/datatype";
 
 import { StatusCard } from "./StatusCard";
 import { UserCard } from "./UserCard";
@@ -12,6 +11,7 @@ import { UserCard } from "./UserCard";
 import Icons from "../../__testdata__/icon/icon";
 import Headers from "../../__testdata__/header/header";
 import icon from "../../__testdata__/icon/icon";
+import { ArticleType } from "../../datatype/Contents/Article/Enum";
 
 const sampleId = "sample-id-0123456789";
 const StoryPrefix = "Common Components|Card";

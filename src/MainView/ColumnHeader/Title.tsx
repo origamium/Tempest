@@ -1,6 +1,6 @@
 import React from "react";
-import { IUser, UserProperties } from "@tsuruclient/datatype";
 import { Typography } from "@material-ui/core";
+import { IUser, UserProperties } from "../../datatype/Contents/User";
 
 interface IHeaderProps {
     owner: IUser;

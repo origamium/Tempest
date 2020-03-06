@@ -4,12 +4,14 @@ import { Toolbar } from "@material-ui/core";
 import { Title } from "./Title";
 import { progressStatus, StatusColorBar } from "./StatusColorBar";
 import { MenuSet } from "./MenuSet";
-import { IUICommonAttribuite, IUser, UIAction } from "@tsuruclient/datatype";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
+import { UIAction } from "../../datatype/UI/UIAction";
+import { IUser } from "../../datatype/Contents/User";
+import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
 export interface HeaderProps {
     handle?: DraggableProvidedDragHandleProps | {};
-    uiColumnAttr: IUICommonAttribuite;
+    uiColumnAttr: IUICommonAttribute;
     uiActions: UIAction[];
     columnName: string;
     owner: IUser;
