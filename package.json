@@ -24,10 +24,15 @@
     "typecheck": "tsc --project tsconfig.json #",
     "typecheck:watch": "tsc --noEmit --watch",
     "lint:ts": "eslint ./src/**/*.ts ./src/**/*.tsx  --cache",
+    "lint:fix:ts": "yarn lint:ts --fix",
     "lint:js": "eslint ./*.js --cache",
+    "lint:fix:js": "yarn lint:js --fix",
     "lint:json": "prettier \"*.json\"",
+    "lint:fix:json": "yarn lint:json --fix",
     "lint:style": "stylelint \"./src/**/*.tsx\" --syntax css-in-js",
-    "lint": "run-p -l -n -c --aggregate-output lint:*"
+    "lint:fix:style": "yarn lint:style --fix",
+    "lint": "run-p -l -n -c --aggregate-output lint:*",
+    "lint:all-fix": "run-p -l -n -c --aggregate-output lint:fix:*"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.14",
