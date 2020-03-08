@@ -78,7 +78,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         this.fileInput = React.createRef();
     }
 
-    private readonly fileInput: React.RefObject<any>;
+    private readonly fileInput: React.RefObject<HTMLInputElement>;
 
     public static defaultState: FormState = {
         text: "",

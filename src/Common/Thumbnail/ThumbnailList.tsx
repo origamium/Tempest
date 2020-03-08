@@ -42,7 +42,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
         if (typeof lists === "string") {
             return lists;
         } else if (lists[0] instanceof File) {
-            return lists.map(v => URL.createObjectURL(v));
+            return lists.map(v => URL.createObjectURL(v)); // Ouch
         }
     }, []);
     const handleClick = React.useCallback(
@@ -67,7 +67,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
                 _handleDelete(index);
             }
         },
-        []
+        [_handleDelete]
     );
 
     return (
