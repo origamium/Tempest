@@ -49,4 +49,4 @@ export const Header: React.FC<HeaderProps> = props => {
 
 Header.defaultProps = {
     handle: {}
-}
+};

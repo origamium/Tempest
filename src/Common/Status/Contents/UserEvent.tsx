@@ -13,11 +13,11 @@ interface UserEventComponentProps {
 
 const Styled = {
     Root: styled.div`
-        width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
         padding: 0.5em;
 
         & > * {

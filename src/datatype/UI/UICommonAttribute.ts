@@ -1,4 +1,4 @@
 export interface IUICommonAttribute {
-    account: string,
+    account: string;
     column: string;
 }

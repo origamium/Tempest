@@ -13,4 +13,3 @@ export const EmojiButtonHoC = (Emoji: String): Function => (props: Props) => {
 
     return <IconButton onClick={handleClick}>{Emoji}</IconButton>;
 };
-

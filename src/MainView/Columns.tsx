@@ -12,10 +12,10 @@ export interface ColumnsProps {
 
 const Styled = {
     Container: styled.main`
-        height: 100%;
-        overflow: auto;
         display: flex;
         justify-content: flex-start;
+        height: 100%;
+        overflow: auto;
     `
 };
 

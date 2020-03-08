@@ -16,16 +16,16 @@ const Styled = {
         height: 100%;
         padding: 4px 0;
         & > * {
-            margin-left: -4px;
-            padding-left: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
             position: absolute;
             top: 0;
             bottom: 0;
             left: -4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            padding-left: 8px;
+            margin-left: -4px;
         }
     `
 };

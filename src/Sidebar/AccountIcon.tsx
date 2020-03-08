@@ -37,7 +37,7 @@ export const AccountIcon: React.FC<AccountIconProps> = props => {
         () =>
             (props[UserProperties.providerDomain] ? props[UserProperties.providerDomain] + "@" : "") +
             props[UserProperties.screenName],
-        []
+        [props]
     );
 
     const handleMouseOver = useCallback(() => {

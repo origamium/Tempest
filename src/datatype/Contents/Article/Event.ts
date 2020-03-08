@@ -1,12 +1,12 @@
-import {IStatus} from './Status';
-import {IUser} from "../User";
-import {EventArticle} from "./Article";
+import { IStatus } from "./Status";
+import { IUser } from "../User";
+import { EventArticle } from "./Article";
 
 export enum EventProperties {
-    article = 'article',
-    id = 'id',
-    sourceUser = 'sourceUser',
-    target = 'target',
+    article = "article",
+    id = "id",
+    sourceUser = "sourceUser",
+    target = "target"
 }
 
 export interface IEvent {

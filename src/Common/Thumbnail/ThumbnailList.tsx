@@ -24,9 +24,9 @@ const Styled = {
     Root: styled.div`
         display: flex;
         flex-wrap: wrap;
-        margin: 0.2em;
-        height: 100%;
         width: 100%;
+        height: 100%;
+        margin: 0.2em;
     `
 };
 

@@ -17,9 +17,9 @@ export interface IAccountListProps {
 
 const Styled = {
     Root: styled.div`
-        margin: 4px 4px;
         display: flex;
         flex-direction: column;
+        margin: 4px 4px;
         overflow-y: auto;
 
         & > * {

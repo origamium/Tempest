@@ -25,13 +25,21 @@ const Styled = {
     `
 };
 
-export const Field: React.FunctionComponent<FieldProps> = ({id, helperText, warn, error, maxRow, value, handleChange}) => {
+export const Field: React.FunctionComponent<FieldProps> = ({
+    id,
+    helperText,
+    warn,
+    error,
+    maxRow,
+    value,
+    handleChange
+}) => {
     const getHelperText = React.useMemo(() => {
         if (error || warn) {
             return error ? error : warn || "";
         }
         return helperText || "";
-    }, []);
+    }, [error, helperText, warn]);
 
     return (
         <Styled.Root>
