@@ -27,10 +27,14 @@ const Styled = {
 };
 
 export const UserEvent: React.FC<UserEventComponentProps> = (props: UserEventComponentProps) => {
-    const sourceUsersDisplayName = props.sourceUser.reduce(
-        (prev, curr, i, source) =>
-            prev + curr[UserProperties.displayName] || "no name" + (source.length - 1 !== i ? ", " : ""),
-        ""
+    const sourceUsersDisplayName = React.useMemo(
+        () =>
+            props.sourceUser.reduce(
+                (prev, curr, i, source) =>
+                    prev + curr[UserProperties.displayName] || "no name" + (source.length - 1 !== i ? ", " : ""),
+                ""
+            ),
+        [props.sourceUser]
     );
     return (
         <Styled.Root>

@@ -34,7 +34,7 @@ const Styled = {
     `
 };
 
-export const Thumbnail: React.FunctionComponent<ThumbnailProps> = (props: ThumbnailProps) => (
+export const Thumbnail: React.FunctionComponent<ThumbnailProps> = props => (
     <Styled.Root
         src={props.source}
         onClick={props.handleClick}
@@ -54,4 +54,4 @@ export const Thumbnail: React.FunctionComponent<ThumbnailProps> = (props: Thumbn
     </Styled.Root>
 );
 
-export default React.memo(Thumbnail);
+export default Thumbnail;

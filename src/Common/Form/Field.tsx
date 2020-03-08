@@ -25,28 +25,30 @@ const Styled = {
     `
 };
 
-const getHelperText = (props: FieldProps): string => {
-    if (props.error || props.warn) {
-        return props.error ? props.error : props.warn || "";
-    }
-    return props.helperText || "";
-};
+export const Field: React.FunctionComponent<FieldProps> = ({id, helperText, warn, error, maxRow, value, handleChange}) => {
+    const getHelperText = React.useMemo(() => {
+        if (error || warn) {
+            return error ? error : warn || "";
+        }
+        return helperText || "";
+    }, []);
 
-export const Field: React.FunctionComponent<FieldProps> = React.memo((props: FieldProps) => (
-    <Styled.Root>
-        <TextField
-            value={props.value}
-            onChange={props.handleChange}
-            helperText={getHelperText(props)}
-            id={props.id}
-            error={!!props.error}
-            multiline={true}
-            margin="none"
-            fullWidth={true}
-            rowsMax={props.maxRow}
-        />
-    </Styled.Root>
-));
+    return (
+        <Styled.Root>
+            <TextField
+                value={value}
+                onChange={handleChange}
+                helperText={getHelperText}
+                id={id}
+                error={!!error}
+                multiline={true}
+                margin="none"
+                fullWidth={true}
+                rowsMax={maxRow}
+            />
+        </Styled.Root>
+    );
+};
 
 Field.defaultProps = {
     error: undefined,

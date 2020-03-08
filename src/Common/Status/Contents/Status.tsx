@@ -35,15 +35,15 @@ export const Status: React.FunctionComponent<IStatusProps> = (props: IStatusProp
     const { column, account } = props;
     const { user, text, image } = props.target;
 
-    const handleLinkClick = (href: string): void => {
+    const handleLinkClick = React.useCallback((href: string): void => {
         //rendererEvents.handleLinkClick(account, column, href);
-    };
+    }, []);
 
-    const handleAccountClick = (): void => {
+    const handleAccountClick = React.useCallback(() => {
         //rendererEvents.handleUserClick(account, column, user[UserProperties.id]);
-    };
+    }, []);
 
-    const screenName = (name?: string) => (name ? "@" + name : "");
+    const screenName = React.useCallback((name?: string) => (name ? "@" + name : ""), []);
 
     return (
         <Styled.Root>

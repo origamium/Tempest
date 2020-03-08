@@ -26,30 +26,41 @@ const Styled = {
             justify-items: center;
             padding: 0.4em 0;
 
-            ${(props: Props & { theme: ITheme }) =>
-                props.header ? "background-image: url(" + props.header + ")" : "background-color: white"};
+            ${({ header }: Props & { theme: ITheme }) =>
+                header ? "background-image: url(" + header + ")" : "background-color: white"};
             background-size: cover;
             background-position: top center;
         }
     `
 };
 
-export const UserCard: React.FC<Props> = props => {
-    const handleClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        if (props.handleClick) {
-            props.handleClick({
-                account: props.account,
-                id: props.id
-            });
-        }
-    }, []);
+export const UserCard: React.FC<Props> = ({
+    account,
+    id,
+    displayName,
+    screenName,
+    avatar,
+    header,
+    handleClick: _handleClick
+}) => {
+    const handleClick = useCallback(
+        (e: React.MouseEvent<HTMLElement>) => {
+            e.preventDefault();
+            if (_handleClick) {
+                _handleClick({
+                    account: account,
+                    id: id
+                });
+            }
+        },
+        [_handleClick, account, id]
+    );
 
     return (
-        <Styled.Root header={props.header} onClick={handleClick}>
-            {props.avatar ? <Avatar src={props.avatar} /> : <Avatar>{"?"}</Avatar>}
-            <Typography variant={"body1"}>{props.displayName || ""}</Typography>
-            <Typography variant={"caption"}>{props.screenName || ""}</Typography>
+        <Styled.Root header={header} onClick={handleClick}>
+            {avatar ? <Avatar src={avatar} /> : <Avatar>{"?"}</Avatar>}
+            <Typography variant={"body1"}>{displayName || ""}</Typography>
+            <Typography variant={"caption"}>{screenName || ""}</Typography>
         </Styled.Root>
     );
 };

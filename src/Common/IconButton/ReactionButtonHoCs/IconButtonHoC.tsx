@@ -10,7 +10,7 @@ const StyledButton = styled(ButtonBase)<any>`
             width: ${size};
             height: ${size};
             border-radius: 50%;
-            
+
             & > *{
                 fill: ${color};
                 width: 100%;

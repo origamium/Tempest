@@ -13,35 +13,49 @@ export interface PopoverMenuProps {
     transformOrigin?: PopoverOrigin;
 }
 
-interface IPopoverMenuItemProps extends PopoverMenuProps {
+interface IPopoverMenuItemProps extends Pick<PopoverMenuProps, "uiCommonAttr" | "handleMenuClose"> {
     uiAction: UIAction;
 }
 
-export const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = props => {
+export const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = ({ uiAction, uiCommonAttr, handleMenuClose }) => {
     const handleClick = React.useCallback(() => {
-        props.uiAction.action({
-            ...props.uiCommonAttr,
-            uiActionId: props.uiAction.id
+        uiAction.action({
+            ...uiCommonAttr,
+            uiActionId: uiAction.id
         });
-        props.handleMenuClose();
-    }, [props]);
+        handleMenuClose();
+    }, [handleMenuClose, uiAction, uiCommonAttr]);
 
-    return <MenuItem onClick={handleClick}>{props.uiAction.name}</MenuItem>;
+    return <MenuItem onClick={handleClick}>{uiAction.name}</MenuItem>;
 };
 
-export const PopOverMenu: React.FC<PopoverMenuProps> = props => {
-    const isOpen = !!props.anchorEl;
+export const PopOverMenu: React.FC<PopoverMenuProps> = ({
+    uiCommonAttr,
+    anchorEl,
+    anchorOrigin,
+    transformOrigin,
+    uiActions,
+    handleMenuClose
+}) => {
+    const isOpen = !!anchorEl;
     return (
         <Popover
             open={isOpen}
-            onClose={props.handleMenuClose}
-            anchorEl={props.anchorEl}
-            anchorOrigin={props.anchorOrigin}
-            transformOrigin={props.transformOrigin}
+            onClose={handleMenuClose}
+            anchorEl={anchorEl}
+            anchorOrigin={anchorOrigin}
+            transformOrigin={transformOrigin}
         >
             <MenuList>
-                {props.uiActions.length > 0 ? (
-                    props.uiActions.map((v, i) => <PopOverMenuItem key={i} {...props} uiAction={v} />)
+                {uiActions.length > 0 ? (
+                    uiActions.map((v, i) => (
+                        <PopOverMenuItem
+                            key={i}
+                            handleMenuClose={handleMenuClose}
+                            uiAction={v}
+                            uiCommonAttr={uiCommonAttr}
+                        />
+                    ))
                 ) : (
                     <MenuItem>{"account actions not registered"}</MenuItem>
                 )}

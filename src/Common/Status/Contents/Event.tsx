@@ -29,12 +29,15 @@ const Styled = {
 export const Event: React.FC<EventComponentProps> = (props: EventComponentProps) => {
     const target = props.target[EventProperties.target];
 
-    const headingText: string =
-        props.target[EventProperties.sourceUser].reduce(
-            (prev, curr, i, source) =>
-                prev + (curr[UserProperties.displayName] || "no name") + (source.length - 1 !== i ? ", " : " "),
-            ""
-        ) + props.eventContext;
+    const headingText = React.useMemo(() => {
+        return (
+            props.target[EventProperties.sourceUser].reduce(
+                (prev, curr, i, source) =>
+                    prev + (curr[UserProperties.displayName] || "no name") + (source.length - 1 !== i ? ", " : " "),
+                ""
+            ) + props.eventContext
+        );
+    }, [props.eventContext, props.target]);
 
     return (
         <Styled.Root>
