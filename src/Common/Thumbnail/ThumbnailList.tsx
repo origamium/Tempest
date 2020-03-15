@@ -8,7 +8,7 @@ export interface ThumbnailListProps extends IUICommonAttribute {
     sourceId?: string;
 
     /* file or uri list */
-    lists: File[] | string[];
+    lists: string[];
 
     /* deletable? */
     isDeletable?: boolean;
@@ -34,17 +34,10 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
     account,
     column,
     isDeletable,
-    lists: sources,
+    lists,
     handleClick: _handleClick,
     handleDelete: _handleDelete
 }) => {
-    const lists = React.useMemo(() => {
-        if (typeof lists === "string") {
-            return lists;
-        } else if (lists[0] instanceof File) {
-            return lists.map(v => URL.createObjectURL(v)); // Ouch
-        }
-    }, []);
     const handleClick = React.useCallback(
         (index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
             e.preventDefault();
@@ -94,5 +87,3 @@ export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = props 
         <div />
     );
 };
-
-export default ThumbnailList;
