@@ -11,6 +11,7 @@ export interface ThumbnailProps {
 
 const Styled = {
     Root: styled.div<any>`
+        box-sizing: border-box;
         position: relative;
         overflow: hidden;
         padding: 1px;
