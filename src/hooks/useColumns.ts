@@ -11,7 +11,7 @@ export const useColumnDataCtx = (): ColumnProps[] => {
     return ctx;
 };
 
-export const useColumns = () => {
+export const useColumns = (handleUpdate: (res: DropResult) => void) => {
     const handleBeforeDragStart = useCallback((initial: DragStart) => {
         /*...*/
     }, []);
@@ -24,9 +24,12 @@ export const useColumns = () => {
         /*...*/
     }, []);
 
-    const handleDragEnd = useCallback((result: DropResult, provided: ResponderProvided) => {
-        handleUpdate(result.source);
-    }, []);
+    const handleDragEnd = useCallback(
+        (result: DropResult, provided: ResponderProvided) => {
+            handleUpdate(result);
+        },
+        [handleUpdate]
+    );
 
     return {
         handleBeforeDragStart,
