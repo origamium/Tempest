@@ -14,10 +14,10 @@ export interface ThumbnailListProps extends IUICommonAttribute {
     isDeletable?: boolean;
 
     /* image clicked */
-    handleClick?: (Object) => void;
+    handleClick?: (obj: { account: string; columnId: string; src: string[]; index: number }) => void;
 
     /* if isDeletable enabled, delete button onClick handler */
-    handleDelete?: (index) => void;
+    handleDelete?: (index: number) => void;
 }
 
 const Styled = {
