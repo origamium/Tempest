@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "@styled";
+import { styled } from "../../Theme";
 import { ClearButton } from "../IconButton/IconButton";
 
 export interface ThumbnailProps {
@@ -32,10 +32,10 @@ const Styled = {
         border-radius: 50%;
         top: 5%;
         right: 5%;
-    `
+    `,
 };
 
-export const Thumbnail: React.FunctionComponent<ThumbnailProps> = props => (
+export const Thumbnail: React.FunctionComponent<ThumbnailProps> = (props) => (
     <Styled.Root
         src={props.source}
         onClick={props.handleClick}

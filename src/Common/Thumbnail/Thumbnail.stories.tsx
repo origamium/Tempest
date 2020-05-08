@@ -1,4 +1,3 @@
-/*tslint:disable*/
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import centered from "@storybook/addon-centered";
@@ -11,7 +10,7 @@ import simulaculaIcon from "../../__testdata__/icon/simulacla.jpg";
 
 import { ThumbnailList } from "./ThumbnailList";
 
-const box = story => <div style={{ width: "50vw" }}>{story()}</div>;
+const box = (story) => <div style={{ width: "50vw" }}>{story()}</div>;
 
 storiesOf("Common Components|Thumbnail", module)
     .addDecorator(centered)

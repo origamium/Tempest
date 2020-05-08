@@ -1,2 +1,2 @@
-export { default as Thumbnail } from "./Thumbnail";
-export { default as ThumbnailList } from "./ThumbnailList";
+export { Thumbnail } from "./Thumbnail";
+export { ThumbnailList } from "./ThumbnailList";

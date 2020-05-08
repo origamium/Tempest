@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@styled";
+import { styled } from "../../Theme";
 import Thumbnail from "./Thumbnail";
 import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
@@ -27,7 +27,7 @@ const Styled = {
         width: 100%;
         height: 100%;
         margin: 0.2em;
-    `
+    `,
 };
 
 const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
@@ -36,7 +36,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
     isDeletable,
     lists,
     handleClick: _handleClick,
-    handleDelete: _handleDelete
+    handleDelete: _handleDelete,
 }) => {
     const handleClick = React.useCallback(
         (index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
@@ -46,7 +46,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
                     account,
                     columnId: column,
                     src: lists,
-                    index
+                    index,
                 });
             }
         },
@@ -78,7 +78,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
     );
 };
 
-export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = props => {
+export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = (props) => {
     return props.lists ? (
         <Styled.Root>
             <Thumbnails {...props} />
