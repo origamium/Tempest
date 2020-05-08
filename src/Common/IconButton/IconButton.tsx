@@ -1,5 +1,5 @@
 import * as React from "react";
-import IconButtonHoC from "./ReactionButtonHoCs/IconButtonHoC";
+import { ComponentButton } from "./ReactionButton/ComponentButton";
 import { Clear, Reply, Repeat, Favorite, Send, AttachFile } from "@material-ui/icons";
 
 export interface IconButtonStyle {
@@ -12,17 +12,41 @@ export interface IconButtonProps {
     style: IconButtonStyle;
     id: string;
     active?: boolean;
-    handleClick: Function;
+    handleClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
 }
 
-export const SendButton: React.FC<IconButtonProps> = (props: IconButtonProps) => IconButtonHoC(Send)(props);
+export const SendButton: React.FC<IconButtonProps> = (props) => (
+    <ComponentButton {...props}>
+        <Send />
+    </ComponentButton>
+);
 
-export const AttachFileButton: React.FC<IconButtonProps> = (props: IconButtonProps) => IconButtonHoC(AttachFile)(props);
+export const AttachFileButton: React.FC<IconButtonProps> = (props) => (
+    <ComponentButton {...props}>
+        <AttachFile />
+    </ComponentButton>
+);
 
-export const ClearButton: React.FC<IconButtonProps> = (props: IconButtonProps) => IconButtonHoC(Clear)(props);
+export const ClearButton: React.FC<IconButtonProps> = (props) => (
+    <ComponentButton {...props}>
+        <Clear />
+    </ComponentButton>
+);
 
-export const ReplyButton: React.FC<IconButtonProps> = (props: IconButtonProps) => IconButtonHoC(Reply)(props);
+export const ReplyButton: React.FC<IconButtonProps> = (props) => (
+    <ComponentButton {...props}>
+        <Reply />
+    </ComponentButton>
+);
 
-export const RepeatButton: React.FC<IconButtonProps> = (props: IconButtonProps) => IconButtonHoC(Repeat)(props);
+export const RepeatButton: React.FC<IconButtonProps> = (props) => (
+    <ComponentButton {...props}>
+        <Repeat />
+    </ComponentButton>
+);
 
-export const FavoriteButton: React.FC<IconButtonProps> = (props: IconButtonProps) => IconButtonHoC(Favorite)(props);
+export const FavoriteButton: React.FC<IconButtonProps> = (props) => (
+    <ComponentButton {...props}>
+        <Favorite />
+    </ComponentButton>
+);
