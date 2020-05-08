@@ -15,7 +15,7 @@ export const Text_ = onlyUpdateForKeys(["text"])((props: TextProps) => (
 ));
 
 Text_.defaultProps = {
-    maxLinkLength: 64
+    maxLinkLength: 64,
 };
 
 export const Text = onlyUpdateForKeys(["text"])(Text_);

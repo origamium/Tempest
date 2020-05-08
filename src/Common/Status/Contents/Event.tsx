@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "@styled";
+import { styled } from "../../../Theme";
 import { Typography } from "@material-ui/core";
 import { StatusCard } from "../../Card/StatusCard";
 import { UserProperties } from "../../../datatype/Contents/User";
@@ -13,9 +13,9 @@ interface EventComponentProps extends IUICommonAttribute {
 
 const Styled = {
     Root: styled.div`
-        width: 100%;
         display: flex;
         flex-direction: column;
+        width: 100%;
         padding: 0.5em;
     `,
     Header: styled.div`
@@ -23,7 +23,7 @@ const Styled = {
     `,
     Body: styled.div`
         padding: 0.2em 0;
-    `
+    `,
 };
 
 export const Event: React.FC<EventComponentProps> = (props: EventComponentProps) => {

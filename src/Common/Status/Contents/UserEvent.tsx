@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "@styled";
+import { styled } from "../../../Theme";
 import { UserCard } from "../../Card/UserCard";
 import { Typography } from "@material-ui/core";
 import { IUser, UserProperties } from "../../../datatype/Contents/User";
@@ -23,7 +23,7 @@ const Styled = {
         & > * {
             margin: 0.4em 0;
         }
-    `
+    `,
 };
 
 export const UserEvent: React.FC<UserEventComponentProps> = (props: UserEventComponentProps) => {
@@ -39,7 +39,7 @@ export const UserEvent: React.FC<UserEventComponentProps> = (props: UserEventCom
     return (
         <Styled.Root>
             <Typography>{sourceUsersDisplayName + " " + props.eventContext}</Typography>
-            {props.sourceUser.map(v => (
+            {props.sourceUser.map((v) => (
                 <UserCard
                     key={v[UserProperties.id]}
                     account={props.account}

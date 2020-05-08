@@ -1,12 +1,12 @@
 import React from "react";
-import { css, styled } from "@styled";
+import { css, styled } from "../../Theme";
 import { LinearProgress } from "@material-ui/core";
 import { LinearProgressProps } from "@material-ui/core/es/LinearProgress";
 
 export enum progressStatus {
     none = "none",
     inProgress = "progress",
-    streaming = "streaming"
+    streaming = "streaming",
 }
 
 interface StatusBarProps {
@@ -24,26 +24,26 @@ const childCss = css`
 
 const Styled = {
     Root: styled.div`
+        position: relative;
         width: 100%;
         height: 4px;
-        position: relative;
         background-color: gray;
     `,
     Progress: styled(({ ...rest }: LinearProgressProps) => <LinearProgress {...rest} />)`
         && {
-            ${childCss};
+            ${childCss}
         }
     `,
     Streaming: styled.div<{ streaming: boolean }>`
-        ${childCss};
+        ${childCss}
         background-color: ${({ streaming }) => (streaming ? "#1e88e5" : "none")};
         transition: background-color 200ms;
     `,
     Error: styled.div<{ err: boolean }>`
-        ${childCss};
+        ${childCss}
         background-color: ${({ err }) => (err ? "#d50000" : "none")};
         transition: background-color 200ms;
-    `
+    `,
 };
 
 interface RenderProgressBar {

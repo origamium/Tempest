@@ -12,7 +12,7 @@ import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
 
 const uiCommonAttr: IUICommonAttribute = {
     account: "",
-    column: ""
+    column: "",
 };
 
 const User1: IUser = {
@@ -25,48 +25,48 @@ const User1: IUser = {
     introduction: undefined,
     location: undefined,
     userWebPageUrl: undefined,
-    pinnedObject: undefined
+    pinnedObject: undefined,
 };
 
 const AccountActions: UIAction[] = [
     {
         id: "1234",
         name: "Start Streaming",
-        action: action("Start Streaming")
+        action: action("Start Streaming"),
     },
     {
         id: "5678",
         name: "Sign Out",
-        action: action("Sign Out")
-    }
+        action: action("Sign Out"),
+    },
 ];
 
 const AccountList1 = [
     {
         user: User1,
         actions: [],
-        uiCommonAttr
+        uiCommonAttr,
     },
     {
         user: User1,
         actions: AccountActions,
-        uiCommonAttr
-    }
+        uiCommonAttr,
+    },
 ];
 
 const StoryPrefix = "Sidebar|";
 
 storiesOf(StoryPrefix + "AccountIcon", module)
     .addDecorator(centered)
-    .add("no actions", () => <AccountIcon {...User1} actions={[]} />)
-    .add("Actions", () => <AccountIcon {...User1} actions={AccountActions} />);
+    .add("no actions", () => <AccountIcon {...User1} uiCommonAttr={uiCommonAttr} uiActions={[]} />)
+    .add("Actions", () => <AccountIcon {...User1} uiCommonAttr={uiCommonAttr} uiActions={AccountActions} />);
 
 storiesOf(StoryPrefix + "AccountList", module)
     .addDecorator(centered)
     .add("info", () => <AccountList accounts={AccountList1} />);
 
 storiesOf(StoryPrefix + "Sidebar", module)
-    .addDecorator(story => <div style={{ height: "100vh" }}>{story()}</div>)
+    .addDecorator((story) => <div style={{ height: "100vh" }}>{story()}</div>)
     .add("info", () => (
         <Sidebar addAction={action("add action")} settingAction={action("setting action")} accounts={AccountList1} />
     ));

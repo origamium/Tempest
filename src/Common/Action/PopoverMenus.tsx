@@ -21,7 +21,7 @@ export const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = ({ uiAction, uiC
     const handleClick = React.useCallback(() => {
         uiAction.action({
             ...uiCommonAttr,
-            uiActionId: uiAction.id
+            uiActionId: uiAction.id,
         });
         handleMenuClose();
     }, [handleMenuClose, uiAction, uiCommonAttr]);
@@ -35,7 +35,7 @@ export const PopOverMenu: React.FC<PopoverMenuProps> = ({
     anchorOrigin,
     transformOrigin,
     uiActions,
-    handleMenuClose
+    handleMenuClose,
 }) => {
     const isOpen = !!anchorEl;
     return (

@@ -8,7 +8,7 @@ export enum UserProperties {
     introduction = "introduction",
     location = "location",
     userWebPageUrl = "userWebPageUrl",
-    pinnedObject = "pinnedObject"
+    pinnedObject = "pinnedObject",
 }
 
 export interface IUser {

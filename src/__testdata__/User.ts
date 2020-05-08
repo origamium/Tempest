@@ -10,7 +10,7 @@ export const User1: IUser = {
     introduction: undefined,
     location: undefined,
     userWebPageUrl: undefined,
-    pinnedObject: undefined
+    pinnedObject: undefined,
 };
 
 export const User2: IUser = {
@@ -23,5 +23,5 @@ export const User2: IUser = {
     introduction: undefined,
     location: undefined,
     userWebPageUrl: undefined,
-    pinnedObject: undefined
+    pinnedObject: undefined,
 };

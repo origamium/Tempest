@@ -12,7 +12,7 @@ export enum StatusProperties {
     image = "image",
     hasReaction = "hasReaction",
     hasMention = "hasMention",
-    isThread = "isThread"
+    isThread = "isThread",
 }
 
 export interface IStatus {

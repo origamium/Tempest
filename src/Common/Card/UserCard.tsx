@@ -31,7 +31,7 @@ const Styled = {
             background-size: cover;
             background-position: top center;
         }
-    `
+    `,
 };
 
 export const UserCard: React.FC<Props> = ({
@@ -41,7 +41,7 @@ export const UserCard: React.FC<Props> = ({
     screenName,
     avatar,
     header,
-    handleClick: _handleClick
+    handleClick: _handleClick,
 }) => {
     const handleClick = useCallback(
         (e: React.MouseEvent<HTMLElement>) => {
@@ -49,7 +49,7 @@ export const UserCard: React.FC<Props> = ({
             if (_handleClick) {
                 _handleClick({
                     account: account,
-                    id: id
+                    id: id,
                 });
             }
         },

@@ -2,7 +2,7 @@ export enum ReplyToProperties {
     id = "id",
     targetId = "targetId",
     targetUserId = "targetUserId",
-    sourceUserId = "sourceUserId"
+    sourceUserId = "sourceUserId",
 }
 
 export interface IReplyTo {

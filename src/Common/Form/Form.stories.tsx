@@ -27,8 +27,8 @@ class FormReplyComponent extends React.Component {
                 id: text("source user id", "123456789abcdef"),
                 screenName: text("screen name", "arclisp"),
                 avatarImage:
-                    "https://www.poets.org/sites/default/files/styles/286x289/public/images/biographies/wblake.jpg?itok=EbtI4Ba0"
-            }
+                    "https://www.poets.org/sites/default/files/styles/286x289/public/images/biographies/wblake.jpg?itok=EbtI4Ba0",
+            },
         });
     };
 

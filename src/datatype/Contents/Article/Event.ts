@@ -6,7 +6,7 @@ export enum EventProperties {
     article = "article",
     id = "id",
     sourceUser = "sourceUser",
-    target = "target"
+    target = "target",
 }
 
 export interface IEvent {

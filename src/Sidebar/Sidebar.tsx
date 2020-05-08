@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@styled";
+import { styled } from "../Theme";
 import { Paper, IconButton } from "@material-ui/core";
 import { AccountList, IAccountProps } from "./AccountList";
 import { Add, Settings } from "@material-ui/icons";
@@ -27,7 +27,7 @@ const Styled = {
             padding-left: 8px;
             margin-left: -4px;
         }
-    `
+    `,
 };
 
 export const Sidebar: React.FC<ISidebarProps> = (props: ISidebarProps) => {

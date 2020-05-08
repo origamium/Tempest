@@ -6,16 +6,16 @@ import { IStatus, StatusProperties } from "../../datatype/Contents/Article/Statu
 const Styled = {
     Avatar: styled(_Avatar)<any>`
         && {
-            margin: 6px;
             width: 32px;
             height: 32px;
+            margin: 6px;
         }
     `,
     Root: styled(_Paper)<any>`
         && {
+            display: flex;
             width: 100%;
             max-height: 60px;
-            display: flex;
             overflow: hidden;
         }
     `,

@@ -53,15 +53,15 @@ const Styled = {
     `,
     Row: styled.div`
         display: flex;
-        width: 100%;
         align-items: flex-end;
+        width: 100%;
     `,
     Buttons: styled.div`
-        height: 100%;
-        flex: auto 0 0;
         display: flex;
+        flex: auto 0 0;
         flex-direction: column;
         justify-content: flex-end;
+        height: 100%;
     `,
 };
 

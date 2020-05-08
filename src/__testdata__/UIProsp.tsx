@@ -3,7 +3,7 @@ import { UIAction } from "../datatype/UI/UIAction";
 
 export const UICommonAttr: IUICommonAttribute = {
     account: "0",
-    column: "0"
+    column: "0",
 };
 
 export const UIAction1: UIAction = {

@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { styled } from "@styled";
+import { styled } from "../Theme";
 import { Column, ColumnProps } from "./Column";
 import { useColumns } from "../hooks/useColumns";
 
@@ -16,11 +16,11 @@ const Styled = {
         justify-content: flex-start;
         height: 100%;
         overflow: auto;
-    `
+    `,
 };
 
-export const Columns = (props: ColumnsProps) => {
-    const { handleBeforeDragStart, handleDragStart, handleDragUpdate, handleDragEnd } = useColumns();
+export const Columns: React.FC<ColumnsProps> = (props) => {
+    const { handleBeforeDragStart, handleDragStart, handleDragUpdate, handleDragEnd } = useColumns(() => {});
 
     return (
         <DragDropContext
@@ -30,11 +30,11 @@ export const Columns = (props: ColumnsProps) => {
             onDragEnd={handleDragEnd}
         >
             <Droppable droppableId={props.tabId} direction="horizontal">
-                {provided => (
+                {(provided) => (
                     <Styled.Container ref={provided.innerRef} {...provided.droppableProps}>
                         {props.columns.map((v, i) => (
                             <Draggable key={v.uiColumnAttr.column} index={i} draggableId={v.uiColumnAttr.column}>
-                                {provided => (
+                                {(provided) => (
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}

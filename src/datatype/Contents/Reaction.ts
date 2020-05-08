@@ -4,7 +4,7 @@ export enum ReactionProperties {
     id = "id",
     name = "name",
     reacted = "reacted",
-    reactionAmounts = "reactionAmounts"
+    reactionAmounts = "reactionAmounts",
 }
 
 export interface IReaction {

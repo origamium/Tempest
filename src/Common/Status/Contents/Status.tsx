@@ -1,7 +1,7 @@
 import * as React from "react";
-import styled from "styled-components";
+import { styled } from "../../../Theme";
 import { Avatar, Typography } from "@material-ui/core";
-import { ThumbnailList } from "../../Thumbnail/ThumbnailList";
+import { ThumbnailList } from "../../Thumbnail";
 import { Text } from "../../Text/Text";
 import { IStatus } from "../../../datatype/Contents/Article/Status";
 import { UserProperties } from "../../../datatype/Contents/User";
@@ -25,10 +25,10 @@ const Styled = {
         }
     `,
     Text: styled.section`
+        overflow-x: hidden;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        overflow-x: hidden;
-    `
+    `,
 };
 
 export const Status: React.FunctionComponent<IStatusProps> = (props: IStatusProps) => {

@@ -1,9 +1,9 @@
 export enum ArticleType {
     status = "status",
-    event = "event"
+    event = "event",
 }
 
 export enum EventType {
     reaction = "reaction",
-    followed = "followed"
+    followed = "followed",
 }

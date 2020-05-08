@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@styled";
+import { styled } from "../Theme";
 import { AccountIcon } from "./AccountIcon";
 import { IUser, UserProperties } from "../datatype/Contents/User";
 import { UIAction } from "../datatype/UI/UIAction";
@@ -25,13 +25,13 @@ const Styled = {
         & > * {
             margin: 2px 0;
         }
-    `
+    `,
 };
 
-export const AccountList: React.FC<IAccountListProps> = props => {
+export const AccountList: React.FC<IAccountListProps> = (props) => {
     return (
         <Styled.Root>
-            {props.accounts.map(v => (
+            {props.accounts.map((v) => (
                 <AccountIcon
                     key={v.user[UserProperties.id]}
                     uiActions={v.actions}

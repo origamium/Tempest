@@ -25,7 +25,6 @@ storiesOf("Common Components|Button/ComponentButton", module)
         >
             <CheckIcon />
         </ComponentButton>
-
     ));
 
 storiesOf("Common Components|Button/ComponentButton/Buttons", module)

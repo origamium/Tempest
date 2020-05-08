@@ -34,7 +34,7 @@ export const scopes: string[] = [
     "users:write",
     "users.profile:read",
     "users.profile:write",
-    "team:read"
+    "team:read",
 ];
 
 export const space_separeted_scopes: string = scopes

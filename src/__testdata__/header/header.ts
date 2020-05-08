@@ -1,3 +1,5 @@
+import seitouboueiImage from "./seitoubouei.jpg";
+
 export default {
-    sample: require("./seitoubouei.jpg")
+    sample: seitouboueiImage,
 };

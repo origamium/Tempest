@@ -11,27 +11,27 @@ export interface ThumbnailProps {
 
 const Styled = {
     Root: styled.div<any>`
-        box-sizing: border-box;
         position: relative;
-        overflow: hidden;
+        box-sizing: border-box;
+        flex: 1 0 50%;
+        width: 100%;
+        min-width: 64px;
+        height: auto;
+        min-height: 64px;
         padding: 1px;
-        border: solid 1px white;
-        border-radius: 3%;
+        overflow: hidden;
 
         background: url(${({ src }) => src}) center center;
         background-size: cover;
-        min-width: 64px;
-        width: 100%;
-        min-height: 64px;
-        height: auto;
-        flex: 1 0 50%;
+        border: solid 1px white;
+        border-radius: 3%;
     `,
     DeleteButton: styled.div`
         position: absolute;
-        background-color: rgba(41, 41, 41, 0.5);
-        border-radius: 50%;
         top: 5%;
         right: 5%;
+        background-color: rgba(41, 41, 41, 0.5);
+        border-radius: 50%;
     `,
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Typography } from "@material-ui/core";
 import { IUser, UserProperties } from "../../datatype/Contents/User";
 
@@ -8,8 +8,10 @@ interface IHeaderProps {
 }
 
 export const Title: React.FC<IHeaderProps> = (props: IHeaderProps) => {
-    const ownerString =
-        (props.owner[UserProperties.providerDomain] || "") + "@" + props.owner[UserProperties.screenName];
+    const ownerString = React.useMemo(
+        () => (props.owner[UserProperties.providerDomain] || "") + "@" + props.owner[UserProperties.screenName],
+        []
+    );
 
     return (
         <div>

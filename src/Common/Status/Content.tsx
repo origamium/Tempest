@@ -12,7 +12,7 @@ export interface ContentProps {
     target: IStatus | IEvent;
 }
 
-export const Content: React.FC<ContentProps> = props => {
+export const Content: React.FC<ContentProps> = (props) => {
     switch (props.target.article.articleType) {
         case ArticleType.status:
             return <Status target={props.target as IStatus} {...props.uiCommonAttr} />;

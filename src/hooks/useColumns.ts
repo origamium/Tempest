@@ -35,6 +35,6 @@ export const useColumns = (handleUpdate: (res: DropResult) => void) => {
         handleBeforeDragStart,
         handleDragStart,
         handleDragUpdate,
-        handleDragEnd
+        handleDragEnd,
     };
 };

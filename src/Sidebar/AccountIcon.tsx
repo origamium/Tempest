@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import styled from "styled-components";
+import { styled } from "../Theme";
 import { Avatar, ButtonBase, Tooltip, Typography } from "@material-ui/core";
 import { TooltipProps } from "@material-ui/core/Tooltip";
 import { TypographyProps } from "@material-ui/core/Typography";
@@ -23,20 +23,19 @@ const Styled = {
         &.root {
             color: white;
         }
-    `
+    `,
 };
 
-const RenderName: React.FC<{ name: string }> = ({ name }: { name: string }) => <Styled.Name>{name}</Styled.Name>;
-
-export const AccountIcon: React.FC<AccountIconProps> = props => {
+export const AccountIcon: React.FC<AccountIconProps> = (props) => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
     const [tooltipOpen, setTooltipOpen] = React.useState<boolean>(false);
     const avatar = props[UserProperties.avatarImage];
 
     const name = useMemo(
         () =>
-            (props[UserProperties.providerDomain] ? props[UserProperties.providerDomain] + "@" : "") +
-            props[UserProperties.screenName],
+            `${props[UserProperties.providerDomain] ? `${props[UserProperties.providerDomain]}@` : ""}${
+                props[UserProperties.screenName]
+            }`,
         [props]
     );
 
@@ -60,7 +59,7 @@ export const AccountIcon: React.FC<AccountIconProps> = props => {
 
     return (
         <>
-            <Styled.Root open={tooltipOpen || !!anchorEl} title={RenderName({ name })} placement="right">
+            <Styled.Root open={tooltipOpen || !!anchorEl} title={name} placement="right">
                 <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                     <ButtonBase disableRipple onClick={handleAvatarClick}>
                         {avatar ? <Avatar alt={name} src={avatar} /> : <Avatar alt={name}>{"?"}</Avatar>}
@@ -74,11 +73,11 @@ export const AccountIcon: React.FC<AccountIconProps> = props => {
                 uiCommonAttr={props.uiCommonAttr}
                 anchorOrigin={{
                     vertical: "bottom",
-                    horizontal: "right"
+                    horizontal: "right",
                 }}
                 transformOrigin={{
                     vertical: "top",
-                    horizontal: "left"
+                    horizontal: "left",
                 }}
             />
         </>

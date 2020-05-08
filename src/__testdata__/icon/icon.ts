@@ -5,5 +5,5 @@ import tsuruicon from "./tsuruIcon.jpg";
 export default {
     origami,
     simulacla,
-    tsuruicon
+    tsuruicon,
 };

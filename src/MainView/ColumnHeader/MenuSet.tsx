@@ -10,7 +10,7 @@ export interface MenuProps {
     uiActions: UIAction[];
 }
 
-export const MenuSet: React.FC<MenuProps> = props => {
+export const MenuSet: React.FC<MenuProps> = (props) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(e.currentTarget);

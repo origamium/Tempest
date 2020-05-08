@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@styled";
+import { styled } from "../Theme";
 import { Paper } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
 import { Header } from "./ColumnHeader/Header";
@@ -21,17 +21,17 @@ export interface ColumnProps {
 
 const Styled = {
     Root: styled.article<{ width: number }>`
-        padding: 4px;
         width: ${({ width }) => width}px;
         height: 100%;
+        padding: 4px;
     `,
     Paper: styled((props: PaperProps) => <Paper {...props}>{props.children}</Paper>)`
         && {
-            width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            width: 100%;
+            height: 100%;
             & > header,
             & > footer {
                 flex: 0 1 auto;
@@ -43,10 +43,10 @@ const Styled = {
                 word-break: break-all;
             }
         }
-    `
+    `,
 };
 
-export const Column: React.FC<ColumnProps> = props => {
+export const Column: React.FC<ColumnProps> = (props) => {
     const { uiColumnAttr, columnUiActions, width, owner, name, status, handle } = props;
     return (
         <Styled.Root width={width}>
