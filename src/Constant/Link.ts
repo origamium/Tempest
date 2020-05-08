@@ -1,11 +1,11 @@
 export default {
     url: "h",
     mention: "@",
-    hashtag: "#"
+    hashtag: "#",
 };
 
 export enum LinkType {
     url,
     mention,
-    hashtag
+    hashtag,
 }
