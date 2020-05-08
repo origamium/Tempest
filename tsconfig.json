@@ -24,7 +24,5 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"],
-  "include": ["src"],
-  "extends": "./tsconfig.paths"
+  "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]
 }
