@@ -18,7 +18,7 @@ storiesOf("Common Components|Button/ComponentButton", module)
             style={{
                 activeColor: color("active color", "#4E66FF"),
                 negativeColor: color("negative color", negativeColor),
-                size: number("size", 32) + "px",
+                size: `${number("size", 32)}px`,
             }}
             active={boolean("active", true)}
             handleClick={action("clicked")}
