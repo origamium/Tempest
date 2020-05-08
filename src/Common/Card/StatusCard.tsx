@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Avatar as _Avatar, Paper as _Paper, Typography } from "@material-ui/core";
-import { styled } from "@styled";
+import { styled } from "../../Theme";
 import { IStatus, StatusProperties } from "../../datatype/Contents/Article/Status";
 
 const Styled = {
@@ -18,7 +18,7 @@ const Styled = {
             display: flex;
             overflow: hidden;
         }
-    `
+    `,
 };
 
 interface Props {
@@ -34,7 +34,7 @@ export const StatusCard: React.FunctionComponent<Props> = ({ account, target, ha
             if (handleClick_) {
                 handleClick_({
                     account: account,
-                    id: target[StatusProperties.id]
+                    id: target[StatusProperties.id],
                 });
             }
         },

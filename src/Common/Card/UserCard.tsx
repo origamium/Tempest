@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Paper, Avatar, Typography } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
-import { styled, ITheme } from "@styled";
+import { styled, ITheme } from "../../Theme";
 import { useCallback } from "react";
 
 interface Props {
