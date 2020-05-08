@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import { styled } from "../../Theme";
 import { TextField } from "@material-ui/core";
 
 export type FieldProps = {
@@ -22,7 +22,7 @@ export type FieldProps = {
 const Styled = {
     Root: styled.div`
         flex: auto 1 0;
-    `
+    `,
 };
 
 export const Field: React.FunctionComponent<FieldProps> = ({
@@ -32,7 +32,7 @@ export const Field: React.FunctionComponent<FieldProps> = ({
     error,
     maxRow,
     value,
-    handleChange
+    handleChange,
 }) => {
     const getHelperText = React.useMemo(() => {
         if (error || warn) {
@@ -61,7 +61,7 @@ export const Field: React.FunctionComponent<FieldProps> = ({
 Field.defaultProps = {
     error: undefined,
     warn: undefined,
-    maxRow: 6
+    maxRow: 6,
 };
 
 export default Field;

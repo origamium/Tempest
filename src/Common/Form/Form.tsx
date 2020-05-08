@@ -1,9 +1,9 @@
 import * as React from "react";
-import Dropzone from "react-dropzone";
-import styled from "styled-components";
+import Dropzone, { FileRejection } from "react-dropzone";
+import { styled } from "../../Theme";
 import Field from "./Field";
 import { ThumbnailList } from "../Thumbnail";
-import IconButtonHoC from "../IconButton/ReactionButtonHoCs/IconButtonHoC";
+import { ComponentButton } from "../IconButton/ReactionButton/ComponentButton";
 import { Send as SendIcon, AttachFile as ClipIcon } from "@material-ui/icons";
 import { IconButtonStyle } from "../IconButton/IconButton";
 import { StatusCard } from "../Card/StatusCard";
@@ -62,13 +62,13 @@ const Styled = {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-    `
+    `,
 };
 
 const ButtonStyle: IconButtonStyle = {
     size: "32px",
     activeColor: "#7D7D7D",
-    negativeColor: "7D7D7D"
+    negativeColor: "#7D7D7D",
 };
 
 class Form extends React.PureComponent<FormProps, FormState> {
@@ -84,7 +84,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         text: "",
         file: [],
         replySource: undefined,
-        warn: undefined
+        warn: undefined,
     };
 
     public render() {
@@ -104,18 +104,16 @@ class Form extends React.PureComponent<FormProps, FormState> {
                                 handleChange={this.handleFieldChange}
                             />
                             <Styled.Buttons>
-                                {IconButtonHoC(ClipIcon)({
-                                    style: ButtonStyle,
-                                    id: column,
-                                    active: false,
-                                    handleClick: this.handleAddFileClicked
-                                })}
-                                {IconButtonHoC(SendIcon)({
-                                    style: ButtonStyle,
-                                    id: column,
-                                    active: false,
-                                    handleClick: this.handleRequestPost
-                                })}
+                                <ComponentButton
+                                    style={ButtonStyle}
+                                    id={column}
+                                    handleClick={this.handleAddFileClicked}
+                                >
+                                    <ClipIcon />
+                                </ComponentButton>
+                                <ComponentButton style={ButtonStyle} id={column} handleClick={this.handleRequestPost}>
+                                    <SendIcon />
+                                </ComponentButton>
                             </Styled.Buttons>
                         </Styled.Row>
                         <Styled.Row>
@@ -146,11 +144,12 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     public handleAddReply = (source: IStatus): void => {
         this.setState({
-            replySource: source
+            replySource: source,
         });
     };
 
-    public handleAddFileClicked = (event: React.MouseEvent<HTMLInputElement>) => {
+    public handleAddFileClicked = (event: React.SyntheticEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         if (this.fileInput && this.fileInput.current) {
             this.fileInput.current.click();
         }
@@ -158,11 +157,11 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     public handleDeleteReply = (): void => {
         this.setState({
-            replySource: undefined
+            replySource: undefined,
         });
     };
 
-    public handleFileDrop = (acceptFile: File[], rejectedFile: File[]): void => {
+    public handleFileDrop = (acceptFile: File[], rejectedFile: FileRejection[]): void => {
         if (this.props.handleFileUpload) {
             this.props.handleFileUpload(
                 (source: string) => this.setState({ text: this.state.text + source }),
@@ -181,7 +180,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         const newFileArray = this.state.file.concat();
         newFileArray.splice(index, 1).forEach((v: string) => URL.revokeObjectURL(v));
         this.setState({
-            file: newFileArray
+            file: newFileArray,
         });
     };
 
@@ -190,7 +189,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         this.setState(Form.defaultState);
     };
 
-    public handleRequestPost = (e: Event): void => {
+    public handleRequestPost = (e: React.SyntheticEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         const { account, column } = this.props;
         const { text, file } = this.state;
