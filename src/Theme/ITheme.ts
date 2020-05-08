@@ -27,6 +27,6 @@ export interface ITheme {
     divider: string;
 }
 
-export default interface IThemeSet {
+export interface IThemeSet {
     [key: string]: ITheme;
 }
