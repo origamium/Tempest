@@ -11,7 +11,7 @@ export default {
     component: Text,
     decorators: [centered, ThemeProviderDecorator],
 };
-const initText = `はい #no https://google.com @arclisp`;
+const initText = `はい #no jfdaslfjldkasjflasjdl https://google.com @arclisp`;
 
 export const Basic = () => <Text text={text("source", initText)} handleLinkClick={action("clicked")} />;
 export const LongUrl = () => (

@@ -19,6 +19,7 @@ const LinkText = styled.a`
             color: ${theme.text.color.secondary};
             text-decoration: ${theme.text.color.secondary} underline;
         `};
+    word-break: break-all;
     cursor: pointer;
 `;
 
@@ -74,7 +75,9 @@ export const Text_: React.FC<TextProps> = ({ text, variant, maxLinkLength, handl
         <Typography variant={variant}>
             {transformedText.map((v, i) =>
                 typeof v === "string" ? (
-                    <span key={i}>{v}</span>
+                    <span key={i} style={{ wordBreak: "break-word" }}>
+                        {v}
+                    </span>
                 ) : (
                     <LinkText key={i} onClick={handleAnchorClick(v)}>
                         {("hashtag" in v && `#${v.hashtag}`) ||
