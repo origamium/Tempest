@@ -18,7 +18,7 @@ const LinkText = styled.a`
         css`
             color: ${theme.text.color.secondary};
             text-decoration: ${theme.text.color.secondary} underline;
-        `};
+        `}
     word-break: break-all;
     cursor: pointer;
 `;
