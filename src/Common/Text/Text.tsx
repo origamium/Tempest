@@ -1,4 +1,5 @@
 import * as React from "react";
+import { css, styled } from "../../Theme";
 import { onlyUpdateForKeys } from "recompose";
 import { Typography } from "@material-ui/core";
 import { Variant } from "@material-ui/core/styles/createTypography";
@@ -9,8 +10,17 @@ export type TextProps = {
     text: string;
     variant?: Variant;
     maxLinkLength?: number;
-    handleLinkClick: (href: string) => void;
+    handleLinkClick: (href: EntityWithIndices) => void;
 };
+
+const LinkText = styled.a`
+    ${({ theme }) =>
+        css`
+            color: ${theme.text.color.secondary};
+            text-decoration: ${theme.text.color.secondary} underline;
+        `};
+    cursor: pointer;
+`;
 
 export const Text_: React.FC<TextProps> = ({ text, variant, maxLinkLength, handleLinkClick }) => {
     const transformedText = React.useMemo(
@@ -50,17 +60,27 @@ export const Text_: React.FC<TextProps> = ({ text, variant, maxLinkLength, handl
                 .filter((v) => v !== ""),
         [text]
     );
+
+    const handleAnchorClick = React.useCallback(
+        (v: EntityWithIndices) => (e: React.SyntheticEvent<HTMLAnchorElement>): void => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleLinkClick(v);
+        },
+        [handleLinkClick]
+    );
+
     return (
         <Typography variant={variant}>
             {transformedText.map((v, i) =>
                 typeof v === "string" ? (
                     <span key={i}>{v}</span>
                 ) : (
-                    <a key={i}>
+                    <LinkText key={i} onClick={handleAnchorClick(v)}>
                         {("hashtag" in v && `#${v.hashtag}`) ||
                             ("url" in v && v.url) ||
                             ("screenName" in v && `@${v.screenName}`)}
-                    </a>
+                    </LinkText>
                 )
             )}
         </Typography>
