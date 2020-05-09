@@ -18,7 +18,8 @@
     "recompose": "^0.30.0",
     "ress": "^2.0.4",
     "serve": "^11.3.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "snyk": "^1.319.2"
   },
   "scripts": {
     "start": "webpack-dev-server --mode=development",
@@ -37,7 +38,9 @@
     "lint:style": "stylelint \"./src/**/*.tsx\" --syntax css-in-js",
     "lint:fix:style": "yarn lint:style --fix",
     "lint": "run-p -l -n -c --aggregate-output lint:*",
-    "lint:all-fix": "run-p -l -n -c --aggregate-output lint:fix:*"
+    "lint:all-fix": "run-p -l -n -c --aggregate-output lint:fix:*",
+    "snyk-protect": "snyk protect",
+    "prepare": "yarn run snyk-protect"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -120,5 +123,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "snyk": true
 }
