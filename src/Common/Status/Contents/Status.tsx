@@ -5,6 +5,7 @@ import { ThumbnailList } from "../../Thumbnail";
 import { Text } from "../../Text/Text";
 import { IStatus } from "../../../datatype/Contents/Article/Status";
 import { UserProperties } from "../../../datatype/Contents/User";
+import { EntityWithIndices } from "twitter-text";
 
 export interface IStatusProps {
     account: string;
@@ -31,11 +32,11 @@ const Styled = {
     `,
 };
 
-export const Status: React.FunctionComponent<IStatusProps> = (props: IStatusProps) => {
+export const Status: React.FunctionComponent<IStatusProps> = props => {
     const { column, account } = props;
     const { user, text, image } = props.target;
 
-    const handleLinkClick = React.useCallback((href: string): void => {
+    const handleLinkClick = React.useCallback((href: EntityWithIndices): void => {
         //rendererEvents.handleLinkClick(account, column, href);
     }, []);
 
