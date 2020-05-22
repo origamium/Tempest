@@ -4,6 +4,7 @@ import { User1, User2 } from "../__testdata__/User";
 import { progressStatus } from "./ColumnHeader/StatusColorBar";
 import { Columns } from "./Columns";
 import { action } from "@storybook/addon-actions";
+import { ColumnDataProvider } from "../hooks/useColumns";
 
 export default {
     title: "Column|Columns",
@@ -37,6 +38,16 @@ const UICAttrList: ColumnProps[] = [
     },
 ];
 
-export const Basic = () => (
-    <Columns tabId={"83832859950909209"} columns={UICAttrList} handleUpdate={action("column update")} />
-);
+export const Basic: React.FC = () => {
+    const [columns, setColumns] = React.useState<ColumnProps[]>(UICAttrList);
+    return (
+        <ColumnDataProvider
+            value={{
+                columns,
+                updateColumns: setColumns,
+            }}
+        >
+            <Columns tabId={"83832859950909209"} handleUpdate={action("column update")} />
+        </ColumnDataProvider>
+    );
+};

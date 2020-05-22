@@ -6,7 +6,6 @@ import { useColumns } from "../hooks/useColumns";
 
 export interface ColumnsProps {
     tabId: string;
-    columns: ColumnProps[];
     handleUpdate: (result: ColumnProps[]) => void;
 }
 
@@ -20,7 +19,7 @@ const Styled = {
 };
 
 export const Columns: React.FC<ColumnsProps> = (props) => {
-    const { handleBeforeDragStart, handleDragStart, handleDragUpdate, handleDragEnd } = useColumns(() => {});
+    const { columns, handleBeforeDragStart, handleDragStart, handleDragUpdate, handleDragEnd } = useColumns();
 
     return (
         <DragDropContext
@@ -32,7 +31,7 @@ export const Columns: React.FC<ColumnsProps> = (props) => {
             <Droppable droppableId={props.tabId} direction="horizontal">
                 {(provided) => (
                     <Styled.Container ref={provided.innerRef} {...provided.droppableProps}>
-                        {props.columns.map((v, i) => (
+                        {columns.map((v, i) => (
                             <Draggable key={v.uiColumnAttr.column} index={i} draggableId={v.uiColumnAttr.column}>
                                 {(provided) => (
                                     <div
