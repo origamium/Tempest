@@ -30,6 +30,14 @@ export const MenuSet: React.FC<MenuProps> = (props) => {
                 anchorEl={anchorEl}
                 handleMenuClose={handleClose}
                 uiActions={props.uiActions}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
             />
         </>
     );
