@@ -4,27 +4,27 @@ module.exports = {
         ecmaVersion: 2018,
         project: "./tsconfig.json",
         sourceType: "module",
-        createDefaultProgram: true
+        createDefaultProgram: true,
     },
     env: {
         es6: true,
         browser: true,
-        node: true
+        node: true,
     },
     extends: [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
-        "prettier/@typescript-eslint"
+        "prettier/@typescript-eslint",
     ],
     plugins: ["@typescript-eslint", "react-hooks"],
     settings: {
         react: {
-            version: "detect"
+            version: "detect",
         },
         node: {
-            tryExtensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".node"]
-        }
+            tryExtensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".node"],
+        },
     },
     rules: {
         "react-hooks/rules-of-hooks": "error",
@@ -34,7 +34,7 @@ module.exports = {
         {
             files: ["**/*.ts", "**/*.tsx"],
             rules: {
-                "no-console": ["warn", {allow: ["info", "warn", "error"]}],
+                "no-console": ["warn", { allow: ["info", "warn", "error"] }],
                 "no-unused-vars": 0,
                 "@typescript-eslint/no-unused-vars": [2, { args: "none" }],
                 "@typescript-eslint/no-require-imports": 2,
@@ -42,19 +42,19 @@ module.exports = {
                 "@typescript-eslint/consistent-type-assertions": 2,
                 "@typescript-eslint/no-unnecessary-type-assertion": 2,
                 "@typescript-eslint/restrict-plus-operands": 2,
-                '@typescript-eslint/return-await': 'error',
+                "@typescript-eslint/return-await": "error",
                 "@typescript-eslint/explicit-function-return-type": "off",
-                "react/prop-types": "off"
+                "react/prop-types": "off",
             },
         },
         {
             files: ["**/__tests__/**", "**/*.test.tsx", "**/*.test.ts"],
             env: {
-                jest: true
+                jest: true,
             },
             rules: {
-                "no-invalid-this": 0
-            }
-        }
-    ]
+                "no-invalid-this": 0,
+            },
+        },
+    ],
 };

@@ -32,7 +32,7 @@ const Styled = {
     `,
 };
 
-export const Status: React.FunctionComponent<IStatusProps> = props => {
+export const Status: React.FunctionComponent<IStatusProps> = (props) => {
     const { column, account } = props;
     const { user, text, image } = props.target;
 
