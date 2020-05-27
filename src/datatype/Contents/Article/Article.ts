@@ -1,11 +1,11 @@
-import { ArticleType, EventType } from "./Enum";
+import { ArticleIdentifier, EventIdentifier } from "./ArticleIdentifier";
 
 export interface Article {
-    articleType: ArticleType;
-    eventType?: EventType;
+    articleType: ArticleIdentifier;
+    eventType?: EventIdentifier;
 }
 
 export interface EventArticle extends Article {
-    articleType: ArticleType.event;
-    eventType: EventType;
+    articleType: ArticleIdentifier.event;
+    eventType: EventIdentifier;
 }

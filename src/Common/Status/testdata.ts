@@ -1,5 +1,5 @@
 import { IStatus } from "../../datatype/Contents/Article/Status";
-import { ArticleType, EventType } from "../../datatype/Contents/Article/Enum";
+import { ArticleIdentifier, EventIdentifier } from "../../datatype/Contents/Article/ArticleIdentifier";
 import { User1, User2 } from "../../__testdata__/User";
 import { IEvent } from "../../datatype/Contents/Article/Event";
 import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
@@ -7,7 +7,7 @@ import { text } from "@storybook/addon-knobs";
 
 export const Status1: IStatus = {
     article: {
-        articleType: ArticleType.status,
+        articleType: ArticleIdentifier.status,
     },
     id: "1234567",
     user: User1,
@@ -19,8 +19,8 @@ export const Status1: IStatus = {
 
 export const Event1: IEvent = {
     article: {
-        articleType: ArticleType.event,
-        eventType: EventType.followed,
+        articleType: ArticleIdentifier.event,
+        eventType: EventIdentifier.followed,
     },
     id: "yeah",
     sourceUser: [User1],
@@ -28,8 +28,8 @@ export const Event1: IEvent = {
 
 export const Event2: IEvent = {
     article: {
-        articleType: ArticleType.event,
-        eventType: EventType.reaction,
+        articleType: ArticleIdentifier.event,
+        eventType: EventIdentifier.reaction,
     },
     id: "yeah",
     sourceUser: [User1, User2, User1],
@@ -43,7 +43,7 @@ export const UIColumnAttr: IUICommonAttribute = {
 
 export const SampleStatus: IStatus = {
     article: {
-        articleType: ArticleType.status,
+        articleType: ArticleIdentifier.status,
     },
     id: "arclisp",
     user: {

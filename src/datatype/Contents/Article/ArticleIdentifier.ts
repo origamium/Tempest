@@ -1,9 +1,9 @@
-export enum ArticleType {
+export enum ArticleIdentifier {
     status = "status",
     event = "event",
 }
 
-export enum EventType {
+export enum EventIdentifier {
     reaction = "reaction",
     followed = "followed",
 }

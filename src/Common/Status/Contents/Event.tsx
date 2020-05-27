@@ -26,7 +26,7 @@ const Styled = {
     `,
 };
 
-export const Event: React.FC<EventComponentProps> = (props: EventComponentProps) => {
+export const Event: React.FC<EventComponentProps> = (props) => {
     const target = props.target[EventProperties.target];
 
     const headingText = React.useMemo(() => {

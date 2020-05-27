@@ -8,7 +8,7 @@ import { UserCard } from "./UserCard";
 import Icons from "../../__testdata__/icon/icon";
 import icon from "../../__testdata__/icon/icon";
 import Headers from "../../__testdata__/header/header";
-import { ArticleType } from "../../datatype/Contents/Article/Enum";
+import { ArticleIdentifier } from "../../datatype/Contents/Article/ArticleIdentifier";
 
 const sampleId = "sample-id-0123456789";
 
@@ -20,7 +20,7 @@ export const Basic = () => (
     <StatusCard
         account={text("accountKey", "accountid@example.org")}
         target={{
-            article: { articleType: ArticleType.status },
+            article: { articleType: ArticleIdentifier.status },
             id: text("id", sampleId),
             text: text("status text", "yeah"),
             date: text("status date", "1234 56 78, 9:12.3"),

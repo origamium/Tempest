@@ -4,31 +4,37 @@ import { Event } from "./Contents/Event";
 import { UserEvent } from "./Contents/UserEvent";
 import { IStatus } from "../../datatype/Contents/Article/Status";
 import { EventProperties, IEvent } from "../../datatype/Contents/Article/Event";
-import { ArticleType, EventType } from "../../datatype/Contents/Article/Enum";
+import { ArticleIdentifier, EventIdentifier } from "../../datatype/Contents/Article/ArticleIdentifier";
 import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
+import { ArticleType } from "../../datatype/Contents/Article/ArticleType";
 
 export interface ContentProps extends IUICommonAttribute {
-    target: IStatus | IEvent;
+    measure?: () => void;
+    target: ArticleType;
 }
 
-export const Content: React.FC<ContentProps> = ({ target, ...rest }) => {
+export const Content: React.FC<ContentProps> = ({ target, measure = () => {}, ...rest }) => {
+    React.useEffect(() => {
+        measure();
+    }, [measure]);
+
     switch (target.article.articleType) {
-        case ArticleType.status:
+        case ArticleIdentifier.status:
             return <Status target={target as IStatus} {...rest} />;
-        case ArticleType.event:
+        case ArticleIdentifier.event:
             switch ((target as IEvent)[EventProperties.article].eventType) {
-                case EventType.reaction:
+                case EventIdentifier.reaction:
                     return <Event eventContext={"はい"} target={target as IEvent} {...rest} />;
-                case EventType.followed:
+                case EventIdentifier.followed:
                     // eslint-disable-next-line no-case-declarations
                     const sourceUser = (target as IEvent)[EventProperties.sourceUser];
                     return <UserEvent eventContext={"はい"} {...rest} sourceUser={sourceUser} />;
                 default:
-                    console.error("EventType dont matching: ", { target });
+                    console.error("EventIdentifier dont matching: ", { target });
                     return <div />;
             }
         default:
-            console.error("ArticleType dont matching: ", { target });
+            console.error("ArticleIdentifier dont matching: ", { target });
             return <div />;
     }
 };
