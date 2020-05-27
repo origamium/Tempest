@@ -16,8 +16,7 @@ export interface ContentProps extends IUICommonAttribute {
 export const Content: React.FC<ContentProps> = ({ target, measure = () => {}, ...rest }) => {
     React.useEffect(() => {
         measure();
-    }, [measure]);
-
+    }, []);
     switch (target.article.articleType) {
         case ArticleIdentifier.status:
             return <Status target={target as IStatus} {...rest} />;

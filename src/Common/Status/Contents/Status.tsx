@@ -15,19 +15,19 @@ export interface IStatusProps {
 
 const Styled = {
     Root: styled.div`
-        display: flex;
-        flex-direction: column;
+        height: 100%;
         padding: 0.5em;
     `,
-    Body: styled.div`
-        display: flex;
+    Body: styled.span`
+        display: inline-flex;
         & > * {
             margin: 0 2px;
         }
     `,
-    Text: styled.section`
+    Text: styled(Typography)`
         overflow-x: hidden;
         word-wrap: break-word;
+        word-break: break-all;
         overflow-wrap: break-word;
     `,
 };
@@ -54,12 +54,12 @@ export const Status: React.FunctionComponent<IStatusProps> = (props) => {
                 ) : (
                     <Avatar onClick={handleAccountClick}>{"?"}</Avatar>
                 )}
-                <Styled.Text>
-                    <Typography variant="caption">
+                <div>
+                    <Styled.Text variant="caption">
                         {(user[UserProperties.displayName] || "") + screenName(user[UserProperties.screenName])}
-                    </Typography>
+                    </Styled.Text>
                     <Text variant="body1" text={text || ""} handleLinkClick={handleLinkClick} />
-                </Styled.Text>
+                </div>
             </Styled.Body>
             {image ? <ThumbnailList account={account} column={column} lists={image} /> : <div />}
         </Styled.Root>
