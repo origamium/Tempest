@@ -1,6 +1,5 @@
 import * as React from "react";
 import { css, styled } from "../../Theme";
-import { onlyUpdateForKeys } from "recompose";
 import { Typography } from "@material-ui/core";
 import { Variant } from "@material-ui/core/styles/createTypography";
 import twitterText from "@schemelisp/twitter-text";
@@ -23,44 +22,43 @@ const LinkText = styled.a`
     cursor: pointer;
 `;
 
-export const Text_: React.FC<TextProps> = ({ text, variant, maxLinkLength, handleLinkClick }) => {
-    const transformedText = React.useMemo(
-        () =>
-            twitterText
-                .extractEntitiesWithIndices(text)
-                .reduce(
-                    (
-                        accm: Array<EntityWithIndices | string>,
-                        curr: EntityWithIndices,
-                        i: number,
-                        source: EntityWithIndices[]
-                    ): Array<EntityWithIndices | string> => {
-                        if (i !== 0 && i !== source.length - 1) {
-                            return [...accm, text.slice(source[i - 1].indices[1], curr.indices[0]), curr];
-                        } else {
-                            if (i === 0) {
-                                return [
-                                    text.slice(0, curr.indices[0]),
-                                    curr,
-                                    text.slice(curr.indices[1], source[i].indices[0]),
-                                    ...accm,
-                                ];
-                            } else if (i === source.length - 1 && curr.indices[1] !== text.length - 1) {
-                                return [
-                                    ...accm,
-                                    text.slice(source[i - 1].indices[1], curr.indices[0]),
-                                    curr,
-                                    text.slice(curr.indices[1], text.length),
-                                ];
-                            }
-                            return accm;
+export const Text: React.FC<TextProps> = ({ text, variant, maxLinkLength, handleLinkClick }) => {
+    const transformedText = React.useMemo(() => {
+        const parsed = twitterText.extractEntitiesWithIndices(text);
+        if (parsed.length === 0) return [text];
+        return parsed
+            .reduce(
+                (
+                    accm: Array<EntityWithIndices | string>,
+                    curr: EntityWithIndices,
+                    i: number,
+                    source: EntityWithIndices[]
+                ): Array<EntityWithIndices | string> => {
+                    if (i !== 0 && i !== source.length - 1) {
+                        return [...accm, text.slice(source[i - 1].indices[1], curr.indices[0]), curr];
+                    } else {
+                        if (i === 0) {
+                            return [
+                                text.slice(0, curr.indices[0]),
+                                curr,
+                                text.slice(curr.indices[1], source[i].indices[0]),
+                                ...accm,
+                            ];
+                        } else if (i === source.length - 1 && curr.indices[1] !== text.length - 1) {
+                            return [
+                                ...accm,
+                                text.slice(source[i - 1].indices[1], curr.indices[0]),
+                                curr,
+                                text.slice(curr.indices[1], text.length),
+                            ];
                         }
-                    },
-                    []
-                )
-                .filter((v) => v !== ""),
-        [text]
-    );
+                        return accm;
+                    }
+                },
+                []
+            )
+            .filter((v) => v !== "");
+    }, [text]);
 
     const handleAnchorClick = React.useCallback(
         (v: EntityWithIndices) => (e: React.SyntheticEvent<HTMLAnchorElement>): void => {
@@ -90,8 +88,6 @@ export const Text_: React.FC<TextProps> = ({ text, variant, maxLinkLength, handl
     );
 };
 
-Text_.defaultProps = {
+Text.defaultProps = {
     maxLinkLength: 64, // TODO
 };
-
-export const Text = onlyUpdateForKeys(["text"])(Text_);
