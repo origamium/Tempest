@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext } from "react";
 import { DragStart, DragUpdate, DropResult, ResponderProvided } from "react-beautiful-dnd";
-import { ColumnProps } from "../MainView/Column";
+import { ColumnProps } from "../Component/MainView/Column";
 
 export type ColumnDataContextType = { columns: ColumnProps[]; updateColumns: (columns: ColumnProps[]) => void };
 export const ColumnDataContext = createContext<ColumnDataContextType | undefined>(undefined);

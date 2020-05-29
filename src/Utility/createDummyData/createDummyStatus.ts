@@ -2,7 +2,7 @@ import { IStatus } from "../../datatype/Contents/Article/Status";
 import { ArticleIdentifier } from "../../datatype/Contents/Article/ArticleIdentifier";
 import { nanoid } from "nanoid";
 import { createDummyUser } from "./createDummyUser";
-import sampleImage from "../../__testdata__/header/header";
+import sampleImage from "../../Component/__testdata__/header/header";
 
 export const createDummyStatus = (): IStatus => ({
     article: { articleType: ArticleIdentifier.status },
