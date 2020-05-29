@@ -1,4 +1,4 @@
-import { IUser } from "../datatype/Contents/User";
+import { IUser } from "../../datatype/Contents/User";
 import { nanoid } from "nanoid";
 
 export const createDummyUser = (): IUser => ({
