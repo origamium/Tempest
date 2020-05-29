@@ -10,6 +10,7 @@ import { EntityWithIndices } from "twitter-text";
 export interface IStatusProps {
     account: string;
     column: string;
+    measure: () => void;
     target: IStatus;
 }
 
@@ -33,7 +34,7 @@ const Styled = {
 };
 
 export const Status: React.FunctionComponent<IStatusProps> = (props) => {
-    const { column, account } = props;
+    const { column, account, measure } = props;
     const { user, text, image } = props.target;
 
     const handleLinkClick = React.useCallback((href: EntityWithIndices): void => {
@@ -61,7 +62,7 @@ export const Status: React.FunctionComponent<IStatusProps> = (props) => {
                     <Text variant="body1" text={text || ""} handleLinkClick={handleLinkClick} />
                 </div>
             </Styled.Body>
-            {image ? <ThumbnailList account={account} column={column} lists={image} /> : <div />}
+            {image?.length > 0 ? <ThumbnailList account={account} column={column} lists={image} measure={measure} /> : <div />}
         </Styled.Root>
     );
 };

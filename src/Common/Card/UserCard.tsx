@@ -18,18 +18,25 @@ const Styled = {
     Root: styled<Props | PaperProps | any>(Paper)`
         && {
             width: 100%;
-            height: 100px;
-            display: flex;
+            height: 120px;
+            display: inline-flex;
             flex-direction: column;
             align-content: center;
             align-items: center;
             justify-items: center;
             padding: 0.4em 0;
 
+            overflow-y: hidden;
+
             ${({ header }: Props & { theme: ITheme }) =>
-                header ? "background-image: url(" + header + ")" : "background-color: white"}
+                header ? "background-image: url(" + header + ")" : "background-color: white"};
             background-size: cover;
             background-position: top center;
+
+            & > * {
+                word-break: break-all;
+                word-wrap: break-spaces;
+            }
         }
     `,
 };
