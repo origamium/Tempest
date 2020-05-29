@@ -27,8 +27,8 @@ const Styled = {
     `,
     Text: styled(Typography)`
         overflow-x: hidden;
-        word-wrap: break-word;
         word-break: break-all;
+        word-wrap: break-word;
         overflow-wrap: break-word;
     `,
 };
@@ -62,7 +62,11 @@ export const Status: React.FunctionComponent<IStatusProps> = (props) => {
                     <Text variant="body1" text={text || ""} handleLinkClick={handleLinkClick} />
                 </div>
             </Styled.Body>
-            {image?.length > 0 ? <ThumbnailList account={account} column={column} lists={image} measure={measure} /> : <div />}
+            {image?.length > 0 ? (
+                <ThumbnailList account={account} column={column} lists={image} measure={measure} />
+            ) : (
+                <div />
+            )}
         </Styled.Root>
     );
 };

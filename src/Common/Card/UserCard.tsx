@@ -29,7 +29,7 @@ const Styled = {
             overflow-y: hidden;
 
             ${({ header }: Props & { theme: ITheme }) =>
-                header ? "background-image: url(" + header + ")" : "background-color: white"};
+                header ? "background-image: url(" + header + ")" : "background-color: white"}
             background-size: cover;
             background-position: top center;
 
