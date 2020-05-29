@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CellMeasurer, CellMeasurerCache, List, ListRowRenderer } from "react-virtualized";
+import { AutoSizer, CellMeasurer, CellMeasurerCache, List, ListRowRenderer } from "react-virtualized";
 import { ArticleType } from "../datatype/Contents/Article/ArticleType";
 import { Content } from "../Common/Status/Content";
 import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
@@ -28,16 +28,18 @@ export const ContentList: React.FC<ContentListProps> = ({ articles, ...uiAttr })
     );
 
     return (
-        <div style={{ backgroundColor: "azure" }}>
-            <List
-                deferredMeasurementCache={cache.current}
-                rowHeight={cache.current.rowHeight}
-                rowCount={articles.length}
-                overscanRowCount={10}
-                width={320}
-                height={1000}
-                rowRenderer={rowRenderer}
-            />
-        </div>
+        <AutoSizer>
+            {({ height }) => (
+                <List
+                    deferredMeasurementCache={cache.current}
+                    rowHeight={cache.current.rowHeight}
+                    rowCount={articles.length}
+                    overscanRowCount={10}
+                    width={320}
+                    height={height}
+                    rowRenderer={rowRenderer}
+                />
+            )}
+        </AutoSizer>
     );
 };
