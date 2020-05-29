@@ -5,26 +5,30 @@ import { ClearButton } from "../IconButton/IconButton";
 export interface ThumbnailProps {
     source: string;
     index: number;
-    handleClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
-    handleDelete?: (e: React.MouseEvent<HTMLDivElement>) => void;
+    measure: () => void;
+    handleClick?: (e: React.SyntheticEvent<HTMLDivElement>) => void;
+    handleDelete?: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
 }
 
 const Styled = {
-    Root: styled.div<any>`
+    Root: styled.div`
         position: relative;
         box-sizing: border-box;
         flex: 1 0 50%;
         width: 100%;
         min-width: 64px;
-        height: auto;
         min-height: 64px;
+        max-height: 120px;
         padding: 1px;
         overflow: hidden;
-
-        background: url(${({ src }) => src}) center center;
-        background-size: cover;
         border: solid 1px white;
         border-radius: 3%;
+
+        & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     `,
     DeleteButton: styled.div`
         position: absolute;
@@ -35,18 +39,21 @@ const Styled = {
     `,
 };
 
-export const Thumbnail: React.FunctionComponent<ThumbnailProps> = (props) => (
-    <Styled.Root
-        src={props.source}
-        onClick={props.handleClick}
-        style={{ cursor: props.handleClick ? "pointer" : "default" }}
-    >
-        {props.handleDelete ? (
+export const Thumbnail: React.FunctionComponent<ThumbnailProps> = ({
+    source,
+    index,
+    measure,
+    handleClick,
+    handleDelete,
+}) => (
+    <Styled.Root style={{ cursor: handleClick ? "pointer" : "default" }} onClick={handleClick}>
+        <img src={source} onLoad={measure} alt={source} />
+        {handleDelete ? (
             <Styled.DeleteButton>
                 <ClearButton
                     style={{ negativeColor: "#ddd", size: "26px" }}
-                    id={props.index.toString() + ":" + props.source}
-                    handleClick={props.handleDelete}
+                    id={`${index.toString()}:${source}`}
+                    handleClick={handleDelete}
                 />
             </Styled.DeleteButton>
         ) : (
@@ -54,5 +61,3 @@ export const Thumbnail: React.FunctionComponent<ThumbnailProps> = (props) => (
         )}
     </Styled.Root>
 );
-
-export default Thumbnail;

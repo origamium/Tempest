@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "../../Theme";
-import Thumbnail from "./Thumbnail";
+import { Thumbnail } from "./Thumbnail";
 import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
 export interface ThumbnailListProps extends IUICommonAttribute {
@@ -18,14 +18,15 @@ export interface ThumbnailListProps extends IUICommonAttribute {
 
     /* if isDeletable enabled, delete button onClick handler */
     handleDelete?: (index: number) => void;
+
+    measure?: () => void;
 }
 
 const Styled = {
     Root: styled.div`
-        display: flex;
+        display: inline-flex;
         flex-wrap: wrap;
         width: 100%;
-        height: 100%;
         margin: 0.2em;
     `,
 };
@@ -37,9 +38,10 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
     lists,
     handleClick: _handleClick,
     handleDelete: _handleDelete,
+    measure = () => {},
 }) => {
     const handleClick = React.useCallback(
-        (index: number) => (e: React.MouseEvent<HTMLImageElement>) => {
+        (index: number) => (e: React.SyntheticEvent<HTMLDivElement>) => {
             e.preventDefault();
             if (_handleClick) {
                 _handleClick({
@@ -54,7 +56,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
     );
 
     const handleDelete = React.useCallback(
-        (index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
+        (index: number) => (e: React.SyntheticEvent<HTMLButtonElement>) => {
             e.preventDefault();
             if (_handleDelete) {
                 _handleDelete(index);
@@ -70,6 +72,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
                     key={i}
                     index={i}
                     source={v}
+                    measure={measure}
                     handleClick={handleClick ? handleClick(i) : undefined}
                     handleDelete={isDeletable ? handleDelete(i) : undefined}
                 />
