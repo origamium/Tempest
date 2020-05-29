@@ -82,7 +82,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
 };
 
 export const ThumbnailList: React.FunctionComponent<ThumbnailListProps> = (props) => {
-    return props.lists ? (
+    return props.lists.length > 0 ? (
         <Styled.Root>
             <Thumbnails {...props} />
         </Styled.Root>
