@@ -41,8 +41,7 @@
     "lint:fix:style": "yarn lint:style --fix",
     "lint": "run-p -l -n -c --aggregate-output lint:*",
     "lint:all-fix": "run-p -l -n -c --aggregate-output lint:fix:*",
-    "snyk-protect": "snyk protect",
-    "prepare": "yarn run snyk-protect"
+    "snyk-protect": "snyk protect"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
