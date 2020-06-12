@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import centered from "@storybook/addon-centered";
 
 import { Text } from "./Text";
-import { ThemeProviderDecorator } from "../../Theme";
+import { ThemeProviderDecorator } from "../../../Theme";
 
 export default {
     title: "Common Components|Text",

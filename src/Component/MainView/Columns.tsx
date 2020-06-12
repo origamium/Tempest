@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { styled } from "../Theme";
+import { styled } from "../../Theme";
 import { Column, ColumnProps } from "./Column";
 import { useColumns } from "../../hooks/useColumns";
 

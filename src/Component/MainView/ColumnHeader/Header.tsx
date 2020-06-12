@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "../../Theme";
+import { styled } from "../../../Theme";
 import { Toolbar } from "@material-ui/core";
 import { Title } from "./Title";
 import { progressStatus, StatusColorBar } from "./StatusColorBar";

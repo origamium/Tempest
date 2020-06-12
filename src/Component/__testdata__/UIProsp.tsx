@@ -1,5 +1,5 @@
-import { IUICommonAttribute } from "../datatype/UI/UICommonAttribute";
-import { UIAction } from "../datatype/UI/UIAction";
+import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
+import { UIAction } from "../../datatype/UI/UIAction";
 
 export const UICommonAttr: IUICommonAttribute = {
     account: "0",

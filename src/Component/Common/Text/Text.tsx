@@ -1,5 +1,5 @@
 import * as React from "react";
-import { css, styled } from "../../Theme";
+import { css, styled } from "../../../Theme";
 import { Typography } from "@material-ui/core";
 import { Variant } from "@material-ui/core/styles/createTypography";
 import twitterText from "@schemelisp/twitter-text";

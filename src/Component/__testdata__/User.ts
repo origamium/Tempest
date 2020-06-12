@@ -1,4 +1,4 @@
-import { IUser } from "../datatype/Contents/User";
+import { IUser } from "../../datatype/Contents/User";
 
 export const User1: IUser = {
     id: "123456",

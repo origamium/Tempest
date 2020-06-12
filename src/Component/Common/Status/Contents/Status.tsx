@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "../../../Theme";
+import { styled } from "../../../../Theme";
 import { Avatar, Typography } from "@material-ui/core";
 import { ThumbnailList } from "../../Thumbnail";
 import { Text } from "../../Text/Text";

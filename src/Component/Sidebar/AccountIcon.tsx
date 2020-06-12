@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import { styled } from "../Theme";
+import { styled } from "../../Theme";
 import { Avatar, ButtonBase, Tooltip, Typography } from "@material-ui/core";
 import { TooltipProps } from "@material-ui/core/Tooltip";
 import { TypographyProps } from "@material-ui/core/Typography";

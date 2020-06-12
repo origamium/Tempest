@@ -2,7 +2,7 @@ import * as React from "react";
 import centered from "@storybook/addon-centered";
 import { UserEvent } from "./UserEvent";
 import { User1, User2 } from "../../../__testdata__/User";
-import { ThemeProviderDecorator } from "../../../Theme";
+import { ThemeProviderDecorator } from "../../../../Theme";
 
 export default {
     title: "Common Components|Content/UserEvent",

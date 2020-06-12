@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "../../../Theme";
+import { styled } from "../../../../Theme";
 import { UserCard } from "../../Card/UserCard";
 import { Typography } from "@material-ui/core";
 import { IUser, UserProperties } from "../../../../datatype/Contents/User";

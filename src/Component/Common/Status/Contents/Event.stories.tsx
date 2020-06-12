@@ -2,7 +2,7 @@ import * as React from "react";
 import centered from "@storybook/addon-centered";
 import { Event } from "./Event";
 import { Event1, Event2, UIColumnAttr } from "../testdata";
-import { ThemeProviderDecorator } from "../../../Theme";
+import { ThemeProviderDecorator } from "../../../../Theme";
 
 export default {
     title: "Common Components|Content/Event",

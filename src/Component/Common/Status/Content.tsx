@@ -9,7 +9,7 @@ import { IUICommonAttribute } from "../../../datatype/UI/UICommonAttribute";
 import { ArticleType } from "../../../datatype/Contents/Article/ArticleType";
 
 export interface ContentProps extends IUICommonAttribute {
-    measure?: () => void;
+    measure: () => void;
     target: ArticleType;
 }
 

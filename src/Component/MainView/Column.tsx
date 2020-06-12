@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "../Theme";
+import { styled } from "../../Theme";
 import { Paper } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
 import { Header } from "./ColumnHeader/Header";

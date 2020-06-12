@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "../Theme";
+import { styled } from "../../Theme";
 import { Paper, IconButton } from "@material-ui/core";
 import { AccountList, IAccountProps } from "./AccountList";
 import { Add, Settings } from "@material-ui/icons";

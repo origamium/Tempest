@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Avatar as _Avatar, Paper as _Paper, Typography } from "@material-ui/core";
-import { styled } from "../../Theme";
+import { styled } from "../../../Theme";
 import { IStatus, StatusProperties } from "../../../datatype/Contents/Article/Status";
 
 const Styled = {

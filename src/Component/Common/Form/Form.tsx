@@ -1,6 +1,6 @@
 import * as React from "react";
 import Dropzone, { FileRejection } from "react-dropzone";
-import { styled } from "../../Theme";
+import { styled } from "../../../Theme";
 import Field from "./Field";
 import { ThumbnailList } from "../Thumbnail";
 import { ComponentButton } from "../IconButton/ReactionButton/ComponentButton";

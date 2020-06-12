@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "../../Theme";
+import { styled } from "../../../Theme";
 import { Thumbnail } from "./Thumbnail";
 import { IUICommonAttribute } from "../../../datatype/UI/UICommonAttribute";
 
