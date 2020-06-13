@@ -1,15 +1,15 @@
 version: 2.1
+references:
+    workspace_root: &workspace_root
+                        /tmp/workspace
+    attach_workspace: &attach_workspace
+        attach_workspace:
+            at: *workspace_root
 executors:
     my-executor:
         docker:
             - image: node:12.18.0-stretch
-        working_directory: ~/repo
-references:
-    workspace_root: &workspace_root
-        /tmp/workspace
-    attach_workspace: &attach_workspace
-        attach_workspace:
-            at: *workspace_root
+        working_directory: *workspace_root
 jobs:
     install:
         executor: my-executor
