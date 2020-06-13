@@ -3,7 +3,7 @@ executors:
     my-executor:
         docker:
             - image: node:12.18.0-stretch
-        working_directory: /
+        working_directory: ~/repo
 jobs:
     install:
         executor: my-executor
@@ -29,7 +29,7 @@ jobs:
         executor: my-executor
         steps:
             - attach_workspace:
-                at: /
+                at: ~/repo
             - run:
                 name: hoge
                 command: ls -l
@@ -40,7 +40,7 @@ jobs:
         executor: my-executor
         steps:
             - attach_workspace:
-                  at: /
+                  at: ~/repo
             - run:
                 name: synk-check
                 command: yarn snyk-protect
