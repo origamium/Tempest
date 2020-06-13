@@ -2,7 +2,7 @@ version: 2.1
 executors:
     my-executor:
         docker:
-            - image: node/12.18.0-stretch
+            - image: node:12.18.0-stretch
         working_directory: /
 jobs:
     install:
