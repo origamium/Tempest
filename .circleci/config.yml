@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 jobs:
-  install-dependencies:
+  install:
     executor:
       name: node/default
     steps:
@@ -19,7 +19,7 @@ jobs:
         key: yarn-packages-{{ checksum "yarn.lock" }}
         paths:
           - ~/.cache/yarn
-  build-and-test:
+  test:
     executor:
       name: node/default
     steps:
@@ -35,16 +35,13 @@ jobs:
         name: synk-check
         command: yarn snyk-protect
 workflows:
-    install-packages-workflow:
-      jobs:
-        - install-dependencies
-    build-and-test-workflow:
-      jobs:
-        - build-and-test:
-          requires:
-            - install-packages-workflow
-    security-check:
-      jobs:
-        - security-check:
-          requires:
-            - install-packages-workflow
+  version: 2
+  build_and_test:
+    jobs:
+      - install
+      - test:
+        requires:
+          - install
+      - security-check:
+        requires:
+          - install
