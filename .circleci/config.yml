@@ -5,7 +5,7 @@ jobs:
     install:
         docker:
             - image: node:latest
-        working_directory: ~/Tempest-Client
+        working_directory: ~/repo
         steps:
             - checkout
             - restore_cache:
@@ -23,15 +23,18 @@ jobs:
     test:
         docker:
             - image: node:latest
-        working_directory: ~/Tempest-Client
+        working_directory: ~/repo
         steps:
+            - run:
+                name: hoge
+                command: ls -l
             - run:
                 name: test
                 command: yarn test
     security-check:
         docker:
             - image: node:latest
-        working_directory: ~/Tempest-Client
+        working_directory: ~/repo
         steps:
             - run:
                 name: synk-check
