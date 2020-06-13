@@ -3,8 +3,6 @@ orbs:
     node: circleci/node@3.0.0
 jobs:
     install:
-        docker:
-            - image: node:latest
         steps:
             - checkout
             - restore_cache:
@@ -20,15 +18,11 @@ jobs:
                 paths:
                     - ~/.cache/yarn
     test:
-        docker:
-            - image: node:latest
         steps:
             - run:
                 name: test
                 command: yarn test
     security-check:
-        docker:
-            - image: node:latest
         steps:
             - run:
                 name: synk-check
