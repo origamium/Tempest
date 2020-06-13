@@ -1,40 +1,40 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+    node: circleci/node@3.0.0
 jobs:
-  install:
-    steps:
-      - checkout
-      - restore_cache:
-        name: Restore Yarn Package Cache
-        keys:
-          - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-        name: Install Dependencies
-        command: yarn install --immutable
-      - save_cache:
-        name: Save Yarn Package Cache
-        key: yarn-packages-{{ checksum "yarn.lock" }}
-        paths:
-          - ~/.cache/yarn
-  test:
-    steps:
-      - run:
-        name: test
-        command: yarn test
-  security-check:
-    steps:
-      - run:
-        name: synk-check
-        command: yarn snyk-protect
+    install:
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Yarn Package Cache
+                keys:
+                    - yarn-packages-{{ checksum "yarn.lock" }}
+            - run:
+                name: Install Dependencies
+                command: yarn install --immutable
+            - save_cache:
+                name: Save Yarn Package Cache
+                key: yarn-packages-{{ checksum "yarn.lock" }}
+                paths:
+                    - ~/.cache/yarn
+    test:
+        steps:
+            - run:
+                name: test
+                command: yarn test
+    security-check:
+        steps:
+            - run:
+                name: synk-check
+                command: yarn snyk-protect
 workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - install
-      - test:
-        requires:
-          - install
-      - security-check:
-        requires:
-          - install
+    version: 2
+    build_and_test:
+        jobs:
+            - install
+            - test:
+                requires:
+                    - install
+            - security-check:
+                requires:
+                    - install
