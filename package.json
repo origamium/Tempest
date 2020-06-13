@@ -1,6 +1,9 @@
 {
   "name": "tempestclient",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@material-ui/core": "4.9.14",
     "@material-ui/icons": "4.9.1",
