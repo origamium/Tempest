@@ -3,33 +3,26 @@ orbs:
   node: circleci/node@3.0.0
 jobs:
   install:
-    executor:
-      name: node/default
     steps:
       - checkout
       - restore_cache:
-        name: restore package cache from yarn
+        name: Restore Yarn Package Cache
         keys:
           - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-        name: install dependencies
-        command: yarn install --frozen-lockfile
+        name: Install Dependencies
+        command: yarn install --immutable
       - save_cache:
-        name: Yarn パッケージキャッシュを保存
+        name: Save Yarn Package Cache
         key: yarn-packages-{{ checksum "yarn.lock" }}
         paths:
           - ~/.cache/yarn
   test:
-    executor:
-      name: node/default
     steps:
-      - checkout
       - run:
         name: test
         command: yarn test
   security-check:
-    executor:
-      name: node/default
     steps:
       - run:
         name: synk-check
