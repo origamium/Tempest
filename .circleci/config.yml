@@ -24,7 +24,7 @@ jobs:
             - persist_to_workspace:
                 root: workspace
                 paths:
-                    - ./
+                    - ~/repo
     test:
         executor: my-executor
         steps:
