@@ -20,7 +20,10 @@ jobs:
                 paths:
                     - ~/.cache/yarn
     test:
+        docker:
+            - image: node:latest
         steps:
+            - checkout
             - run:
                 name: hoge
                 command: ls -l
@@ -28,7 +31,10 @@ jobs:
                 name: test
                 command: yarn test
     security-check:
+        docker:
+            - image: node:latest
         steps:
+            - checkout
             - run:
                 name: synk-check
                 command: yarn snyk-protect
