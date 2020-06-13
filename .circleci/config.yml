@@ -22,7 +22,7 @@ jobs:
                 paths:
                     - ~/.cache/yarn
             - persist_to_workspace:
-                root: workspace
+                root: ~/repo
                 paths:
                     - ./
     test:
