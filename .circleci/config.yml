@@ -1,10 +1,11 @@
 version: 2.1
-orbs:
-    node: circleci/node@3.0.0
+executors:
+    my-executor:
+        docker:
+            - image: node/12.18.0-stretch
 jobs:
     install:
-        docker:
-            - image: node:latest
+        executor: my-executor
         steps:
             - checkout
             - restore_cache:
@@ -19,11 +20,13 @@ jobs:
                 key: yarn-packages-{{ checksum "yarn.lock" }}
                 paths:
                     - ~/.cache/yarn
+            - persist_to_workspace:
+                root: workspace
     test:
-        docker:
-            - image: node:latest
+        executor: my-executor
         steps:
-            - checkout
+            - attach_workspace:
+                at: /
             - run:
                 name: hoge
                 command: ls -l
@@ -31,10 +34,10 @@ jobs:
                 name: test
                 command: yarn test
     security-check:
-        docker:
-            - image: node:latest
+        executor: my-executor
         steps:
-            - checkout
+            - attach_workspace:
+                  at: /
             - run:
                 name: synk-check
                 command: yarn snyk-protect
