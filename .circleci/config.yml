@@ -4,6 +4,12 @@ executors:
         docker:
             - image: node:12.18.0-stretch
         working_directory: ~/repo
+references:
+    workspace_root: &workspace_root
+        /tmp/workspace
+    attach_workspace: &attach_workspace
+        attach_workspace:
+            at: *workspace_root
 jobs:
     install:
         executor: my-executor
@@ -22,25 +28,20 @@ jobs:
                 paths:
                     - ~/.cache/yarn
             - persist_to_workspace:
-                root: ~/repo
+                root: *workspace_root
                 paths:
                     - ./
     test:
         executor: my-executor
         steps:
-            - attach_workspace:
-                at: ~/repo
-            - run:
-                name: hoge
-                command: ls -l
+            - *attach_workspace
             - run:
                 name: test
                 command: yarn test
     security-check:
         executor: my-executor
         steps:
-            - attach_workspace:
-                  at: ~/repo
+            - *attach_workspace
             - run:
                 name: synk-check
                 command: yarn snyk-protect
