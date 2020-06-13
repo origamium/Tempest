@@ -2,16 +2,53 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 jobs:
+  install-dependencies:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - restore_cache:
+        name: restore package cache from yarn
+        keys:
+          - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+        name: install dependencies
+        command: yarn install --frozen-lockfile
+  cache-dependencies:
+    executor:
+      name: node/default
+    steps:
+      - save_cache:
+        name: Yarn パッケージキャッシュを保存
+        key: yarn-packages-{{ checksum "yarn.lock" }}
+        paths:
+          - ~/.cache/yarn
   build-and-test:
     executor:
       name: node/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
+      - run:
+        name: test
+        command: yarn test
+  security-check:
+    executor:
+      name: node/default
+    steps:
+      - run:
+        name: synk-check
+        command: yarn snyk-protect
 workflows:
+    install-packages:
+      jobs:
+        - install-dependencies
     build-and-test:
       jobs:
-        - build-and-test
+        - install-packages:
+          requires:
+            - install-dependencies
+    security-check:
+      jobs:
+        - install-packages:
+          requires:
+            - install-dependencies
