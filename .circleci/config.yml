@@ -20,8 +20,6 @@ jobs:
                 paths:
                     - ~/.cache/yarn
     test:
-        docker:
-            - image: node:latest
         steps:
             - run:
                 name: hoge
@@ -30,8 +28,6 @@ jobs:
                 name: test
                 command: yarn test
     security-check:
-        docker:
-            - image: node:latest
         steps:
             - run:
                 name: synk-check
