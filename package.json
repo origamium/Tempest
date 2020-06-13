@@ -120,7 +120,7 @@
     "react-docgen-typescript-loader": "3.7.2",
     "react-markdown": "4.3.1",
     "sass-loader": "8.0.2",
-    "serve": "11.3.1",
+    "serve": "11.3.2",
     "snyk": "1.339.2",
     "source-map-loader": "0.2.4",
     "start-server-and-test": "1.11.0",
