@@ -3,6 +3,7 @@ executors:
     my-executor:
         docker:
             - image: node/12.18.0-stretch
+        working_directory: /
 jobs:
     install:
         executor: my-executor
@@ -22,6 +23,8 @@ jobs:
                     - ~/.cache/yarn
             - persist_to_workspace:
                 root: workspace
+                paths:
+                    - /
     test:
         executor: my-executor
         steps:
