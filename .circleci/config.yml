@@ -14,10 +14,6 @@ jobs:
       - run:
         name: install dependencies
         command: yarn install --frozen-lockfile
-  cache-dependencies:
-    executor:
-      name: node/default
-    steps:
       - save_cache:
         name: Yarn パッケージキャッシュを保存
         key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -39,16 +35,16 @@ jobs:
         name: synk-check
         command: yarn snyk-protect
 workflows:
-    install-packages:
+    install-packages-workflow:
       jobs:
         - install-dependencies
-    build-and-test:
+    build-and-test-workflow:
       jobs:
-        - install-packages:
+        - build-and-test:
           requires:
-            - install-dependencies
+            - install-packages-workflow
     security-check:
       jobs:
-        - install-packages:
+        - security-check:
           requires:
-            - install-dependencies
+            - install-packages-workflow
