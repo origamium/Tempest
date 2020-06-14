@@ -3171,7 +3171,17 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@testing-library/dom@7.14.0", "@testing-library/dom@^7.9.0":
+"@testing-library/dom@7.14.2":
+  version "7.14.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.14.2.tgz#e539b2342c5a67e2dfd285bba02308abeb237195"
+  integrity sha512-MZjve+Qn0bPFAJ8w0SIkuplCMd52Bh2JyNAvS0xh/RSZVAsux1HGL24yhTf6fT+HtHMqG1F0vZFU8ncZmmAK1Q==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    aria-query "^4.0.2"
+    dom-accessibility-api "^0.4.5"
+    pretty-format "^25.5.0"
+
+"@testing-library/dom@^7.9.0":
   version "7.14.0"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.14.0.tgz#b7d4619987b55340249a0302499bfde5f6afbf6b"
   integrity sha512-qZuzHu6ChzbVE5r7TOwTwSTSAzQj+XknLSA5Vj6DV04GXMtvXocNp1SC3RaiyOOxGyTrL33Cmatj+AbfvZ9t1w==
