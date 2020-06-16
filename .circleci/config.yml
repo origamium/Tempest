@@ -18,14 +18,13 @@ jobs:
             - restore_cache:
                 name: Restore Yarn Package Cache
                 keys:
-                    - yarn-lock-{{ .Branch }}-{{ checksum "yarn.lock" }}
-                    - yarn-lock-master-{{ checksum "yarn.lock" }}
+                    - yarn-lock-{{ checksum "yarn.lock" }}
             - run:
                 name: Install Dependencies
                 command: yarn install --immutable
             - save_cache:
                 name: Save Yarn Package Cache
-                key: yarn-lock-{{ .Branch }}-{{ checksum "yarn.lock" }}
+                key: yarn-lock-{{ checksum "yarn.lock" }}
                 paths:
                     - node_modules
                     - ~/.cache/yarn
