@@ -19,6 +19,7 @@ jobs:
                 name: Restore Yarn Package Cache
                 keys:
                     - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+                    - v{{ .Environment.CIRCLE_CACHE_VERSION }}-node-module-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
                     - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-master-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
                     - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-cache-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}
                     - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-cache-master-{{ .Environment.CIRCLE_JOB }}
@@ -26,15 +27,15 @@ jobs:
                 name: Install Dependencies
                 command: yarn install
             - save_cache:
+                name: Save node_modules Cache
+                key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-node-module-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+                paths:
+                    - node_modules
+            - save_cache:
                 name: Save Yarn Package Cache
                 key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
                 paths:
                     - ~/.cache/yarn
-            - save_cache:
-                name: Save node_modules Cache
-                key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
-                paths:
-                    - node_modules
             - persist_to_workspace:
                 root: *workspace_root
                 paths:
