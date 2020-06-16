@@ -30,7 +30,7 @@
     "build-storybook": "build-storybook --quiet",
     "typecheck": "tsc --project tsconfig.json #",
     "typecheck:watch": "tsc --noEmit --watch",
-    "test": "jest --config=jest/test/jest.config.js",
+    "test": "jest --config=jest/test/jest.config.js --passWithNoTests",
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test --coverage",
     "test:visual": "jest --config=jest/integration/jest.config.js",
