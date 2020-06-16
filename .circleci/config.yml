@@ -18,18 +18,21 @@ jobs:
             - restore_cache:
                 name: Restore Yarn Package Cache
                 keys:
-                    - yarn-packages-{{ checksum "yarn.lock" }}
+                    - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+                    - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-master-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+                    - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-cache-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}
+                    - v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-cache-master-{{ .Environment.CIRCLE_JOB }}
             - run:
                 name: Install Dependencies
                 command: yarn install --immutable
             - save_cache:
                 name: Save Yarn Package Cache
-                key: yarn-packages-{{ checksum "yarn.lock" }}
+                key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
                 paths:
                     - ~/.cache/yarn
             - save_cache:
                 name: Save node_modules Cache
-                key: yarn-packages-{{ checksum "yarn.lock" }}
+                key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-yarn-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
                 paths:
                     - node_modules
             - persist_to_workspace:
