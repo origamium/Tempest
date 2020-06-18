@@ -8,7 +8,7 @@ references:
 executors:
     my-executor:
         docker:
-            - image: node:12.18.0-stretch
+            - image: node:12.18.1-stretch
         working_directory: *workspace_root
 jobs:
     install:
