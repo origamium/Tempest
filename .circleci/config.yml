@@ -39,6 +39,9 @@ jobs:
             - run:
                 name: test
                 command: yarn test
+            - run:
+                name: typecheck
+                command: yarn typecheck
     security-check:
         executor: my-executor
         steps:
