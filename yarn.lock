@@ -12254,10 +12254,10 @@ react-docgen-typescript-loader@3.7.2:
     loader-utils "^1.2.3"
     react-docgen-typescript "^1.15.0"
 
-react-docgen-typescript@1.17.0:
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.17.0.tgz#c3d9d12b83fb7b6cd295ea95d9592c17a8d69d68"
-  integrity sha512-9/HKEoVFRfhQgvxMDylmmgU8ouImt2LfI5eS9ZbSIlCPk1IZTetYY+nWli4lPw2mH2Two/iRiKwlydyx6FafgQ==
+react-docgen-typescript@1.18.0:
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.18.0.tgz#7f43b186b0228364cc6583231c3be09fbd3eb5e3"
+  integrity sha512-nY4bXz44tLzXBVF+cyaL/gZsMxlmYVICaEIXFF4EqvD8PEN1+zL+IgaQ1mNfJ6Zq8jUFAeXDo1Ds7ylxWZtjXQ==
 
 react-docgen-typescript@^1.15.0:
   version "1.17.1"
