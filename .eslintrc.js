@@ -17,7 +17,7 @@ module.exports = {
         "plugin:prettier/recommended",
         "prettier/@typescript-eslint",
     ],
-    plugins: ["@typescript-eslint", "react-hooks"],
+    plugins: ["@typescript-eslint", "react-hooks", "jest"],
     settings: {
         react: {
             version: "detect",
