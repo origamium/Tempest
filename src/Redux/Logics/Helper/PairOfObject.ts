@@ -1,3 +1,3 @@
 export type PairOfObject<T> = {
-    [key: string]: T,
+    [key: string]: T;
 };
