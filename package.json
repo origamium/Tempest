@@ -9,6 +9,7 @@
     "@material-ui/icons": "4.9.1",
     "@schemelisp/twitter-text": "3.2.1",
     "deepmerge": "4.2.2",
+    "localforage": "^1.7.4",
     "react": "16.13.1",
     "react-beautiful-dnd": "13.0.0",
     "react-dom": "16.13.1",
