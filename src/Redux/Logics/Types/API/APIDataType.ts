@@ -7,5 +7,5 @@ export interface APIDataType {
     path: string;
     parameter: APIParameterDefType;
     method: HttpMethods;
-    return: ReturnedDatumInfoType | null;
+    return?: ReturnedDatumInfoType;
 }

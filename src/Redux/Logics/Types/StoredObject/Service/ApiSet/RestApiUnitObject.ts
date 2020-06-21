@@ -1,6 +1,6 @@
-import { HttpMethods } from "../../../Enums/HttpMethods";
-import { PairOfObject } from "../../../helper/PairOfObject";
 import { ParameterDefinition } from "./ParameterDefinition";
+import { HttpMethods } from "../../../../Enums/HttpMethods";
+import { PairOfObject } from "../../../../HelperType/PairOfObject";
 
 export type RestApiUnitObject = {
     path: string;

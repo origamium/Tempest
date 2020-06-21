@@ -1,5 +1,5 @@
-import { PairOfObject } from "../../../helper/PairOfObject";
 import { SchemaObject } from "./SchemaObject";
+import { PairOfObject } from "../../../../HelperType/PairOfObject";
 
 export type DataSetObject = {
     key: string;

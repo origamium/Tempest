@@ -1,11 +1,11 @@
-import { AuthorizeMethod } from "../Enums/AuthorizeMethod";
-import { OAuthVersion } from "../Enums/OAuthVersion";
-import { SignMethod } from "../Enums/SignMethod";
-import { SignSpace } from "../Enums/SignSpace";
-import { IAPIKey } from "./APIKeyType";
+import { APIKeyType } from "./APIKeyType";
+import { OAuthVersion } from "../../Enums/Authorization/OAuthVersion";
+import { AuthorizeMethod } from "../../Enums/Authorization/AuthorizeMethod";
+import { SignMethod } from "../../Enums/Authorization/SignMethod";
+import { SignSpace } from "../../Enums/Authorization/SignSpace";
 
 export interface AuthInfoType {
-    apiKey: IAPIKey;
+    apiKey: APIKeyType;
     oauthVersion: OAuthVersion;
     authMethod: AuthorizeMethod;
     signMethod: SignMethod;

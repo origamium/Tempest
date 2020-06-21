@@ -1,6 +1,6 @@
 import { APISet } from "../API/APISet";
 import DataSet from "../Data/DataSet";
-import { ServiceObject } from "../StoredObject/Service/ServiceObject";
+import { ServiceObject } from "../Types/StoredObject/Service/ServiceObject";
 
 export default class Service {
     private readonly _serviceName: string;

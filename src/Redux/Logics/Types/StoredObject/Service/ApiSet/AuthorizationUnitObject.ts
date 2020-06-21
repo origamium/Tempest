@@ -1,7 +1,7 @@
-import { AuthorizeMethod } from "../../../Enums/AuthorizeMethod";
-import { OAuthVersion } from "../../../Enums/OAuthVersion";
-import { SignMethod } from "../../../Enums/SignMethod";
-import { SignSpace } from "../../../Enums/SignSpace";
+import { OAuthVersion } from "../../../../Enums/Authorization/OAuthVersion";
+import { AuthorizeMethod } from "../../../../Enums/Authorization/AuthorizeMethod";
+import { SignMethod } from "../../../../Enums/Authorization/SignMethod";
+import { SignSpace } from "../../../../Enums/Authorization/SignSpace";
 
 export type AuthorizationUnitObject = {
     oauthVersion: OAuthVersion; // required

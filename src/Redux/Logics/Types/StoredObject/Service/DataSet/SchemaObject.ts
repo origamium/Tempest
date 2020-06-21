@@ -1,6 +1,6 @@
-import { schemaTypes } from "../../../Enums/schemaTypes";
-import { PairOfObject } from "../../../helper/PairOfObject";
-import { ITransform } from "../../../Data/Dynamizr/Interfaces/ITransform";
+import { schemaTypes } from "../../../../Enums/SchemaTypes";
+import { ITransform } from "../../../../Data/Dynamizr/Interfaces/ITransform";
+import { PairOfObject } from "../../../../HelperType/PairOfObject";
 
 export type SchemaObjectElement = {
     name: string; // equal key

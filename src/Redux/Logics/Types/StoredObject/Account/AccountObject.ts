@@ -1,6 +1,6 @@
-import { IUser } from "../../Data/Types/User";
-import { PairOfObject } from "../../helper/PairOfObject";
 import { AuthorizationDataObject } from "./AuthorizationDataObject";
+import { IUser } from "../../../../../datatype/Contents/User";
+import { PairOfObject } from "../../../HelperType/PairOfObject";
 
 export type AccountObject = {
     id: string;

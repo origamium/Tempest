@@ -1,6 +1,6 @@
-import { PairOfObject } from "../../helper/PairOfObject";
 import { ApiSetObject } from "./ApiSet/ApiSetObject";
 import { DataSets } from "./DataSet/DataSetObject";
+import { PairOfObject } from "../../../HelperType/PairOfObject";
 
 export type ServiceObject = {
     serviceName: string; // is equal key

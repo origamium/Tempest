@@ -1,13 +1,13 @@
-import Authorization from "../API/Authorization/Authorization";
-import { IAPIKey } from "../Interfaces/IKeys";
-import { ProviderObject } from "../StoredObject/Provider/ProviderObject";
-import { ServiceObject } from "../StoredObject/Service/ServiceObject";
+import { APIKeyType } from "../Types/API/APIKeyType";
+import { ServiceObject } from "../Types/StoredObject/Service/ServiceObject";
+import { ProviderObject } from "../Types/StoredObject/Provider/ProviderObject";
+import Authorization from "../API/Authorization";
 
 export default class Provider {
     private readonly _name: string;
     private readonly _baseUrl: string; // https://slack.com/api/, https://api.twitter.com/, https://mstdn.jp/api/v1/ ...
     private readonly _domain: string; // mstdn.jp, pawoo.net...
-    private readonly _apiKey: IAPIKey;
+    private readonly _apiKey: APIKeyType;
     private readonly _auth: Authorization;
 
     constructor(serviceSource: ServiceObject, providerSource: ProviderObject) {

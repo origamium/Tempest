@@ -1,5 +1,5 @@
 import { Schema } from "normalizr";
-import { ITransform } from "../Data/Dynamizr/Interfaces/ITransform";
+import { ITransform } from "../../Data/Dynamizr/Interfaces/ITransform";
 
 export interface ReturnedDatumInfoType {
     normalizrSchema: Schema;

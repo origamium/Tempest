@@ -1,4 +1,4 @@
-import { PairOfObject } from "../../helper/PairOfObject";
+import { PairOfObject } from "../../../HelperType/PairOfObject";
 
 export type ProviderObject = {
     serviceKey: string; // equal Service Object key.
