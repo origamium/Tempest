@@ -16,25 +16,25 @@ const blank: APIDataType = {
 const sandwitch_param: APIParameterDefType = {
     yuru: {
         required: true,
-        type: ApiParameterMethods.SandWitch,
+        type: ApiParameterMethods.PathString,
     },
 };
 
 const sandwitch_err: APIParameterDefType = {
     yuru: {
         required: true,
-        type: ApiParameterMethods.SandWitch,
+        type: ApiParameterMethods.PathString,
     },
     yuri: {
         required: false,
-        type: ApiParameterMethods.SandWitch,
+        type: ApiParameterMethods.PathString,
     },
 };
 
 const sample1: APIParameterDefType = {
     yuru: {
         required: true,
-        type: ApiParameterMethods.SandWitch,
+        type: ApiParameterMethods.PathString,
     },
     yuri: {
         required: true,

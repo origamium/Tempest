@@ -5,7 +5,6 @@ export interface APIParameterDefType {
         | {
               required: boolean;
               type: ApiParameterMethods;
-              extendPath?: string; // only in sandwitch parameter, i.e. ~/:id/extend...
           }
         | undefined;
 }
