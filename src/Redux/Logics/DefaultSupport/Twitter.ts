@@ -57,46 +57,50 @@ const apiSet: ApiSetObject = {
 const dataSet: DataSets = {
     status: {
         key: "status",
-        schema: {
-            name: "contents",
-            type: schemaTypes.Entity,
-            idAttribute: "id_str",
-            transform: {
-                id: "id_str",
-                date: "created_at",
-                content: {
-                    text: "text",
-                    entity: "entities",
+        schemaDef: {
+            schema: {
+                name: "contents",
+                type: schemaTypes.Entity,
+                idAttribute: "id_str",
+                transform: {
+                    id: "id_str",
+                    date: "created_at",
+                    content: {
+                        text: "text",
+                        entity: "entities",
+                    },
                 },
             },
         },
     },
     statusList: {
         key: "status",
-        schema: {
-            name: "contents",
-            type: schemaTypes.Array,
-            idAttribute: "id_str",
-            transform: {
-                id: "id_str",
-                date: "created_at",
-                content: {
-                    text: "text",
-                    entity: "entities",
+        schemaDef: {
+            schema: {
+                name: "contents",
+                type: schemaTypes.Array,
+                idAttribute: "id_str",
+                transform: {
+                    id: "id_str",
+                    date: "created_at",
+                    content: {
+                        text: "text",
+                        entity: "entities",
+                    },
                 },
-            },
-            definition: {
-                user: {
-                    name: "users",
-                    type: schemaTypes.Entity,
-                    idAttribute: "id_str",
-                    transform: {
-                        id: "id_str",
-                        screen_name: "screen_name",
-                        display_name: "name",
-                        icon: "profile_image_url_https",
-                        header: "profile_background_image_url_https",
-                        bio: "description",
+                definition: {
+                    user: {
+                        name: "users",
+                        type: schemaTypes.Entity,
+                        idAttribute: "id_str",
+                        transform: {
+                            id: "id_str",
+                            screen_name: "screen_name",
+                            display_name: "name",
+                            icon: "profile_image_url_https",
+                            header: "profile_background_image_url_https",
+                            bio: "description",
+                        },
                     },
                 },
             },
@@ -104,12 +108,14 @@ const dataSet: DataSets = {
     },
     user: {
         key: "user",
-        schema: {
-            name: "user",
-            type: schemaTypes.Entity,
-            idAttribute: "id_str",
-            transform: {
-                id: "id_str",
+        schemaDef: {
+            schema: {
+                name: "user",
+                type: schemaTypes.Entity,
+                idAttribute: "id_str",
+                transform: {
+                    id: "id_str",
+                },
             },
         },
     },

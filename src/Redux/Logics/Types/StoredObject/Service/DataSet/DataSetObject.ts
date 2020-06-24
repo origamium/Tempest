@@ -1,11 +1,11 @@
-import { SchemaObject } from "./SchemaObject";
 import { PairOfObject } from "../../../../HelperType/PairOfObject";
+import { ISchema } from "../../../../Data/Dynamizr/Interfaces/ISchema";
 
 export type DataSetObject = {
     key: string;
     targetDataKey?: string;
     extendErrorKey?: string;
-    schema: SchemaObject;
+    schemaDef: ISchema;
 };
 
 export type DataSets = PairOfObject<DataSetObject>;

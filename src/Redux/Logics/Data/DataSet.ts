@@ -12,7 +12,7 @@ export default class DataSet {
         const keys = Object.keys(source);
         for (const key of keys) {
             if (key) {
-                this._receivedDataInfo[key] = dynaSchemaCreator(source[key]!);
+                this._receivedDataInfo[key] = dynaSchemaCreator(source[key]!.schemaDef);
             }
         }
     }
