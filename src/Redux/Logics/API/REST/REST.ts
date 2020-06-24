@@ -8,7 +8,7 @@ export default class REST {
     constructor(source: RestApiUnits) {
         this._apis = {};
         Object.keys(source).forEach((key) => {
-            this._apis[key] = new RESTElement(source[key]);
+            this._apis[key] = new RESTElement(source[key]!);
         });
     }
 }
