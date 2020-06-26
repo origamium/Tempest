@@ -1,51 +1,43 @@
 import { ApiParameterMethods } from "../../Enums/ApiParameterMethods";
-import * as Exceptions from "../../../Exceptions";
 import { APIParameterDefType } from "../../Types/API/APIParameterDefType";
 import { CombinedParameterDataType } from "../../Types/API/CombinedParameterDataType";
-import { APIDataType } from "../../Types/API/APIDataType";
-import { APIPayloadType } from "../../Types/API/APIPayloadType";
 import * as querystring from "querystring";
+import { compile } from "path-to-regexp";
+import { APIPayloadType } from "../../Types/API/APIPayloadType";
+import { APIDataType } from "../../Types/API/APIDataType";
 
 interface IParameterKeysObject {
     key: string[];
     required: string[];
     header: string[];
-    sandwitch: string | null;
+    pathToRegexp: string[];
     query: string[];
 }
 
 export default class Request {
     public static getParameterClassifier(parameter: APIParameterDefType): IParameterKeysObject {
         const parameters = Object.keys(parameter);
-        const sandwitches = parameters.filter((key) => parameter[key]?.type === ApiParameterMethods.PathString);
-
-        let sandwitch: string | null = null;
-        if (sandwitches.length > 1) {
-            throw Exceptions.MultipleSandWitchParameterNotAllowed;
-        } else if (sandwitches.length === 1) {
-            sandwitch = sandwitches[0];
-        }
 
         return {
             key: parameters,
             required: parameters.filter((key: string) => parameter[key]?.required),
             header: parameters.filter((key: string) => parameter[key]?.type === ApiParameterMethods.Header),
-            sandwitch,
+            pathToRegexp: parameters.filter((key) => parameter[key]?.type === ApiParameterMethods.PathString),
             query: parameters.filter((key: string) => parameter[key]?.type === ApiParameterMethods.Query),
         };
     }
 
-    public static parameterChecker(parameters: CombinedParameterDataType, keys: IParameterKeysObject): boolean {
-        const payloadKeys = Object.keys(parameters.payload);
+    public static parameterChecker({ payload }: CombinedParameterDataType, keys: IParameterKeysObject): boolean {
+        const payloadKeys = Object.keys(payload);
 
-        for (const payloadKeyIndex in payloadKeys) {
-            if (!keys.key.includes(payloadKeys[payloadKeyIndex])) {
+        for (const requiredKey of keys.required) {
+            if (!payloadKeys.includes(requiredKey)) {
                 return false;
             }
         }
 
-        for (const requiredKey in keys.required) {
-            if (!payloadKeys.includes(keys.required[requiredKey])) {
+        for (const payloadKey of payloadKeys) {
+            if (!keys.key.includes(payloadKey)) {
                 return false;
             }
         }
@@ -55,6 +47,23 @@ export default class Request {
 
     private static isIncludePathToRegexp({ definition }: CombinedParameterDataType): boolean {
         return !!Object.entries(definition).find(([, value]) => value?.type === ApiParameterMethods.PathString);
+    }
+
+    private static pickUpPathToRegexp(
+        path: string,
+        parameters: CombinedParameterDataType,
+        keys: IParameterKeysObject
+    ): string {
+        if (this.isIncludePathToRegexp(parameters)) {
+            const toPath = compile(path); // TODO: ここでわざわざcompileするのはかなりパフォーマンス的に悪い
+            const PathToRegexParam: { [key: string]: string } = keys.pathToRegexp?.reduce(
+                (prev, curr) => ({ ...prev, [curr]: parameters.payload[curr] }),
+                {}
+            );
+            return toPath(PathToRegexParam);
+        } else {
+            return path;
+        }
     }
 
     private static pickUpQueryString(
@@ -72,7 +81,10 @@ export default class Request {
         keys: IParameterKeysObject
     ): string {
         const qs = querystring.stringify(this.pickUpQueryString(keys, parameters.payload));
-        return `${data.baseUri}${data.path /*TODO: path-to-regexp*/}${qs.length !== 0 ? `?${qs}` : ""}`;
+        const qsString = qs.length !== 0 ? `?${qs}` : "";
+        const path = this.pickUpPathToRegexp(data.path, parameters, keys);
+
+        return `${data.baseUri}${path}${qsString}`;
     }
 
     public static createQueryParameterObject(

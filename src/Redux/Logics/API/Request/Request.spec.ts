@@ -3,7 +3,6 @@ import { APIDataType } from "../../Types/API/APIDataType";
 import { HttpMethods } from "../../Enums/HttpMethods";
 import { APIParameterDefType } from "../../Types/API/APIParameterDefType";
 import { ApiParameterMethods } from "../../Enums/ApiParameterMethods";
-import { MultipleSandWitchParameterNotAllowed } from "../../../Exceptions";
 import { CombinedParameterDataType } from "../../Types/API/CombinedParameterDataType";
 
 const blank: APIDataType = {
@@ -13,14 +12,30 @@ const blank: APIDataType = {
     method: HttpMethods.GET,
 };
 
-const sandwitch_param: APIParameterDefType = {
+const path_to_string_basic: APIDataType = {
+    baseUri: "https://example.com",
+    path: "/:id/nya/:projectName/",
+    parameter: {
+        id: {
+            required: true,
+            type: ApiParameterMethods.PathString,
+        },
+        projectName: {
+            required: true,
+            type: ApiParameterMethods.PathString,
+        },
+    },
+    method: HttpMethods.POST,
+};
+
+const path_to_string: APIParameterDefType = {
     yuru: {
         required: true,
         type: ApiParameterMethods.PathString,
     },
 };
 
-const sandwitch_err: APIParameterDefType = {
+const path_to_string_error: APIParameterDefType = {
     yuru: {
         required: true,
         type: ApiParameterMethods.PathString,
@@ -58,39 +73,60 @@ const sample1: APIParameterDefType = {
     },
 };
 
-test("getParameterKeys method ", () => {
+test("getParameterKeys method", () => {
     expect(Request.getParameterClassifier(blank.parameter)).toEqual({
         key: [],
         required: [],
         header: [],
-        sandwitch: null,
+        pathToRegexp: [],
         query: [],
     });
 
-    expect(Request.getParameterClassifier({ ...blank.parameter, ...sandwitch_param })).toEqual({
+    expect(Request.getParameterClassifier({ ...blank.parameter, ...path_to_string })).toEqual({
         key: ["yuru"],
         required: ["yuru"],
         header: [],
-        sandwitch: "yuru",
+        pathToRegexp: ["yuru"],
         query: [],
     });
 
-    expect(() => Request.getParameterClassifier({ ...blank.parameter, ...sandwitch_err })).toThrow(
-        MultipleSandWitchParameterNotAllowed.message
-    );
+    // getParameterClassifier is not raise exception. its valid case.
+    expect(Request.getParameterClassifier({ ...blank.parameter, ...path_to_string_error })).toEqual({
+        key: ["yuru", "yuri"],
+        required: ["yuru"],
+        header: [],
+        pathToRegexp: ["yuru", "yuri"],
+        query: [],
+    });
 
     expect(Request.getParameterClassifier(Object.assign({ ...blank.parameter, ...sample1 }))).toEqual({
         key: ["yuru", "yuri", "oomuro", "sakurako", "yoshikawa", "chinatsu"],
         required: ["yuru", "yuri", "yoshikawa"],
         header: ["yuri", "chinatsu"],
-        sandwitch: "yuru",
+        pathToRegexp: ["yuru"],
         query: ["oomuro", "sakurako", "yoshikawa"],
+    });
+
+    expect(Request.getParameterClassifier(path_to_string_basic.parameter)).toEqual({
+        key: ["id", "projectName"],
+        required: ["id", "projectName"],
+        header: [],
+        pathToRegexp: ["id", "projectName"],
+        query: [],
     });
 });
 
 const blankCombinedParameter: CombinedParameterDataType = {
     definition: {},
     payload: {},
+};
+
+const path_to_bacic_combined_parameter: CombinedParameterDataType = {
+    definition: path_to_string_basic.parameter,
+    payload: {
+        id: "1234",
+        projectName: "383208",
+    },
 };
 
 const errorParameter: CombinedParameterDataType = {
@@ -129,25 +165,6 @@ test("parameterRequireChecker method", () => {
     );
 });
 
-const sandWitchUriParam: CombinedParameterDataType = {
-    definition: sandwitch_param,
-    payload: { yuru: "yuri~~~~~~~" },
-};
-
-const sandWitchParamIncludingExtendParam: CombinedParameterDataType = {
-    definition: { yuru: { ...sandwitch_param.yuru!, extendPath: "/followers" } },
-    payload: { yuru: "yuri" },
-};
-
-const sample1CombinedParameters: CombinedParameterDataType = {
-    definition: sample1,
-    payload: {
-        yuru: "komeri",
-        yuri: "power",
-        yoshikawa: "furyroad",
-    },
-};
-
 test("createUrl method", () => {
     expect(
         Request.createUri(
@@ -158,30 +175,14 @@ test("createUrl method", () => {
     ).toEqual(blank.baseUri + blank.path);
 
     expect(
-        Request.createUri(blank, sandWitchUriParam, Request.getParameterClassifier(sandWitchUriParam.definition))
-    ).toEqual(blank.baseUri + blank.path + "/" + sandWitchUriParam.payload.yuru);
-
-    expect(
-        Request.createUri(
-            blank,
-            sandWitchParamIncludingExtendParam,
-            Request.getParameterClassifier(sandWitchParamIncludingExtendParam.definition)
-        )
-    ).toEqual(
-        blank.baseUri +
-            blank.path +
-            "/" +
-            sandWitchParamIncludingExtendParam.payload.yuru +
-            sandWitchParamIncludingExtendParam.definition.yuru!.extendPath
-    );
-
-    expect(
-        Request.createUri(
-            blank,
-            sample1CombinedParameters,
-            Request.getParameterClassifier(sample1CombinedParameters.definition)
-        )
-    ).toEqual(blank.baseUri + blank.path + "/" + sample1CombinedParameters.payload.yuru);
+        Request.createUri(path_to_string_basic, path_to_bacic_combined_parameter, {
+            key: ["id", "projectName"],
+            required: ["id", "projectName"],
+            header: [],
+            pathToRegexp: ["id", "projectName"],
+            query: [],
+        })
+    ).toEqual(`${path_to_string_basic.baseUri}/1234/nya/383208/`);
 });
 
 test("createHeaderObject method", () => {
