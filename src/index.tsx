@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { configureStore, sagaMiddleware } from "./Redux/store/store";
-import { rootSaga } from "./Redux/sagas/rootSaga";
+import { configureStore, sagaMiddleware } from "./Redux/Store/store";
+import { rootSaga } from "./Redux/Sagas/rootSaga";
 import { Theme, ThemeProvider } from "./Theme";
 import "ress";
 
