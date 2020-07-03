@@ -1,10 +1,10 @@
 import { ApiParameterMethods } from "../../Enums/ApiParameterMethods";
-import { APIParameterDefType } from "../../Types/API/APIParameterDefType";
-import { CombinedParameterDataType } from "../../Types/API/CombinedParameterDataType";
+import { APIParameterDefType } from "../../APIType/APIParameterDefType";
+import { CombinedParameterDataType } from "../../APIType/CombinedParameterDataType";
 import * as querystring from "querystring";
 import { compile } from "path-to-regexp";
-import { APIPayloadType } from "../../Types/API/APIPayloadType";
-import { APIDataType } from "../../Types/API/APIDataType";
+import { APIPayloadType } from "../../APIType/APIPayloadType";
+import { APIDataType } from "../../APIType/APIDataType";
 
 interface IParameterKeysObject {
     key: string[];
