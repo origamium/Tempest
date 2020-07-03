@@ -150,19 +150,19 @@ test("parameterRequireChecker method", () => {
             blankCombinedParameter,
             Request.getParameterClassifier(blankCombinedParameter.definition)
         )
-    ).toEqual(true);
+    ).toBeUndefined();
 
-    expect(Request.parameterChecker(errorParameter, Request.getParameterClassifier(errorParameter.definition))).toEqual(
-        false
-    );
+    expect(() =>
+        Request.parameterChecker(errorParameter, Request.getParameterClassifier(errorParameter.definition))
+    ).toThrow();
 
-    expect(Request.parameterChecker(goodParameter, Request.getParameterClassifier(goodParameter.definition))).toEqual(
-        true
-    );
+    expect(
+        Request.parameterChecker(goodParameter, Request.getParameterClassifier(goodParameter.definition))
+    ).toBeUndefined();
 
-    expect(Request.parameterChecker(unknownPayload, Request.getParameterClassifier(unknownPayload.definition))).toEqual(
-        false
-    );
+    expect(() =>
+        Request.parameterChecker(unknownPayload, Request.getParameterClassifier(unknownPayload.definition))
+    ).toThrow();
 });
 
 test("createUrl method", () => {
@@ -195,12 +195,9 @@ test("createHeaderObject method", () => {
     //だるい: TODO
 });
 
-test("createQueryParameterObject method", () => {
-    expect(
-        Request.createQueryParameterObject(
-            blankCombinedParameter,
-            Request.getParameterClassifier(blankCombinedParameter.definition)
-        )
-    ).toEqual({});
-    //だるい: TODO
+test("createRequset", () => {
+    expect(Request.createRequest(path_to_string_basic, path_to_bacic_combined_parameter.payload)).toEqual([
+        "https://example.com/1234/nya/383208/",
+        { headers: {}, method: "POST" },
+    ]);
 });

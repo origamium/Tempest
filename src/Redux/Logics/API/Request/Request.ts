@@ -27,22 +27,26 @@ export default class Request {
         };
     }
 
-    public static parameterChecker({ payload }: CombinedParameterDataType, keys: IParameterKeysObject): boolean {
+    public static parameterChecker({ payload }: CombinedParameterDataType, keys: IParameterKeysObject): void | never {
         const payloadKeys = Object.keys(payload);
 
         for (const requiredKey of keys.required) {
             if (!payloadKeys.includes(requiredKey)) {
-                return false;
+                throw new Error(
+                    `missing required payload, ${JSON.stringify(keys.required)} but missing ${requiredKey}`
+                );
             }
         }
 
         for (const payloadKey of payloadKeys) {
             if (!keys.key.includes(payloadKey)) {
-                return false;
+                throw new Error(
+                    `unexpected payload. ${payloadKey} is not defined parameter. defined keys:${JSON.stringify(
+                        keys.key
+                    )} `
+                );
             }
         }
-
-        return true;
     }
 
     private static isIncludePathToRegexp({ definition }: CombinedParameterDataType): boolean {
@@ -87,21 +91,6 @@ export default class Request {
         return `${data.baseUri}${path}${qsString}`;
     }
 
-    public static createQueryParameterObject(
-        parameters: CombinedParameterDataType,
-        keys: IParameterKeysObject
-    ): object {
-        return keys.query
-            .filter((key) => parameters.payload[key])
-            .reduce(
-                (prev, currKey) => ({
-                    ...prev,
-                    ...{ currKey: parameters.payload[currKey] },
-                }),
-                {}
-            );
-    }
-
     public static createHeaderObject(parameters: CombinedParameterDataType, keys: IParameterKeysObject): HeadersInit {
         return keys.header
             .filter((key) => parameters.payload[key])
@@ -131,9 +120,7 @@ export default class Request {
         }
 
         const classifiedKey: IParameterKeysObject = this.getParameterClassifier(combinedParameter.definition);
-        if (this.parameterChecker(combinedParameter, classifiedKey)) {
-            throw new Error("invalid parameter definition and payload.");
-        }
+        this.parameterChecker(combinedParameter, classifiedKey);
 
         return [
             this.createUri(data, combinedParameter, classifiedKey),
