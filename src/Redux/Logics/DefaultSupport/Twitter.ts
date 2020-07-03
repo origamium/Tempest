@@ -9,6 +9,7 @@ import { schemaTypes } from "../Enums/SchemaTypes";
 import { DataSetsObject } from "../Types/StoredObject/Service/DataSet/DataSetObject";
 import { ServiceObject } from "../Types/StoredObject/Service/ServiceObject";
 import { ProviderObject } from "../Types/StoredObject/Provider/ProviderObject";
+import { Protocol } from "../Enums/Protocol";
 
 const serviceKey = "Twitter";
 
@@ -26,6 +27,7 @@ const apiSet: APISetObject = {
     apis: {
         updateStatus: {
             path: "statuses/update",
+            protocol: Protocol.rest,
             httpMethod: HttpMethods.POST,
             parameterDefinition: {
                 status: {
@@ -41,12 +43,14 @@ const apiSet: APISetObject = {
         },
         homeTimeline: {
             path: "statuses/home_timeline",
+            protocol: Protocol.rest,
             httpMethod: HttpMethods.GET,
             parameterDefinition: {},
             returnedDataKey: "statusList",
         },
         mentionsTimeline: {
             path: "statuses/mentions_timeline",
+            protocol: Protocol.rest,
             httpMethod: HttpMethods.GET,
             parameterDefinition: {},
             returnedDataKey: "statusList",
