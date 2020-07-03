@@ -1,4 +1,4 @@
-import { ApiSetObject } from "../Types/StoredObject/Service/ApiSet/ApiSetObject";
+import { APISetObject } from "../Types/StoredObject/Service/ApiSet/APISetObject";
 import { OAuthVersion } from "../Enums/Authorization/OAuthVersion";
 import { AuthorizeMethod } from "../Enums/Authorization/AuthorizeMethod";
 import { SignMethod } from "../Enums/Authorization/SignMethod";
@@ -6,13 +6,13 @@ import { SignSpace } from "../Enums/Authorization/SignSpace";
 import { HttpMethods } from "../Enums/HttpMethods";
 import { ApiParameterMethods } from "../Enums/ApiParameterMethods";
 import { schemaTypes } from "../Enums/SchemaTypes";
-import { DataSets } from "../Types/StoredObject/Service/DataSet/DataSetObject";
+import { DataSetsObject } from "../Types/StoredObject/Service/DataSet/DataSetObject";
 import { ServiceObject } from "../Types/StoredObject/Service/ServiceObject";
 import { ProviderObject } from "../Types/StoredObject/Provider/ProviderObject";
 
 const serviceKey = "Twitter";
 
-const apiSet: ApiSetObject = {
+const apiSet: APISetObject = {
     authorization: {
         oauthVersion: OAuthVersion.OAuth1,
         authMethod: AuthorizeMethod.PIN,
@@ -23,7 +23,7 @@ const apiSet: ApiSetObject = {
         requestAuthorizePagePath: "oauth/authorize",
         requestAccessTokenPath: "oauth/access_token",
     },
-    rest: {
+    apis: {
         updateStatus: {
             path: "statuses/update",
             httpMethod: HttpMethods.POST,
@@ -54,7 +54,7 @@ const apiSet: ApiSetObject = {
     },
 };
 
-const dataSet: DataSets = {
+const dataSet: DataSetsObject = {
     status: {
         key: "status",
         schemaDef: {

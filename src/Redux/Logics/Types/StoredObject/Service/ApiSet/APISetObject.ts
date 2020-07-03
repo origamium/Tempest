@@ -1,7 +1,7 @@
 import { AuthorizationUnitObject } from "./AuthorizationUnitObject";
-import { APIDataType } from "../../../API/APIDataType";
+import { Apis } from "./ApiUnitObject";
 
-export type ApiSetObject = {
+export type APISetObject = {
     authorization: AuthorizationUnitObject;
-    apidata: APIDataType;
+    apis: Apis;
 };

@@ -1,13 +1,13 @@
 import dynamize, { dynaSchemaCreator } from "./Dynamizr";
 import { ReturnedDatumInfoType } from "../Types/API/ReturnedDatumInfoType";
 import { PairOfObject } from "../HelperType/PairOfObject";
-import { DataSets } from "../Types/StoredObject/Service/DataSet/DataSetObject";
+import { DataSetsObject } from "../Types/StoredObject/Service/DataSet/DataSetObject";
 import { UnexpectedDataKey } from "../../Exceptions";
 
 export default class DataSet {
     private readonly _receivedDataInfo: PairOfObject<ReturnedDatumInfoType>;
 
-    constructor(source: DataSets) {
+    constructor(source: DataSetsObject) {
         this._receivedDataInfo = {};
         const keys = Object.keys(source);
         for (const key of keys) {

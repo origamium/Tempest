@@ -8,4 +8,4 @@ export type DataSetObject = {
     schemaDef: ISchema;
 };
 
-export type DataSets = PairOfObject<DataSetObject>;
+export type DataSetsObject = PairOfObject<DataSetObject>;

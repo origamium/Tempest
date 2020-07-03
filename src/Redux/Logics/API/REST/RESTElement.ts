@@ -1,6 +1,6 @@
 import { HttpMethods } from "../../Enums/HttpMethods";
 import { APIParameterDefType } from "../../Types/API/APIParameterDefType";
-import { RestApiUnitObject } from "../../Types/StoredObject/Service/ApiSet/RestApiUnitObject";
+import { ApiUnitObject } from "../../Types/StoredObject/Service/ApiSet/ApiUnitObject";
 
 export default class RESTElement {
     private readonly _path: string;
@@ -9,7 +9,7 @@ export default class RESTElement {
     private readonly _returnDataKey: string | string[];
     private readonly _errorKey?: string; // extend error check.
 
-    constructor(source: RestApiUnitObject) {
+    constructor(source: ApiUnitObject) {
         this._path = source.path;
         this._HttpMethod = source.httpMethod;
         this._paramDefinition = source.parameterDefinition;

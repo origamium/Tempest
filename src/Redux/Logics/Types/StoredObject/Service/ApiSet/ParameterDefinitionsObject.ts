@@ -6,4 +6,4 @@ export type ParameterDefinitionObject = {
     type: ApiParameterMethods;
 };
 
-export type ParameterDefinition = PairOfObject<ParameterDefinitionObject>;
+export type ParameterDefinitionsObject = PairOfObject<ParameterDefinitionObject>;
