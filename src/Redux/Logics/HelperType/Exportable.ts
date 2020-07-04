@@ -1,3 +1,3 @@
-export default abstract class Exportable {
-    public abstract export(): string | never; // json.stringify
+export abstract class Exportable {
+    public abstract export(): string | object | never; // json.stringifyable
 }
