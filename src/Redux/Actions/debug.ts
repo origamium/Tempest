@@ -26,11 +26,34 @@ export interface inDevelopmentActionType {
     };
 }
 
+export const inDevelopmentAction = ({
+    target,
+    message,
+}: {
+    target: string;
+    message?: string;
+}): inDevelopmentActionType => {
+    return {
+        type: debugIdentifier.IN_DEVELOPMENT,
+        payload: {
+            target,
+            message,
+        },
+    };
+};
+
 export interface errActionType {
     type: debugIdentifier.ERR;
     payload: {
         message?: string;
     };
 }
+
+export const errAction = (message?: string): errActionType => ({
+    type: debugIdentifier.ERR,
+    payload: {
+        message,
+    },
+});
 
 export type debugActions = debugActionType | inDevelopmentActionType | errActionType;
