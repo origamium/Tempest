@@ -33,6 +33,7 @@ export const inDevelopmentAction = ({
     target: string;
     message?: string;
 }): inDevelopmentActionType => {
+    console.warn(`${target} is'nt implemented. \n ${message}`);
     return {
         type: debugIdentifier.IN_DEVELOPMENT,
         payload: {
