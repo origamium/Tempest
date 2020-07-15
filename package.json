@@ -129,7 +129,7 @@
     "react-markdown": "4.3.1",
     "sass-loader": "8.0.2",
     "serve": "11.3.2",
-    "snyk": "1.341.1",
+    "snyk": "1.362.0",
     "source-map-loader": "1.0.0",
     "start-server-and-test": "1.11.0",
     "style-loader": "1.2.1",
