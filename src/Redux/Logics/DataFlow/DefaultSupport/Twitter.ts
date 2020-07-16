@@ -1,4 +1,3 @@
-import { APISetObject } from "../SavingData/StoredObject/Service/ApiSet/APISetObject";
 import { OAuthVersion } from "../Enums/Authorization/OAuthVersion";
 import { AuthorizeMethod } from "../Enums/Authorization/AuthorizeMethod";
 import { SignMethod } from "../Enums/Authorization/SignMethod";
@@ -6,10 +5,11 @@ import { SignSpace } from "../Enums/Authorization/SignSpace";
 import { HttpMethods } from "../Enums/HttpMethods";
 import { ApiParameterMethods } from "../Enums/ApiParameterMethods";
 import { schemaTypes } from "../Enums/SchemaTypes";
-import { DataSetsObject } from "../SavingData/StoredObject/Service/DataSet/DataSetObject";
-import { ServiceObject } from "../SavingData/StoredObject/Service/ServiceObject";
-import { ProviderObject } from "../SavingData/StoredObject/Provider/ProviderObject";
 import { Protocol } from "../Enums/Protocol";
+import { APISetObject } from "../../SavingData/StoredObject/Service/ApiSet/APISetObject";
+import { DataSetsObject } from "../../SavingData/StoredObject/Service/DataSet/DataSetObject";
+import { ServiceObject } from "../../SavingData/StoredObject/Service/ServiceObject";
+import { ProviderObject } from "../../SavingData/StoredObject/Provider/ProviderObject";
 
 const serviceKey = "Twitter";
 
