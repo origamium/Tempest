@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "./Theme";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const Styled = {
     Root: styled.div`
@@ -10,5 +11,13 @@ const Styled = {
 };
 
 export const App: React.FC = () => {
-    return <Styled.Root>はい</Styled.Root>;
+    return (
+        <Auth0Provider
+            domain="lisp.auth0.com"
+            clientId="BmXHS2fMDer91hNjqLIEquULdS3EHib6"
+            redirectUri={window.location.origin}
+        >
+            <Styled.Root>はい</Styled.Root>;
+        </Auth0Provider>
+    );
 };
