@@ -1,16 +1,5 @@
 import * as React from "react";
-import {
-    AppBar,
-    IconButton,
-    Toolbar,
-    Typography,
-    Popper,
-    Paper,
-    List,
-    ListItem,
-    Avatar,
-    Button
-} from "@material-ui/core";
+import { AppBar, IconButton, Toolbar, Typography, Paper, Button } from "@material-ui/core";
 import { NetworkCheck } from "@material-ui/icons";
 import { styled } from "../../Theme";
 import { StatusPopper, useStatusPopper } from "./Status";
