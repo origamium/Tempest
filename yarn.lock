@@ -1698,6 +1698,14 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime-corejs3@^7.10.2":
+  version "7.10.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.10.5.tgz#a57fe6c13045ca33768a2aa527ead795146febe1"
+  integrity sha512-RMafpmrNB5E/bwdSphLr8a8++9TosnyJp98RZzI6VOx2R2CCMpsXXXRvmI700O9oEKpXdZat6oEK68/F0zjd4A==
+  dependencies:
+    core-js-pure "^3.0.0"
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime-corejs3@^7.7.4", "@babel/runtime-corejs3@^7.8.3":
   version "7.10.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.10.2.tgz#3511797ddf9a3d6f3ce46b99cc835184817eaa4e"
@@ -3227,14 +3235,15 @@
     dom-accessibility-api "^0.4.6"
     pretty-format "^25.5.0"
 
-"@testing-library/dom@^7.9.0":
-  version "7.16.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.16.0.tgz#15c23c5e653e53ecf20a0642706caf89218027b0"
-  integrity sha512-vV0dBOuolgiujf7tD+GGGWTDJrtvj+lEtRUHPuEkG74TWKTm+zA/MZBlgAN6VtU/na4Vnimt5NWekXO1hduZkw==
+"@testing-library/dom@^7.17.1":
+  version "7.21.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.21.0.tgz#9eedde0b8d6a2cf5716773e9f3170ad032ea45f7"
+  integrity sha512-S8TTMCd7qCkLs6bhdh2+fk7/pIrD16UKvnwa6gJICalZzV1xoAxDY9Isp6qmelizYH4P1Tz+O5Y4nMmjx3x0uQ==
   dependencies:
-    "@babel/runtime" "^7.10.2"
-    aria-query "^4.0.2"
-    dom-accessibility-api "^0.4.5"
+    "@babel/runtime" "^7.10.3"
+    "@types/aria-query" "^4.2.0"
+    aria-query "^4.2.2"
+    dom-accessibility-api "^0.4.6"
     pretty-format "^25.5.0"
 
 "@testing-library/jest-dom@5.10.1":
@@ -3260,13 +3269,13 @@
     "@babel/runtime" "^7.5.4"
     "@types/testing-library__react-hooks" "^3.0.0"
 
-"@testing-library/react@10.2.1":
-  version "10.2.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-10.2.1.tgz#f0c5ac9072ad54c29672150943f35d6617263f26"
-  integrity sha512-pv2jZhiZgN1/alz1aImhSasZAOPg3er2Kgcfg9fzuw7aKPLxVengqqR1n0CJANeErR1DqORauQaod+gGUgAJOQ==
+"@testing-library/react@10.4.7":
+  version "10.4.7"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-10.4.7.tgz#fc14847fb70a5e93576b8f7f0d1490ead02a9061"
+  integrity sha512-hUYbum3X2f1ZKusKfPaooKNYqE/GtPiQ+D2HJaJ4pkxeNJQFVUEvAvEh9+3QuLdBeTWkDMNY5NSijc5+pGdM4Q==
   dependencies:
-    "@babel/runtime" "^7.10.2"
-    "@testing-library/dom" "^7.9.0"
+    "@babel/runtime" "^7.10.3"
+    "@testing-library/dom" "^7.17.1"
 
 "@testing-library/user-event@12.0.11":
   version "12.0.11"
