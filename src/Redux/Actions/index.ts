@@ -1,4 +1,4 @@
 import { debugActions } from "./debug";
-import { initializeActions } from "./initialize";
+import { dataStoreActions } from "./dataStore";
 
-export type RegisteredActions = debugActions | initializeActions;
+export type RegisteredActions = debugActions | dataStoreActions;
