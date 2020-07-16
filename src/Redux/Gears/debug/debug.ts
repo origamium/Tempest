@@ -1,8 +1,4 @@
-export enum debugIdentifier {
-    DEBUG = "DEBUG",
-    IN_DEVELOPMENT = "IN_DEVELOPMENT",
-    ERR = "ERR",
-}
+import { debugIdentifier } from "./index";
 
 export interface debugActionType {
     type: debugIdentifier.DEBUG;
@@ -17,44 +13,3 @@ export const debugAction = (message?: string): debugActionType => ({
         message,
     },
 });
-
-export interface inDevelopmentActionType {
-    type: debugIdentifier.IN_DEVELOPMENT;
-    payload: {
-        target: string;
-        message?: string;
-    };
-}
-
-export const inDevelopmentAction = ({
-    target,
-    message,
-}: {
-    target: string;
-    message?: string;
-}): inDevelopmentActionType => {
-    console.warn(`${target} is'nt implemented. \n ${message}`);
-    return {
-        type: debugIdentifier.IN_DEVELOPMENT,
-        payload: {
-            target,
-            message,
-        },
-    };
-};
-
-export interface errActionType {
-    type: debugIdentifier.ERR;
-    payload: {
-        message?: string;
-    };
-}
-
-export const errAction = (message?: string): errActionType => ({
-    type: debugIdentifier.ERR,
-    payload: {
-        message,
-    },
-});
-
-export type debugActions = debugActionType | inDevelopmentActionType | errActionType;
