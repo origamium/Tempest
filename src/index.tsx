@@ -8,14 +8,21 @@ import { configureStore, sagaMiddleware } from "./Redux/Store/configureStore";
 import { rootSaga } from "./Redux/Sagas/rootSaga";
 import { Theme, ThemeProvider } from "./Theme";
 import "ress";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 Sentry.init({ dsn: "https://446c9a464ec844c2a5261438e9df8f52@o344655.ingest.sentry.io/5341100" });
 
 ReactDOM.render(
     <Provider store={configureStore()}>
-        <ThemeProvider theme={Theme.Light}>
-            <App />
-        </ThemeProvider>
+        <Auth0Provider
+            domain="lisp.auth0.com"
+            clientId="BmXHS2fMDer91hNjqLIEquULdS3EHib6"
+            redirectUri={window.location.origin}
+        >
+            <ThemeProvider theme={Theme.Light}>
+                <App />
+            </ThemeProvider>
+        </Auth0Provider>
     </Provider>,
     document.getElementById("root")
 );

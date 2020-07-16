@@ -1,10 +1,9 @@
-import React from "react";
-import { styled, ThemeProvider } from "./Theme";
-import { Provider } from "react-redux";
-import { configureStore } from "./Redux/Store/configureStore";
-import { Auth0Provider } from "@auth0/auth0-react";
+import * as React from "react";
+import { styled } from "./Theme";
 import { Body } from "./Body";
 import { Header } from "./Component/Header/Header";
+import { useDispatch } from "react-redux";
+import { requestInitializeAction } from "./Redux/Actions/dataStore";
 
 const Styled = {
     Root: styled.div`
@@ -19,20 +18,16 @@ const Styled = {
 };
 
 export const App: React.FC = () => {
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(requestInitializeAction());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
-        <Auth0Provider
-            domain="lisp.auth0.com"
-            clientId="BmXHS2fMDer91hNjqLIEquULdS3EHib6"
-            redirectUri={window.location.origin}
-        >
-            <Provider store={configureStore()}>
-                <ThemeProvider theme={"Light"}>
-                    <Styled.Root>
-                        <Header />
-                        <Body />
-                    </Styled.Root>
-                </ThemeProvider>
-            </Provider>
-        </Auth0Provider>
+        <Styled.Root>
+            <Header />
+            <Body />
+        </Styled.Root>
     );
 };
