@@ -1,3 +1,5 @@
-export type PageObject = {
+import { TabObject } from "./TabObject";
 
-}
+export type PageObject = {
+    tabs: TabObject[];
+};
