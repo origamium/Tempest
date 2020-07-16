@@ -128,6 +128,26 @@ export const StatusPopper: React.FC<StatusPopperProps> = ({ checkButtonEl }) => 
                         <ListItem>
                             <Styled.ListItemBody>
                                 <div>
+                                    <Avatar variant="square">T</Avatar>
+                                </div>
+                                <div>
+                                    <Typography variant={"body1"}>Twitter</Typography>
+                                    <Typography variant={"body2"}>{`Tempest client Twitter Account`}</Typography>
+                                    <Typography>
+                                        <a
+                                            rel={"noreferrer noopener"}
+                                            target={"_blank"}
+                                            href={"https://twitter.com/tempestclient"}
+                                        >
+                                            {"Twitter"}
+                                        </a>
+                                    </Typography>
+                                </div>
+                            </Styled.ListItemBody>
+                        </ListItem>
+                        <ListItem>
+                            <Styled.ListItemBody>
+                                <div>
                                     <Avatar
                                         variant="square"
                                         src={
