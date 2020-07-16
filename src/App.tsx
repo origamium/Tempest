@@ -3,7 +3,7 @@ import { styled } from "./Theme";
 import { Body } from "./Body";
 import { Header } from "./Component/Header/Header";
 import { useDispatch } from "react-redux";
-import { requestInitializeAction } from "./Redux/Actions/dataStore";
+import { requestInitializeAction } from "./Redux/Gears/dataStore/requestInitialize";
 
 const Styled = {
     Root: styled.div`

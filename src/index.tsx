@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import * as Sentry from "@sentry/react";
 import * as serviceWorker from "./serviceWorker";
 import { configureStore, sagaMiddleware } from "./Redux/Store/configureStore";
-import { rootSaga } from "./Redux/Sagas/rootSaga";
+import { rootSaga } from "./Redux/rootSaga";
 import { Theme, ThemeProvider } from "./Theme";
 import "ress";
 import { Auth0Provider } from "@auth0/auth0-react";
