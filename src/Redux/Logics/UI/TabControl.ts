@@ -35,7 +35,7 @@ export class TabControl implements Exportable<TabObject> {
         return {
             id: this._id,
             name: this._name,
-            columnId: this._columns.map((v) => v.id()),
+            columnId: this._columns.map((v) => v.id),
         };
     }
 }

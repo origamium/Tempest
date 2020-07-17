@@ -30,7 +30,7 @@ export class ColumnControl implements Exportable<ColumnObject> {
     }
 
     get id() {
-        return this.id;
+        return this._id;
     }
 
     export(): ColumnObject {
