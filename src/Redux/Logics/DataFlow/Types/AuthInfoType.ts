@@ -6,11 +6,11 @@ import { SignSpace } from "./Authorization/SignSpace";
 
 export interface AuthInfoType {
     apiKey: APIKeyType;
+    apiUrl?: string;
     oauthVersion: OAuthVersion;
     authMethod: AuthorizeMethod;
     signMethod: SignMethod;
     signSpace: SignSpace;
     scope?: string;
-    callback?: string;
-    official?: string;
+    callback: string;
 }
