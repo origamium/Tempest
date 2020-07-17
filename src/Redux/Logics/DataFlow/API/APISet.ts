@@ -1,4 +1,4 @@
-import { APIDataType } from "../APIType/APIDataType";
+import { APIDataType } from "../Types/APIDataType";
 import { compile, PathFunction } from "path-to-regexp";
 
 export class APISet {

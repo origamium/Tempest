@@ -1,5 +1,5 @@
 import dynamize, { dynaSchemaCreator } from "./Dynamizr";
-import { ReturnedDatumInfoType } from "../APIType/ReturnedDatumInfoType";
+import { ReturnedDatumInfoType } from "../Types/ReturnedDatumInfoType";
 import { PairOfObject } from "../../HelperType/PairOfObject";
 import { DataSetsObject } from "../../SavingData/StoredObject/Service/DataSet/DataSetObject";
 import { UnexpectedDataKey } from "../../../Exceptions";

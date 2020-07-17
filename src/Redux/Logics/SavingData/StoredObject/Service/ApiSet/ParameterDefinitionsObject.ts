@@ -1,4 +1,4 @@
-import { ApiParameterMethods } from "../../../../DataFlow/Enums/ApiParameterMethods";
+import { ApiParameterMethods } from "../../../../DataFlow/Types/ApiParameterMethods";
 import { PairOfObject } from "../../../../HelperType/PairOfObject";
 
 export type ParameterDefinitionObject = {

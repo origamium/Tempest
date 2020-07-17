@@ -1,7 +1,7 @@
-import { OAuthVersion } from "../../../../DataFlow/Enums/Authorization/OAuthVersion";
-import { AuthorizeMethod } from "../../../../DataFlow/Enums/Authorization/AuthorizeMethod";
-import { SignMethod } from "../../../../DataFlow/Enums/Authorization/SignMethod";
-import { SignSpace } from "../../../../DataFlow/Enums/Authorization/SignSpace";
+import { OAuthVersion } from "../../../../DataFlow/Types/Authorization/OAuthVersion";
+import { AuthorizeMethod } from "../../../../DataFlow/Types/Authorization/AuthorizeMethod";
+import { SignMethod } from "../../../../DataFlow/Types/Authorization/SignMethod";
+import { SignSpace } from "../../../../DataFlow/Types/Authorization/SignSpace";
 
 export type AuthorizationUnitObject = {
     oauthVersion: OAuthVersion; // required

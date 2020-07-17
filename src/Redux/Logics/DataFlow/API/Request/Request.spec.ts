@@ -1,9 +1,9 @@
 import Request from "./Request";
-import { APIDataType } from "../../APIType/APIDataType";
-import { HttpMethods } from "../../Enums/HttpMethods";
-import { APIParameterDefType } from "../../APIType/APIParameterDefType";
-import { ApiParameterMethods } from "../../Enums/ApiParameterMethods";
-import { CombinedParameterDataType } from "../../APIType/CombinedParameterDataType";
+import { APIDataType } from "../../Types/APIDataType";
+import { HttpMethods } from "../../Types/HttpMethods";
+import { APIParameterDefType } from "../../Types/APIParameterDefType";
+import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
+import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
 
 const blank: APIDataType = {
     baseUri: "https://example.com",

@@ -1,7 +1,7 @@
-import { HttpMethods } from "../Enums/HttpMethods";
+import { HttpMethods } from "./HttpMethods";
 import { APIParameterDefType } from "./APIParameterDefType";
 import { ReturnedDatumInfoType } from "./ReturnedDatumInfoType";
-import { Protocol } from "../Enums/Protocol";
+import { Protocol } from "./Protocol";
 
 export interface APIDataType {
     baseUri: string;

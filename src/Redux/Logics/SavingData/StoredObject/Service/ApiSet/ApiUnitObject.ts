@@ -1,7 +1,7 @@
 import { ParameterDefinitionsObject } from "./ParameterDefinitionsObject";
-import { HttpMethods } from "../../../../DataFlow/Enums/HttpMethods";
+import { HttpMethods } from "../../../../DataFlow/Types/HttpMethods";
 import { PairOfObject } from "../../../../HelperType/PairOfObject";
-import { Protocol } from "../../../../DataFlow/Enums/Protocol";
+import { Protocol } from "../../../../DataFlow/Types/Protocol";
 
 export type ApiUnitObject = {
     path: string;

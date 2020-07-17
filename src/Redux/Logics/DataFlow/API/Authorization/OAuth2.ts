@@ -1,14 +1,14 @@
 import OAuth from "./OAuth";
-import { AuthorizeMethod } from "../../Enums/Authorization/AuthorizeMethod";
-import { APIDataType } from "../../APIType/APIDataType";
-import { AuthInfoType } from "../../APIType/AuthInfoType";
+import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
+import { APIDataType } from "../../Types/APIDataType";
+import { AuthInfoType } from "../../Types/AuthInfoType";
 import { optionObject } from "./OAuth";
-import { CombinedParameterDataType } from "../../APIType/CombinedParameterDataType";
-import { APIParameterDefType } from "../../APIType/APIParameterDefType";
-import { APIPayloadType } from "../../APIType/APIPayloadType";
-import { TokenType } from "../../APIType/APIKeyType";
-import { SignSpace } from "../../Enums/Authorization/SignSpace";
-import { ApiParameterMethods } from "../../Enums/ApiParameterMethods";
+import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
+import { APIParameterDefType } from "../../Types/APIParameterDefType";
+import { APIPayloadType } from "../../Types/APIPayloadType";
+import { TokenType } from "../../Types/APIKeyType";
+import { SignSpace } from "../../Types/Authorization/SignSpace";
+import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
 import { UnknownOAuthSignatureSpace } from "../../../../Exceptions";
 
 export default class OAuth2 implements OAuth {

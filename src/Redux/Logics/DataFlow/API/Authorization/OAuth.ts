@@ -1,9 +1,9 @@
-import { TokenType } from "../../APIType/APIKeyType";
-import { APIDataType } from "../../APIType/APIDataType";
-import { AuthInfoType } from "../../APIType/AuthInfoType";
-import { CombinedParameterDataType } from "../../APIType/CombinedParameterDataType";
-import { AuthorizeMethod } from "../../Enums/Authorization/AuthorizeMethod";
-import { APIPayloadType } from "../../APIType/APIPayloadType";
+import { TokenType } from "../../Types/APIKeyType";
+import { APIDataType } from "../../Types/APIDataType";
+import { AuthInfoType } from "../../Types/AuthInfoType";
+import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
+import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
+import { APIPayloadType } from "../../Types/APIPayloadType";
 
 export type optionObject = {
     scope?: string[];

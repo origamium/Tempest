@@ -1,13 +1,13 @@
 import OAuth1 from "./OAuth1";
 import OAuth2 from "./OAuth2";
-import { AuthInfoType } from "../../APIType/AuthInfoType";
+import { AuthInfoType } from "../../Types/AuthInfoType";
 import { AuthorizationUnitObject } from "../../../SavingData/StoredObject/Service/ApiSet/AuthorizationUnitObject";
-import { APIKeyType, TokenType } from "../../APIType/APIKeyType";
-import { OAuthVersion } from "../../Enums/Authorization/OAuthVersion";
+import { APIKeyType, TokenType } from "../../Types/APIKeyType";
+import { OAuthVersion } from "../../Types/Authorization/OAuthVersion";
 import { UnknownAuthorizationMethod } from "../../../../Exceptions";
-import { APIDataType } from "../../APIType/APIDataType";
-import { APIPayloadType } from "../../APIType/APIPayloadType";
-import { CombinedParameterDataType } from "../../APIType/CombinedParameterDataType";
+import { APIDataType } from "../../Types/APIDataType";
+import { APIPayloadType } from "../../Types/APIPayloadType";
+import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
 
 export default class Authorization {
     private readonly info: AuthInfoType;

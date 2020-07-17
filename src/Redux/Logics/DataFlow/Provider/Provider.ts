@@ -1,4 +1,4 @@
-import { APIKeyType } from "../APIType/APIKeyType";
+import { APIKeyType } from "../Types/APIKeyType";
 import { ServiceObject } from "../../SavingData/StoredObject/Service/ServiceObject";
 import { ProviderObject } from "../../SavingData/StoredObject/Provider/ProviderObject";
 import Authorization from "../API/Authorization";

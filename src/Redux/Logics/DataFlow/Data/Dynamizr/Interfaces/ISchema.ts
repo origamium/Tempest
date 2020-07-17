@@ -1,5 +1,5 @@
 import { ITransform } from "./ITransform";
-import { schemaTypes } from "../../../Enums/SchemaTypes";
+import { schemaTypes } from "../../../Types/SchemaTypes";
 
 export interface ISchema {
     target?: string;

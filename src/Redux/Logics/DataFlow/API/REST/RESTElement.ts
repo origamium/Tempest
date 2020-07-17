@@ -1,5 +1,5 @@
-import { HttpMethods } from "../../Enums/HttpMethods";
-import { APIParameterDefType } from "../../APIType/APIParameterDefType";
+import { HttpMethods } from "../../Types/HttpMethods";
+import { APIParameterDefType } from "../../Types/APIParameterDefType";
 import { ApiUnitObject } from "../../../SavingData/StoredObject/Service/ApiSet/ApiUnitObject";
 
 export default class RESTElement {

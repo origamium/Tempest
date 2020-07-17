@@ -1,4 +1,4 @@
-import { MuteEnumType } from "../../../DataFlow/Enums/MuteEnumType";
+import { MuteEnumType } from "../../../DataFlow/Types/MuteEnumType";
 
 export type MuteCommonObject = {
     type: MuteEnumType;

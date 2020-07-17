@@ -1,16 +1,16 @@
 // @ts-ignore
 import * as authSign from "oauth-sign";
 import OAuth from "./OAuth";
-import { AuthInfoType } from "../../APIType/AuthInfoType";
-import { TokenType } from "../../APIType/APIKeyType";
-import { APIDataType } from "../../APIType/APIDataType";
-import { APIPayloadType } from "../../APIType/APIPayloadType";
-import { SignSpace } from "../../Enums/Authorization/SignSpace";
-import { ApiParameterMethods } from "../../Enums/ApiParameterMethods";
+import { AuthInfoType } from "../../Types/AuthInfoType";
+import { TokenType } from "../../Types/APIKeyType";
+import { APIDataType } from "../../Types/APIDataType";
+import { APIPayloadType } from "../../Types/APIPayloadType";
+import { SignSpace } from "../../Types/Authorization/SignSpace";
+import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
 import { UnknownOAuthSignatureSpace } from "../../../../Exceptions";
-import { CombinedParameterDataType } from "../../APIType/CombinedParameterDataType";
-import { APIParameterDefType } from "../../APIType/APIParameterDefType";
-import { AuthorizeMethod } from "../../Enums/Authorization/AuthorizeMethod";
+import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
+import { APIParameterDefType } from "../../Types/APIParameterDefType";
+import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
 
 export default class OAuth1 implements OAuth {
     private static readonly nonce: string = "superdry";

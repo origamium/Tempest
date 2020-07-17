@@ -1,6 +1,6 @@
 import { Exportable } from "../HelperType/Exportable";
 import { MuteObject, MuteUserElementObject, MuteWordElementObject } from "../SavingData/StoredObject/UI/MuteObject";
-import { MuteEnumType } from "../DataFlow/Enums/MuteEnumType";
+import { MuteEnumType } from "../DataFlow/Types/MuteEnumType";
 
 export class MuteWord implements Exportable<MuteWordElementObject> {
     private _id: string;
