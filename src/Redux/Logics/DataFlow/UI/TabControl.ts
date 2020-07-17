@@ -1,8 +1,12 @@
-import { Exportable } from "../HelperType/Exportable";
-import { ColumnControl } from "./ColumnControl";
-import { TabObject } from "../SavingData/StoredObject/UI/TabObject";
-import { ColumnObject } from "../SavingData/StoredObject/UI/ColumnObject";
-import { MuteObject } from "../SavingData/StoredObject/UI/MuteObject";
+import { Exportable } from "../../HelperType/Exportable";
+import { ColumnControl, ColumnObject } from "./ColumnControl";
+import { MuteObject } from "./MuteControl";
+
+export type TabObject = {
+    id: string;
+    name: string;
+    columnId: string[];
+};
 
 export class TabControl implements Exportable<TabObject> {
     private _id: string;

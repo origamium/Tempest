@@ -1,6 +1,28 @@
-import { Exportable } from "../HelperType/Exportable";
-import { MuteObject, MuteUserElementObject, MuteWordElementObject } from "../SavingData/StoredObject/UI/MuteObject";
-import { MuteEnumType } from "../DataFlow/Types/MuteEnumType";
+import { Exportable } from "../../HelperType/Exportable";
+import { MuteEnumType } from "../Types/MuteEnumType";
+
+export type MuteCommonObject = {
+    type: MuteEnumType;
+    id: string;
+    name: string;
+};
+
+export type MuteWordElementObject = {
+    type: MuteEnumType.word;
+    isRegex: boolean;
+    inverse: boolean;
+    muteWord: string;
+} & MuteCommonObject;
+
+export type MuteUserElementObject = {
+    type: MuteEnumType.user;
+    inverse: boolean;
+    targetId: string[];
+} & MuteCommonObject;
+
+export type MuteObject = {
+    [id: string]: MuteWordElementObject | MuteUserElementObject;
+};
 
 export class MuteWord implements Exportable<MuteWordElementObject> {
     private _id: string;
@@ -85,7 +107,7 @@ export class MuteControl implements Exportable<MuteObject> {
     }
 
     get idList(): string[] {
-        return Object.entries(this._mutes).map((([v, body]) => body.id))
+        return Object.entries(this._mutes).map(([v, body]) => body.id);
     }
 
     export(): MuteObject {

@@ -1,7 +1,13 @@
-import { Exportable } from "../HelperType/Exportable";
-import { ColumnObject } from "../SavingData/StoredObject/UI/ColumnObject";
-import { MuteObject } from "../SavingData/StoredObject/UI/MuteObject";
-import { MuteControl } from "./MuteControl";
+import { Exportable } from "../../HelperType/Exportable";
+import { MuteControl, MuteObject } from "./MuteControl";
+
+export type ColumnObject = {
+    id: string;
+    accountId: string[];
+    muteId: string[];
+    collapsed: boolean;
+    contentCollapse: number;
+};
 
 export class ColumnControl implements Exportable<ColumnObject> {
     private _id: string;

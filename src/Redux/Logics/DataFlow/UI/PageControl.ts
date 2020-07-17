@@ -1,8 +1,11 @@
-import { Exportable } from "../HelperType/Exportable";
-import { TabControl } from "./TabControl";
-import { PageObject } from "../SavingData/StoredObject/UI/PageObject";
-import { ColumnObject } from "../SavingData/StoredObject/UI/ColumnObject";
-import { MuteObject } from "../SavingData/StoredObject/UI/MuteObject";
+import { Exportable } from "../../HelperType/Exportable";
+import { TabControl, TabObject } from "./TabControl";
+import { ColumnObject } from "./ColumnControl";
+import { MuteObject } from "./MuteControl";
+
+export type PageObject = {
+    tabs: TabObject[];
+};
 
 export class PageControl implements Exportable<PageObject> {
     private _tab: TabControl[];
