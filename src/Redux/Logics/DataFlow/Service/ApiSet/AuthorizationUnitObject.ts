@@ -4,15 +4,15 @@ import { SignMethod } from "../../Types/Authorization/SignMethod";
 import { SignSpace } from "../../Types/Authorization/SignSpace";
 
 export type AuthorizationUnitObject = {
+    apiUrl?: string; // connect authorization lambda
     oauthVersion: OAuthVersion; // required
     authMethod: AuthorizeMethod; // required
     signMethod: SignMethod; // required
     signSpace: SignSpace; // required
     scope?: string[];
-    redirectUrl: string; // required
+    callback: string; // required
     requestAuthorizeTokenPath?: string;
     requestAuthorizePagePath: string; // required
     requestAccessTokenPath: string; // required
     requestTokenRefreshPath?: string;
-    official?: string; // connect authorization lambda
 };

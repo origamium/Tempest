@@ -1,9 +1,9 @@
 import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
-import { PairOfObject } from "../../../HelperType/PairOfObject";
+import { UndefinedablePairOfObject } from "../../../HelperType/PairOfObject";
 
 export type APIParameterDefType = {
     required: boolean;
     type: ApiParameterMethods;
 };
 
-export type APIParameterDefTypes = PairOfObject<APIParameterDefType>;
+export type APIParameterDefTypes = UndefinedablePairOfObject<APIParameterDefType>;

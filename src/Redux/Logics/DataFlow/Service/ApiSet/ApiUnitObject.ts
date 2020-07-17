@@ -1,6 +1,6 @@
 import { APIParameterDefTypes } from "./APIParameterDefTypes";
 import { HttpMethods } from "../../Types/HttpMethods";
-import { PairOfObject } from "../../../HelperType/PairOfObject";
+import { UndefinedablePairOfObject } from "../../../HelperType/PairOfObject";
 import { Protocol } from "../../Types/Protocol";
 
 export type ApiUnitObject = {
@@ -12,4 +12,4 @@ export type ApiUnitObject = {
     errorKey?: string; // use SchemaObject
 };
 
-export type APISetObject = PairOfObject<ApiUnitObject>;
+export type APIUnitsObject = UndefinedablePairOfObject<ApiUnitObject>;
