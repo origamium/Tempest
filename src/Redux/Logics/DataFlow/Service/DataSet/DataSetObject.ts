@@ -1,5 +1,5 @@
-import { PairOfObject } from "../../../../HelperType/PairOfObject";
-import { ISchema } from "../../../../DataFlow/Data/Dynamizr/Interfaces/ISchema";
+import { PairOfObject } from "../../../HelperType/PairOfObject";
+import { ISchema } from "../../Data/Dynamizr/Interfaces/ISchema";
 
 export type DataSetObject = {
     key: string;

@@ -1,10 +1,11 @@
 import dynamize, { dynaSchemaCreator } from "./Dynamizr";
 import { ReturnedDatumInfoType } from "../Types/ReturnedDatumInfoType";
 import { PairOfObject } from "../../HelperType/PairOfObject";
-import { DataSetsObject } from "../../SavingData/StoredObject/Service/DataSet/DataSetObject";
+import { DataSetsObject } from "../Service/DataSet/DataSetObject";
 import { UnexpectedDataKey } from "../../../Exceptions";
+import { ISolvedData } from "./Dynamizr/Interfaces/ISolvedData";
 
-export default class DataSet {
+export default class DataSetControl {
     private readonly _receivedDataInfo: PairOfObject<ReturnedDatumInfoType>;
 
     constructor(source: DataSetsObject) {
@@ -17,7 +18,7 @@ export default class DataSet {
         }
     }
 
-    public normalize(key: string, data: any): any {
+    public normalize(key: string, data: any): ISolvedData {
         if (!this._receivedDataInfo[key]) {
             throw UnexpectedDataKey;
         }

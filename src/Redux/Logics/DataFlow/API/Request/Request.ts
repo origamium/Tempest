@@ -1,10 +1,10 @@
-import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
-import { APIParameterDefType } from "../../Types/APIParameterDefType";
-import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
 import * as querystring from "querystring";
 import { compile } from "path-to-regexp";
+import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
 import { APIPayloadType } from "../../Types/APIPayloadType";
-import { APIDataType } from "../../Types/APIDataType";
+import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
+import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
+import { APIParameterDefTypes } from "../../Service/ApiSet/APIParameterDefTypes";
 
 interface IParameterKeysObject {
     key: string[];
@@ -15,7 +15,7 @@ interface IParameterKeysObject {
 }
 
 export default class Request {
-    public static getParameterClassifier(parameter: APIParameterDefType): IParameterKeysObject {
+    public static getParameterClassifier(parameter: APIParameterDefTypes): IParameterKeysObject {
         const parameters = Object.keys(parameter);
 
         return {
@@ -80,7 +80,8 @@ export default class Request {
     }
 
     public static createUri(
-        data: APIDataType,
+        baseUri: string,
+        data: ApiUnitObject,
         parameters: CombinedParameterDataType,
         keys: IParameterKeysObject
     ): string {
@@ -88,7 +89,7 @@ export default class Request {
         const qsString = qs.length !== 0 ? `?${qs}` : "";
         const path = this.pickUpPathToRegexp(data.path, parameters, keys);
 
-        return `${data.baseUri}${path}${qsString}`;
+        return `${baseUri}${path}${qsString}`;
     }
 
     public static createHeaderObject(parameters: CombinedParameterDataType, keys: IParameterKeysObject): HeadersInit {
@@ -104,12 +105,13 @@ export default class Request {
     }
 
     public static createRequest(
-        data: APIDataType,
+        baseUri: string,
+        data: ApiUnitObject,
         payload: APIPayloadType,
         cert?: CombinedParameterDataType
     ): [RequestInfo, RequestInit] {
         let combinedParameter: CombinedParameterDataType = {
-            definition: data.parameter,
+            definition: data.parameterDef,
             payload,
         };
         if (cert) {
@@ -123,9 +125,9 @@ export default class Request {
         this.parameterChecker(combinedParameter, classifiedKey);
 
         return [
-            this.createUri(data, combinedParameter, classifiedKey),
+            this.createUri(baseUri, data, combinedParameter, classifiedKey),
             {
-                method: data.method,
+                method: data.httpMethod,
                 headers: this.createHeaderObject(combinedParameter, classifiedKey),
             },
         ];

@@ -1,16 +1,16 @@
-import { APIDataType } from "../Types/APIDataType";
 import { compile, PathFunction } from "path-to-regexp";
+import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
 
 export class APISet {
-    private compiledPathToRegexp: PathFunction<any>;
-    private api: APIDataType;
+    private _compiledPathToRegexp: PathFunction<any>;
+    private _api: ApiUnitObject;
 
-    constructor(source: APIDataType) {
-        this.compiledPathToRegexp = compile(source.path);
-        this.api = source;
+    constructor(source: ApiUnitObject) {
+        this._compiledPathToRegexp = compile(source.path);
+        this._api = source;
     }
 
     public createRequest = (): [RequestInfo, RequestInit] => {
-
-    }
+        return ["", {}];
+    };
 }

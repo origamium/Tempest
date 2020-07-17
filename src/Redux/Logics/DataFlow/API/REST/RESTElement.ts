@@ -1,6 +1,6 @@
 import { HttpMethods } from "../../Types/HttpMethods";
 import { APIParameterDefType } from "../../Types/APIParameterDefType";
-import { ApiUnitObject } from "../../../SavingData/StoredObject/Service/ApiSet/ApiUnitObject";
+import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
 
 export default class RESTElement {
     private readonly _path: string;
@@ -12,7 +12,7 @@ export default class RESTElement {
     constructor(source: ApiUnitObject) {
         this._path = source.path;
         this._HttpMethod = source.httpMethod;
-        this._paramDefinition = source.parameterDefinition;
+        this._paramDefinition = source.parameterDef;
         this._returnDataKey = source.returnedDataKey;
         this._errorKey = source.errorKey;
     }

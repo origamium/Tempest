@@ -1,7 +1,7 @@
-import DataSet from "./DataSet";
+import DataSetControl from "./DataSetControl";
 import Twitter from "../DefaultSupport/Twitter";
 import * as data from "../testdata/twitter/home_timeline.json";
-const instance = new DataSet(Twitter.service.dataSet);
+const instance = new DataSetControl(Twitter.service.dataSet);
 
 describe("dynamizr working tests", () => {
     test("exactly data normalize", () => {
