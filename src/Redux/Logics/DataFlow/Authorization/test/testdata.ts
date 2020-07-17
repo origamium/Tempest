@@ -1,14 +1,14 @@
-import { APIKeyType, TokenType } from "../../../Types/APIKeyType";
+import { APIKeyType, TokenType } from "../../Types/APIKeyType";
 import { APIDataType } from "../../../Types/APIDataType";
-import { HttpMethods } from "../../../Types/HttpMethods";
+import { HttpMethods } from "../../Types/HttpMethods";
 import { APIParameterDefType } from "../../../Types/APIParameterDefType";
-import { ApiParameterMethods } from "../../../Types/ApiParameterMethods";
-import { PairOfObject } from "../../../../HelperType/PairOfObject";
-import { AuthorizationUnitObject } from "../../../../SavingData/StoredObject/Service/ApiSet/AuthorizationUnitObject";
-import { OAuthVersion } from "../../../Types/Authorization/OAuthVersion";
-import { AuthorizeMethod } from "../../../Types/Authorization/AuthorizeMethod";
-import { SignMethod } from "../../../Types/Authorization/SignMethod";
-import { SignSpace } from "../../../Types/Authorization/SignSpace";
+import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
+import { PairOfObject } from "../../../HelperType/PairOfObject";
+import { AuthorizationUnitObject } from "../../Service/ApiSet/AuthorizationUnitObject";
+import { OAuthVersion } from "../../Types/Authorization/OAuthVersion";
+import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
+import { SignMethod } from "../../Types/Authorization/SignMethod";
+import { SignSpace } from "../../Types/Authorization/SignSpace";
 
 export const DummyApiKey: APIKeyType = {
     ApiKey: "qwerty",

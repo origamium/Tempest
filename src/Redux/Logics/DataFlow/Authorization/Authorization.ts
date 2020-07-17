@@ -1,13 +1,25 @@
 import OAuth1 from "./OAuth1";
 import OAuth2 from "./OAuth2";
-import { AuthInfoType } from "../../Types/AuthInfoType";
-import { AuthorizationUnitObject } from "../../../SavingData/StoredObject/Service/ApiSet/AuthorizationUnitObject";
-import { APIKeyType, TokenType } from "../../Types/APIKeyType";
-import { OAuthVersion } from "../../Types/Authorization/OAuthVersion";
-import { UnknownAuthorizationMethod } from "../../../../Exceptions";
-import { APIDataType } from "../../Types/APIDataType";
-import { APIPayloadType } from "../../Types/APIPayloadType";
-import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
+import { AuthInfoType } from "../Types/AuthInfoType";
+import { AuthorizationUnitObject } from "../Service/ApiSet/AuthorizationUnitObject";
+import { APIKeyType, TokenType } from "../Types/APIKeyType";
+import { OAuthVersion } from "../Types/Authorization/OAuthVersion";
+import { UnknownAuthorizationMethod } from "../../../Exceptions";
+import { APIPayloadType } from "../Types/APIPayloadType";
+import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
+import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
+
+export type AuthorizationDataObject = {
+    token: string;
+    tokenSecret?: string;
+    refreshTokenObject?: RefreshTokenObject;
+};
+
+export type RefreshTokenObject = {
+    refreshToken: string;
+    tokenAcquisitionDate: number; // unix time
+    tokenExpireDate: number; // unix time
+};
 
 export default class Authorization {
     private readonly info: AuthInfoType;
@@ -36,10 +48,11 @@ export default class Authorization {
     }
 
     public getAuthorizationData(
-        api: APIDataType,
+        baseUri: string,
+        api: ApiUnitObject,
         token: TokenType,
         payload: APIPayloadType
     ): CombinedParameterDataType {
-        return this.auth.getAuthorizationData(api, this.info, token, payload);
+        return this.auth.getAuthorizationData(baseUri, api, this.info, token, payload);
     }
 }

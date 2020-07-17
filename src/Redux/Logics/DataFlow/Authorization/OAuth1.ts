@@ -1,16 +1,16 @@
 // @ts-ignore
 import * as authSign from "oauth-sign";
 import OAuth from "./OAuth";
-import { AuthInfoType } from "../../Types/AuthInfoType";
-import { TokenType } from "../../Types/APIKeyType";
-import { APIDataType } from "../../Types/APIDataType";
-import { APIPayloadType } from "../../Types/APIPayloadType";
-import { SignSpace } from "../../Types/Authorization/SignSpace";
-import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
-import { UnknownOAuthSignatureSpace } from "../../../../Exceptions";
-import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
-import { APIParameterDefType } from "../../Types/APIParameterDefType";
-import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
+import { AuthInfoType } from "../Types/AuthInfoType";
+import { TokenType } from "../Types/APIKeyType";
+import { APIPayloadType } from "../Types/APIPayloadType";
+import { SignSpace } from "../Types/Authorization/SignSpace";
+import { ApiParameterMethods } from "../Types/ApiParameterMethods";
+import { UnknownOAuthSignatureSpace } from "../../../Exceptions";
+import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
+import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
+import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
+import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 
 export default class OAuth1 implements OAuth {
     private static readonly nonce: string = "superdry";
@@ -20,9 +20,10 @@ export default class OAuth1 implements OAuth {
     }
 
     private static _signature(
+        baseUri: string,
         authInfo: AuthInfoType,
         token: TokenType | undefined,
-        apiData: APIDataType,
+        apiData: ApiUnitObject,
         payload: APIPayloadType,
         timestamp: string
     ): string {
@@ -36,8 +37,8 @@ export default class OAuth1 implements OAuth {
         };
         return authSign.sign(
             authInfo.signMethod,
-            apiData.method,
-            apiData.baseUri + apiData.path,
+            apiData.httpMethod,
+            baseUri + apiData.path,
             { ...signParameter, ...payload },
             authInfo.apiKey.ApiSecretKey,
             token ? token.TokenSecret : ""
@@ -45,9 +46,10 @@ export default class OAuth1 implements OAuth {
     }
 
     private static _authorization(
+        baseUri: string,
         authInfo: AuthInfoType,
         token: TokenType | undefined,
-        apiData: APIDataType,
+        apiData: ApiUnitObject,
         payload: APIPayloadType
     ): CombinedParameterDataType {
         const timestamp = OAuth1._now();
@@ -61,7 +63,7 @@ export default class OAuth1 implements OAuth {
             ...(token ? { oauth_token: token.Token } : {}),
         };
 
-        const oauth_signature = OAuth1._signature(authInfo, token, apiData, payload, timestamp);
+        const oauth_signature = OAuth1._signature(baseUri, authInfo, token, apiData, payload, timestamp);
 
         switch (authInfo.signSpace) {
             case SignSpace.Header:
@@ -94,7 +96,7 @@ export default class OAuth1 implements OAuth {
                 };
 
                 return {
-                    definition: { ...definition, ...apiData.parameter },
+                    definition: { ...definition, ...apiData.parameterDef },
                     payload: { ...authSeed, ...payload, ...{ oauth_signature } },
                 };
 
@@ -104,10 +106,11 @@ export default class OAuth1 implements OAuth {
     }
 
     public requestAuthToken(
-        apiData: APIDataType,
+        baseUri: string,
+        apiData: ApiUnitObject,
         authInfo: AuthInfoType
     ): CombinedParameterDataType & { requiredPayload?: object } {
-        const template: APIParameterDefType = apiData.parameter;
+        const template: APIParameterDefTypes = apiData.parameterDef;
         const value: APIPayloadType = {};
 
         const callbackKey = "oauth_callback";
@@ -115,7 +118,7 @@ export default class OAuth1 implements OAuth {
             value[callbackKey] = authInfo.callback;
         }
 
-        const authorizationData = OAuth1._authorization(authInfo, undefined, apiData, value);
+        const authorizationData = OAuth1._authorization(baseUri, authInfo, undefined, apiData, value);
 
         return {
             definition: { ...authorizationData.definition, ...template },
@@ -124,12 +127,13 @@ export default class OAuth1 implements OAuth {
     }
 
     public authorizeUri(
-        apiData: APIDataType,
+        baseUri: string,
+        apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         optional?: { scope?: string[]; authToken?: TokenType }
     ): { uri: string; method: AuthorizeMethod } {
-        const uri: string = apiData.baseUri + apiData.path;
+        const uri: string = baseUri + apiData.path;
         const parameters: string[] = [];
 
         if (!optional?.authToken?.Token) {
@@ -145,17 +149,18 @@ export default class OAuth1 implements OAuth {
     }
 
     public requestToken(
-        apiData: APIDataType,
+        baseUri: string,
+        apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         verifier: string,
         optional?: { scope?: string[]; authToken?: TokenType }
     ): CombinedParameterDataType {
-        const template: APIParameterDefType = apiData.parameter;
+        const template: APIParameterDefTypes = apiData.parameterDef;
         const value: APIPayloadType = {
             oauth_verifier: verifier,
         };
 
-        const authorizationData = OAuth1._authorization(authInfo, undefined, apiData, value);
+        const authorizationData = OAuth1._authorization(baseUri, authInfo, undefined, apiData, value);
 
         return {
             definition: { ...authorizationData.definition, ...template },
@@ -166,15 +171,16 @@ export default class OAuth1 implements OAuth {
     // TODO: refreshToken
 
     public getAuthorizationData(
-        apiData: APIDataType,
+        baseUri: string,
+        apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         token: TokenType,
         payload: APIPayloadType
     ): CombinedParameterDataType {
-        const authorizationData = OAuth1._authorization(authInfo, token, apiData, payload);
+        const authorizationData = OAuth1._authorization(baseUri, authInfo, token, apiData, payload);
 
         return {
-            definition: { ...authorizationData.definition, ...apiData.parameter },
+            definition: { ...authorizationData.definition, ...apiData.parameterDef },
             payload: { ...authorizationData.payload, ...payload },
         };
     }

@@ -1,15 +1,15 @@
 import OAuth from "./OAuth";
-import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
-import { APIDataType } from "../../Types/APIDataType";
-import { AuthInfoType } from "../../Types/AuthInfoType";
+import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
+import { AuthInfoType } from "../Types/AuthInfoType";
 import { optionObject } from "./OAuth";
-import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
-import { APIParameterDefType } from "../../Types/APIParameterDefType";
-import { APIPayloadType } from "../../Types/APIPayloadType";
-import { TokenType } from "../../Types/APIKeyType";
-import { SignSpace } from "../../Types/Authorization/SignSpace";
-import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
-import { UnknownOAuthSignatureSpace } from "../../../../Exceptions";
+import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
+import { APIPayloadType } from "../Types/APIPayloadType";
+import { TokenType } from "../Types/APIKeyType";
+import { SignSpace } from "../Types/Authorization/SignSpace";
+import { ApiParameterMethods } from "../Types/ApiParameterMethods";
+import { UnknownOAuthSignatureSpace } from "../../../Exceptions";
+import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
+import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 
 export default class OAuth2 implements OAuth {
     private static scopeToString(scope: string[]): string {
@@ -17,12 +17,13 @@ export default class OAuth2 implements OAuth {
     }
 
     public authorizeUri(
-        apiData: APIDataType,
+        baseUri: string,
+        apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         option?: optionObject
     ): { uri: string; method: AuthorizeMethod } {
-        const uri = apiData.baseUri + apiData.path;
+        const uri = `${baseUri}${apiData.path}`;
         const parameters: string[] = [];
         if (option?.scope) {
             parameters.push(OAuth2.scopeToString(option.scope));
@@ -35,12 +36,13 @@ export default class OAuth2 implements OAuth {
     }
 
     public requestToken(
-        apiData: APIDataType,
+        baseUri: string,
+        apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         verifier: string,
         option?: optionObject
     ): CombinedParameterDataType {
-        const template: APIParameterDefType = apiData.parameter;
+        const template: APIParameterDefTypes = apiData.parameterDef;
         if (!authInfo.apiKey.ApiSecretKey) {
             throw new Error("api secret key is undefined");
         }
@@ -61,12 +63,13 @@ export default class OAuth2 implements OAuth {
     // TODO: refreshToken
 
     public getAuthorizationData(
-        apiData: APIDataType,
+        baseUri: string,
+        apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         token: TokenType,
-        payload:APIPayloadType
+        payload: APIPayloadType
     ): CombinedParameterDataType {
-        const template: APIParameterDefType = {};
+        const template: APIParameterDefTypes = {};
         const value: APIPayloadType = {};
         let key: string = "";
         if (token) {

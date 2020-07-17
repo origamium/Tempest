@@ -1,11 +1,11 @@
-import { APIKeyType } from "../../../Types/APIKeyType";
-import { AuthInfoType } from "../../../Types/AuthInfoType";
-import { OAuthVersion } from "../../../Types/Authorization/OAuthVersion";
-import { AuthorizeMethod } from "../../../Types/Authorization/AuthorizeMethod";
-import { SignMethod } from "../../../Types/Authorization/SignMethod";
-import { SignSpace } from "../../../Types/Authorization/SignSpace";
+import { APIKeyType } from "../../Types/APIKeyType";
+import { AuthInfoType } from "../../Types/AuthInfoType";
+import { OAuthVersion } from "../../Types/Authorization/OAuthVersion";
+import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
+import { SignMethod } from "../../Types/Authorization/SignMethod";
+import { SignSpace } from "../../Types/Authorization/SignSpace";
 import { APIDataType } from "../../../Types/APIDataType";
-import { HttpMethods } from "../../../Types/HttpMethods";
+import { HttpMethods } from "../../Types/HttpMethods";
 import OAuth1 from "../OAuth1";
 
 const auth = new OAuth1();
