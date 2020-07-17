@@ -3,7 +3,7 @@ import { styled } from "./Theme";
 import { Body } from "./Body";
 import { Header } from "./Component/Header/Header";
 import { useDispatch } from "react-redux";
-import { requestInitializeAction } from "./Redux/Gears/dataStore/requestInitialize";
+import { requestRestoreAction } from "./Redux/Gears/dataStore/requestRestore";
 
 const Styled = {
     Root: styled.div`
@@ -20,7 +20,7 @@ const Styled = {
 export const App: React.FC = () => {
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(requestInitializeAction());
+        dispatch(requestRestoreAction());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
