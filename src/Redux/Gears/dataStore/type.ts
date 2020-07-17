@@ -1,8 +1,8 @@
-import { Accounts } from "../../Logics/SavingData/StoredObject/Account/AccountObject";
-import { Services } from "../../Logics/SavingData/StoredObject/Service/ServiceObject";
-import { Providers } from "../../Logics/SavingData/StoredObject/Provider/ProviderObject";
 import { dbKeys } from "../../Store/indexedDB";
 import { UIObject } from "../../Logics/DataFlow/UI/UIObject";
+import { Accounts } from "../../Logics/DataFlow/Account/AccountControl";
+import { Providers } from "../../Logics/DataFlow/Provider/ProviderControl";
+import { Services } from "../../Logics/DataFlow/Service/ServiceControl";
 
 export type RootObject = {
     [dbKeys.account]: Accounts;

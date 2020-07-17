@@ -3,7 +3,7 @@ import { APIDataType } from "../../../Types/APIDataType";
 import { HttpMethods } from "../../Types/HttpMethods";
 import { APIParameterDefType } from "../../../Types/APIParameterDefType";
 import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
-import { PairOfObject } from "../../../HelperType/PairOfObject";
+import { UndefinedablePairOfObject } from "../../../HelperType/PairOfObject";
 import { AuthorizationUnitObject } from "../../Service/ApiSet/AuthorizationUnitObject";
 import { OAuthVersion } from "../../Types/Authorization/OAuthVersion";
 import { AuthorizeMethod } from "../../Types/Authorization/AuthorizeMethod";
@@ -38,13 +38,13 @@ export const test1_blank_param: APIParameterDefType = {
     },
 };
 
-export const oauth1data: PairOfObject<AuthorizationUnitObject> = {
+export const oauth1data: UndefinedablePairOfObject<AuthorizationUnitObject> = {
     pin_hmac_header: {
         oauthVersion: OAuthVersion.OAuth1,
         authMethod: AuthorizeMethod.PIN,
         signMethod: SignMethod.hmac,
         signSpace: SignSpace.Header,
-        redirectUrl: "oob",
+        callback: "oob",
         requestAuthorizeTokenPath: "oauth/request_token",
         requestAuthorizePagePath: "oauth/authorize",
         requestAccessTokenPath: "oauth/access_token",
@@ -54,20 +54,20 @@ export const oauth1data: PairOfObject<AuthorizationUnitObject> = {
         authMethod: AuthorizeMethod.PIN,
         signMethod: SignMethod.hmac,
         signSpace: SignSpace.Query,
-        redirectUrl: "oob",
+        callback: "oob",
         requestAuthorizeTokenPath: "oauth/request_token",
         requestAuthorizePagePath: "oauth/authorize",
         requestAccessTokenPath: "oauth/access_token",
     },
 };
 
-export const oauth2data: PairOfObject<AuthorizationUnitObject> = {
+export const oauth2data: UndefinedablePairOfObject<AuthorizationUnitObject> = {
     pin_plain_header: {
         oauthVersion: OAuthVersion.OAuth2,
         authMethod: AuthorizeMethod.Callback,
         signMethod: SignMethod.plain,
         signSpace: SignSpace.Header,
-        redirectUrl: "https://google.com",
+        callback: "https://google.com",
         requestAuthorizePagePath: "oauth/authorize",
         requestAccessTokenPath: "oauth/access_token",
     },
@@ -76,7 +76,7 @@ export const oauth2data: PairOfObject<AuthorizationUnitObject> = {
         authMethod: AuthorizeMethod.Callback,
         signMethod: SignMethod.plain,
         signSpace: SignSpace.Query,
-        redirectUrl: "https://google.com",
+        callback: "https://google.com",
         requestAuthorizePagePath: "oauth/authorize",
         requestAccessTokenPath: "oauth/access_token",
     },

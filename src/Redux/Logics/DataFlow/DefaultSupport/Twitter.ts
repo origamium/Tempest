@@ -6,10 +6,7 @@ import { HttpMethods } from "../Types/HttpMethods";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { schemaTypes } from "../Types/SchemaTypes";
 import { Protocol } from "../Types/Protocol";
-import { APISetObject } from "../../SavingData/StoredObject/Service/ApiSet/APISetObject";
-import { DataSetsObject } from "../../SavingData/StoredObject/Service/DataSet/DataSetObject";
-import { ServiceObject } from "../../SavingData/StoredObject/Service/ServiceObject";
-import { ProviderObject } from "../../SavingData/StoredObject/Provider/ProviderObject";
+import { DataSetsObject } from "../Service/DataSet/DataSetObject";
 
 const serviceKey = "Twitter";
 
