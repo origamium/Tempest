@@ -1,7 +1,7 @@
-import { PageControl } from "../../Logics/UI/PageControl";
-import { TabControl } from "../../Logics/UI/TabControl";
-import { ColumnControl } from "../../Logics/UI/ColumnControl";
-import { MuteControl } from "../../Logics/UI/MuteControl";
+import { PageControl } from "../../Logics/DataFlow/UI/PageControl";
+import { TabControl } from "../../Logics/DataFlow/UI/TabControl";
+import { ColumnControl } from "../../Logics/DataFlow/UI/ColumnControl";
+import { MuteControl } from "../../Logics/DataFlow/UI/MuteControl";
 import { dataStoreActions, dataStoreActionsIdentifier } from "./index";
 
 export type DataStoreType = {
