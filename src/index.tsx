@@ -9,6 +9,15 @@ import { rootSaga } from "./Redux/rootSaga";
 import { Theme, ThemeProvider } from "./Theme";
 import "ress";
 import { Auth0Provider } from "@auth0/auth0-react";
+import localforage from "localforage";
+
+localforage.config({
+    driver: localforage.INDEXEDDB,
+    name: "tempest",
+    version: 0.1,
+    storeName: "tempestlocalstore",
+    description: "tempest client saved settings",
+});
 
 Sentry.init({ dsn: "https://446c9a464ec844c2a5261438e9df8f52@o344655.ingest.sentry.io/5341100" });
 
