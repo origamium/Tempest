@@ -2,7 +2,7 @@ import { Accounts } from "../../Logics/SavingData/StoredObject/Account/AccountOb
 import { Services } from "../../Logics/SavingData/StoredObject/Service/ServiceObject";
 import { Providers } from "../../Logics/SavingData/StoredObject/Provider/ProviderObject";
 import { dbKeys } from "../../Store/indexedDB";
-import { UIObject } from "../../Logics/SavingData/StoredObject/UI/UIObject";
+import { UIObject } from "../../Logics/DataFlow/UI/UIObject";
 
 export type RootObject = {
     [dbKeys.account]: Accounts;

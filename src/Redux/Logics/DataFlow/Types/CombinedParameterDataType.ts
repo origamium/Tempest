@@ -1,7 +1,7 @@
-import { APIParameterDefType } from "./APIParameterDefType";
 import { APIPayloadType } from "./APIPayloadType";
+import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 
 export interface CombinedParameterDataType {
-    definition: APIParameterDefType;
+    definition: APIParameterDefTypes;
     payload: APIPayloadType;
 }

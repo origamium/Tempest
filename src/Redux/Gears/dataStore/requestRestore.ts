@@ -3,11 +3,11 @@ import { Action } from "redux";
 import { dataStoreActionsIdentifier } from "./index";
 import { dbKeys, SettingStore } from "../../Store/indexedDB";
 import { requestInitializeAction } from "./requestInitialize";
-import { PageControl } from "../../Logics/UI/PageControl";
-import { UIObject } from "../../Logics/SavingData/StoredObject/UI/UIObject";
-import { TabControl } from "../../Logics/UI/TabControl";
-import { ColumnControl } from "../../Logics/UI/ColumnControl";
-import { MuteControl } from "../../Logics/UI/MuteControl";
+import { PageControl } from "../../Logics/DataFlow/UI/PageControl";
+import { UIObject } from "../../Logics/DataFlow/UI/UIObject";
+import { TabControl } from "../../Logics/DataFlow/UI/TabControl";
+import { ColumnControl } from "../../Logics/DataFlow/UI/ColumnControl";
+import { MuteControl } from "../../Logics/DataFlow/UI/MuteControl";
 import { finishRestoreAction } from "./finishRestore";
 
 export interface RequestRestoreActionType extends Action {
