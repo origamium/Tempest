@@ -1,8 +1,8 @@
-export const scopes: string[] = [
+export const slack_scopes: string[] = [
     "channels:history",
     "channels:read",
     "channels:write",
-    "chat:write:user",
+    "chat:write",
     "groups:history",
     "groups:read",
     "groups:write",
@@ -14,7 +14,7 @@ export const scopes: string[] = [
     "mpim:write",
     "emoji:read",
     "files:read",
-    "files:write:user",
+    "files:write",
     "pins:read",
     "pins:write",
     "reactions:read",
@@ -37,6 +37,7 @@ export const scopes: string[] = [
     "team:read",
 ];
 
-export const space_separeted_scopes: string = scopes
+export const slack_scope_str: string = slack_scopes
     .reduce((accm: string, curr: string): string => accm + " " + curr, "")
-    .trim();
+    .trim()
+    .replace(/\s/g, ",");
