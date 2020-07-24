@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import { Provider } from "react-redux";
 import dotenv from "dotenv";
-import * as Sentry from "@sentry/react";
 import * as serviceWorker from "./serviceWorker";
 import { configureStore, sagaMiddleware } from "./Redux/Store/configureStore";
 import { rootSaga } from "./Redux/rootSaga";
@@ -21,8 +20,6 @@ localforage.config({
     storeName: "tempestlocalstore",
     description: "tempest client saved settings",
 });
-
-Sentry.init({ dsn: "https://446c9a464ec844c2a5261438e9df8f52@o344655.ingest.sentry.io/5341100" });
 
 ReactDOM.render(
     <Provider store={configureStore()}>
