@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./App";
 import { Provider } from "react-redux";
+import dotenv from "dotenv";
 import * as Sentry from "@sentry/react";
 import * as serviceWorker from "./serviceWorker";
 import { configureStore, sagaMiddleware } from "./Redux/Store/configureStore";
@@ -10,6 +11,8 @@ import { Theme, ThemeProvider } from "./Theme";
 import "ress";
 import { Auth0Provider } from "@auth0/auth0-react";
 import localforage from "localforage";
+
+dotenv.config();
 
 localforage.config({
     driver: localforage.INDEXEDDB,

@@ -107,6 +107,7 @@
     "core-js": "3.6.5",
     "cross-env": "7.0.2",
     "css-loader": "3.6.0",
+    "dotenv": "^8.2.0",
     "eslint": "7.4.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-import": "2.22.0",
