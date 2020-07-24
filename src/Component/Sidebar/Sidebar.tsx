@@ -11,10 +11,11 @@ export interface ISidebarProps {
 }
 
 const Styled = {
-    Root: styled.div`
+    Root: styled.div<{ width: number }>`
         position: relative;
+        width: ${({ width }) => width + 24}px;
         height: 100%;
-        padding: 4px 0;
+
         & > * {
             position: absolute;
             top: 0;
@@ -23,17 +24,25 @@ const Styled = {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
+            height: calc(100% - 16px);
             padding-left: 8px;
-            margin-left: -4px;
+            margin: 8px 0 8px -4px;
         }
     `,
 };
 
 export const Sidebar: React.FC<ISidebarProps> = (props: ISidebarProps) => {
+    const sidebarBodyRef = React.useRef<HTMLDivElement>(null);
+    const [sidebarClientWidth, setSidebarClientWidth] = React.useState<number>(0);
+    const calcSidebarBodyWidth = React.useCallback<() => number>(() => sidebarBodyRef.current?.clientWidth ?? 0, []);
+
+    React.useLayoutEffect(() => {
+        setSidebarClientWidth(calcSidebarBodyWidth());
+    }, [calcSidebarBodyWidth]);
+
     return (
-        <Styled.Root>
-            <Paper>
+        <Styled.Root width={sidebarClientWidth}>
+            <Paper ref={sidebarBodyRef}>
                 <div>
                     <IconButton onClick={props.addAction}>
                         <Add />

@@ -4,6 +4,8 @@ import { Body } from "./Body";
 import { Header } from "./Component/Header/Header";
 import { useDispatch } from "react-redux";
 import { requestRestoreAction } from "./Redux/Gears/dataStore/requestRestore";
+import { TabDataProvider } from "./hooks/useTabs";
+import { ColumnDataProvider } from "./hooks/useColumns";
 
 const Styled = {
     Root: styled.div`
@@ -26,8 +28,12 @@ export const App: React.FC = () => {
 
     return (
         <Styled.Root>
-            <Header />
-            <Body />
+            <TabDataProvider value={undefined}>
+                <ColumnDataProvider value={{ columns: [], updateColumns: () => {} }}>
+                    <Header />
+                    <Body />
+                </ColumnDataProvider>
+            </TabDataProvider>
         </Styled.Root>
     );
 };
