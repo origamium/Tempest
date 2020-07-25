@@ -77,7 +77,7 @@
     "@testing-library/dom": "7.21.0",
     "@testing-library/jest-dom": "5.11.1",
     "@testing-library/react": "10.4.7",
-    "@testing-library/react-hooks": "3.3.0",
+    "@testing-library/react-hooks": "3.4.1",
     "@testing-library/user-event": "12.0.11",
     "@types/expect-puppeteer": "4.4.3",
     "@types/jest": "26.0.4",
