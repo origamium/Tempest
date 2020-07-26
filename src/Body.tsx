@@ -61,19 +61,6 @@ export const Body: React.FC = () => {
                 >
                     <Tab label={"Twitter"} />
                     <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
                 </Tabs>
                 <TabPanel index={1} value={1} />
             </Styled.Body>
