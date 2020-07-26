@@ -18,8 +18,10 @@ localforage.config({
     description: "tempest client saved settings",
 });
 
+const store = configureStore();
+
 ReactDOM.render(
-    <Provider store={configureStore()}>
+    <Provider store={store}>
         <Auth0Provider
             domain="lisp.auth0.com"
             clientId="BmXHS2fMDer91hNjqLIEquULdS3EHib6"
