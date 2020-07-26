@@ -7,10 +7,19 @@ import { Columns } from "./Component/MainView/Columns";
 const Styled = {
     Root: styled.div`
         display: flex;
+        width: 100%;
         height: 100%;
     `,
-    TabPanelBody: styled.div`
+    Body: styled.div`
+        flex: 0 1 auto;
+        overflow: auto;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+    `,
+    TabPanelBody: styled.div`
+        flex: 1 0 auto;
+        width: 100%;
     `,
 };
 
@@ -21,16 +30,14 @@ interface TabPanelProps {
 
 const TabPanel: React.FC<TabPanelProps> = ({ index, value }) => {
     return (
-        <div
+        <Styled.TabPanelBody
             role="tabpanel"
             hidden={value !== index}
             id={`scrollable-auto-tabpanel-${index}`}
             aria-labelledby={`scrollable-auto-tab-${index}`}
         >
-            <Styled.TabPanelBody>
-                <Columns tabId={"394"} handleUpdate={() => {}} />
-            </Styled.TabPanelBody>
-        </div>
+            <Columns tabId={"394"} handleUpdate={() => {}} />
+        </Styled.TabPanelBody>
     );
 };
 
@@ -43,31 +50,33 @@ export const Body: React.FC = () => {
     return (
         <Styled.Root>
             <Sidebar accounts={[]} addAction={() => {}} settingAction={() => {}} />
-            <Tabs
-                value={tabIndex}
-                onChange={handleTabChange}
-                indicatorColor="primary"
-                textColor="primary"
-                variant="scrollable"
-                scrollButtons="auto"
-            >
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-                <Tab label={"Twitter"} />
-            </Tabs>
-            <TabPanel index={1} value={1} />
+            <Styled.Body>
+                <Tabs
+                    value={tabIndex}
+                    onChange={handleTabChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                >
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                    <Tab label={"Twitter"} />
+                </Tabs>
+                <TabPanel index={1} value={1} />
+            </Styled.Body>
         </Styled.Root>
     );
 };

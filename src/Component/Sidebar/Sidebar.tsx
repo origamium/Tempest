@@ -12,21 +12,15 @@ export interface ISidebarProps {
 
 const Styled = {
     Root: styled.div<{ width: number }>`
-        position: relative;
         width: ${({ width }) => width + 24}px;
         height: 100%;
-
         & > * {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: -4px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: calc(100% - 16px);
             padding-left: 8px;
-            margin: 8px 0 8px -4px;
+            margin: 8px 0 8px -8px;
         }
     `,
 };
