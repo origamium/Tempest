@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as authSign from "oauth-sign";
-import OAuth from "./OAuth";
+import OAuth, { optionObject } from "./OAuth";
 import { AuthInfoType } from "../Types/AuthInfoType";
 import { TokenType } from "../Types/APIKeyType";
 import { APIPayloadType } from "../Types/APIPayloadType";
@@ -131,7 +131,7 @@ export default class OAuth1 implements OAuth {
         apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
-        optional?: { scope?: string[]; authToken?: TokenType }
+        optional?: optionObject
     ): { uri: string; method: AuthorizeMethod } {
         const uri: string = baseUri + apiData.path;
         const parameters: string[] = [];
