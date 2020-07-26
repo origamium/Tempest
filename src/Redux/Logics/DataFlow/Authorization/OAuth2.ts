@@ -12,8 +12,15 @@ import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 
 export default class OAuth2 implements OAuth {
-    private static scopeToString(scope: string[]): string {
-        return "scope=" + scope.reduce((accm, curr) => accm + "+" + curr, "");
+    private static scopeToString(parameterName: string, scope: string[], separateStr: string = ","): string {
+        return (
+            parameterName +
+            "=" +
+            scope
+                .reduce((accm: string, curr: string): string => accm + " " + curr, "")
+                .trim()
+                .replace(/\s/g, separateStr)
+        );
     }
 
     public authorizeUri(
@@ -22,16 +29,19 @@ export default class OAuth2 implements OAuth {
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         option?: optionObject
-    ): { uri: string; method: AuthorizeMethod } {
+    ): { uri: string; method: AuthorizeMethod; imageUrl?: string } {
         const uri = `${baseUri}${apiData.path}`;
         const parameters: string[] = [];
         if (option?.scope) {
-            parameters.push(OAuth2.scopeToString(option.scope));
+            parameters.push(
+                OAuth2.scopeToString(option.scope.payloadName, option.scope.scopes, option.scope.separateStr)
+            );
         }
 
         return {
             uri: uri + "?" + encodeURIComponent(parameters.reduce((accm, curr) => accm + "&" + curr, "")),
             method,
+            imageUrl: option?.imageUrl,
         };
     }
 

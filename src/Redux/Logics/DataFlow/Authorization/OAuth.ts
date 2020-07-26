@@ -6,8 +6,13 @@ import { APIPayloadType } from "../Types/APIPayloadType";
 import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
 
 export type optionObject = {
-    scope?: string[];
+    scope?: {
+        payloadName: string;
+        scopes: string[];
+        separateStr: string,
+    };
     authToken: TokenType;
+    imageUrl?: string;
 };
 
 export default interface IOAuth {
