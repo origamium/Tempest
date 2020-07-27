@@ -1,20 +1,20 @@
 import { Exportable } from "../../HelperType/Exportable";
-import { TabControl, TabObject } from "./TabControl";
-import { ColumnObject } from "./ColumnControl";
-import { MuteObject } from "./MuteControl";
+import { TabControl, TabControlObject } from "./TabControl";
+import { ColumnControlObject } from "./ColumnControl";
+import { MuteControlObject } from "./MuteControl";
 
-export type PageObject = {
-    tabs: TabObject[];
+export type PageControlObject = {
+    tabs: TabControlObject[];
 };
 
-export class PageControl implements Exportable<PageObject> {
+export class PageControl implements Exportable<PageControlObject> {
     private _tab: TabControl[];
 
-    constructor({ tabs }: PageObject, columns: ColumnObject[], mutes: MuteObject) {
+    constructor({ tabs }: PageControlObject, columns: ColumnControlObject[], mutes: MuteControlObject) {
         this._tab = tabs.map((v) => new TabControl(v, columns, mutes));
     }
 
-    export(): PageObject {
+    export(): PageControlObject {
         return {
             tabs: this._tab.map((v) => v.export()),
         };

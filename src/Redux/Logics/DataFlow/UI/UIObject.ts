@@ -1,11 +1,11 @@
-import { ColumnObject } from "./ColumnControl";
-import { MuteObject } from "./MuteControl";
-import { TabObject } from "./TabControl";
-import { PageObject } from "./PageControl";
+import { ColumnControlObject } from "./ColumnControl";
+import { MuteControlObject } from "./MuteControl";
+import { TabControlObject } from "./TabControl";
+import { PageControlObject } from "./PageControl";
 
 export type UIObject = {
-    page: PageObject;
-    tabs: TabObject[];
-    columns: ColumnObject[];
-    mutes: MuteObject;
+    page: PageControlObject;
+    tabs: TabControlObject[];
+    columns: ColumnControlObject[];
+    mutes: MuteControlObject;
 };

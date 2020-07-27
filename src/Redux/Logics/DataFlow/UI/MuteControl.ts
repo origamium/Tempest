@@ -7,31 +7,31 @@ export type MuteCommonObject = {
     name: string;
 };
 
-export type MuteWordElementObject = {
+export type MuteWordControlObject = {
     type: MuteEnumType.word;
     isRegex: boolean;
     inverse: boolean;
     muteWord: string;
 } & MuteCommonObject;
 
-export type MuteUserElementObject = {
+export type MuteUserControlObject = {
     type: MuteEnumType.user;
     inverse: boolean;
     targetId: string[];
 } & MuteCommonObject;
 
-export type MuteObject = {
-    [id: string]: MuteWordElementObject | MuteUserElementObject;
+export type MuteControlObject = {
+    [id: string]: MuteWordControlObject | MuteUserControlObject;
 };
 
-export class MuteWord implements Exportable<MuteWordElementObject> {
+export class MuteWord implements Exportable<MuteWordControlObject> {
     private _id: string;
     private _name: string;
     private _isRegex: boolean;
     private _inverse: boolean;
     private _muteWord: string;
 
-    constructor({ id, name, muteWord, isRegex, inverse }: MuteWordElementObject) {
+    constructor({ id, name, muteWord, isRegex, inverse }: MuteWordControlObject) {
         this._id = id;
         this._name = name;
         this._muteWord = muteWord;
@@ -42,7 +42,7 @@ export class MuteWord implements Exportable<MuteWordElementObject> {
     get id(): string {
         return this._id;
     }
-    export(): MuteWordElementObject {
+    export(): MuteWordControlObject {
         return {
             type: MuteEnumType.word,
             id: this._id,
@@ -54,13 +54,13 @@ export class MuteWord implements Exportable<MuteWordElementObject> {
     }
 }
 
-export class MuteUser implements Exportable<MuteUserElementObject> {
+export class MuteUser implements Exportable<MuteUserControlObject> {
     private _id: string;
     private _name: string;
     private _inverse: boolean;
     private _targetId: string[];
 
-    constructor({ id, name, inverse, targetId }: MuteUserElementObject) {
+    constructor({ id, name, inverse, targetId }: MuteUserControlObject) {
         this._id = id;
         this._name = name;
         this._inverse = inverse;
@@ -70,7 +70,7 @@ export class MuteUser implements Exportable<MuteUserElementObject> {
     get id(): string {
         return this._id;
     }
-    export(): MuteUserElementObject {
+    export(): MuteUserControlObject {
         return {
             type: MuteEnumType.user,
             id: this._id,
@@ -81,7 +81,7 @@ export class MuteUser implements Exportable<MuteUserElementObject> {
     }
 }
 
-export class MuteControl implements Exportable<MuteObject> {
+export class MuteControl implements Exportable<MuteControlObject> {
     private _mutes: {
         [key: string]: MuteWord | MuteUser;
     };
@@ -90,7 +90,7 @@ export class MuteControl implements Exportable<MuteObject> {
         return this._mutes[id];
     }
 
-    constructor(init: MuteObject) {
+    constructor(init: MuteControlObject) {
         this._mutes = Object.entries(init)
             .map(([, muteObject]) => {
                 if (muteObject.type === MuteEnumType.word) {
@@ -110,7 +110,7 @@ export class MuteControl implements Exportable<MuteObject> {
         return Object.entries(this._mutes).map(([v, body]) => body.id);
     }
 
-    export(): MuteObject {
+    export(): MuteControlObject {
         return Object.entries(this._mutes).reduce(
             (accm, [, muteObject]) => ({ ...accm, [muteObject.id]: muteObject.export() }),
             {}
