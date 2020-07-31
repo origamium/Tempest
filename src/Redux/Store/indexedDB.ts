@@ -5,8 +5,11 @@ export const SettingStore = localforage.createInstance({
 });
 
 export enum dbKeys {
-    ui = "UI",
     account = "account",
     service = "service",
     provider = "provider",
+    ui = "UI",
+    content = "content",
+    setting = "setting",
+    credentials = "credentials",
 }
