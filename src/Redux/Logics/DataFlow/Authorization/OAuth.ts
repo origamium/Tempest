@@ -36,7 +36,6 @@ export default interface IOAuth {
     // "verifier" is also known as "PIN"
     requestToken(
         baseUri: string,
-
         apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         verifier: string,

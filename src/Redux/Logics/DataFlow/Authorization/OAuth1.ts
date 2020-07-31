@@ -153,7 +153,7 @@ export default class OAuth1 implements OAuth {
         apiData: ApiUnitObject,
         authInfo: AuthInfoType,
         verifier: string,
-        optional?: { scope?: string[]; authToken?: TokenType }
+        option?: optionObject
     ): CombinedParameterDataType {
         const template: APIParameterDefTypes = apiData.parameterDef;
         const value: APIPayloadType = {
