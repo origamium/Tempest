@@ -50,7 +50,7 @@ export class Contents implements Exportable<ContentsStruct> {
 export class ContentsControl implements Exportable<ContentsControlObject> {
     private contents: PairOfObject<Contents>;
 
-    constructor(source: ContentsControlObject, exists: PairOfObject<Contents>) {
+    constructor(source: ContentsControlObject, exists?: PairOfObject<Contents>) {
         if (exists) {
             this.contents = { ...exists };
         } else {

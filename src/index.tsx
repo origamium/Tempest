@@ -20,6 +20,8 @@ localforage.config({
 
 const store = configureStore();
 
+sagaMiddleware.run(rootSaga);
+
 ReactDOM.render(
     <Provider store={store}>
         <Auth0Provider
@@ -34,8 +36,6 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
-
-sagaMiddleware.run(rootSaga);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
