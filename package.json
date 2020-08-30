@@ -134,7 +134,7 @@
     "serve": "11.3.2",
     "snyk": "1.386.0",
     "source-map-loader": "1.1.0",
-    "start-server-and-test": "1.11.2",
+    "start-server-and-test": "1.11.3",
     "style-loader": "1.2.1",
     "stylelint": "13.6.1",
     "stylelint-config-recess-order": "2.1.0",
