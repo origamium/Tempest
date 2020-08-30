@@ -21,7 +21,7 @@
     "react-dropzone": "11.0.3",
     "react-i18next": "11.7.2",
     "react-redux": "7.2.1",
-    "react-virtualized": "9.21.2",
+    "react-virtualized": "9.22.2",
     "recompose": "0.30.0",
     "redux": "4.0.5",
     "redux-actions": "2.6.5",
