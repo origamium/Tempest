@@ -1,4 +1,4 @@
-import { debugActions } from "./Gears/debug";
-import { dataStoreActions } from "./Gears/dataStore";
+import { debugActions } from "./Slices/debug";
+import { dataStoreActions } from "./Slices/dataStore";
 
 export type RegisteredActions = debugActions | dataStoreActions;

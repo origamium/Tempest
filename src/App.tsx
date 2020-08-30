@@ -3,7 +3,7 @@ import { styled } from "./Theme";
 import { Body } from "./Body";
 import { Header } from "./Component/Header/Header";
 import { useDispatch } from "react-redux";
-import { requestRestoreAction } from "./Redux/Gears/dataStore/requestRestore";
+import { requestRestoreAction } from "./Redux/Slices/dataStore/requestRestore";
 import { TabDataProvider } from "./hooks/useTabs";
 import { ColumnDataProvider } from "./hooks/useColumns";
 
@@ -25,6 +25,8 @@ export const App: React.FC = () => {
         dispatch(requestRestoreAction());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+
 
     return (
         <Styled.Root>
