@@ -117,7 +117,7 @@
     "eslint-plugin-react-hooks": "4.1.0",
     "file-loader": "6.0.0",
     "fork-ts-checker-webpack-plugin": "5.1.0",
-    "html-webpack-plugin": "4.3.0",
+    "html-webpack-plugin": "4.4.1",
     "husky": "4.2.5",
     "jest": "26.4.2",
     "jest-image-snapshot": "4.2.0",
