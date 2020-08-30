@@ -1,7 +1,7 @@
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import * as React from "react";
-import { OpenDialogEvent, OpenDialogEventDetail, OpenDialogEventDispatcher } from "../../../CustomEvents";
+import { OpenDialogEventDetail, OpenDialogEventDispatcher } from "../../../CustomEvents";
 
 export const SidebarAddButton: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
