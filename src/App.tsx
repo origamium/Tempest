@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { requestRestoreAction } from "./Redux/Slices/dataStore/requestRestore";
 import { TabDataProvider } from "./hooks/useTabs";
 import { ColumnDataProvider } from "./hooks/useColumns";
+import { useDialog } from "./hooks/useDialog";
 
 const Styled = {
     Root: styled.div`
@@ -26,7 +27,7 @@ export const App: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
+    useDialog();
 
     return (
         <Styled.Root>
