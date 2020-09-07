@@ -75,7 +75,7 @@
     "@storybook/addon-storysource": "5.3.21",
     "@storybook/addons": "5.3.21",
     "@storybook/react": "5.3.21",
-    "@testing-library/dom": "7.23.0",
+    "@testing-library/dom": "7.24.1",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "10.4.9",
     "@testing-library/react-hooks": "3.4.1",
