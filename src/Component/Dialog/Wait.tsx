@@ -1,5 +1,5 @@
 import * as React from "react";
 
-export const Loading: React.FC = () => {
+export const Wait: React.FC = () => {
     return <div />;
 };
