@@ -13,7 +13,7 @@ import { ArticleIdentifier } from "../../../datatype/Contents/Article/ArticleIde
 const sampleId = "sample-id-0123456789";
 
 export default {
-    title: "Common Components|Card",
+    title: "Common Components/Card",
 };
 
 export const Basic = () => (

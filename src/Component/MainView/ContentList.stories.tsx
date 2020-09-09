@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { createDummyContent } from "../../Utility/createDummyData/createDummyContent";
 
 export default {
-    title: "Column|Column/ContentList",
+    title: "Column/Column/ContentList",
     component: ContentList,
 };
 

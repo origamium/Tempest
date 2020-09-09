@@ -9,7 +9,7 @@ import Form from "./Form";
 import { Field } from "./Field";
 // import icon from "../../__testdata__/icon/icon";
 
-const StoryNamePrefix = "Common Components|Form";
+const StoryNamePrefix = "Common Components/Form";
 
 const sampleAccountId = "arclisp@twitter.com";
 const sampleId = "arclisp@twitter.com:1:01";

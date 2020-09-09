@@ -12,7 +12,7 @@ import { ThumbnailList } from "./ThumbnailList";
 
 const box = (story) => <div style={{ width: "50vw" }}>{story()}</div>;
 
-storiesOf("Common Components|Thumbnail", module)
+storiesOf("Common Components/Thumbnail", module)
     .addDecorator(centered)
     .add(
         "Thumbnail info",
@@ -33,7 +33,7 @@ storiesOf("Common Components|Thumbnail", module)
         {}
     );
 
-storiesOf("Common Components|ThumbnailList", module)
+storiesOf("Common Components/ThumbnailList", module)
     .addDecorator(centered)
     .addDecorator(box)
     .add(

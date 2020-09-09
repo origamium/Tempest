@@ -7,7 +7,7 @@ import { Text } from "./Text";
 import { ThemeProviderDecorator } from "../../../Theme";
 
 export default {
-    title: "Common Components|Text",
+    title: "Common Components/Text",
     component: Text,
     decorators: [centered, ThemeProviderDecorator],
 };

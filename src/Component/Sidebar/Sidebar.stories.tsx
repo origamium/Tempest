@@ -54,7 +54,7 @@ const AccountList1 = [
     },
 ];
 
-const StoryPrefix = "Sidebar|";
+const StoryPrefix = "Sidebar/";
 
 storiesOf(StoryPrefix + "AccountIcon", module)
     .addDecorator(centered)
@@ -68,5 +68,6 @@ storiesOf(StoryPrefix + "AccountList", module)
 storiesOf(StoryPrefix + "Sidebar", module)
     .addDecorator((story) => <div style={{ height: "100vh" }}>{story()}</div>)
     .add("info", () => (
+        // @ts-ignore
         <Sidebar addAction={action("add action")} settingAction={action("setting action")} accounts={AccountList1} />
     ));

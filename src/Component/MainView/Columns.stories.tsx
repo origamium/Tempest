@@ -7,7 +7,7 @@ import { action } from "@storybook/addon-actions";
 import { ColumnDataProvider } from "../../hooks/useColumns";
 
 export default {
-    title: "Column|Columns",
+    title: "Column/Columns",
     component: Columns,
 };
 

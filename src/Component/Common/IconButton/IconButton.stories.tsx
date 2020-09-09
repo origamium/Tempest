@@ -10,7 +10,7 @@ import { FavoriteButton, RepeatButton, ReplyButton } from "./IconButton";
 const sampleId = "sample-id-0123456789";
 const negativeColor = "#7D7D7D";
 
-storiesOf("Common Components|Button/ComponentButton", module)
+storiesOf("Common Components/Button/ComponentButton", module)
     .addDecorator(centered)
     .add("Info", () => (
         <ComponentButton
@@ -27,7 +27,7 @@ storiesOf("Common Components|Button/ComponentButton", module)
         </ComponentButton>
     ));
 
-storiesOf("Common Components|Button/ComponentButton/Buttons", module)
+storiesOf("Common Components/Button/ComponentButton/Buttons", module)
     .addDecorator(centered)
     .add(
         "Reply Button",

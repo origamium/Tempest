@@ -5,7 +5,7 @@ import { progressStatus } from "./StatusColorBar";
 import { User1 } from "../../__testdata__/User";
 
 export default {
-    title: "Column|Header",
+    title: "Column/Header",
     component: Header,
 };
 

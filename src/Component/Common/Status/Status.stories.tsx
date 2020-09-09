@@ -5,7 +5,7 @@ import { ThemeProviderDecorator } from "../../../Theme";
 import { SampleStatus, UIColumnAttr } from "./testdata";
 
 export default {
-    title: "Common Components|Content",
+    title: "Common Components/Content",
     decorators: [centered, ThemeProviderDecorator],
 };
 

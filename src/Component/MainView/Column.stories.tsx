@@ -6,7 +6,7 @@ import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 import { progressStatus } from "./ColumnHeader/StatusColorBar";
 
 export default {
-    title: "Column|Column",
+    title: "Column/Column",
     component: Column,
 };
 
