@@ -9,6 +9,7 @@ import { Theme, ThemeProvider } from "./Theme";
 import "ress";
 import { Auth0Provider } from "@auth0/auth0-react";
 import localforage from "localforage";
+import { DialogProvider } from "./hooks/useDialog";
 
 localforage.config({
     driver: localforage.INDEXEDDB,
@@ -30,7 +31,9 @@ ReactDOM.render(
             redirectUri={window.location.origin}
         >
             <ThemeProvider theme={Theme.Light}>
-                <App />
+                <DialogProvider>
+                    <App />
+                </DialogProvider>
             </ThemeProvider>
         </Auth0Provider>
     </Provider>,
