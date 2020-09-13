@@ -14,7 +14,7 @@
     "localforage": "1.9.0",
     "normalizr": "3.6.0",
     "path-to-regexp": "6.1.0",
-    "query-string": "6.13.1",
+    "query-string": "6.13.2",
     "react": "16.13.1",
     "react-beautiful-dnd": "13.0.0",
     "react-dom": "16.13.1",
