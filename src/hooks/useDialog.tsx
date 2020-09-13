@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Dispatch, useContext } from "react";
+import { Dispatch, useCallback, useContext } from "react";
 
 export const OpenDialogEvent = "openDialog";
 
@@ -41,7 +41,10 @@ export const DialogProvider: React.FC = ({ children }) => {
     return <DialogContext.Provider value={{ key: state, dispatch }}>{children}</DialogContext.Provider>;
 };
 
-export const useDialog = () => {
+export const useDialog = (): [DialogName, Dispatch<DialogName>, () => void] => {
     const { key, dispatch } = useContext(DialogContext);
-    return [key, dispatch];
+    const handleClose = useCallback(() => {
+        dispatch(undefined);
+    }, [dispatch]);
+    return [key, dispatch, handleClose];
 };
