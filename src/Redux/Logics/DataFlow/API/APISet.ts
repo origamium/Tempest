@@ -4,6 +4,7 @@ import { PairOfObject } from "../../HelperType/PairOfObject";
 import { Exportable } from "../../HelperType/Exportable";
 
 export class APISet implements Exportable<ApiUnitObject> {
+    // @ts-ignore
     private _compiledPathToRegexp: PathFunction<any>;
     private _api: ApiUnitObject;
 

@@ -1,6 +1,6 @@
 import { HttpMethods } from "../../Types/HttpMethods";
-import { APIParameterDefType } from "../../Types/APIParameterDefType";
 import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
+import { APIParameterDefType } from "../../Service/ApiSet/APIParameterDefTypes";
 
 export default class RESTElement {
     private readonly _path: string;
