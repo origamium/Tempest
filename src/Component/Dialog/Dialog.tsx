@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dialog } from "@material-ui/core";
 import { DialogName, useDialog } from "../../hooks/useDialog";
-import { ServiceSelect } from "./AddAccount/ServiceSelect";
+import { AddAccount } from "./AddAccount/AddAccount";
 
 type DialogContentsProps = {
     dialogKey: DialogName;
@@ -9,14 +9,21 @@ type DialogContentsProps = {
 };
 
 const DialogContents: React.FC<DialogContentsProps> = ({ dialogKey, handleClose }) => {
+    React.useEffect(() => {
+        if (!dialogKey) {
+            handleClose();
+        }
+    }, [dialogKey, handleClose]);
+
     switch (dialogKey) {
         case "add-account":
-            return <ServiceSelect />;
+            return <AddAccount />;
         case "add-column":
+            return <div />;
+        case undefined:
             return <div />;
         default:
             console.error(`unknown dialog key: ${dialogKey}`);
-            handleClose();
             return <div />;
     }
 };
