@@ -7,7 +7,6 @@ import {
     ListItem,
     ListItemText,
     ListItemAvatar,
-    ListItemIcon,
     Collapse,
     Avatar,
     Typography,
@@ -37,11 +36,11 @@ export type ServiceSelectProps = {};
 
 const Styled = {
     Actions: styled.div`
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-`
-}
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    `,
+};
 
 export const ServiceSelect: React.FC<ServiceSelectProps> = () => {
     const [, , handleClose] = useDialog();
@@ -65,7 +64,7 @@ export const ServiceSelect: React.FC<ServiceSelectProps> = () => {
 
     const handleNext = React.useCallback(() => {
         // todo
-    }, [])
+    }, []);
 
     // todo
     const serviceAndProviders = React.useMemo<ProviderSelector>(() => {
