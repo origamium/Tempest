@@ -1,5 +1,5 @@
 // @ts-ignore
-import * as authSign from "oauth-sign";
+import oauthSignature from "oauth-signature";
 import OAuth, { optionObject } from "./OAuth";
 import { AuthInfoType } from "../Types/AuthInfoType";
 import { TokenType } from "../Types/APIKeyType";
@@ -35,13 +35,14 @@ export default class OAuth1 implements OAuth {
             oauth_nonce: OAuth1.nonce,
             oauth_version: authInfo.oauthVersion,
         };
-        return authSign.sign(
-            authInfo.signMethod,
+        // WARN: やばいかも
+        return oauthSignature.generate(
             apiData.httpMethod,
             baseUri + apiData.path,
             { ...signParameter, ...payload },
+            authInfo.signMethod,
             authInfo.apiKey.ApiSecretKey,
-            token ? token.TokenSecret : ""
+            token?.TokenSecret
         );
     }
 
