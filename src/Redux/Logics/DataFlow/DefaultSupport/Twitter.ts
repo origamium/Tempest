@@ -6,52 +6,40 @@ import { HttpMethods } from "../Types/HttpMethods";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { schemaTypes } from "../Types/SchemaTypes";
 import { Protocol } from "../Types/Protocol";
-import { DataSetsObject } from "../Service/DataSet/DataSetObject";
+import { ProviderObject } from "../Provider/ProviderControl";
+import { ServiceObject } from "../Service/ServiceControl";
+import { DataSetsObject } from "../Data/DataSetControl";
 
-const serviceKey = "Twitter";
-
-const apiSet: APISetObject = {
-    authorization: {
-        oauthVersion: OAuthVersion.OAuth1,
-        authMethod: AuthorizeMethod.PIN,
-        signMethod: SignMethod.hmac,
-        signSpace: SignSpace.Header,
-        redirectUrl: "https://google.com",
-        requestAuthorizeTokenPath: "oauth/request_token",
-        requestAuthorizePagePath: "oauth/authorize",
-        requestAccessTokenPath: "oauth/access_token",
-    },
-    apis: {
-        updateStatus: {
-            path: "statuses/update",
-            protocol: Protocol.rest,
-            httpMethod: HttpMethods.POST,
-            parameterDefinition: {
-                status: {
-                    required: true,
-                    type: ApiParameterMethods.Query,
-                },
-                in_reply_to_status_id: {
-                    required: false,
-                    type: ApiParameterMethods.Query,
-                },
+const apiSet = {
+    updateStatus: {
+        path: "statuses/update",
+        protocol: Protocol.rest,
+        httpMethod: HttpMethods.POST,
+        parameterDef: {
+            status: {
+                required: true,
+                type: ApiParameterMethods.Query,
             },
-            returnedDataKey: "status",
+            in_reply_to_status_id: {
+                required: false,
+                type: ApiParameterMethods.Query,
+            },
         },
-        homeTimeline: {
-            path: "statuses/home_timeline",
-            protocol: Protocol.rest,
-            httpMethod: HttpMethods.GET,
-            parameterDefinition: {},
-            returnedDataKey: "statusList",
-        },
-        mentionsTimeline: {
-            path: "statuses/mentions_timeline",
-            protocol: Protocol.rest,
-            httpMethod: HttpMethods.GET,
-            parameterDefinition: {},
-            returnedDataKey: "statusList",
-        },
+        returnedDataKey: "status",
+    },
+    homeTimeline: {
+        path: "statuses/home_timeline",
+        protocol: Protocol.rest,
+        httpMethod: HttpMethods.GET,
+        parameterDef: {},
+        returnedDataKey: "statusList",
+    },
+    mentionsTimeline: {
+        path: "statuses/mentions_timeline",
+        protocol: Protocol.rest,
+        httpMethod: HttpMethods.GET,
+        parameterDef: {},
+        returnedDataKey: "statusList",
     },
 };
 
@@ -122,6 +110,8 @@ const dataSet: DataSetsObject = {
     },
 };
 
+const serviceKey = "Twitter";
+
 const service: ServiceObject = {
     serviceName: serviceKey,
     apiSet,
@@ -133,8 +123,18 @@ const provider: ProviderObject = {
     providerName: "twitter.com",
     baseUrl: "https://twitter.com/",
     domain: "twitter.com",
-    apiKey: "",
-    apiSecret: "",
+    authorization: {
+        apiUrl: "https://api.twitter.com/",
+        oauthVersion: OAuthVersion.OAuth1,
+        authMethod: AuthorizeMethod.PIN,
+        signMethod: SignMethod.hmac,
+        signSpace: SignSpace.Header,
+        callback: "https://tsuru-twitter-oauth1-v1.origamium.net",
+        requestAuthorizeTokenPath: "oauth/request_token",
+        requestAuthorizePagePath: "oauth/authorize",
+        requestAccessTokenPath: "oauth/access_token",
+    },
+    apiKey: { ApiKey: "teMvsH7tcmvrJSbKNJvOTIKsc" },
 };
 
 export default {
