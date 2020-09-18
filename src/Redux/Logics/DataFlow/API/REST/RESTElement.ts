@@ -1,11 +1,11 @@
 import { HttpMethods } from "../../Types/HttpMethods";
 import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
-import { APIParameterDefType } from "../../Service/ApiSet/APIParameterDefTypes";
+import { APIParameterDefTypes } from "../../Service/ApiSet/APIParameterDefTypes";
 
 export default class RESTElement {
     private readonly _path: string;
     private readonly _HttpMethod: HttpMethods;
-    private readonly _paramDefinition: APIParameterDefType;
+    private readonly _paramDefinition: APIParameterDefTypes;
     private readonly _returnDataKey: string | string[];
     private readonly _errorKey?: string; // extend error check.
 
