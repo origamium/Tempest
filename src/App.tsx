@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { requestRestoreAction } from "./Redux/Slices/dataStore/requestRestore";
 import { TabDataProvider } from "./hooks/useTabs";
 import { ColumnDataProvider } from "./hooks/useColumns";
-import { useDialog } from "./hooks/useDialog";
+import { TempestDialog } from "./Component/Dialog/Dialog";
 
 const Styled = {
     Root: styled.div`
@@ -27,14 +27,13 @@ export const App: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useDialog();
-
     return (
         <Styled.Root>
             <TabDataProvider value={undefined}>
                 <ColumnDataProvider value={{ columns: [], updateColumns: () => {} }}>
                     <Header />
                     <Body />
+                    <TempestDialog />
                 </ColumnDataProvider>
             </TabDataProvider>
         </Styled.Root>

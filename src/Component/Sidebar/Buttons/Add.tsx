@@ -1,10 +1,11 @@
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import * as React from "react";
-import { DialogName, OpenDialogEventDispatcher } from "../../../hooks/useDialog";
+import { DialogName, useDialog } from "../../../hooks/useDialog";
 
 export const SidebarAddButton: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+    const [, openDialogByKey] = useDialog();
 
     const handleAddButtonClick = React.useCallback((e: React.SyntheticEvent<HTMLButtonElement>) => {
         setAnchorEl(e.currentTarget);
@@ -18,11 +19,11 @@ export const SidebarAddButton: React.FC = () => {
         (e: React.MouseEvent<any>) => {
             const action: DialogName = e.currentTarget.dataset.actions;
             if (action) {
-                OpenDialogEventDispatcher(action);
+                openDialogByKey(action);
             }
             handleClose();
         },
-        [handleClose]
+        [handleClose, openDialogByKey]
     );
 
     return (

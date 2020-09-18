@@ -117,7 +117,7 @@ export const ServiceSelect: React.FC<ServiceSelectProps> = () => {
                 <List style={{ minWidth: "280px", maxWidth: "480px", width: "80%", overflow: "auto" }}>
                     {serviceAndProviders.map((item, i) =>
                         "service" in item ? (
-                            <>
+                            <div key={i}>
                                 <ListItem
                                     button
                                     alignItems={"flex-start"}
@@ -144,7 +144,7 @@ export const ServiceSelect: React.FC<ServiceSelectProps> = () => {
                                         </ListItem>
                                     ))}
                                 </Collapse>
-                            </>
+                            </div>
                         ) : (
                             <ListItem
                                 key={i}
