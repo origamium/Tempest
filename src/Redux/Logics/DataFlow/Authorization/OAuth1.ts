@@ -1,5 +1,5 @@
-// @ts-ignore
-import oauthSignature from "oauth-signature";
+import oauth1a from "oauth-1.0a";
+import crypto from "crypto-js";
 import OAuth, { optionObject } from "./OAuth";
 import { AuthInfoType } from "../Types/AuthInfoType";
 import { TokenType } from "../Types/APIKeyType";
@@ -11,41 +11,51 @@ import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
 import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
 import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
+import { SignMethod } from "../Types/Authorization/SignMethod";
 
 export default class OAuth1 implements OAuth {
-    private static readonly nonce: string = "superdry";
-
-    private static _now(): string {
-        return Math.round(+new Date() / 1000).toString();
-    }
-
     private static _signature(
         baseUri: string,
         authInfo: AuthInfoType,
         token: TokenType | undefined,
         apiData: ApiUnitObject,
-        payload: APIPayloadType,
-        timestamp: string
-    ): string {
-        const signParameter = {
-            oauth_consumer_key: authInfo.apiKey.ApiKey,
-            oauth_token: token ? token.Token : "",
-            oauth_signature_method: authInfo.signMethod,
-            oauth_timestamp: timestamp,
-            oauth_nonce: OAuth1.nonce,
-            oauth_version: authInfo.oauthVersion,
-        };
+        payload: APIPayloadType
+    ): oauth1a.Authorization {
+        const oauth = new oauth1a({
+            consumer: {
+                key: authInfo.apiKey.ApiKey,
+                secret: authInfo.apiKey.ApiSecretKey ?? "",
+            },
+            signature_method: authInfo.signMethod,
+            hash_function(base_string, key) {
+                switch (authInfo.signMethod) {
+                    case SignMethod.rsa:
+                        return crypto.SHA1(base_string, key).toString(crypto.enc.Base64);
+                    case SignMethod.hmac:
+                        return crypto.HmacSHA1(base_string, key).toString(crypto.enc.Base64);
+                    case SignMethod.plain:
+                        console.warn("このサービス使うのやめちまえ");
+                        // TODO
+                        return `${base_string}${key}`;
+                }
+            },
+        });
+
         // WARN: やばいかも
-        return oauthSignature.generate(
-            apiData.httpMethod,
-            baseUri + apiData.path,
-            { ...signParameter, ...payload },
-            authInfo.signMethod,
-            authInfo.apiKey.ApiSecretKey,
-            token?.TokenSecret
+        return oauth.authorize(
+            {
+                url: `${baseUri}${apiData.path}`,
+                method: apiData.httpMethod,
+                data: payload,
+            },
+            token && {
+                key: token.Token,
+                secret: token.TokenSecret ?? "",
+            }
         );
     }
 
+    // TODO: backup nonce and timestamp
     private static _authorization(
         baseUri: string,
         authInfo: AuthInfoType,
@@ -53,18 +63,7 @@ export default class OAuth1 implements OAuth {
         apiData: ApiUnitObject,
         payload: APIPayloadType
     ): CombinedParameterDataType {
-        const timestamp = OAuth1._now();
-
-        const authSeed = {
-            oauth_consumer_key: authInfo.apiKey.ApiKey,
-            oauth_signature_method: authInfo.signMethod,
-            oauth_timestamp: timestamp,
-            oauth_nonce: OAuth1.nonce,
-            oauth_version: authInfo.oauthVersion,
-            ...(token ? { oauth_token: token.Token } : {}),
-        };
-
-        const oauth_signature = OAuth1._signature(baseUri, authInfo, token, apiData, payload, timestamp);
+        const oauth_data = OAuth1._signature(baseUri, authInfo, token, apiData, payload);
 
         switch (authInfo.signSpace) {
             case SignSpace.Header:
@@ -74,18 +73,20 @@ export default class OAuth1 implements OAuth {
                     },
                     payload: {
                         Authorization:
-                            `OAuth oauth_consumer_key="${authSeed.oauth_consumer_key}",` +
+                            `OAuth oauth_consumer_key="${oauth_data.oauth_consumer_key}",` +
                             (token ? `oauth_token="${token.Token},` : ``) +
-                            `oauth_signature_method="${authSeed.oauth_signature_method}",` +
-                            `oauth_timestamp="${authSeed.oauth_timestamp}",` +
-                            `oauth_nonce="${authSeed.oauth_nonce}",` +
-                            `oauth_version="${authSeed.oauth_version}",` +
-                            `oauth_signature="${encodeURIComponent(oauth_signature)}"`,
+                            `oauth_signature_method="${oauth_data.oauth_signature_method}",` +
+                            `oauth_timestamp="${oauth_data.oauth_timestamp}",` +
+                            `oauth_nonce="${oauth_data.oauth_nonce}",` +
+                            `oauth_version="${oauth_data.oauth_version}",` +
+                            `oauth_signature="${oauth_data.oauth_signature}"`,
                     },
                 };
 
             case SignSpace.Query:
+                // eslint-disable-next-line no-case-declarations
                 const required = { required: true, type: ApiParameterMethods.Query };
+                // eslint-disable-next-line no-case-declarations
                 const definition = {
                     oauth_consumer_key: required,
                     oauth_token: { required: false, type: ApiParameterMethods.Query },
@@ -98,7 +99,13 @@ export default class OAuth1 implements OAuth {
 
                 return {
                     definition: { ...definition, ...apiData.parameterDef },
-                    payload: { ...authSeed, ...payload, ...{ oauth_signature } },
+                    payload: {
+                        ...Object.entries(oauth_data).reduce(
+                            (accm, [key, value]) => ({ ...accm, [key]: value.toString() }),
+                            {}
+                        ),
+                        ...payload,
+                    },
                 };
 
             default:
