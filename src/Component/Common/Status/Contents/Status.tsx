@@ -5,7 +5,7 @@ import { ThumbnailList } from "../../Thumbnail";
 import { Text } from "../../Text/Text";
 import { IStatus } from "../../../../datatype/Contents/Article/Status";
 import { UserProperties } from "../../../../datatype/Contents/User";
-import { EntityWithIndices } from "twitter-text";
+import { EntityWithIndices } from "@schemelisp/twitter-text";
 
 export interface IStatusProps {
     account: string;

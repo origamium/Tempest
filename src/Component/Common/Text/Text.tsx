@@ -3,7 +3,7 @@ import { css, styled } from "../../../Theme";
 import { Typography } from "@material-ui/core";
 import { Variant } from "@material-ui/core/styles/createTypography";
 import twitterText from "@schemelisp/twitter-text";
-import type { EntityWithIndices } from "twitter-text";
+import type { EntityWithIndices } from "@schemelisp/twitter-text";
 
 export type TextProps = {
     text: string;
