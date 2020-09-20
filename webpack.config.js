@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const Dotenv = require("dotenv-webpack");
 
 module.exports = (_, { mode = "development" }) => {
     const config = {
@@ -133,7 +132,7 @@ module.exports = (_, { mode = "development" }) => {
             },
         };
 
-        config.plugins.push(new webpack.HotModuleReplacementPlugin(), new Dotenv());
+        config.plugins.push(new webpack.HotModuleReplacementPlugin());
     }
 
     return config;
