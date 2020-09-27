@@ -5,7 +5,7 @@ import { Providers } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { Services } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ContentsControlObject } from "../../Logics/DataFlow/Contents/ContentsControl";
 
-export type RootObject = {
+export type ControlObject = {
     [dbKeys.account]: Accounts;
     [dbKeys.service]: Services;
     [dbKeys.provider]: Providers;
@@ -15,4 +15,4 @@ export type RootObject = {
     [dbKeys.credentials]: unknown;
 };
 
-export type PartialRootObject = Partial<RootObject>;
+export type PartialRootObject = Partial<ControlObject>;

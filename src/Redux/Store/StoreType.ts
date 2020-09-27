@@ -1,3 +1,5 @@
+import { DataStoreType } from "../Slices/dataStore/reducer";
+
 export type StoreType = {
-    hai?: unknown;
+    dataStore: DataStoreType | null;
 };
