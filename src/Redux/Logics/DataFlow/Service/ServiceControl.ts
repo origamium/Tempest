@@ -6,7 +6,8 @@ import { ISolvedData } from "../Data/Dynamizr/Interfaces/ISolvedData";
 import { Exportable } from "../../HelperType/Exportable";
 
 export type ServiceObject = {
-    serviceName: string; // is equal key
+    serviceKey: string; // is equal key
+    serviceName: string;
     apiSet: APIUnitsObject;
     dataSet: DataSetsObject;
     officialKey?: string;
@@ -16,14 +17,20 @@ export type ServiceObject = {
 export type Services = UndefinedablePairOfObject<ServiceObject>;
 
 export class Service implements Exportable<ServiceObject> {
+    private readonly _serviceKey: string;
     private readonly _serviceName: string;
     private readonly _apiSet: APISetControl;
     private readonly _dataSet: DataSetControl;
 
     constructor({ source, officialServiceKey }: { source: ServiceObject; officialServiceKey?: unknown }) {
+        this._serviceKey = source.serviceKey;
         this._serviceName = source.serviceName;
         this._apiSet = new APISetControl(source.apiSet);
         this._dataSet = new DataSetControl(source.dataSet);
+    }
+
+    get serviceKey() {
+        return this._serviceKey;
     }
 
     get serviceName() {
@@ -40,6 +47,7 @@ export class Service implements Exportable<ServiceObject> {
 
     export(): ServiceObject {
         return {
+            serviceKey: this._serviceKey,
             serviceName: this._serviceName,
             apiSet: this._apiSet.export(),
             dataSet: this._dataSet.export(),
@@ -56,6 +64,10 @@ export class ServiceControl implements Exportable<Services> {
             (accm, [key, source]) => ({ ...accm, [key]: new Service({ source } as { source: ServiceObject }) }),
             {}
         );
+    }
+
+    public getServices(): { key: string; name: string }[] {
+        return Object.values(this._services).map((v) => ({ key: v.serviceKey, name: v.serviceName }));
     }
 
     public getService(key: string): Service | undefined {

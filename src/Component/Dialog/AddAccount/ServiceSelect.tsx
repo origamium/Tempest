@@ -16,23 +16,11 @@ import {
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { useDialog } from "../../../hooks/useDialog";
 import { styled } from "../../../Theme";
+import { ProviderSelector } from "./AddAccount";
 
-type ProviderListType = {
-    key: string;
-    name: string;
-    icon?: string;
-    description?: string;
+export type ServiceSelectProps = {
+    list: ProviderSelector;
 };
-
-type ServiceListType = {
-    service: string;
-    name: string;
-    providers: ProviderListType[];
-};
-
-type ProviderSelector = Array<ProviderListType | ServiceListType>;
-
-export type ServiceSelectProps = {};
 
 const Styled = {
     Actions: styled.div`
@@ -42,7 +30,7 @@ const Styled = {
     `,
 };
 
-export const ServiceSelect: React.FC<ServiceSelectProps> = () => {
+export const ServiceSelect: React.FC<ServiceSelectProps> = ({ list }) => {
     const [, , handleClose] = useDialog();
 
     const [listOpen, setListOpen] = React.useState<string[]>([]);
@@ -66,48 +54,6 @@ export const ServiceSelect: React.FC<ServiceSelectProps> = () => {
         // todo
     }, []);
 
-    // todo
-    const serviceAndProviders = React.useMemo<ProviderSelector>(() => {
-        return [
-            {
-                key: "twitter:twitter",
-                name: "Twitter",
-            },
-            {
-                service: "mastodon",
-                name: "Mastodon",
-                providers: [
-                    {
-                        key: "mastodon:pawoo",
-                        name: "Pawoo",
-                        icon: "https://image.internetcom.jp/upload/20170427/images/pawoo.jpg",
-                    },
-                    {
-                        key: "mastodon:poyo",
-                        name: "Poyo",
-                        description: "mastodon poyo server",
-                    },
-                ],
-            },
-            {
-                service: "gnu_social",
-                name: "GNU Social",
-                providers: [
-                    {
-                        key: "gnu_social:social",
-                        name: "Netflix",
-                        icon: "https://image.internetcom.jp/upload/20170427/images/pawoo.jpg",
-                    },
-                    {
-                        key: "gnu_social:wawawa",
-                        name: "Wawa",
-                        description: "mastodon poyo server",
-                    },
-                ],
-            },
-        ];
-    }, []);
-
     return (
         <>
             <DialogTitle>
@@ -115,52 +61,36 @@ export const ServiceSelect: React.FC<ServiceSelectProps> = () => {
             </DialogTitle>
             <DialogContent>
                 <List style={{ minWidth: "280px", maxWidth: "480px", width: "80%", overflow: "auto" }}>
-                    {serviceAndProviders.map((item, i) =>
-                        "service" in item ? (
-                            <div key={i}>
-                                <ListItem
-                                    button
-                                    alignItems={"flex-start"}
-                                    data-listname={item.service}
-                                    onClick={handleClickExpandableListItem}
-                                >
-                                    <ListItemText primary={item.name} />
-                                    {listOpen.includes(item.service) ? <ExpandLess /> : <ExpandMore />}
-                                </ListItem>
-                                <Collapse in={listOpen.includes(item.service)} timeout="auto" unmountOnExit>
-                                    {item.providers.map((v, i) => (
-                                        <ListItem
-                                            key={i}
-                                            button
-                                            alignItems={"flex-start"}
-                                            data-provider-key={v.key}
-                                            onClick={handleSelectProvider}
-                                        >
-                                            <ListItemAvatar>
-                                                <Avatar src={v?.icon}>{v.name.slice(0, 2)}</Avatar>
-                                            </ListItemAvatar>
-                                            <ListItemText primary={v.name} secondary={v?.description} />
-                                            <Radio value={v.key} checked={v.key === selected} />
-                                        </ListItem>
-                                    ))}
-                                </Collapse>
-                            </div>
-                        ) : (
+                    {list.map((item, i) => (
+                        <div key={i}>
                             <ListItem
-                                key={i}
                                 button
                                 alignItems={"flex-start"}
-                                data-provider-key={item.key}
-                                onClick={handleSelectProvider}
+                                data-listname={item.service}
+                                onClick={handleClickExpandableListItem}
                             >
-                                <ListItemAvatar>
-                                    <Avatar src={item?.icon}>{item.name.slice(0, 2)}</Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary={item.name} secondary={item?.description} />
-                                <Radio value={item.key} checked={item.key === selected} />
+                                <ListItemText primary={item.name} />
+                                {listOpen.includes(item.service) ? <ExpandLess /> : <ExpandMore />}
                             </ListItem>
-                        )
-                    )}
+                            <Collapse in={listOpen.includes(item.service)} timeout="auto" unmountOnExit>
+                                {item.providers.map((v, i) => (
+                                    <ListItem
+                                        key={i}
+                                        button
+                                        alignItems={"flex-start"}
+                                        data-provider-key={v.key}
+                                        onClick={handleSelectProvider}
+                                    >
+                                        <ListItemAvatar>
+                                            <Avatar src={v?.icon}>{v.name.slice(0, 2)}</Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary={v.name} secondary={v?.description} />
+                                        <Radio value={v.key} checked={v.key === selected} />
+                                    </ListItem>
+                                ))}
+                            </Collapse>
+                        </div>
+                    ))}
                 </List>
             </DialogContent>
             <DialogActions>

@@ -110,10 +110,11 @@ const dataSet: DataSetsObject = {
     },
 };
 
-const serviceKey = "Twitter";
+const serviceKey = "twitter";
 
 const service: ServiceObject = {
-    serviceName: serviceKey,
+    serviceKey,
+    serviceName: "Twitter",
     apiSet,
     dataSet,
 };
@@ -121,6 +122,7 @@ const service: ServiceObject = {
 const provider: ProviderObject = {
     serviceKey,
     providerName: "twitter.com",
+    providerKey: "twitter",
     baseUrl: "https://twitter.com/",
     domain: "twitter.com",
     authorization: {
