@@ -1,9 +1,10 @@
 import * as React from "react";
 import { DialogTitle } from "@material-ui/core";
 import { ServiceSelect } from "./ServiceSelect";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "../../../Redux/Store/StoreType";
 import { DataStoreType } from "../../../Redux/Slices/dataStore/reducer";
+import { requestAuthorizationSequenceAction } from "../../../Redux/Slices/authorization/requestAuthorizationSequence";
 
 export type ServiceListType = {
     service: string;
@@ -20,6 +21,7 @@ export type ProviderSelector = Array<ServiceListType>;
 
 export const AddAccount: React.FC = () => {
     const datastore = useSelector<StoreType, DataStoreType | null>((state) => state.dataStore);
+    const dispatch = useDispatch();
 
     const list = React.useMemo<ProviderSelector>(() => {
         if (datastore) {
@@ -34,7 +36,12 @@ export const AddAccount: React.FC = () => {
                         name: curr.name,
                         providers: providers
                             .filter((v) => v.service === curr.key)
-                            .map((v) => ({ key: v.key, name: v.name, description: "", icon: v.name.slice(0, 2) })),
+                            .map((v) => ({
+                                key: `${curr.key},${v.key}`,
+                                name: v.name,
+                                description: "",
+                                icon: v.name.slice(0, 2),
+                            })),
                     },
                 ],
                 []
@@ -43,10 +50,17 @@ export const AddAccount: React.FC = () => {
         return [];
     }, [datastore]);
 
+    const handleSubmitProvider = React.useCallback(
+        (key: string) => {
+            dispatch(requestAuthorizationSequenceAction(key));
+        },
+        [dispatch]
+    );
+
     return (
         <>
             <DialogTitle>アカウントの追加</DialogTitle>
-            <ServiceSelect list={list} />
+            <ServiceSelect list={list} handleSubmitProvider={handleSubmitProvider} />
         </>
     );
 };

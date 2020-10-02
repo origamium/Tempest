@@ -20,6 +20,7 @@ import { ProviderSelector } from "./AddAccount";
 
 export type ServiceSelectProps = {
     list: ProviderSelector;
+    handleSubmitProvider: (key: string) => void;
 };
 
 const Styled = {
@@ -30,7 +31,7 @@ const Styled = {
     `,
 };
 
-export const ServiceSelect: React.FC<ServiceSelectProps> = ({ list }) => {
+export const ServiceSelect: React.FC<ServiceSelectProps> = ({ list, handleSubmitProvider }) => {
     const [, , handleClose] = useDialog();
 
     const [listOpen, setListOpen] = React.useState<string[]>([]);
@@ -51,8 +52,10 @@ export const ServiceSelect: React.FC<ServiceSelectProps> = ({ list }) => {
     }, []);
 
     const handleNext = React.useCallback(() => {
-        // todo
-    }, []);
+        if (selected) {
+            handleSubmitProvider(selected);
+        }
+    }, [handleSubmitProvider, selected]);
 
     return (
         <>
