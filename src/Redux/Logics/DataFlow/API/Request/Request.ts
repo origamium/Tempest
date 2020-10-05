@@ -5,6 +5,8 @@ import { APIPayloadType } from "../../Types/APIPayloadType";
 import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
 import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
 import { APIParameterDefTypes } from "../../Service/ApiSet/APIParameterDefTypes";
+import { APISet } from "../APISet";
+import { DataSetControl } from "../../Data/DataSetControl";
 
 interface IParameterKeysObject {
     key: string[];
@@ -14,7 +16,7 @@ interface IParameterKeysObject {
     query: string[];
 }
 
-export default class Request {
+export class TRequest {
     public static getParameterClassifier(parameter: APIParameterDefTypes): IParameterKeysObject {
         const parameters = Object.keys(parameter);
 
@@ -131,5 +133,9 @@ export default class Request {
                 headers: this.createHeaderObject(combinedParameter, classifiedKey),
             },
         ];
+    }
+
+    public static parseResponse<T>(api: APISet, data: DataSetControl): T | never {
+        data.normalize()
     }
 }

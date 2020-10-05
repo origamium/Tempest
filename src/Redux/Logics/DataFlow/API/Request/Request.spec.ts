@@ -1,7 +1,5 @@
-import Request from "./Request";
-import { APIDataType } from "../../Types/APIDataType";
+import { TRequest } from "./Request";
 import { HttpMethods } from "../../Types/HttpMethods";
-import { APIParameterDefType } from "../../Types/APIParameterDefType";
 import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
 import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
 
@@ -74,7 +72,7 @@ const sample1: APIParameterDefType = {
 };
 
 test("getParameterKeys method", () => {
-    expect(Request.getParameterClassifier(blank.parameter)).toEqual({
+    expect(TRequest.getParameterClassifier(blank.parameter)).toEqual({
         key: [],
         required: [],
         header: [],
@@ -82,7 +80,7 @@ test("getParameterKeys method", () => {
         query: [],
     });
 
-    expect(Request.getParameterClassifier({ ...blank.parameter, ...path_to_string })).toEqual({
+    expect(TRequest.getParameterClassifier({ ...blank.parameter, ...path_to_string })).toEqual({
         key: ["yuru"],
         required: ["yuru"],
         header: [],
@@ -91,7 +89,7 @@ test("getParameterKeys method", () => {
     });
 
     // getParameterClassifier is not raise exception. its valid case.
-    expect(Request.getParameterClassifier({ ...blank.parameter, ...path_to_string_error })).toEqual({
+    expect(TRequest.getParameterClassifier({ ...blank.parameter, ...path_to_string_error })).toEqual({
         key: ["yuru", "yuri"],
         required: ["yuru"],
         header: [],
@@ -99,7 +97,7 @@ test("getParameterKeys method", () => {
         query: [],
     });
 
-    expect(Request.getParameterClassifier(Object.assign({ ...blank.parameter, ...sample1 }))).toEqual({
+    expect(TRequest.getParameterClassifier(Object.assign({ ...blank.parameter, ...sample1 }))).toEqual({
         key: ["yuru", "yuri", "oomuro", "sakurako", "yoshikawa", "chinatsu"],
         required: ["yuru", "yuri", "yoshikawa"],
         header: ["yuri", "chinatsu"],
@@ -107,7 +105,7 @@ test("getParameterKeys method", () => {
         query: ["oomuro", "sakurako", "yoshikawa"],
     });
 
-    expect(Request.getParameterClassifier(path_to_string_basic.parameter)).toEqual({
+    expect(TRequest.getParameterClassifier(path_to_string_basic.parameter)).toEqual({
         key: ["id", "projectName"],
         required: ["id", "projectName"],
         header: [],
@@ -146,36 +144,36 @@ const unknownPayload: CombinedParameterDataType = {
 
 test("parameterRequireChecker method", () => {
     expect(
-        Request.parameterChecker(
+        TRequest.parameterChecker(
             blankCombinedParameter,
-            Request.getParameterClassifier(blankCombinedParameter.definition)
+            TRequest.getParameterClassifier(blankCombinedParameter.definition)
         )
     ).toBeUndefined();
 
     expect(() =>
-        Request.parameterChecker(errorParameter, Request.getParameterClassifier(errorParameter.definition))
+        TRequest.parameterChecker(errorParameter, TRequest.getParameterClassifier(errorParameter.definition))
     ).toThrow();
 
     expect(
-        Request.parameterChecker(goodParameter, Request.getParameterClassifier(goodParameter.definition))
+        TRequest.parameterChecker(goodParameter, TRequest.getParameterClassifier(goodParameter.definition))
     ).toBeUndefined();
 
     expect(() =>
-        Request.parameterChecker(unknownPayload, Request.getParameterClassifier(unknownPayload.definition))
+        TRequest.parameterChecker(unknownPayload, TRequest.getParameterClassifier(unknownPayload.definition))
     ).toThrow();
 });
 
 test("createUrl method", () => {
     expect(
-        Request.createUri(
+        TRequest.createUri(
             blank,
             blankCombinedParameter,
-            Request.getParameterClassifier(blankCombinedParameter.definition)
+            TRequest.getParameterClassifier(blankCombinedParameter.definition)
         )
     ).toEqual(blank.baseUri + blank.path);
 
     expect(
-        Request.createUri(path_to_string_basic, path_to_bacic_combined_parameter, {
+        TRequest.createUri(path_to_string_basic, path_to_bacic_combined_parameter, {
             key: ["id", "projectName"],
             required: ["id", "projectName"],
             header: [],
@@ -187,16 +185,16 @@ test("createUrl method", () => {
 
 test("createHeaderObject method", () => {
     expect(
-        Request.createHeaderObject(
+        TRequest.createHeaderObject(
             blankCombinedParameter,
-            Request.getParameterClassifier(blankCombinedParameter.definition)
+            TRequest.getParameterClassifier(blankCombinedParameter.definition)
         )
     ).toEqual({});
     //だるい: TODO
 });
 
 test("createRequset", () => {
-    expect(Request.createRequest(path_to_string_basic, path_to_bacic_combined_parameter.payload)).toEqual([
+    expect(TRequest.createRequest(path_to_string_basic, path_to_bacic_combined_parameter.payload)).toEqual([
         "https://example.com/1234/nya/383208/",
         { headers: {}, method: "POST" },
     ]);
