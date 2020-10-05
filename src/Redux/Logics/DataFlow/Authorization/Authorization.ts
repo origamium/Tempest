@@ -9,6 +9,8 @@ import { APIPayloadType } from "../Types/APIPayloadType";
 import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
 import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
 import { Exportable } from "../../HelperType/Exportable";
+import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
+import { APISet, APISetControl } from "../API/APISet";
 
 export type AuthorizationDataObject = {
     token: string;
@@ -69,6 +71,14 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         return this._info.apiKey;
     }
 
+    private getBaseUri(uri?: string) {
+        const url = this._info.apiUrl ?? uri;
+        if (!url) {
+            throw new Error("undefined baseurl");
+        }
+        return url;
+    }
+
     public getAuthorizationData(
         baseUri: string,
         api: ApiUnitObject,
@@ -76,6 +86,21 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         payload: APIPayloadType
     ): CombinedParameterDataType {
         return this.auth.getAuthorizationData(baseUri, api, this._info, token, payload);
+    }
+
+    public getAuthToken(api: APISet, baseUri?: string): CombinedParameterDataType | undefined {
+        if (this.auth instanceof OAuth1) {
+            return this.auth.requestAuthToken(this.getBaseUri(baseUri), api.export(), this._info);
+        }
+        return;
+    }
+
+    public getAuthorizeUri(api: APISet, baseUri?: string) {
+        const url = this._info.apiUrl ?? baseUri;
+        if (!url) {
+            throw new Error("undefined baseurl");
+        }
+        return this.auth.authorizeUri(url, api.export(), this._info, this._info.authMethod);
     }
 
     export(): AuthorizationUnitObject {
