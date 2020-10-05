@@ -30,11 +30,19 @@ export class DataSetControl implements Exportable<DataSetsObject> {
         }
     }
 
-    public normalize(key: string, data: any): ISolvedData {
+    public normalize<T = any>(key: string, data: any): ISolvedData<T> {
         if (!this._receivedDataInfo[key]) {
             throw UnexpectedDataKey;
         }
         return dynamize(this._receivedDataInfo[key]!, data);
+    }
+
+    public async parseResponse<T = any>(key: string, res: Response): Promise<ISolvedData<T>> {
+        if (!res.ok) {
+            await Promise.reject({ status: res.status, statusText: res.statusText });
+        }
+        const json = await res.json();
+        return this.normalize(key, json);
     }
 
     export(): DataSetsObject {
