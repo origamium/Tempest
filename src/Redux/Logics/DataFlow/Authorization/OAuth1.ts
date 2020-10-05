@@ -117,7 +117,7 @@ export default class OAuth1 implements OAuth {
         baseUri: string,
         apiData: ApiUnitObject,
         authInfo: AuthInfoType
-    ): CombinedParameterDataType & { requiredPayload?: object } {
+    ): CombinedParameterDataType {
         const template: APIParameterDefTypes = apiData.parameterDef;
         const value: APIPayloadType = {};
 
