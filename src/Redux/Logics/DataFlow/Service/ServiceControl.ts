@@ -1,8 +1,9 @@
 import { APISet, APISetControl } from "../API/APISet";
 import { APIUnitsObject } from "./ApiSet/ApiUnitObject";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
-import { DataSetControl, DataSetsObject } from "../Data/DataSetControl";
+import { DataSetControl, DataSetObject, DataSetsObject } from "../Data/DataSetControl";
 import { Exportable } from "../../HelperType/Exportable";
+import { ISolvedData } from "../Data/Dynamizr/Interfaces/ISolvedData";
 
 export type ServiceObject = {
     serviceKey: string; // is equal key
@@ -38,6 +39,10 @@ export class Service implements Exportable<ServiceObject> {
 
     public getApiSet(key: string): APISet | undefined {
         return this._apiSet[key];
+    }
+
+    public async parseResponse<T>(api: APISet, response: Response): Promise<ISolvedData<T>> {
+        return this._dataSet.parseResponse<T>(api.dataKey, response);
     }
 
     export(): ServiceObject {

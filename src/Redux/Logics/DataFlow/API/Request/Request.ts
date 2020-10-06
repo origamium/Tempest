@@ -135,12 +135,4 @@ export class TRequest {
             },
         ];
     }
-
-    public static async parseResponse<T>(
-        api: APISet,
-        data: DataSetControl,
-        response: Response
-    ): Promise<ISolvedData<T>> {
-        return data.parseResponse<T>(api.dataKey, response);
-    }
 }
