@@ -2,7 +2,6 @@ import { APISet, APISetControl } from "../API/APISet";
 import { APIUnitsObject } from "./ApiSet/ApiUnitObject";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { DataSetControl, DataSetsObject } from "../Data/DataSetControl";
-import { ISolvedData } from "../Data/Dynamizr/Interfaces/ISolvedData";
 import { Exportable } from "../../HelperType/Exportable";
 
 export type ServiceObject = {
@@ -39,10 +38,6 @@ export class Service implements Exportable<ServiceObject> {
 
     public getApiSet(key: string): APISet | undefined {
         return this._apiSet[key];
-    }
-
-    public dataDynamize(key: string, data: unknown): ISolvedData {
-        return this._dataSet.normalize(key, data);
     }
 
     export(): ServiceObject {
