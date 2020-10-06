@@ -17,6 +17,14 @@ export class APISet implements Exportable<ApiUnitObject> {
         return ["", {}];
     };
 
+    get dataKey() {
+        return this._api.returnedDataKey;
+    }
+
+    get errorKey() {
+        return this._api.errorKey;
+    }
+
     export(): ApiUnitObject {
         return this._api;
     }
