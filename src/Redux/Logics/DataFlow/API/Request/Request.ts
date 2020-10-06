@@ -7,6 +7,7 @@ import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
 import { APIParameterDefTypes } from "../../Service/ApiSet/APIParameterDefTypes";
 import { APISet } from "../APISet";
 import { DataSetControl } from "../../Data/DataSetControl";
+import { ISolvedData } from "../../Data/Dynamizr/Interfaces/ISolvedData";
 
 interface IParameterKeysObject {
     key: string[];
@@ -135,7 +136,11 @@ export class TRequest {
         ];
     }
 
-    public static parseResponse<T>(api: APISet, data: DataSetControl): T | never {
-        data.normalize()
+    public static async parseResponse<T>(
+        api: APISet,
+        data: DataSetControl,
+        response: Response
+    ): Promise<ISolvedData<T>> {
+        return data.parseResponse<T>(api.dataKey, response);
     }
 }
