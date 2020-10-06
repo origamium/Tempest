@@ -1,4 +1,4 @@
 export interface ISolvedData<T = any> {
     entities: T;
-    result: string | string[] | number | number[];
+    result?: string | string[] | number | number[];
 }
