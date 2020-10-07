@@ -11,6 +11,12 @@ import { ServiceObject } from "../Service/ServiceControl";
 import { DataSetsObject } from "../Data/DataSetControl";
 
 const apiSet = {
+    requestAuthToken: {
+        path: "",
+        protocol: Protocol.rest,
+        httpMethod: HttpMethods.GET,
+        parameterDef: {},
+    },
     updateStatus: {
         path: "statuses/update",
         protocol: Protocol.rest,
@@ -123,7 +129,7 @@ const provider: ProviderObject = {
     serviceKey,
     providerName: "twitter.com",
     providerKey: "twitter",
-    baseUrl: "https://twitter.com/",
+    baseUrl: "https://api.twitter.com/",
     domain: "twitter.com",
     authorization: {
         apiUrl: "https://api.twitter.com/",
