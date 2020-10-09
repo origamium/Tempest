@@ -44,13 +44,13 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
 
     const requestAuthTokenKey = "requestAuthToken";
     const requestAuthTokenApi = service.getApiSet(requestAuthTokenKey);
+    let code, nonce;
     if (requestAuthTokenApi) {
-        let code;
         const requestAuthTokenApiPayloads = provider.authorization.getAuthToken(requestAuthTokenApi, provider.baseUri);
         const [info ,init] = TRequest.createRequest(provider.baseUri, requestAuthTokenApi.export(), requestAuthTokenApiPayloads?.payload || {})
         try {
             const response = yield call(() => fetch(info, init));
-            const result = yield call(() => service.parseResponse(requestAuthTokenApi, response))
+            const data = yield call(() => service.parseResponse(requestAuthTokenApi, response))
             // todo
         }
 
