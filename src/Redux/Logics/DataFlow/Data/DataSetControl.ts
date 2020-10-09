@@ -32,10 +32,13 @@ export class DataSetControl implements Exportable<DataSetsObject> {
         const keys = Object.keys(source);
         for (const key of keys) {
             if (key) {
-                this._receivedDataInfo[key] = {
-                    schema: dynaSchemaCreator(source[key]!.schemaDef),
-                    format: source[key]!.dataFormat ?? DataFormat.json,
-                };
+                const dataInfo = source[key];
+                if (dataInfo) {
+                    this._receivedDataInfo[key] = {
+                        schema: dynaSchemaCreator(dataInfo.schemaDef),
+                        format: dataInfo.dataFormat ?? DataFormat.json,
+                    };
+                }
             }
         }
     }

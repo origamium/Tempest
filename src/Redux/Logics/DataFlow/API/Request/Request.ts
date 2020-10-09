@@ -5,9 +5,6 @@ import { APIPayloadType } from "../../Types/APIPayloadType";
 import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
 import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
 import { APIParameterDefTypes } from "../../Service/ApiSet/APIParameterDefTypes";
-import { APISet } from "../APISet";
-import { DataSetControl } from "../../Data/DataSetControl";
-import { ISolvedData } from "../../Data/Dynamizr/Interfaces/ISolvedData";
 
 interface IParameterKeysObject {
     key: string[];

@@ -1,7 +1,7 @@
 import { APISet, APISetControl } from "../API/APISet";
 import { APIUnitsObject } from "./ApiSet/ApiUnitObject";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
-import { DataSetControl, DataSetObject, DataSetsObject } from "../Data/DataSetControl";
+import { DataSetControl, DataSetsObject } from "../Data/DataSetControl";
 import { Exportable } from "../../HelperType/Exportable";
 import { ISolvedData } from "../Data/Dynamizr/Interfaces/ISolvedData";
 
