@@ -96,7 +96,7 @@
     "@types/react-redux": "7.1.9",
     "@types/react-virtualized": "9.21.10",
     "@types/recompose": "0.30.7",
-    "@types/styled-components": "5.1.3",
+    "@types/styled-components": "5.1.4",
     "@types/twitter-text": "2.0.0",
     "@typescript-eslint/eslint-plugin": "4.4.0",
     "@typescript-eslint/parser": "4.4.0",
