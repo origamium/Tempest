@@ -8,14 +8,21 @@ import { schemaTypes } from "../Types/SchemaTypes";
 import { Protocol } from "../Types/Protocol";
 import { ProviderObject } from "../Provider/ProviderControl";
 import { ServiceObject } from "../Service/ServiceControl";
-import { DataSetsObject } from "../Data/DataSetControl";
+import { DataFormat, DataSetsObject } from "../Data/DataSetControl";
+import { SchemaElementType } from "../Data/Dynamizr/Interfaces/ISchema";
 
 const apiSet = {
     requestAuthToken: {
-        path: "",
+        path: "oauth/request_token",
         protocol: Protocol.rest,
-        httpMethod: HttpMethods.GET,
-        parameterDef: {},
+        httpMethod: HttpMethods.POST,
+        parameterDef: {
+            oauth_callback: {
+                required: true,
+                type: ApiParameterMethods.Header,
+            },
+        },
+        returnedDataKey: "oauth_request_token",
     },
     updateStatus: {
         path: "statuses/update",
@@ -50,11 +57,29 @@ const apiSet = {
 };
 
 const dataSet: DataSetsObject = {
+    oauth_request_token: {
+        key: "oauth_request_token",
+        schemaDef: {
+            schema: {
+                name: "oauth_token",
+                elementType: SchemaElementType.flat,
+                type: schemaTypes.Entity,
+                idAttribute: "oauth_token",
+                transform: {
+                    oauth_token: "oauth_token",
+                    oauth_token_secret: "oauth_token_secret",
+                    oauth_callback_confirmed: "oauth_callback_confirmed",
+                },
+            },
+        },
+        dataFormat: DataFormat.qs,
+    },
     status: {
         key: "status",
         schemaDef: {
             schema: {
                 name: "contents",
+                elementType: SchemaElementType.dyna,
                 type: schemaTypes.Entity,
                 idAttribute: "id_str",
                 transform: {
@@ -73,6 +98,7 @@ const dataSet: DataSetsObject = {
         schemaDef: {
             schema: {
                 name: "contents",
+                elementType: SchemaElementType.dyna,
                 type: schemaTypes.Array,
                 idAttribute: "id_str",
                 transform: {
@@ -86,6 +112,7 @@ const dataSet: DataSetsObject = {
                 definition: {
                     user: {
                         name: "users",
+                        elementType: SchemaElementType.dyna,
                         type: schemaTypes.Entity,
                         idAttribute: "id_str",
                         transform: {
@@ -106,6 +133,7 @@ const dataSet: DataSetsObject = {
         schemaDef: {
             schema: {
                 name: "user",
+                elementType: SchemaElementType.dyna,
                 type: schemaTypes.Entity,
                 idAttribute: "id_str",
                 transform: {

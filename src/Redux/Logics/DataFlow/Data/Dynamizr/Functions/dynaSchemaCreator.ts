@@ -1,11 +1,18 @@
 import { schema } from "normalizr";
 import { UnsupportedSchemaType } from "../Exceptions";
-import { IRecursiveSchema, ISchema, ISchemaElement } from "../Interfaces/ISchema";
+import {
+    IRecursiveSchema,
+    ISchema,
+    IDynaSchemaElement,
+    IFlatSchemaElement,
+    SchemaElementType,
+    SchemaElement,
+} from "../Interfaces/ISchema";
 import { schemaTypes } from "../../../Types/SchemaTypes";
 import { ReturnedDatumInfoType } from "../../../Types/ReturnedDatumInfoType";
 
 // --- normalizr schema creator ----
-const entityCreator = (schemaData: ISchemaElement) =>
+const entityCreator = (schemaData: IDynaSchemaElement) =>
     new schema.Entity(
         schemaData.name,
         schemaData.definition ? reCreateSchema(schemaData.definition) : {},
@@ -26,20 +33,31 @@ const reCreateSchema = (schemaData: IRecursiveSchema) =>
             {}
         );
 
-const schemaCreator = (schemaData: ISchemaElement): any => {
-    switch (schemaData.type) {
-        case schemaTypes.Entity:
-            return entityCreator(schemaData);
-        case schemaTypes.Array:
-            return new schema.Array(entityCreator(schemaData));
+const schemaCreator = (
+    schemaData: IDynaSchemaElement | IFlatSchemaElement
+): schema.Array<any> | schema.Entity<any> | undefined => {
+    switch (schemaData.elementType) {
+        case SchemaElementType.dyna:
+            // eslint-disable-next-line no-case-declarations
+            const data = schemaData as IDynaSchemaElement;
+            switch (data.type) {
+                case schemaTypes.Entity:
+                    return entityCreator(data);
+                case schemaTypes.Array:
+                    return new schema.Array(entityCreator(data));
+                default:
+                    throw UnsupportedSchemaType;
+            }
+        case SchemaElementType.flat:
+            return undefined;
         default:
-            throw UnsupportedSchemaType;
+            throw new Error();
     }
 };
 // --- end of normalizr schema creator ---
 
 // --- transform ---
-const pickupTransformAttr = (schemaData: ISchemaElement, root = {}) => {
+const pickupTransformAttr = (schemaData: SchemaElement, root = {}) => {
     const definition = schemaData.definition;
     if (definition) {
         Object.keys(definition).forEach((key) => pickupTransformAttr(definition[key], root));

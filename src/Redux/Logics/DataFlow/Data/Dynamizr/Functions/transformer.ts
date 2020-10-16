@@ -30,8 +30,11 @@ const transform = (format: ITransform, target: any) => {
         .reduce((accm, curr) => ({ ...accm, [curr.itemKey]: curr.data }), {});
 };
 
-export default (dynaSchemaData: ReturnedDatumInfoType, target: any): ISolvedData => ({
-    // TODO: Return Data Definition
-    entities: transform(dynaSchemaData.transformerSchema, target.entities),
-    result: target.result,
-});
+export default (dynaSchemaData: ReturnedDatumInfoType, target: any): ISolvedData =>
+    dynaSchemaData.normalizrSchema
+        ? {
+              // TODO: Return Data Definition
+              entities: transform(dynaSchemaData.transformerSchema, target.entities),
+              result: target.result,
+          }
+        : { entities: transform(dynaSchemaData.transformerSchema, target.entities), result: target };

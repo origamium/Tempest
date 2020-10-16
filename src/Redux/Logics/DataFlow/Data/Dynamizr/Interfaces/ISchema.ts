@@ -4,17 +4,32 @@ import { schemaTypes } from "../../../Types/SchemaTypes";
 export interface ISchema {
     target?: string;
     errorCheckParam?: string;
-    schema: ISchemaElement;
+    schema: IDynaSchemaElement | IFlatSchemaElement;
 }
 
 export interface IRecursiveSchema {
-    [key: string]: ISchemaElement;
+    [key: string]: IDynaSchemaElement | IFlatSchemaElement;
 }
 
-export interface ISchemaElement {
+export enum SchemaElementType {
+    dyna = "dyna",
+    flat = "flat",
+}
+
+interface ISchemaElementBase {
+    elementType: SchemaElementType;
+    definition?: IRecursiveSchema;
+    transform: ITransform;
+}
+
+export interface IDynaSchemaElement extends ISchemaElementBase {
     name: string;
     type: schemaTypes;
-    transform: ITransform;
     idAttribute?: string;
-    definition?: IRecursiveSchema;
 }
+
+export interface IFlatSchemaElement extends ISchemaElementBase {
+    name: string;
+}
+
+export type SchemaElement = IDynaSchemaElement | IFlatSchemaElement;
