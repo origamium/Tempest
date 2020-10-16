@@ -38,7 +38,7 @@ export class Service implements Exportable<ServiceObject> {
     }
 
     public getApiSet(key: string): APISet | undefined {
-        return this._apiSet[key];
+        return this._apiSet.getAPI(key);
     }
 
     public async parseResponse<T>(api: APISet, response: Response): Promise<ISolvedData<T>> {
