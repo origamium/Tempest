@@ -20,7 +20,6 @@ module.exports = (_, { mode = "development" }) => {
             libraryTarget: "umd",
             umdNamedDefine: true,
         },
-        devtool: "",
         resolve: {
             extensions: [".js", ".jsx", ".ts", ".tsx"],
         },
@@ -65,7 +64,6 @@ module.exports = (_, { mode = "development" }) => {
             },
         },
         plugins: [
-            new ForkTsCheckerWebpackPlugin(),
             new webpack.ProgressPlugin(),
             new CleanWebpackPlugin(),
             new MiniCssExtractPlugin({
@@ -132,7 +130,7 @@ module.exports = (_, { mode = "development" }) => {
             },
         };
 
-        config.plugins.push(new webpack.HotModuleReplacementPlugin());
+        config.plugins.push(new webpack.HotModuleReplacementPlugin(), new ForkTsCheckerWebpackPlugin());
     }
 
     return config;
