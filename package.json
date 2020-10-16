@@ -35,7 +35,7 @@
   },
   "scripts": {
     "start": "webpack serve --mode development --env development",
-    "build": "webpack --mode=production",
+    "build": "webpack --mode production",
     "build:dev": "webpack --mode=development",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook --quiet",
