@@ -26,14 +26,14 @@ export function* requestRestoreSaga() {
     const keys = yield call(SettingStore.keys);
 
     if (keys.length > 0) {
-        const uiObj: UIObject = yield call<(key: dbKeys.ui) => Promise<UIObject>>(SettingStore.getItem, dbKeys.ui);
-        const accountObj = yield call<(key: dbKeys.account) => Promise<Accounts>>(SettingStore.getItem, dbKeys.account);
-        const serviceObj = yield call<(key: dbKeys.service) => Promise<Services>>(SettingStore.getItem, dbKeys.service);
-        const providerObj = yield call<(key: dbKeys.provider) => Promise<Providers>>(
+        const uiObj: UIObject = yield call<(key: dbKeys.ui) => Promise<UIObject | null>>(SettingStore.getItem, dbKeys.ui);
+        const accountObj = yield call<(key: dbKeys.account) => Promise<Accounts | null>>(SettingStore.getItem, dbKeys.account);
+        const serviceObj = yield call<(key: dbKeys.service) => Promise<Services | null>>(SettingStore.getItem, dbKeys.service);
+        const providerObj = yield call<(key: dbKeys.provider) => Promise<Providers | null>>(
             SettingStore.getItem,
             dbKeys.provider
         );
-        const contentObj = yield call<(key: dbKeys.content) => Promise<ContentsControlObject>>(
+        const contentObj = yield call<(key: dbKeys.content) => Promise<ContentsControlObject | null>>(
             SettingStore.getItem,
             dbKeys.content
         );
