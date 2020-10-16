@@ -122,7 +122,7 @@ module.exports = (_, { mode = "development" }) => {
             nodeEnv: "development",
             splitChunks: {
                 cacheGroups: {
-                    vendors: {
+                    defaultVendors: {
                         test: /node_modules/,
                         name: "vendor",
                         enforce: true,
