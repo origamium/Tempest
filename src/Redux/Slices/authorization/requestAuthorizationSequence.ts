@@ -30,8 +30,11 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
     if (!serviceKey || !providerKey) {
         return;
     }
-    const [services, providers]: [ServiceControl | undefined, ProviderControl | undefined] = yield select(
-        (state: StoreType) => state ?? [undefined, undefined]
+    const [services, providers]: [
+        ServiceControl | undefined,
+        ProviderControl | undefined
+    ] = yield select((state: StoreType) =>
+        state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined]
     );
 
     const service = services?.getService(serviceKey);
@@ -47,13 +50,17 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
     let code, nonce;
     if (requestAuthTokenApi) {
         const requestAuthTokenApiPayloads = provider.authorization.getAuthToken(requestAuthTokenApi, provider.baseUri);
-        const [info ,init] = TRequest.createRequest(provider.baseUri, requestAuthTokenApi.export(), requestAuthTokenApiPayloads?.payload || {})
+        const [info, init] = TRequest.createRequest(
+            provider.baseUri,
+            requestAuthTokenApi.export(),
+            requestAuthTokenApiPayloads?.payload || {}
+        );
         try {
             const response = yield call(() => fetch(info, init));
-            const data = yield call(() => service.parseResponse(requestAuthTokenApi, response))
+            const data = yield call(() => service.parseResponse(requestAuthTokenApi, response));
             // todo
-        }
-
+            console.log(data);
+        } catch (e) {}
     }
 
     const key = "authorizeUri";
