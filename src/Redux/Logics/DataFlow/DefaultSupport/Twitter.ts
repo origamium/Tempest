@@ -17,6 +17,10 @@ const apiSet = {
         protocol: Protocol.rest,
         httpMethod: HttpMethods.POST,
         parameterDef: {
+            Authorization: {
+                required: true,
+                type: ApiParameterMethods.Header,
+            },
             oauth_callback: {
                 required: true,
                 type: ApiParameterMethods.Header,
