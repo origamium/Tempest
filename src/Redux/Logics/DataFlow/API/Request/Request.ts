@@ -98,7 +98,7 @@ export class TRequest {
             .reduce(
                 (prev, currKey) => ({
                     ...prev,
-                    ...{ currKey: parameters.payload[currKey] },
+                    ...{ [currKey]: parameters.payload[currKey] },
                 }),
                 {}
             );
