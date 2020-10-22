@@ -78,7 +78,6 @@ export default class OAuth1 implements OAuth {
                 return {
                     definition: {
                         Authorization: { required: true, type: ApiParameterMethods.Header },
-                        cors: { required: false, type: ApiParameterMethods.Header },
                     },
                     payload: {
                         Authorization: oauth_data.Authorization,
