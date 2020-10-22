@@ -9,8 +9,7 @@ import { APIPayloadType } from "../Types/APIPayloadType";
 import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
 import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
 import { Exportable } from "../../HelperType/Exportable";
-import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
-import { APISet, APISetControl } from "../API/APISet";
+import { APISet } from "../API/APISet";
 
 export type AuthorizationDataObject = {
     token: string;

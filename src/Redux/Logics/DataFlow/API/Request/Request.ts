@@ -15,13 +15,18 @@ interface IParameterKeysObject {
 }
 
 export class TRequest {
+    private static defaultHeaders = ["mode"];
+
     public static getParameterClassifier(parameter: APIParameterDefTypes): IParameterKeysObject {
-        const parameters = Object.keys(parameter);
+        const parameters = [...Object.keys(parameter), ...this.defaultHeaders];
 
         return {
             key: parameters,
             required: parameters.filter((key: string) => parameter[key]?.required),
-            header: parameters.filter((key: string) => parameter[key]?.type === ApiParameterMethods.Header),
+            header: [
+                ...parameters.filter((key: string) => parameter[key]?.type === ApiParameterMethods.Header),
+                ...this.defaultHeaders,
+            ],
             pathToRegexp: parameters.filter((key) => parameter[key]?.type === ApiParameterMethods.PathString),
             query: parameters.filter((key: string) => parameter[key]?.type === ApiParameterMethods.Query),
         };
