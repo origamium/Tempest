@@ -1,4 +1,4 @@
-import oauth1a from "oauth-1.0a";
+import oauth1a, { Header } from "oauth-1.0a";
 import crypto from "crypto-js";
 import OAuth, { optionObject } from "./OAuth";
 import { AuthInfoType } from "../Types/AuthInfoType";
@@ -20,7 +20,7 @@ export default class OAuth1 implements OAuth {
         token: TokenType | undefined,
         apiData: ApiUnitObject,
         payload: APIPayloadType
-    ): oauth1a.Authorization {
+    ): Header {
         const oauth = new oauth1a({
             consumer: {
                 key: authInfo.apiKey.ApiKey,
@@ -29,29 +29,37 @@ export default class OAuth1 implements OAuth {
             signature_method: authInfo.signMethod,
             hash_function(base_string, key) {
                 switch (authInfo.signMethod) {
-                    case SignMethod.rsa:
-                        return crypto.SHA1(base_string, key).toString(crypto.enc.Base64);
                     case SignMethod.hmac:
-                        return crypto.HmacSHA1(base_string, key).toString(crypto.enc.Base64);
+                        return crypto
+                            .HmacSHA1(
+                                base_string,
+                                `${encodeURIComponent(authInfo.apiKey.ApiSecretKey ?? "")}&${encodeURIComponent(
+                                    token?.TokenSecret ?? ""
+                                )}`
+                            )
+                            .toString(crypto.enc.Base64);
                     case SignMethod.plain:
                         console.warn("このサービス使うのやめちまえ");
-                        // TODO
-                        return `${base_string}${key}`;
+                        return `${base_string}$`;
+                    default:
+                        return "";
                 }
             },
         });
 
         // WARN: やばいかも
-        return oauth.authorize(
-            {
-                url: `${baseUri}${apiData.path}`,
-                method: apiData.httpMethod,
-                data: payload,
-            },
-            token && {
-                key: token.Token,
-                secret: token.TokenSecret ?? "",
-            }
+        return oauth.toHeader(
+            oauth.authorize(
+                {
+                    url: `${baseUri}${apiData.path}`,
+                    method: apiData.httpMethod,
+                    data: payload,
+                },
+                token && {
+                    key: token.Token,
+                    secret: token.TokenSecret ?? "",
+                }
+            )
         );
     }
 
@@ -70,16 +78,10 @@ export default class OAuth1 implements OAuth {
                 return {
                     definition: {
                         Authorization: { required: true, type: ApiParameterMethods.Header },
+                        cors: { required: false, type: ApiParameterMethods.Header },
                     },
                     payload: {
-                        Authorization:
-                            `OAuth oauth_consumer_key="${oauth_data.oauth_consumer_key}",` +
-                            (token ? `oauth_token="${token.Token},` : ``) +
-                            `oauth_signature_method="${oauth_data.oauth_signature_method}",` +
-                            `oauth_timestamp="${oauth_data.oauth_timestamp}",` +
-                            `oauth_nonce="${oauth_data.oauth_nonce}",` +
-                            `oauth_version="${oauth_data.oauth_version}",` +
-                            `oauth_signature="${oauth_data.oauth_signature}"`,
+                        Authorization: oauth_data.Authorization,
                     },
                 };
 
