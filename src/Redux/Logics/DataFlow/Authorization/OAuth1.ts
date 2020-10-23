@@ -114,12 +114,8 @@ export default class OAuth1 implements OAuth {
         }
     }
 
-    public requestAuthToken(
-        baseUri: string,
-        apiData: APISetObject,
-        authInfo: AuthInfoType
-    ): CombinedParameterDataType {
-        const template: APIParameterDefTypes = apiData.parameterDef;
+    public requestAuthToken(baseUri: string, apiData: APISetObject, authInfo: AuthInfoType): CombinedParameterDataType {
+        const template: APIParameterDefTypes = apiData.parameterDef ?? {};
         const value: APIPayloadType = {};
 
         const callbackKey = "oauth_callback";
@@ -164,7 +160,7 @@ export default class OAuth1 implements OAuth {
         verifier: string,
         option?: optionObject
     ): CombinedParameterDataType {
-        const template: APIParameterDefTypes = apiData.parameterDef;
+        const template: APIParameterDefTypes = apiData.parameterDef ?? {};
         const value: APIPayloadType = {
             oauth_verifier: verifier,
         };
