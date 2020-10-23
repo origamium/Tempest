@@ -114,7 +114,7 @@ export class TRequest {
         data: APISetObject,
         payload: APIPayloadType,
         cert?: CombinedParameterDataType
-    ): [RequestInfo, RequestInit] {
+    ): [RequestInfo, RequestInit, boolean] {
         const parameterDef = data.parameterDef ?? {};
         const defaultPayload = Object.entries(parameterDef).reduce(
             (accm, [key, value]) => (value?.default ? { ...accm, [key]: value.default } : accm),
@@ -140,6 +140,7 @@ export class TRequest {
                 method: data.httpMethod,
                 headers: this.createHeaderObject(combinedParameter, classifiedKey),
             },
+            data.open ?? false,
         ];
     }
 }
