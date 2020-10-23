@@ -10,8 +10,13 @@ export class APISet implements Exportable<APISetObject> {
     private _compiledPathToRegexp: PathFunction<any>;
     private _api: APISetObject;
 
-    private defaultMethod(method: HttpMethods): ApiParameterMethods {
+    private static defaultMethod(method: HttpMethods): ApiParameterMethods {
         switch (method) {
+            case HttpMethods.GET:
+            case HttpMethods.PUT:
+                return ApiParameterMethods.Query;
+            default:
+                return ApiParameterMethods.Body;
         }
     }
 
@@ -23,7 +28,7 @@ export class APISet implements Exportable<APISetObject> {
             Object.entries(source.parameterDef).reduce(
                 (accm, [key, value]) => ({
                     ...accm,
-                    [key]: Object.assign({ value }, { type: value?.type ?? this.defaultMethod(source.httpMethod) }),
+                    [key]: Object.assign({ value }, { type: value?.type ?? APISet.defaultMethod(source.httpMethod) }),
                 }),
                 {}
             );
