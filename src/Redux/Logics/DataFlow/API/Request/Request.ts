@@ -12,6 +12,7 @@ interface IParameterKeysObject {
     header: string[];
     pathToRegexp: string[];
     query: string[];
+    body: string[];
 }
 
 export class TRequest {
@@ -29,6 +30,7 @@ export class TRequest {
             ],
             pathToRegexp: parameters.filter((key) => parameter[key]?.type === ApiParameterMethods.PathString),
             query: parameters.filter((key: string) => parameter[key]?.type === ApiParameterMethods.Query),
+            body: parameters.filter((key: string) => parameter[key]?.type === ApiParameterMethods.Body),
         };
     }
 
@@ -109,6 +111,20 @@ export class TRequest {
             );
     }
 
+    public static createBodyString(parameters: CombinedParameterDataType, keys: IParameterKeysObject): string {
+        return JSON.stringify(
+            keys.body
+                .filter((key) => parameters.payload[key])
+                .reduce(
+                    (prev, currKey) => ({
+                        ...prev,
+                        ...{ [currKey]: parameters.payload[currKey] },
+                    }),
+                    {}
+                )
+        );
+    }
+
     public static createRequest(
         baseUri: string,
         data: APISetObject,
@@ -139,6 +155,7 @@ export class TRequest {
             {
                 method: data.httpMethod,
                 headers: this.createHeaderObject(combinedParameter, classifiedKey),
+                body: this.createBodyString(combinedParameter, classifiedKey),
             },
             data.open ?? false,
         ];
