@@ -38,7 +38,7 @@ export class APISet implements Exportable<APISetObject> {
         return ["", {}];
     };
 
-    get dataKey() {
+    get dataKey(): string | undefined {
         return this._api.returnedDataKey;
     }
 
