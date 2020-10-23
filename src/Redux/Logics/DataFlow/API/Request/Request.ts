@@ -116,7 +116,7 @@ export class TRequest {
         cert?: CombinedParameterDataType
     ): [RequestInfo, RequestInit] {
         let combinedParameter: CombinedParameterDataType = {
-            definition: data.parameterDef,
+            definition: data.parameterDef ?? {},
             payload,
         };
         if (cert) {
