@@ -115,9 +115,14 @@ export class TRequest {
         payload: APIPayloadType,
         cert?: CombinedParameterDataType
     ): [RequestInfo, RequestInit] {
+        const parameterDef = data.parameterDef ?? {};
+        const defaultPayload = Object.entries(parameterDef).reduce(
+            (accm, [key, value]) => (value?.default ? { ...accm, [key]: value.default } : accm),
+            {}
+        );
         let combinedParameter: CombinedParameterDataType = {
-            definition: data.parameterDef ?? {},
-            payload,
+            definition: parameterDef,
+            payload: { ...defaultPayload, ...payload },
         };
         if (cert) {
             combinedParameter = {
