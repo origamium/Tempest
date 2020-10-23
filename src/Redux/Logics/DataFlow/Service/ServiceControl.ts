@@ -1,5 +1,5 @@
 import { APISet, APISetControl } from "../API/APISet";
-import { APIUnitsObject } from "./ApiSet/ApiUnitObject";
+import { APISetsObject } from "./ApiSet/APISetObject";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { DataSetControl, DataSetsObject } from "../Data/DataSetControl";
 import { Exportable } from "../../HelperType/Exportable";
@@ -8,7 +8,7 @@ import { ISolvedData } from "../Data/Dynamizr/Interfaces/ISolvedData";
 export type ServiceObject = {
     serviceKey: string; // is equal key
     serviceName: string;
-    apiSet: APIUnitsObject;
+    apiSet: APISetsObject;
     dataSet: DataSetsObject;
     officialKey?: string;
 };

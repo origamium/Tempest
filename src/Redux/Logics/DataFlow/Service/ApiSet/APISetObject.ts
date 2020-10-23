@@ -3,13 +3,14 @@ import { HttpMethods } from "../../Types/HttpMethods";
 import { UndefinedablePairOfObject } from "../../../HelperType/PairOfObject";
 import { Protocol } from "../../Types/Protocol";
 
-export type ApiUnitObject = {
+export type APISetObject = {
     path: string;
     protocol: Protocol;
     httpMethod: HttpMethods;
-    parameterDef: APIParameterDefTypes;
-    returnedDataKey: string; // related SchemaObject.
+    parameterDef?: APIParameterDefTypes;
+    open?: boolean;
+    returnedDataKey?: string; // related SchemaObject.
     errorKey?: string; // use SchemaObject
 };
 
-export type APIUnitsObject = UndefinedablePairOfObject<ApiUnitObject>;
+export type APISetsObject = UndefinedablePairOfObject<APISetObject>;

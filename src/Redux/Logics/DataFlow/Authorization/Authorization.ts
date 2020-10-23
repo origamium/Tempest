@@ -7,7 +7,7 @@ import { OAuthVersion } from "../Types/Authorization/OAuthVersion";
 import { UnknownAuthorizationMethod } from "../../../Exceptions";
 import { APIPayloadType } from "../Types/APIPayloadType";
 import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
-import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
+import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { Exportable } from "../../HelperType/Exportable";
 import { APISet } from "../API/APISet";
 
@@ -80,7 +80,7 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
 
     public getAuthorizationData(
         baseUri: string,
-        api: ApiUnitObject,
+        api: APISetObject,
         token: TokenType,
         payload: APIPayloadType
     ): CombinedParameterDataType {

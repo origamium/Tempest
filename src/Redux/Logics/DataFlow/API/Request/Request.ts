@@ -3,7 +3,7 @@ import { compile } from "path-to-regexp";
 import { ApiParameterMethods } from "../../Types/ApiParameterMethods";
 import { APIPayloadType } from "../../Types/APIPayloadType";
 import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
-import { ApiUnitObject } from "../../Service/ApiSet/ApiUnitObject";
+import { APISetObject } from "../../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../../Service/ApiSet/APIParameterDefTypes";
 
 interface IParameterKeysObject {
@@ -86,7 +86,7 @@ export class TRequest {
 
     public static createUri(
         baseUri: string,
-        data: ApiUnitObject,
+        data: APISetObject,
         parameters: CombinedParameterDataType,
         keys: IParameterKeysObject
     ): string {
@@ -111,7 +111,7 @@ export class TRequest {
 
     public static createRequest(
         baseUri: string,
-        data: ApiUnitObject,
+        data: APISetObject,
         payload: APIPayloadType,
         cert?: CombinedParameterDataType
     ): [RequestInfo, RequestInit] {

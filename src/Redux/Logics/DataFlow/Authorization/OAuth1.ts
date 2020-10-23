@@ -9,7 +9,7 @@ import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { UnknownOAuthSignatureSpace } from "../../../Exceptions";
 import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
 import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
-import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
+import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 import { SignMethod } from "../Types/Authorization/SignMethod";
 
@@ -18,7 +18,7 @@ export default class OAuth1 implements OAuth {
         baseUri: string,
         authInfo: AuthInfoType,
         token: TokenType | undefined,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         payload: APIPayloadType
     ): Header {
         const oauth = new oauth1a({
@@ -68,7 +68,7 @@ export default class OAuth1 implements OAuth {
         baseUri: string,
         authInfo: AuthInfoType,
         token: TokenType | undefined,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         payload: APIPayloadType
     ): CombinedParameterDataType {
         const oauth_data = OAuth1._signature(baseUri, authInfo, token, apiData, payload);
@@ -116,7 +116,7 @@ export default class OAuth1 implements OAuth {
 
     public requestAuthToken(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType
     ): CombinedParameterDataType {
         const template: APIParameterDefTypes = apiData.parameterDef;
@@ -137,7 +137,7 @@ export default class OAuth1 implements OAuth {
 
     public authorizeUri(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         optional?: optionObject
@@ -159,7 +159,7 @@ export default class OAuth1 implements OAuth {
 
     public requestToken(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         verifier: string,
         option?: optionObject
@@ -181,7 +181,7 @@ export default class OAuth1 implements OAuth {
 
     public getAuthorizationData(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         token: TokenType,
         payload: APIPayloadType

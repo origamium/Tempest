@@ -8,7 +8,7 @@ import { TokenType } from "../Types/APIKeyType";
 import { SignSpace } from "../Types/Authorization/SignSpace";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { UnknownOAuthSignatureSpace } from "../../../Exceptions";
-import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
+import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 
 export default class OAuth2 implements OAuth {
@@ -25,7 +25,7 @@ export default class OAuth2 implements OAuth {
 
     public authorizeUri(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         option?: optionObject
@@ -47,7 +47,7 @@ export default class OAuth2 implements OAuth {
 
     public requestToken(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         verifier: string,
         option?: optionObject
@@ -74,7 +74,7 @@ export default class OAuth2 implements OAuth {
 
     public getAuthorizationData(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         token: TokenType,
         payload: APIPayloadType

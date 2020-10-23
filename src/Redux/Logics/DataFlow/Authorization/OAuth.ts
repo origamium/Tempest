@@ -3,7 +3,7 @@ import { AuthInfoType } from "../Types/AuthInfoType";
 import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
 import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
 import { APIPayloadType } from "../Types/APIPayloadType";
-import { ApiUnitObject } from "../Service/ApiSet/ApiUnitObject";
+import { APISetObject } from "../Service/ApiSet/APISetObject";
 
 export type optionObject = {
     scope?: {
@@ -19,14 +19,14 @@ export default interface IOAuth {
     // optional: step 0
     requestAuthToken?(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType
     ): CombinedParameterDataType & { requiredPayload?: object };
 
     // required: step 1. Generate Authorization url
     authorizeUri(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         option?: optionObject
@@ -36,7 +36,7 @@ export default interface IOAuth {
     // "verifier" is also known as "PIN"
     requestToken(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         verifier: string,
         option?: optionObject
@@ -45,7 +45,7 @@ export default interface IOAuth {
     // optional: step 3
     refreshToken?(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         token: TokenType
     ): CombinedParameterDataType;
@@ -53,7 +53,7 @@ export default interface IOAuth {
     // required: autohorized data
     getAuthorizationData(
         baseUri: string,
-        apiData: ApiUnitObject,
+        apiData: APISetObject,
         authInfo: AuthInfoType,
         token: TokenType,
         payload: APIPayloadType
