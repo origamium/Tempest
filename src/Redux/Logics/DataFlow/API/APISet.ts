@@ -1,16 +1,32 @@
 import { compile, PathFunction } from "path-to-regexp";
-import { ApiUnitObject, APIUnitsObject } from "../Service/ApiSet/ApiUnitObject";
+import { APISetObject, APISetsObject } from "../Service/ApiSet/APISetObject";
 import { PairOfObject } from "../../HelperType/PairOfObject";
 import { Exportable } from "../../HelperType/Exportable";
+import { HttpMethods } from "../Types/HttpMethods";
+import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 
-export class APISet implements Exportable<ApiUnitObject> {
+export class APISet implements Exportable<APISetObject> {
     // @ts-ignore
     private _compiledPathToRegexp: PathFunction<any>;
-    private _api: ApiUnitObject;
+    private _api: APISetObject;
 
-    constructor(source: ApiUnitObject) {
+    private defaultMethod(method: HttpMethods): ApiParameterMethods {
+        switch (method) {
+        }
+    }
+
+    constructor(source: APISetObject) {
         this._compiledPathToRegexp = compile(source.path);
         this._api = source;
+        this._api.parameterDef =
+            source.parameterDef &&
+            Object.entries(source.parameterDef).reduce(
+                (accm, [key, value]) => ({
+                    ...accm,
+                    [key]: Object.assign({ value }, { type: value?.type ?? this.defaultMethod(source.httpMethod) }),
+                }),
+                {}
+            );
     }
 
     public createRequest = (): [RequestInfo, RequestInit] => {
@@ -25,17 +41,17 @@ export class APISet implements Exportable<ApiUnitObject> {
         return this._api.errorKey;
     }
 
-    export(): ApiUnitObject {
+    export(): APISetObject {
         return this._api;
     }
 }
 
-export class APISetControl implements Exportable<APIUnitsObject> {
+export class APISetControl implements Exportable<APISetsObject> {
     private _apiSet: PairOfObject<APISet>;
 
-    constructor(source: APIUnitsObject) {
+    constructor(source: APISetsObject) {
         this._apiSet = Object.entries(source).reduce(
-            (accm, [key, value]) => ({ ...accm, [key]: new APISet(value as ApiUnitObject) }),
+            (accm, [key, value]) => ({ ...accm, [key]: new APISet(value as APISetObject) }),
             {}
         );
     }
@@ -44,7 +60,7 @@ export class APISetControl implements Exportable<APIUnitsObject> {
         return this._apiSet[key];
     }
 
-    export(): APIUnitsObject {
+    export(): APISetsObject {
         return Object.entries(this._apiSet).reduce((accm, [key, value]) => ({ ...accm, [key]: value.export() }), {});
     }
 }
