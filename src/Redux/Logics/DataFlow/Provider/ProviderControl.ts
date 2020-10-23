@@ -4,7 +4,7 @@ import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOf
 import { AuthorizationUnitObject } from "../Service/ApiSet/AuthorizationUnitObject";
 import { Exportable } from "../../HelperType/Exportable";
 
-export type ProviderObject = {
+export type ProviderObjectElement = {
     serviceKey: string; // equal Service Object key. and must be unique
     providerKey: string;
     providerName: string;
@@ -14,8 +14,10 @@ export type ProviderObject = {
     apiKey: APIKeyType;
 };
 
+export type ProviderObject = ProviderObjectElement | ProviderObjectElement[];
+
 // key is domain. e.g. 'twitter.com', 'slack.com'
-export type Providers = UndefinedablePairOfObject<ProviderObject>;
+export type Providers = PairOfObject<ProviderObject>;
 
 export class Provider implements Exportable<ProviderObject> {
     private readonly _serviceKey: string;
@@ -25,7 +27,7 @@ export class Provider implements Exportable<ProviderObject> {
     private readonly _domain: string; // mstdn.jp, pawoo.net...
     private readonly _auth: Authorization;
 
-    constructor({ source, officialProviderKey }: { source: ProviderObject; officialProviderKey?: string }) {
+    constructor({ source, officialProviderKey }: { source: ProviderObjectElement; officialProviderKey?: string }) {
         this._serviceKey = source.serviceKey;
         this._providerKey = source.providerKey;
         this._providerName = source.providerName;
@@ -63,7 +65,7 @@ export class Provider implements Exportable<ProviderObject> {
         return this._domain;
     }
 
-    export(): ProviderObject {
+    export(): ProviderObjectElement {
         return {
             serviceKey: this._serviceKey,
             providerKey: this._providerKey,
@@ -81,7 +83,12 @@ export class ProviderControl implements Exportable<Providers> {
 
     constructor(source: Providers) {
         this._providers = Object.entries(source).reduce(
-            (accm, [key, source]) => ({ ...accm, [key]: new Provider({ source } as { source: ProviderObject }) }),
+            (accm, [_, providers]) => ({
+                ...accm,
+                ...(Array.isArray(providers)
+                    ? providers.reduce((accm2, value) => ({ ...accm2, [value.serviceKey]: value }), {})
+                    : { [providers.serviceKey]: providers }),
+            }),
             {}
         );
     }
