@@ -135,7 +135,7 @@
     "stylelint-config-recommended": "3.0.0",
     "stylelint-config-styled-components": "0.1.1",
     "ts-jest": "26.4.1",
-    "ts-loader": "8.0.5",
+    "ts-loader": "8.0.7",
     "tsconfig-paths-webpack-plugin": "3.3.0",
     "type-fest": "0.18.0",
     "typescript": "4.0.3",
