@@ -137,7 +137,7 @@
     "sass-loader": "10.0.3",
     "serve": "11.3.2",
     "snowpack": "^2.15.1",
-    "snyk": "1.415.0",
+    "snyk": "1.420.1",
     "source-map-loader": "1.1.1",
     "style-loader": "2.0.0",
     "stylelint": "13.7.2",
