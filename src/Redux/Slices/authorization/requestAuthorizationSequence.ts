@@ -47,6 +47,8 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
 
     const requestAuthTokenKey = "requestAuthToken";
     const requestAuthTokenApi = service.getApiSet(requestAuthTokenKey);
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let code, nonce;
     if (requestAuthTokenApi) {
         const requestAuthTokenApiPayloads = provider.authorization.getAuthToken(requestAuthTokenApi, provider.baseUri);
@@ -68,5 +70,7 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
     if (!getAuthorizeUriApi) {
         throw new Error(`ApiSetControl.getApiSet(${key}) is undefined`);
     }
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const url = provider.authorization.getAuthorizeUri(getAuthorizeUriApi, provider.baseUri);
 }

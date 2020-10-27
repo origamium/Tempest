@@ -1,6 +1,6 @@
 import { APIKeyType } from "../Types/APIKeyType";
 import Authorization from "../Authorization";
-import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
+import { PairOfObject } from "../../HelperType/PairOfObject";
 import { AuthorizationUnitObject } from "../Service/ApiSet/AuthorizationUnitObject";
 import { Exportable } from "../../HelperType/Exportable";
 
