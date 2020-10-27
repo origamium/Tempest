@@ -1,9 +1,11 @@
 import { APISetsObject } from "../Service/ApiSet/APISetObject";
 import { Protocol } from "../Types/Protocol";
 import { HttpMethods } from "../Types/HttpMethods";
+import { ProviderObject } from "../Provider/ProviderControl";
 
 export default {
     Service: {
+        serviceKey: "mastodon",
         serviceName: "Mastodon",
         apiSet: {
             authorize: {
@@ -24,8 +26,7 @@ export default {
                     },
                     scope: {
                         required: true,
-                        default:
-                            "read read:accounts read:blocks read:bookmarks read:favourites read:filters read:follows read:lists read:mutes read:notifications read:search read:statuses write write:accounts write:blocks write:bookmarks write:conversations write:favourites write:filters write:follows write:lists write:media write:mutes write:notifications write:reports write:statuses follow",
+                        default: "read write follow",
                     },
                 },
             },
@@ -45,8 +46,7 @@ export default {
                     },
                     scope: {
                         required: true,
-                        default:
-                            "read read:accounts read:blocks read:bookmarks read:favourites read:filters read:follows read:lists read:mutes read:notifications read:search read:statuses write write:accounts write:blocks write:bookmarks write:conversations write:favourites write:filters write:follows write:lists write:media write:mutes write:notifications write:reports write:statuses follow",
+                        default: "read write follow",
                     },
                     code: {
                         required: true,
@@ -82,13 +82,11 @@ export default {
             baseUrl: "https://mstdn.jp/",
             domain: "mstdn.jp",
             apiKey: undefined,
-            apiSecret: undefined,
         },
         {
             baseUrl: "https://pawoo.net/",
             domain: "mstdn.jp",
             apiKey: undefined,
-            apiSecret: undefined,
         },
-    ],
+    ] as ProviderObject,
 };

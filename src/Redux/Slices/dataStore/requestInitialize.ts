@@ -10,6 +10,7 @@ import { finishRestoreAction } from "./finishRestore";
 import { MuteControl } from "../../Logics/DataFlow/UI/MuteControl";
 
 import twitter from "../../Logics/DataFlow/DefaultSupport/Twitter";
+import mastodon from "../../Logics/DataFlow/DefaultSupport/Mastodon";
 
 export interface RequestInitializeActionType extends Action {
     type: dataStoreActionsIdentifier.REQUEST_INITIALIZE;
@@ -21,8 +22,8 @@ export const requestInitializeAction = (): RequestInitializeActionType => ({
 
 export function* requestInitializeSaga() {
     // initialization
-    const service = new ServiceControl({ twitter: twitter.service });
-    const provider = new ProviderControl({ twitter: twitter.provider });
+    const service = new ServiceControl({ twitter: twitter.service, mastodon: mastodon.Service });
+    const provider = new ProviderControl({ twitter: twitter.provider, mastodon: mastodon.Provider });
     const account = new AccountControl({ account: {}, lineup: [] });
     const content = new ContentsControl({});
     const page = new PageControl({ tabs: [] }, [], {});
