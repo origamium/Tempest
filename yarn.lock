@@ -1891,7 +1891,7 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@snowpack/app-scripts-react@^1.12.5":
+"@snowpack/app-scripts-react@1.12.5":
   version "1.12.5"
   resolved "https://registry.yarnpkg.com/@snowpack/app-scripts-react/-/app-scripts-react-1.12.5.tgz#1143f4d6cd2c80f7e8c5224cbeda4d0189a1cace"
   integrity sha512-3xSxF3k2Tf60z3Suf6hsjDPT22KnF/NgBXCD3HskXE4aajPDEuxmi0GuIxDt68WFi0C5s76GpwFdQ6YxNS/ECQ==
@@ -1907,7 +1907,7 @@
     babel-preset-react-app "^9.1.2"
     react-app-polyfill "^1.0.6"
 
-"@snowpack/plugin-babel@^2.1.4":
+"@snowpack/plugin-babel@2.1.4", "@snowpack/plugin-babel@^2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-babel/-/plugin-babel-2.1.4.tgz#4adabbc447de644b560271c7515be1cf71e31e23"
   integrity sha512-Xzn5VKmpERh8wLqVRcW6aRgQMYIOG/AV/W4JdgKUrBGo/ByL/jxVb69OOFaLzVGdrEIyInPlI/PNoctk35iynQ==
@@ -1923,7 +1923,7 @@
     execa "^4.0.3"
     npm-run-path "^4.0.1"
 
-"@snowpack/plugin-dotenv@^2.0.4":
+"@snowpack/plugin-dotenv@2.0.4", "@snowpack/plugin-dotenv@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-dotenv/-/plugin-dotenv-2.0.4.tgz#bd9b9db3adb589a0163a937a4a0dd41ff86f1051"
   integrity sha512-Ho4IpDLiA0m6YgKoBAuHV/s8bk+pIaE7sYH01nvfm9QOkZK68l69Dv61DG4VXMatcnw1zEPPR3RoLKpyDofKYQ==
@@ -1931,7 +1931,7 @@
     dotenv "^8.2.0"
     dotenv-expand "^5.1.0"
 
-"@snowpack/plugin-react-refresh@^2.3.4":
+"@snowpack/plugin-react-refresh@2.3.4", "@snowpack/plugin-react-refresh@^2.3.4":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-react-refresh/-/plugin-react-refresh-2.3.4.tgz#629192b6460904914d0cc2a0a5d8de17cbef47c3"
   integrity sha512-4mkY+HFiQ80Z3XYig2F/H6usFG9YF4xsJANBJOky3POQp92gcIGvirhDlQjvXbjTZHcDPRcpkH6S8V0+g9/mrQ==
@@ -1948,7 +1948,7 @@
     execa "^4.0.3"
     npm-run-path "^4.0.1"
 
-"@snowpack/plugin-typescript@^1.0.2":
+"@snowpack/plugin-typescript@1.0.2", "@snowpack/plugin-typescript@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-typescript/-/plugin-typescript-1.0.2.tgz#2c229c40ee5d7b520d754ba062b7530cc7fd3932"
   integrity sha512-qVmsecGwzx5bCI0RDDIri0jtxtTwCY3eA0Q7sQBJKpVhaZ75FPIR0JTRLcDkoQc2V6OO7qTbDoNdyGFQvv0AEg==
@@ -1956,7 +1956,7 @@
     execa "^4.0.3"
     npm-run-path "^4.0.1"
 
-"@snowpack/web-test-runner-plugin@^0.1.3":
+"@snowpack/web-test-runner-plugin@0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@snowpack/web-test-runner-plugin/-/web-test-runner-plugin-0.1.3.tgz#dd230bcd9691de4a649d727084f5503d1e59fa2f"
   integrity sha512-pb0+CE1ahIG5N8DTalFJ/XYw2w2xaawCNjAczAOsAURep2ihUJUfRsf1RiNtAuulv1kUxQhqbXD7sk5P62A5/w==
@@ -3354,14 +3354,14 @@
   dependencies:
     "@types/react" "*"
 
-"@types/redux-logger@^3.0.8":
+"@types/redux-logger@3.0.8":
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/@types/redux-logger/-/redux-logger-3.0.8.tgz#1fb6d26917bb198792bb1cf57feb31cae1532c5d"
   integrity sha512-zM+cxiSw6nZtRbxpVp9SE3x/X77Z7e7YAfHD1NkxJyJbAGSXJGF0E9aqajZfPOa/sTYnuwutmlCldveExuCeLw==
   dependencies:
     redux "^4.0.0"
 
-"@types/redux-saga@^0.10.5":
+"@types/redux-saga@0.10.5":
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/@types/redux-saga/-/redux-saga-0.10.5.tgz#80bf21078379ebc97387dbe56e44467b5677fa85"
   integrity sha1-gL8hB4N568lzh9vlbkRGe1Z3+oU=
@@ -3387,7 +3387,7 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-5.5.0.tgz#146c2a29ee7d3bae4bf2fcb274636e264c813c45"
   integrity sha512-41qEJgBH/TWgo5NFSvBCJ1qkoi3Q6ONSF2avrHq1LVEZfYpdHmj0y9SuTK+u9ZhG1sYQKBL1AWXKyLWP4RaUoQ==
 
-"@types/snowpack-env@^2.3.0":
+"@types/snowpack-env@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/snowpack-env/-/snowpack-env-2.3.0.tgz#a5cb4aeef86700df0245ad1a9c830ebe8cc8f752"
   integrity sha512-wC/zq9A0IhlNyO469UPCOr3XZNTOXeGWiOJig9yWUZ0DkUOVNJinfFqC3vRzmlid6+CSiPw8GLvW/03F2/1vyg==
@@ -13889,7 +13889,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowpack@^2.15.1:
+snowpack@2.15.1:
   version "2.15.1"
   resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.15.1.tgz#fb83ef896e0c30e3faac5e2dcca1a91d1af5da55"
   integrity sha512-rV+es3chRduZnjQM1WnkgB/gWext+41+CZ5EXTgRXxcXXk5DT6JPn9yivP1+098I1ilmtPYQMB/yGHsWHG8ebA==
