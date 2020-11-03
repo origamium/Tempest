@@ -95,11 +95,7 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
     }
 
     public getAuthorizeUri(api: APISet, baseUri?: string) {
-        const url = this._info.apiUrl ?? baseUri;
-        if (!url) {
-            throw new Error("undefined baseurl");
-        }
-        return this.auth.authorizeUri(url, api.export(), this._info, this._info.authMethod);
+        return this.auth.authorizeUri(this.getBaseUri(baseUri), api.export(), this._info, this._info.authMethod);
     }
 
     export(): AuthorizationUnitObject {
