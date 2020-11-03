@@ -13,7 +13,7 @@ export default {
         serviceKey,
         serviceName: "Mastodon",
         apiSet: {
-            authorize: {
+            authorizeUri: {
                 path: "oauth/authorize",
                 protocol: Protocol.rest,
                 httpMethod: HttpMethods.GET,
@@ -35,7 +35,7 @@ export default {
                     },
                 },
             },
-            token: {
+            requestToken: {
                 path: "oauth/token",
                 protocol: Protocol.rest,
                 httpMethod: HttpMethods.POST,
@@ -63,7 +63,7 @@ export default {
                 },
                 returnedDataKey: "oauth_token",
             },
-            revoke: {
+            revokeToken: {
                 path: "oauth/revoke",
                 protocol: Protocol.rest,
                 httpMethod: HttpMethods.POST,
