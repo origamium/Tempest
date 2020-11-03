@@ -116,7 +116,6 @@
     "serve": "11.3.2",
     "snowpack": "^2.15.1",
     "snyk": "1.420.1",
-    "source-map-loader": "1.1.1",
     "stylelint": "13.7.2",
     "stylelint-config-recess-order": "2.2.0",
     "stylelint-config-recommended": "3.0.0",
