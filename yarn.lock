@@ -1940,10 +1940,10 @@
     "@babel/plugin-syntax-class-properties" "^7.10.0"
     react-refresh "^0.8.3"
 
-"@snowpack/plugin-run-script@^2.1.7":
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/@snowpack/plugin-run-script/-/plugin-run-script-2.1.7.tgz#30f50cc76251f9c857ccaa6b725bfa509765d9dd"
-  integrity sha512-+gwR03tsXDJf3OU0LJ40nZVZXVUu2nr8V5C3rLOHjlJ3U1vYY0WCcS9IvhrO3eYakOg5Git8JDZIakJ1wczvBA==
+"@snowpack/plugin-run-script@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-run-script/-/plugin-run-script-2.2.0.tgz#26b434af5f23dbe3bc189dcacdca5834113b79bc"
+  integrity sha512-wv+ttz7wXD/R+IoIuZqdwy4foP3yq986dPVMGTl2N6ipWo5PAHAQ3n6A83efT/K4zQ1h+RibF3k4yr92qu3jNg==
   dependencies:
     execa "^4.0.3"
     npm-run-path "^4.0.1"
@@ -6903,10 +6903,10 @@ escodegen@1.x.x, escodegen@^1.14.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-esinstall@^0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/esinstall/-/esinstall-0.3.5.tgz#86d364bca149868dcfd4b1d9cdaaf38075dd9af4"
-  integrity sha512-dAz60PnafifmuKGByuONPaFPLuTfhqpzAxgKgxMOaHhOb3zZxoP+TsiGolLEPDliYdHBtZIp7fEFOycUMKlGLg==
+esinstall@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/esinstall/-/esinstall-0.3.6.tgz#6f54d6a05bbfbc945548c7af89a2fd2d67dab5ce"
+  integrity sha512-tmtJ0fNXv0C3t37zRuR/WUEVyKsTLvxcWPPe5OlT3QhJiWo7du/HXVUMOX4DTn6ob6jf6zSb0KQJFpHUhBCyHQ==
   dependencies:
     "@rollup/plugin-alias" "^3.0.1"
     "@rollup/plugin-commonjs" "^15.0.0"
@@ -9883,10 +9883,10 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonschema@^1.2.5:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.4.0.tgz#1afa34c4bc22190d8e42271ec17ac8b3404f87b2"
-  integrity sha512-/YgW6pRMr6M7C+4o8kS+B/2myEpHCrxO4PEWnqJNBFMjn7EWXqlQ4tGwL6xTHeRplwuZmcAncdvfOad1nT2yMw==
+jsonschema@~1.2.5:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.2.11.tgz#7a799cc2aa5a285d893203e8dc81f5becbfb0e91"
+  integrity sha512-XNZHs3N1IOa3lPKm//npxMhOdaoPw+MvEV0NIgxcER83GTJcG13rehtWmpBCfEt8DrtYwIkMTs8bdXoYs4fvnQ==
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -13990,13 +13990,13 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowpack@2.15.1:
-  version "2.15.1"
-  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.15.1.tgz#fb83ef896e0c30e3faac5e2dcca1a91d1af5da55"
-  integrity sha512-rV+es3chRduZnjQM1WnkgB/gWext+41+CZ5EXTgRXxcXXk5DT6JPn9yivP1+098I1ilmtPYQMB/yGHsWHG8ebA==
+snowpack@^2.15.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.16.1.tgz#c05bbe5a6ada14917759e3525c2879c9cfe4cc2b"
+  integrity sha512-BvvNxCISztDWKnn5umlXdzAzAXUwpV1Bs7/80s37CoxWDhWyX4SUOv8uZ9a1K6Gb1cBR9V4nwO0nUuYN6lxSIg==
   dependencies:
     "@snowpack/plugin-build-script" "^2.0.11"
-    "@snowpack/plugin-run-script" "^2.1.7"
+    "@snowpack/plugin-run-script" "^2.2.0"
     cacache "^15.0.0"
     cachedir "^2.3.0"
     chokidar "^3.4.0"
@@ -14007,7 +14007,7 @@ snowpack@2.15.1:
     detect-port "^1.3.0"
     es-module-lexer "^0.3.24"
     esbuild "^0.7.0"
-    esinstall "^0.3.5"
+    esinstall "^0.3.6"
     etag "^1.8.1"
     execa "^4.0.3"
     find-cache-dir "^3.3.1"
@@ -14016,7 +14016,7 @@ snowpack@2.15.1:
     http-proxy "^1.18.1"
     httpie "^1.1.2"
     isbinaryfile "^4.0.6"
-    jsonschema "^1.2.5"
+    jsonschema "~1.2.5"
     kleur "^4.1.1"
     mime-types "^2.1.26"
     mkdirp "^1.0.3"
