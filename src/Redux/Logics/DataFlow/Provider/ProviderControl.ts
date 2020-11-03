@@ -86,7 +86,7 @@ export class ProviderControl implements Exportable<Providers> {
             (accm, [_, providers]) => ({
                 ...accm,
                 ...(Array.isArray(providers)
-                    ? providers.reduce((accm2, value) => ({ ...accm2, [value.serviceKey]: value }), {})
+                    ? providers.reduce((accm2, value) => ({ ...accm2, [value.providerKey]: value }), {})
                     : { [providers.serviceKey]: providers }),
             }),
             {}
@@ -95,7 +95,7 @@ export class ProviderControl implements Exportable<Providers> {
 
     public getProviders(): { key: string; name: string; service: string }[] {
         return Object.values(this._providers).map((v) => ({
-            key: v.serviceKey,
+            key: v.providerKey,
             name: v.providerName,
             service: v.serviceKey,
         }));
