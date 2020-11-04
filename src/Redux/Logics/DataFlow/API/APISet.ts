@@ -4,6 +4,8 @@ import { PairOfObject } from "../../HelperType/PairOfObject";
 import { Exportable } from "../../HelperType/Exportable";
 import { HttpMethods } from "../Types/HttpMethods";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
+import { TRequest } from "./Request/Request";
+import { APIPayloadType } from "../Types/APIPayloadType";
 
 export class APISet implements Exportable<APISetObject> {
     // @ts-ignore
@@ -37,8 +39,8 @@ export class APISet implements Exportable<APISetObject> {
             );
     }
 
-    public createRequest = (): [RequestInfo, RequestInit] => {
-        return ["", {}];
+    public createRequest = (baseUri: string, payload: APIPayloadType): [RequestInfo, RequestInit, boolean] => {
+        return TRequest.createRequest(baseUri, this._api, payload);
     };
 
     get dataKey(): string | undefined {
