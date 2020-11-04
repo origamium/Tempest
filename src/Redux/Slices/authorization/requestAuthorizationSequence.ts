@@ -45,6 +45,9 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
         return;
     }
 
+    /*
+    ** TODO
+
     const requestAuthTokenKey = "requestAuthToken";
     const requestAuthTokenApi = service.getApiSet(requestAuthTokenKey);
     // @ts-ignore
@@ -60,17 +63,20 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
         try {
             const response = yield call(() => fetch(info, init));
             const data = yield call(() => service.parseResponse(requestAuthTokenApi, response));
-            // todo
             console.log(data);
-        } catch (e) {}
+        } catch (e) {
+
+        }
     }
+
+    */
 
     const key = "authorizeUri";
     const getAuthorizeUriApi = service.getApiSet(key);
     if (!getAuthorizeUriApi) {
         throw new Error(`ApiSetControl.getApiSet(${key}) is undefined`);
     }
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const url = provider.authorization.getAuthorizeUri(getAuthorizeUriApi, provider.baseUri);
+    window.open(url);
 }
