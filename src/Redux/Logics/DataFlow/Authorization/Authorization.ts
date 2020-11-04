@@ -94,8 +94,8 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         return;
     }
 
-    public getAuthorizeUri(api: APISet, baseUri?: string) {
-        return this.auth.authorizeUri(this.getBaseUri(baseUri), api.export(), this._info, this._info.authMethod);
+    public getAuthorizeUri(api: APISet, baseUri?: string): string{
+        return this.auth.authorizeUri(this.getBaseUri(baseUri), api, this._info, this._info.authMethod);
     }
 
     export(): AuthorizationUnitObject {
