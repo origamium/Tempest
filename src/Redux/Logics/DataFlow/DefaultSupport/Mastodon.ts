@@ -90,7 +90,7 @@ export default {
             baseUrl: "https://mstdn.jp/",
             domain: "mstdn.jp",
             apiKey: {
-                ApiKey: "f24ec24cda87513ba5b963addc0b3a75d13c8fed83c17fc60ba2f7b59aeb7ffc",
+                ApiKey: "e9a00b4f0006783b55e9c2c7dca4ca75c7ff3cdfd0e13dafe190758083d0641a",
             },
             authorization: {
                 apiUrl: "https://mstdn.net/",
@@ -109,7 +109,7 @@ export default {
             baseUrl: "https://pawoo.net/",
             domain: "pawoo.net",
             apiKey: {
-                ApiKey: "5e0f667fb4da4b6e06cff473f8fdbce51f86c2af9c56ccd90b2fcad5160aeab8",
+                ApiKey: "f24ec24cda87513ba5b963addc0b3a75d13c8fed83c17fc60ba2f7b59aeb7ffc",
             },
             authorization: {
                 apiUrl: "https://pawoo.net/",
