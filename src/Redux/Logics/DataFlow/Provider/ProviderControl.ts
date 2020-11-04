@@ -86,8 +86,11 @@ export class ProviderControl implements Exportable<Providers> {
             (accm, [_, providers]) => ({
                 ...accm,
                 ...(Array.isArray(providers)
-                    ? providers.reduce((accm2, value) => ({ ...accm2, [value.providerKey]: value }), {})
-                    : { [providers.serviceKey]: providers }),
+                    ? providers.reduce(
+                          (accm2, value) => ({ ...accm2, [value.providerKey]: new Provider({ source: value }) }),
+                          {}
+                      )
+                    : { [providers.serviceKey]: new Provider({ source: providers }) }),
             }),
             {}
         );
