@@ -10,44 +10,25 @@ import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { UnknownOAuthSignatureSpace } from "../../../Exceptions";
 import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
+import { APISet } from "../API/APISet";
 
 export default class OAuth2 implements OAuth {
-    private static scopeToString(parameterName: string, scope: string[], separateStr: string = ","): string {
-        return (
-            parameterName +
-            "=" +
-            scope
-                .reduce((accm: string, curr: string): string => accm + " " + curr, "")
-                .trim()
-                .replace(/\s/g, separateStr)
-        );
-    }
-
     public authorizeUri(
         baseUri: string,
-        apiData: APISetObject,
+        apiData: APISet,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         option?: optionObject
-    ): { uri: string; method: AuthorizeMethod; imageUrl?: string } {
-        const uri = `${baseUri}${apiData.path}`;
-        const parameters: string[] = [];
-        if (option?.scope) {
-            parameters.push(
-                OAuth2.scopeToString(option.scope.payloadName, option.scope.scopes, option.scope.separateStr)
-            );
-        }
-
-        return {
-            uri: uri + "?" + encodeURIComponent(parameters.reduce((accm, curr) => accm + "&" + curr, "")),
-            method,
-            imageUrl: option?.imageUrl,
-        };
+    ): string {
+        return apiData.createRequest(baseUri, {
+            client_id: authInfo.apiKey.ApiKey,
+            redirect_uri: authInfo.callback,
+        })[0] as string;
     }
 
     public requestToken(
         baseUri: string,
-        apiData: APISetObject,
+        apiData: APISet,
         authInfo: AuthInfoType,
         verifier: string,
         option?: optionObject

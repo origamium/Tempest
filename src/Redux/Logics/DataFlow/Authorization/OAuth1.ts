@@ -12,6 +12,7 @@ import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
 import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 import { SignMethod } from "../Types/Authorization/SignMethod";
+import { APISet } from "../API/APISet";
 
 export default class OAuth1 implements OAuth {
     private static _signature(
@@ -133,11 +134,12 @@ export default class OAuth1 implements OAuth {
 
     public authorizeUri(
         baseUri: string,
-        apiData: APISetObject,
+        apiData: APISet,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
         optional?: optionObject
-    ): { uri: string; method: AuthorizeMethod } {
+    ): string {
+        const api = apiData.createRequest();
         const uri: string = baseUri + apiData.path;
         const parameters: string[] = [];
 
