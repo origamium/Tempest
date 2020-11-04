@@ -28,7 +28,10 @@ export class APISet implements Exportable<APISetObject> {
             Object.entries(source.parameterDef).reduce(
                 (accm, [key, value]) => ({
                     ...accm,
-                    [key]: Object.assign({ value }, { type: value?.type ?? APISet.defaultMethod(source.httpMethod) }),
+                    [key]: Object.assign(
+                        { ...value },
+                        { type: value?.type ?? APISet.defaultMethod(source.httpMethod) }
+                    ),
                 }),
                 {}
             );
