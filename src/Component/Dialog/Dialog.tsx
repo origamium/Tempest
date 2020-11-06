@@ -1,10 +1,12 @@
 import * as React from "react";
 import { Dialog } from "@material-ui/core";
-import { DialogName, useDialog } from "../../hooks/useDialog";
 import { AddAccount } from "./AddAccount/AddAccount";
+import { useDispatch, useSelector } from "react-redux";
+import { StoreType } from "../../Redux/Store/StoreType";
+import { closeDialogAction, dialogKeys } from "../../Redux/Slices/dialog";
 
 type DialogContentsProps = {
-    dialogKey: DialogName;
+    dialogKey: dialogKeys;
     handleClose: () => void;
 };
 
@@ -29,11 +31,18 @@ const DialogContents: React.FC<DialogContentsProps> = ({ dialogKey, handleClose 
 };
 
 export const TempestDialog: React.FC = () => {
-    const [dialogKey, , handleClose] = useDialog();
+    const dialogData = useSelector((store: StoreType) => store.dialog);
+    const dispatch = useDispatch();
+
+    const handleClose = React.useCallback(() => {
+        dispatch(closeDialogAction());
+    }, []);
 
     return (
-        <Dialog open={!!dialogKey}>
-            <DialogContents dialogKey={dialogKey} handleClose={handleClose} />
-        </Dialog>
+        dialogData && (
+            <Dialog open={!!dialogData.open}>
+                <DialogContents dialogKey={dialogData.open} handleClose={handleClose} />
+            </Dialog>
+        )
     );
 };
