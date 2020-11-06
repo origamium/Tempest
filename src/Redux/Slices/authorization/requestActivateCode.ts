@@ -27,5 +27,5 @@ export interface FailedActivateCode extends Action {
 }
 
 export const failedActivateCode = (): FailedActivateCode => ({
-    type: authorizationActionsIdentifier.FAILED_REQUEST_CODE_ACTIVATE
+    type: authorizationActionsIdentifier.FAILED_REQUEST_CODE_ACTIVATE,
 });
