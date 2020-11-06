@@ -45,6 +45,9 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
+/*
+ * snowpack用
+
 // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
 // Learn more: https://www.snowpack.dev/#hot-module-replacement
 // @ts-ignore
@@ -52,3 +55,5 @@ if (import.meta.hot) {
     // @ts-ignore
     import.meta.hot.accept();
 }
+
+*/
