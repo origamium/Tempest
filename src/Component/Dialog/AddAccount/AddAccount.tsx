@@ -5,6 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "../../../Redux/Store/StoreType";
 import { DataStoreType } from "../../../Redux/Slices/dataStore/reducer";
 import { requestAuthorizationSequenceAction } from "../../../Redux/Slices/authorization/requestAuthorizationSequence";
+import { requestActivateCode } from "../../../Redux/Slices/authorization/requestActivateCode";
+import { InputPIN } from "./InputPIN";
+
+export type AddAccountProps = {
+    pageNumber: number;
+    handleClose: () => void;
+};
 
 export type ServiceListType = {
     service: string;
@@ -19,8 +26,9 @@ export type ServiceListType = {
 
 export type ProviderSelector = Array<ServiceListType>;
 
-export const AddAccount: React.FC = () => {
+export const AddAccount: React.FC<AddAccountProps> = ({ pageNumber, handleClose }) => {
     const datastore = useSelector<StoreType, DataStoreType | null>((state) => state.dataStore);
+    const [selectedProvider, setSelectedProvider] = React.useState<string>();
     const dispatch = useDispatch();
 
     const list = React.useMemo<ProviderSelector>(() => {
@@ -52,15 +60,28 @@ export const AddAccount: React.FC = () => {
 
     const handleSubmitProvider = React.useCallback(
         (key: string) => {
+            setSelectedProvider(key);
             dispatch(requestAuthorizationSequenceAction(key));
+        },
+        [dispatch]
+    );
+
+    const handleSubmitPIN = React.useCallback(
+        (providerKey: string, code: string) => {
+            dispatch(requestActivateCode({ providerKey, code }));
         },
         [dispatch]
     );
 
     return (
         <>
-            <DialogTitle>アカウントの追加</DialogTitle>
-            <ServiceSelect list={list} handleSubmitProvider={handleSubmitProvider} />
+            <DialogTitle>{"Add Account"}</DialogTitle>
+            {pageNumber === 0 && (
+                <ServiceSelect list={list} handleSubmitProvider={handleSubmitProvider} handleClose={handleClose} />
+            )}
+            {pageNumber === 1 && selectedProvider && (
+                <InputPIN providerKey={selectedProvider} handleSubmitPIN={handleSubmitPIN} />
+            )}
         </>
     );
 };
