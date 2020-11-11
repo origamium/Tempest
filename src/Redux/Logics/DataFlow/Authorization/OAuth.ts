@@ -3,14 +3,14 @@ import { AuthInfoType } from "../Types/AuthInfoType";
 import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
 import { AuthorizeMethod } from "../Types/Authorization/AuthorizeMethod";
 import { APIPayloadType } from "../Types/APIPayloadType";
-import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APISet } from "../API/APISet";
+import { AuthorizePaths } from "./Authorization";
 
 export type optionObject = {
     scope?: {
         payloadName: string;
         scopes: string[];
-        separateStr: string,
+        separateStr: string;
     };
     authToken: TokenType;
     imageUrl?: string;
@@ -21,8 +21,9 @@ export default interface IOAuth {
     requestAuthToken?(
         baseUri: string,
         apiData: APISet,
-        authInfo: AuthInfoType
-    ): CombinedParameterDataType & { requiredPayload?: object };
+        authInfo: AuthInfoType,
+        lambda: AuthorizePaths
+    ): [RequestInfo, RequestInit];
 
     // required: step 1. Generate Authorization url
     authorizeUri(
@@ -39,17 +40,19 @@ export default interface IOAuth {
         baseUri: string,
         apiData: APISet,
         authInfo: AuthInfoType,
+        lambda: AuthorizePaths,
         verifier: string,
         option?: optionObject
-    ): CombinedParameterDataType;
+    ): [RequestInfo, RequestInit];
 
     // optional: step 3
     refreshToken?(
         baseUri: string,
         apiData: APISet,
         authInfo: AuthInfoType,
+        lambda: AuthorizePaths,
         token: TokenType
-    ): CombinedParameterDataType;
+    ): [RequestInfo, RequestInit];
 
     // required: autohorized data
     getAuthorizationData(
