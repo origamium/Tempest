@@ -51,6 +51,10 @@ export class APISet implements Exportable<APISetObject> {
         return this._api.errorKey;
     }
 
+    get parameterDef() {
+        return this._api.parameterDef;
+    }
+
     export(): APISetObject {
         return this._api;
     }

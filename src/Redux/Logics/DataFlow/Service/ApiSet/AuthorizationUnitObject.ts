@@ -11,8 +11,8 @@ export type AuthorizationUnitObject = {
     signSpace: SignSpace; // required
     scope?: string[];
     callback: string; // required
-    requestAuthorizeTokenPath?: string;
-    requestAuthorizePagePath: string; // required
-    requestAccessTokenPath: string; // required
-    requestTokenRefreshPath?: string;
+    requestAuthorizeTokenLambda?: string;
+    requestAccessTokenLambda?: string;
+    requestTokenRefreshLambda?: string;
+    requestRevokeTokenLambda?: string;
 };

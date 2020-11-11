@@ -24,10 +24,10 @@ export type RefreshTokenObject = {
 };
 
 export type AuthorizePaths = {
-    requestAuthorizeTokenPath?: string;
-    requestAuthorizePagePath: string; // required
-    requestAccessTokenPath: string; // required
-    requestTokenRefreshPath?: string;
+    requestAuthorizeTokenLambda?: string;
+    requestAccessTokenLambda?: string;
+    requestTokenRefreshLambda?: string;
+    requestRevokeTokenLambda?: string;
 };
 
 export class Authorization implements Exportable<AuthorizationUnitObject> {
@@ -48,10 +48,10 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         };
 
         this._authorizePaths = {
-            requestAuthorizeTokenPath: source.requestAccessTokenPath,
-            requestAuthorizePagePath: source.requestAuthorizePagePath,
-            requestAccessTokenPath: source.requestAccessTokenPath,
-            requestTokenRefreshPath: source.requestTokenRefreshPath,
+            requestAuthorizeTokenLambda: source.requestAccessTokenLambda,
+            requestAccessTokenLambda: source.requestAccessTokenLambda,
+            requestTokenRefreshLambda: source.requestTokenRefreshLambda,
+            requestRevokeTokenLambda: source.requestRevokeTokenLambda
         };
 
         switch (this._info.oauthVersion) {
@@ -68,6 +68,10 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
 
     get apiKey(): APIKeyType {
         return this._info.apiKey;
+    }
+
+    get authorizeLambda(): AuthorizePaths {
+        return this._authorizePaths;
     }
 
     private getBaseUri(uri?: string) {
