@@ -7,10 +7,11 @@ import { closeDialogAction, dialogKeys } from "../../Redux/Slices/dialog";
 
 type DialogContentsProps = {
     dialogKey: dialogKeys;
+    pageNumber: number;
     handleClose: () => void;
 };
 
-const DialogContents: React.FC<DialogContentsProps> = ({ dialogKey, handleClose }) => {
+const DialogContents: React.FC<DialogContentsProps> = ({ dialogKey, pageNumber, handleClose }) => {
     React.useEffect(() => {
         if (!dialogKey) {
             handleClose();
@@ -19,7 +20,7 @@ const DialogContents: React.FC<DialogContentsProps> = ({ dialogKey, handleClose 
 
     switch (dialogKey) {
         case "add-account":
-            return <AddAccount />;
+            return <AddAccount pageNumber={pageNumber} handleClose={handleClose} />;
         case "add-column":
             return <div />;
         case undefined:
@@ -36,12 +37,12 @@ export const TempestDialog: React.FC = () => {
 
     const handleClose = React.useCallback(() => {
         dispatch(closeDialogAction());
-    }, []);
+    }, [dispatch]);
 
     return (
         dialogData && (
             <Dialog open={!!dialogData.open}>
-                <DialogContents dialogKey={dialogData.open} handleClose={handleClose} />
+                <DialogContents dialogKey={dialogData.open} pageNumber={dialogData.page} handleClose={handleClose} />
             </Dialog>
         )
     );

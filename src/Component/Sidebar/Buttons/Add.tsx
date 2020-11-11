@@ -1,11 +1,12 @@
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import * as React from "react";
-import { DialogName, useDialog } from "../../../hooks/useDialog";
+import { dialogKeys, openDialogAction } from "../../../Redux/Slices/dialog";
+import { useDispatch } from "react-redux";
 
 export const SidebarAddButton: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-    const [, openDialogByKey] = useDialog();
+    const dispatch = useDispatch();
 
     const handleAddButtonClick = React.useCallback((e: React.SyntheticEvent<HTMLButtonElement>) => {
         setAnchorEl(e.currentTarget);
@@ -17,13 +18,13 @@ export const SidebarAddButton: React.FC = () => {
 
     const handleMenuButtonClicked = React.useCallback(
         (e: React.MouseEvent<any>) => {
-            const action: DialogName = e.currentTarget.dataset.actions;
+            const action: dialogKeys = e.currentTarget.dataset.actions;
             if (action) {
-                openDialogByKey(action);
+                dispatch(openDialogAction(action));
             }
             handleClose();
         },
-        [handleClose, openDialogByKey]
+        [dispatch, handleClose]
     );
 
     return (
