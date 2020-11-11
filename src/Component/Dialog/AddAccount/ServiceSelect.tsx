@@ -14,13 +14,13 @@ import {
     Radio,
 } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import { useDialog } from "../../../hooks/useDialog";
 import { styled } from "../../../Theme";
 import { ProviderSelector } from "./AddAccount";
 
 export type ServiceSelectProps = {
     list: ProviderSelector;
     handleSubmitProvider: (key: string) => void;
+    handleClose: () => void;
 };
 
 const Styled = {
@@ -31,9 +31,7 @@ const Styled = {
     `,
 };
 
-export const ServiceSelect: React.FC<ServiceSelectProps> = ({ list, handleSubmitProvider }) => {
-    const [, , handleClose] = useDialog();
-
+export const ServiceSelect: React.FC<ServiceSelectProps> = ({ list, handleSubmitProvider, handleClose }) => {
     const [listOpen, setListOpen] = React.useState<string[]>([]);
     const [selected, setSelect] = React.useState<string>();
 
