@@ -1,10 +1,10 @@
-import { select, call } from "redux-saga/effects";
+import { select, put } from "redux-saga/effects";
 import { Action } from "redux";
 import { authorizationActionsIdentifier } from "./index";
 import { StoreType } from "../../Store/StoreType";
 import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
-import { TRequest } from "../../Logics/DataFlow/API/Request/Request";
+import { nextPageAction } from "../dialog";
 
 export interface RequestAuthorizationSequence extends Action {
     type: authorizationActionsIdentifier.REQUEST_AUTHORIZATION_SEQUENCE;
@@ -79,4 +79,5 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
 
     const url = provider.authorization.getAuthorizeUri(getAuthorizeUriApi, provider.baseUri);
     window.open(url);
+    yield put(nextPageAction());
 }
