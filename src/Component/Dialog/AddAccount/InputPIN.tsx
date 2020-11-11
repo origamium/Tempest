@@ -6,20 +6,31 @@ export type InputPINProps = {
     handleSubmitPIN: (providerKey: string, code: string) => void;
 };
 
-export const InputPIN: React.FC<InputPINProps> = () => {
+export const InputPIN: React.FC<InputPINProps> = ({ providerKey, handleSubmitPIN }) => {
+    const [pin, setPin] = React.useState<string>();
+    const handleChangePin = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setPin(e.currentTarget.value);
+    }, []);
+
+    const handleSubmit = React.useCallback(() => {
+        if (pin) {
+            handleSubmitPIN(providerKey, pin);
+        }
+    }, [handleSubmitPIN, pin, providerKey]);
+
     return (
-        <form>
+        <>
             <DialogTitle>
                 <Typography>{"Input PIN"}</Typography>
             </DialogTitle>
             <DialogContent>
-                <TextField label={"INSERT PIN HERE"} variant={"filled"} />
+                <TextField label={"INSERT PIN HERE"} variant={"filled"} value={pin} onChange={handleChangePin} />
                 <DialogActions>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>
                         {"Activate"}
                     </Button>
                 </DialogActions>
             </DialogContent>
-        </form>
+        </>
     );
 };
