@@ -67,8 +67,8 @@ export const AddAccount: React.FC<AddAccountProps> = ({ pageNumber, handleClose 
     );
 
     const handleSubmitPIN = React.useCallback(
-        (providerKey: string, code: string) => {
-            dispatch(requestActivateCode({ providerKey, code }));
+        (key: string, code: string) => {
+            dispatch(requestActivateCode({ key, code }));
         },
         [dispatch]
     );
@@ -76,10 +76,10 @@ export const AddAccount: React.FC<AddAccountProps> = ({ pageNumber, handleClose 
     return (
         <>
             <DialogTitle>{"Add Account"}</DialogTitle>
-            {pageNumber === 0 && (
+            {pageNumber === 1 && (
                 <ServiceSelect list={list} handleSubmitProvider={handleSubmitProvider} handleClose={handleClose} />
             )}
-            {pageNumber === 1 && selectedProvider && (
+            {pageNumber === 2 && selectedProvider && (
                 <InputPIN providerKey={selectedProvider} handleSubmitPIN={handleSubmitPIN} />
             )}
         </>
