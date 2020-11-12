@@ -22,6 +22,6 @@ export const dialogReducer = (
         case dialogActionsIdentifier.PREV_DIALOG_PAGE:
             return state && state.page > 0 ? { ...state, page: state.page - 1 } : null;
         default:
-            return null;
+            return state;
     }
 };
