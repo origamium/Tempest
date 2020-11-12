@@ -43,7 +43,7 @@ export class DataSetControl implements Exportable<DataSetsObject> {
         }
     }
 
-    public async parseResponse<T = any>(key: string, res: Response): Promise<ISolvedData<T>> {
+    public async parseResponseData<T = any>(key: string, res: Response): Promise<ISolvedData<T>> {
         const dataInfo = this._receivedDataInfo[key];
 
         if (!dataInfo) {
