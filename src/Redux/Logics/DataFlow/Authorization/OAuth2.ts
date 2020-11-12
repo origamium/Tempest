@@ -11,6 +11,7 @@ import { UnknownOAuthSignatureSpace } from "../../../Exceptions";
 import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 import { APISet } from "../API/APISet";
+import { AuthorizePaths } from "./Authorization";
 
 export default class OAuth2 implements OAuth {
     public authorizeUri(
@@ -30,25 +31,23 @@ export default class OAuth2 implements OAuth {
         baseUri: string,
         apiData: APISet,
         authInfo: AuthInfoType,
+        lambda: AuthorizePaths,
         verifier: string,
+        provider?: string,
         option?: optionObject
-    ): CombinedParameterDataType {
-        const template: APIParameterDefTypes = apiData.parameterDef;
-        if (!authInfo.apiKey.ApiSecretKey) {
-            throw new Error("api secret key is undefined");
-        }
-
+    ): [RequestInfo, RequestInit, boolean] {
         const value: APIPayloadType = {
             client_id: authInfo.apiKey.ApiKey,
-            client_secret: authInfo.apiKey.ApiSecretKey,
             ...(authInfo.callback ? { redirect_uri: authInfo.callback } : {}),
+            ...(provider ? { provider } : {}),
             code: verifier,
         };
 
-        return {
-            definition: template,
-            payload: value,
-        };
+        if (!lambda.requestAuthorizeTokenLambda && !authInfo.apiKey.ApiSecretKey) {
+            throw new Error("api secret key is undefined");
+        }
+
+        return apiData.createRequest(baseUri, value);
     }
 
     // TODO: refreshToken

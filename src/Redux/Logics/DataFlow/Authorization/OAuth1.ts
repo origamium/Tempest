@@ -13,6 +13,7 @@ import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 import { SignMethod } from "../Types/Authorization/SignMethod";
 import { APISet } from "../API/APISet";
+import { AuthorizePaths } from "./Authorization";
 
 export default class OAuth1 implements OAuth {
     private static _signature(
@@ -115,7 +116,12 @@ export default class OAuth1 implements OAuth {
         }
     }
 
-    public requestAuthToken(baseUri: string, apiData: APISetObject, authInfo: AuthInfoType): CombinedParameterDataType {
+    public requestAuthToken(
+        baseUri: string,
+        apiData: APISet,
+        authInfo: AuthInfoType,
+        lambda: AuthorizePaths
+    ): CombinedParameterDataType {
         const template: APIParameterDefTypes = apiData.parameterDef ?? {};
         const value: APIPayloadType = {};
 
@@ -157,11 +163,13 @@ export default class OAuth1 implements OAuth {
 
     public requestToken(
         baseUri: string,
-        apiData: APISetObject,
+        apiData: APISet,
         authInfo: AuthInfoType,
+        lambda: AuthorizePaths,
         verifier: string,
+        provider?: string,
         option?: optionObject
-    ): CombinedParameterDataType {
+    ): [RequestInfo, RequestInit, boolean] {
         const template: APIParameterDefTypes = apiData.parameterDef ?? {};
         const value: APIPayloadType = {
             oauth_verifier: verifier,

@@ -23,7 +23,7 @@ export default interface IOAuth {
         apiData: APISet,
         authInfo: AuthInfoType,
         lambda: AuthorizePaths
-    ): [RequestInfo, RequestInit];
+    ): [RequestInfo, RequestInit, boolean];
 
     // required: step 1. Generate Authorization url
     authorizeUri(
@@ -42,8 +42,9 @@ export default interface IOAuth {
         authInfo: AuthInfoType,
         lambda: AuthorizePaths,
         verifier: string,
+        provider?: string,
         option?: optionObject
-    ): [RequestInfo, RequestInit];
+    ): [RequestInfo, RequestInit, boolean];
 
     // optional: step 3
     refreshToken?(
@@ -52,7 +53,7 @@ export default interface IOAuth {
         authInfo: AuthInfoType,
         lambda: AuthorizePaths,
         token: TokenType
-    ): [RequestInfo, RequestInit];
+    ): [RequestInfo, RequestInit, boolean];
 
     // required: autohorized data
     getAuthorizationData(

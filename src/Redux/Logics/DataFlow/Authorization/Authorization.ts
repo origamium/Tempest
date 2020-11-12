@@ -39,6 +39,7 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
     constructor(source: AuthorizationUnitObject, optional: { apiKey: APIKeyType }) {
         this._info = {
             apiKey: optional.apiKey,
+            apiUrl: source.apiUrl,
             oauthVersion: source.oauthVersion,
             authMethod: source.authMethod,
             signMethod: source.signMethod,
@@ -48,10 +49,10 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         };
 
         this._authorizePaths = {
-            requestAuthorizeTokenLambda: source.requestAccessTokenLambda,
             requestAccessTokenLambda: source.requestAccessTokenLambda,
+            requestAuthorizeTokenLambda: source.requestAuthorizeTokenLambda,
             requestTokenRefreshLambda: source.requestTokenRefreshLambda,
-            requestRevokeTokenLambda: source.requestRevokeTokenLambda
+            requestRevokeTokenLambda: source.requestRevokeTokenLambda,
         };
 
         switch (this._info.oauthVersion) {
@@ -91,15 +92,31 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         return this.auth.getAuthorizationData(baseUri, api, this._info, token, payload);
     }
 
-    public getAuthToken(api: APISet, baseUri?: string): CombinedParameterDataType | undefined {
+    public authToken(api: APISet, baseUri?: string): CombinedParameterDataType | undefined {
         if (this.auth instanceof OAuth1) {
-            return this.auth.requestAuthToken(this.getBaseUri(baseUri), api.export(), this._info);
+            return this.auth.requestAuthToken(this.getBaseUri(baseUri), api, this._info, this.authorizeLambda);
         }
         return;
     }
 
-    public getAuthorizeUri(api: APISet, baseUri?: string): string{
+    public getAuthorizeUri(api: APISet, baseUri?: string): string {
         return this.auth.authorizeUri(this.getBaseUri(baseUri), api, this._info, this._info.authMethod);
+    }
+
+    public requestToken(
+        api: APISet,
+        verifier: string,
+        provider?: string,
+        baseUri?: string
+    ): [RequestInfo, RequestInit, boolean] {
+        return this.auth.requestToken(
+            this.getBaseUri(baseUri),
+            api,
+            this._info,
+            this.authorizeLambda,
+            verifier,
+            provider
+        );
     }
 
     export(): AuthorizationUnitObject {
