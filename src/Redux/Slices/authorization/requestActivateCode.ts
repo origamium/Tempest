@@ -4,6 +4,7 @@ import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { select, call } from "redux-saga/effects";
 import { StoreType } from "../../Store/StoreType";
+import { parseResponse } from "../../Logics/DataFlow/parseResponse";
 
 export interface RequestActivateCode extends Action {
     type: authorizationActionsIdentifier.REQUEST_CODE_ACTIVATE;
@@ -64,6 +65,6 @@ export function* requestActivateCodeSaga(action: RequestActivateCode) {
     const [info, init] = provider.authorization.requestToken(getToken, code, providerKey);
 
     const res = yield call(fetch, provider.authorization.authorizeLambda.requestAuthorizeTokenLambda ?? info, init);
-    const parsedResponse = yield call(service.parseResponse, getToken, res);
+    const parsedResponse = yield call([service, service.parseResponse], getToken, res);
     console.log(parsedResponse);
 }

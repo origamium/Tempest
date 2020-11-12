@@ -41,8 +41,10 @@ export class Service implements Exportable<ServiceObject> {
         return this._apiSet.getAPI(key);
     }
 
-    public async parseResponse<T>(api: APISet, response: Response): Promise<ISolvedData<T>> {
-        return api.dataKey ? this._dataSet.parseResponse<T>(api.dataKey, response) : Promise.reject();
+    public parseResponse<T>(api: APISet, response: Response): Promise<ISolvedData<T>> {
+        return new Promise((resolve, reject) => {
+            api.dataKey ? resolve(this._dataSet.parseResponseData<T>(api.dataKey, response)) : reject();
+        });
     }
 
     export(): ServiceObject {
