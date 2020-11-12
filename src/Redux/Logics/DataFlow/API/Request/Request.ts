@@ -5,6 +5,7 @@ import { APIPayloadType } from "../../Types/APIPayloadType";
 import { CombinedParameterDataType } from "../../Types/CombinedParameterDataType";
 import { APISetObject } from "../../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../../Service/ApiSet/APIParameterDefTypes";
+import formurlencoded from "form-urlencoded";
 
 interface IParameterKeysObject {
     key: string[];
@@ -112,7 +113,7 @@ export class TRequest {
     }
 
     public static createBodyString(parameters: CombinedParameterDataType, keys: IParameterKeysObject): string {
-        return JSON.stringify(
+        return formurlencoded(
             keys.body
                 .filter((key) => parameters.payload[key])
                 .reduce(
