@@ -4,7 +4,6 @@ import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { select, call } from "redux-saga/effects";
 import { StoreType } from "../../Store/StoreType";
-import { parseResponse } from "../../Logics/DataFlow/parseResponse";
 
 export interface RequestActivateCode extends Action {
     type: authorizationActionsIdentifier.REQUEST_CODE_ACTIVATE;
