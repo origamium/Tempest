@@ -62,7 +62,7 @@ const pickupTransformAttr = (schemaData: SchemaElement, root = {}) => {
     if (definition) {
         Object.keys(definition).forEach((key) => pickupTransformAttr(definition[key], root));
     }
-    return Object.assign(root, { [schemaData.name]: schemaData.transform });
+    return Object.assign(root, schemaData.name ? { [schemaData.name]: schemaData.transform } : schemaData.transform);
 };
 
 export default (schemaData: ISchema): ReturnedDatumInfoType => ({

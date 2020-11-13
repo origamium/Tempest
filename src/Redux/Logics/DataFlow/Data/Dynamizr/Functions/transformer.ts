@@ -37,4 +37,4 @@ export default (dynaSchemaData: ReturnedDatumInfoType, target: any): ISolvedData
               entities: transform(dynaSchemaData.transformerSchema, target.entities),
               result: target.result,
           }
-        : { entities: transform(dynaSchemaData.transformerSchema, target.entities), result: target };
+        : { entities: transform(dynaSchemaData.transformerSchema, target.entities ?? target), result: target };
