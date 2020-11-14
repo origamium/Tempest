@@ -3101,7 +3101,7 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
-"@types/form-urlencoded@^2.0.1":
+"@types/form-urlencoded@2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/form-urlencoded/-/form-urlencoded-2.0.1.tgz#5c7789aca2681564116c3d278359232527e14ba1"
   integrity sha512-Kz3LwezuNvsQF8ZcswMv4b5ZhKmjTkH2Rxle6l/520Npvaxho6b4HN9lStp6HhGrZsL/rwJHpWK9vM1RA7uZbw==
@@ -3288,7 +3288,7 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
-"@types/normalizr@^2.0.18":
+"@types/normalizr@2.0.18":
   version "2.0.18"
   resolved "https://registry.yarnpkg.com/@types/normalizr/-/normalizr-2.0.18.tgz#a42fc1e33a036be3009d6285dd776d94fd88d60d"
   integrity sha1-pC/B4zoDa+MAnWKF3XdtlP2I1g0=
@@ -4507,6 +4507,20 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
+babel-jest@26.6.3, babel-jest@^26.6.3:
+  version "26.6.3"
+  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-26.6.3.tgz#d87d25cb0037577a0c89f82e5755c5d293c01056"
+  integrity sha512-pl4Q+GAVOHwvjrck6jKjvmGhnO3jHX/xuB9d27f+EJZ/6k+6nMuPjorrYp7s++bKKdANwzElBWnLWaObvTnaZA==
+  dependencies:
+    "@jest/transform" "^26.6.2"
+    "@jest/types" "^26.6.2"
+    "@types/babel__core" "^7.1.7"
+    babel-plugin-istanbul "^6.0.0"
+    babel-preset-jest "^26.6.2"
+    chalk "^4.0.0"
+    graceful-fs "^4.2.4"
+    slash "^3.0.0"
+
 babel-jest@^26.2.2:
   version "26.6.1"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-26.6.1.tgz#07bd7bec14de47fe0f2c9a139741329f1f41788b"
@@ -4517,20 +4531,6 @@ babel-jest@^26.2.2:
     "@types/babel__core" "^7.1.7"
     babel-plugin-istanbul "^6.0.0"
     babel-preset-jest "^26.5.0"
-    chalk "^4.0.0"
-    graceful-fs "^4.2.4"
-    slash "^3.0.0"
-
-babel-jest@^26.6.3:
-  version "26.6.3"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-26.6.3.tgz#d87d25cb0037577a0c89f82e5755c5d293c01056"
-  integrity sha512-pl4Q+GAVOHwvjrck6jKjvmGhnO3jHX/xuB9d27f+EJZ/6k+6nMuPjorrYp7s++bKKdANwzElBWnLWaObvTnaZA==
-  dependencies:
-    "@jest/transform" "^26.6.2"
-    "@jest/types" "^26.6.2"
-    "@types/babel__core" "^7.1.7"
-    babel-plugin-istanbul "^6.0.0"
-    babel-preset-jest "^26.6.2"
     chalk "^4.0.0"
     graceful-fs "^4.2.4"
     slash "^3.0.0"
@@ -8268,7 +8268,7 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-form-urlencoded@^4.2.1:
+form-urlencoded@4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/form-urlencoded/-/form-urlencoded-4.2.1.tgz#264d0b4524a87332e94f606237493fb5d26dcd84"
   integrity sha512-0eFJroOH2qaqc/630d4YZpmsyKmh6sfq/1z3YMXvFab0O6teGnf8640C7gufikwbQJFaC6nPlG4d/GiYVN+Dcw==
@@ -17172,7 +17172,7 @@ webidl-conversions@^6.1.0:
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
 
-webpack-cli@3:
+webpack-cli@3.3.12:
   version "3.3.12"
   resolved "https://registry.yarnpkg.com/webpack-cli/-/webpack-cli-3.3.12.tgz#94e9ada081453cd0aa609c99e500012fd3ad2d4a"
   integrity sha512-NVWBaz9k839ZH/sinurM+HcDvJOTXwSjYp1ku+5XKeOC03z8v5QitnK/x+lAxGXFyhdayoIf/GOpv85z3/xPag==
