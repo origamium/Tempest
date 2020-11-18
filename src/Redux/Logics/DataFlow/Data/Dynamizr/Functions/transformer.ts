@@ -1,40 +1,42 @@
-import { UnexpectedFormatType } from "../Exceptions";
-import { ISolvedData } from "../Interfaces/ISolvedData";
-import { ITransform } from "../Interfaces/ITransform";
 import { ReturnedDatumInfoType } from "../../../Types/ReturnedDatumInfoType";
+import { TransformArraySchema, TransformSchema, TransformSchemaObject } from "../Interfaces/TransformData";
 
-const dataTransform = (format: any, target: any): any => {
-    switch (typeof format) {
-        case "string":
-            return target[format];
-        case "object":
-            return Object.keys(format)
-                .map((key) => ({ key, data: dataTransform(format[key], target) }))
-                .reduce((accm, curr) => ({ ...accm, [curr.key]: curr.data }), {});
-        default:
-            throw UnexpectedFormatType;
+const arrayOrObject = (v: Array<any> | Object): [] | {} => (Array.isArray(v) ? [] : {});
+
+const addValue = (source: any, value: any, isArray: boolean): any =>
+    isArray ? [...source, value] : { ...source, ...value };
+
+export const _reduceArray = (schemaValue: TransformArraySchema[], target: Array<any>) => {
+    const schema = schemaValue[0]!;
+    return { [schema.key]: target.map((v) => _reduce({}, schema.schema, v)) };
+};
+
+export const _reduceObject = (accumulator: any, schemaValue: TransformSchemaObject, target: any) => {
+    return Object.entries(schemaValue).reduce((innerAccm, [innerSchemaKey, innerSchemaValue]) => {
+        return _reduce(innerAccm, innerSchemaValue, target[innerSchemaKey]);
+    }, {});
+};
+
+export const _reduce = (accumulator: any, schemaValue: TransformSchema, target: any) => {
+    if (Array.isArray(schemaValue)) {
+        return addValue(accumulator, _reduceArray(schemaValue, target), false);
+    } else if (typeof schemaValue === "object") {
+        return _reduceObject(accumulator, schemaValue, target);
+    } else {
+        return addValue(accumulator, { [schemaValue]: target }, false);
     }
 };
 
-const transform = (format: ITransform, target: any) => {
-    return Object.keys(target)
-        .map((itemKey) => ({
-            itemKey,
-            data: Object.keys(target[itemKey])
-                .map((id) => ({
-                    id,
-                    data: dataTransform(format[itemKey], target[itemKey][id]),
-                }))
-                .reduce((accm, curr) => ({ ...accm, [curr.id]: curr.data }), {}),
-        }))
-        .reduce((accm, curr) => ({ ...accm, [curr.itemKey]: curr.data }), {});
-};
+export const transformer = (dynaSchemaData: ReturnedDatumInfoType, target_: any): any => {
+    const schema = dynaSchemaData.transformerSchema;
+    const targetIsArray = Array.isArray(dynaSchemaData.transformerSchema);
+    const target = dynaSchemaData.targetParameterName ? target_[dynaSchemaData.targetParameterName] : target_;
 
-export default (dynaSchemaData: ReturnedDatumInfoType, target: any): ISolvedData =>
-    dynaSchemaData.normalizrSchema
-        ? {
-              // TODO: Return Data Definition
-              entities: transform(dynaSchemaData.transformerSchema, target.entities),
-              result: target.result,
-          }
-        : { entities: transform(dynaSchemaData.transformerSchema, target.entities ?? target), result: target };
+    const result = _reduce(arrayOrObject(targetIsArray), schema, target);
+
+    if (result["_root"]) {
+        return result._root;
+    } else {
+        return result;
+    }
+};

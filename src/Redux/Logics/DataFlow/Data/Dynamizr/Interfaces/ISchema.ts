@@ -1,4 +1,4 @@
-import { ITransform } from "./ITransform";
+import { TransformData } from "./TransformData";
 import { schemaTypes } from "../../../Types/SchemaTypes";
 
 export interface ISchema {
@@ -19,7 +19,7 @@ export enum SchemaElementType {
 interface ISchemaElementBase {
     elementType: SchemaElementType;
     definition?: IRecursiveSchema;
-    transform: ITransform;
+    transform: TransformData;
 }
 
 export interface IDynaSchemaElement extends ISchemaElementBase {

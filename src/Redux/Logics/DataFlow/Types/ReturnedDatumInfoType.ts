@@ -1,9 +1,9 @@
 import { Schema } from "normalizr";
-import { ITransform } from "../Data/Dynamizr/Interfaces/ITransform";
+import { TransformSchema } from "../Data/Dynamizr/Interfaces/TransformData";
 
 export interface ReturnedDatumInfoType {
     normalizrSchema?: Schema;
-    transformerSchema: ITransform;
+    transformerSchema: TransformSchema;
 
     /*
      *  default: undefundefundefundefundefundefundefundefundefined. In this state, checking HTTP Status Code.
