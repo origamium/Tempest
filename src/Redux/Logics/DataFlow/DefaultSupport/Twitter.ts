@@ -170,9 +170,6 @@ const provider: ProviderObject = {
         signMethod: SignMethod.hmac,
         signSpace: SignSpace.Header,
         callback: "https://tsuru-twitter-oauth1-v1.origamium.net",
-        requestAuthorizeTokenPath: "oauth/request_token",
-        requestAuthorizePagePath: "oauth/authorize",
-        requestAccessTokenPath: "oauth/access_token",
     },
     apiKey: { ApiKey: "teMvsH7tcmvrJSbKNJvOTIKsc" },
 };
