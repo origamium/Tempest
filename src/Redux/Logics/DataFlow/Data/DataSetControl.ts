@@ -2,7 +2,6 @@ import * as qs from "querystring";
 import { ReturnedDatumInfoType } from "../Types/ReturnedDatumInfoType";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { UnexpectedDataKey } from "../../../Exceptions";
-import { ISolvedData } from "./Dynamizr/Interfaces/ISolvedData";
 import { Exportable } from "../../HelperType/Exportable";
 import { TransformSchema } from "./Dynamizr/Interfaces/TransformData";
 import { dynamize } from "./Dynamizr/dynamize";
@@ -46,7 +45,7 @@ export class DataSetControl implements Exportable<DataSetsObject> {
         }
     }
 
-    public async parseResponseData<T = any>(key: string, res: Response): Promise<ISolvedData<T>> {
+    public async parseResponseData<T = any>(key: string, res: Response): Promise<T> {
         const dataInfo = this._receivedDataInfo[key];
 
         if (!dataInfo) {
@@ -60,9 +59,10 @@ export class DataSetControl implements Exportable<DataSetsObject> {
 
         switch (dataInfo.format) {
             case DataFormat.qs:
-                return { entities: (qs.parse(await res.text()) as any) as T }; // OH MY GOD
+                return (qs.parse(await res.text()) as any) as T; // OH MY GOD
             case DataFormat.json:
             default:
+                console.log(Array.isArray(await res.json()));
                 return dynamize(dataInfo.schema, await res.json());
         }
     }

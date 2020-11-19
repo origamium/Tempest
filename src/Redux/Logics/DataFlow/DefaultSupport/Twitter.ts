@@ -4,12 +4,10 @@ import { SignMethod } from "../Types/Authorization/SignMethod";
 import { SignSpace } from "../Types/Authorization/SignSpace";
 import { HttpMethods } from "../Types/HttpMethods";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
-import { schemaTypes } from "../Types/SchemaTypes";
 import { Protocol } from "../Types/Protocol";
 import { ProviderObject } from "../Provider/ProviderControl";
 import { ServiceObject } from "../Service/ServiceControl";
 import { DataFormat, DataSetsObject } from "../Data/DataSetControl";
-import { SchemaElementType } from "../Data/Dynamizr/Interfaces/ISchema";
 
 const apiSet = {
     requestAuthToken: {
@@ -88,16 +86,16 @@ const dataSet: DataSetsObject = {
         },
     },
     statusList: {
-        transform: {
-            schema: {
-                id: "id_str",
-                date: "created_at",
-                content: {
+        transform: [
+            {
+                key: "_root",
+                schema: {
+                    id_str: "id",
+                    created_at: "created_at",
                     text: "text",
-                    entity: "entities",
                 },
             },
-        },
+        ],
     },
     user: {
         transform: {
