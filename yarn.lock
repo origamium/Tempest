@@ -2033,15 +2033,7 @@
     execa "^4.0.3"
     npm-run-path "^4.0.1"
 
-"@snowpack/plugin-typescript@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@snowpack/plugin-typescript/-/plugin-typescript-1.0.2.tgz#2c229c40ee5d7b520d754ba062b7530cc7fd3932"
-  integrity sha512-qVmsecGwzx5bCI0RDDIri0jtxtTwCY3eA0Q7sQBJKpVhaZ75FPIR0JTRLcDkoQc2V6OO7qTbDoNdyGFQvv0AEg==
-  dependencies:
-    execa "^4.0.3"
-    npm-run-path "^4.0.1"
-
-"@snowpack/plugin-typescript@^1.1.0":
+"@snowpack/plugin-typescript@1.1.0", "@snowpack/plugin-typescript@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-typescript/-/plugin-typescript-1.1.0.tgz#902d3f5500e7295835cefa31c0a26cafd2d819d0"
   integrity sha512-6jAFFks42lW1Gy07qVF6A0RKOCQc+ICa029GUrbgLmXhs0UzDmTG+jJ0qyC41J9MnRR/utLrXvgWWVrmIrPifw==
