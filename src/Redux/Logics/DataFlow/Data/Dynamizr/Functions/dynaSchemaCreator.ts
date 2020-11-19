@@ -5,7 +5,6 @@ import {
     ISchema,
     IDynaSchemaElement,
     IFlatSchemaElement,
-    SchemaElementType,
     SchemaElement,
 } from "../Interfaces/ISchema";
 import { schemaTypes } from "../../../Types/SchemaTypes";
@@ -36,22 +35,15 @@ const reCreateSchema = (schemaData: IRecursiveSchema) =>
 const schemaCreator = (
     schemaData: IDynaSchemaElement | IFlatSchemaElement
 ): schema.Array<any> | schema.Entity<any> | undefined => {
-    switch (schemaData.elementType) {
-        case SchemaElementType.dyna:
-            // eslint-disable-next-line no-case-declarations
-            const data = schemaData as IDynaSchemaElement;
-            switch (data.type) {
-                case schemaTypes.Entity:
-                    return entityCreator(data);
-                case schemaTypes.Array:
-                    return new schema.Array(entityCreator(data));
-                default:
-                    throw UnsupportedSchemaType;
-            }
-        case SchemaElementType.flat:
-            return undefined;
+    // eslint-disable-next-line no-case-declarations
+    const data = schemaData as IDynaSchemaElement;
+    switch (data.type) {
+        case schemaTypes.Entity:
+            return entityCreator(data);
+        case schemaTypes.Array:
+            return new schema.Array(entityCreator(data));
         default:
-            throw new Error();
+            throw UnsupportedSchemaType;
     }
 };
 // --- end of normalizr schema creator ---
@@ -62,7 +54,15 @@ const pickupTransformAttr = (schemaData: SchemaElement, root = {}) => {
     if (definition) {
         Object.keys(definition).forEach((key) => pickupTransformAttr(definition[key], root));
     }
-    return Object.assign(root, schemaData.name ? { [schemaData.name]: schemaData.transform } : schemaData.transform);
+    return Object.assign(
+        root,
+        schemaData.name
+            ? { [schemaData.name]: schemaData.transform }
+            : Object.keys(schemaData.transform).reduce(
+                  (accm, curr) => ({ ...accm, [curr]: { target: schemaData.transform[curr] } }),
+                  {}
+              )
+    );
 };
 
 export default (schemaData: ISchema): ReturnedDatumInfoType => ({
