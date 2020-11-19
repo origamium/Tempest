@@ -5,6 +5,7 @@ import { ProviderObject } from "../Provider/ProviderControl";
 import { OAuthVersion } from "../Types/Authorization/OAuthVersion";
 import { SignSpace } from "../Types/Authorization/SignSpace";
 import { SignMethod } from "../Types/Authorization/SignMethod";
+import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 
 const serviceKey = "mastodon";
 
@@ -44,7 +45,7 @@ export default {
                         required: true,
                     },
                     client_secret: {
-                        required: true,
+                        required: false,
                     },
                     redirect_uri: {
                         required: true,
@@ -59,6 +60,14 @@ export default {
                     grant_type: {
                         required: true,
                         default: "code",
+                    },
+                    provider: {
+                        required: false,
+                    },
+                    "content-type": {
+                        required: true,
+                        type: ApiParameterMethods.Header,
+                        default: "application/x-www-form-urlencoded",
                     },
                 },
                 returnedDataKey: "oauth_token",
@@ -80,7 +89,15 @@ export default {
                 },
             },
         } as APISetsObject,
-        dataSet: {},
+        dataSet: {
+            oauth_token: {
+                transform: {
+                    access_token: "token",
+                    token_type: "token_type",
+                    scope: "scope",
+                },
+            },
+        },
     },
     Provider: [
         {
@@ -90,16 +107,15 @@ export default {
             baseUrl: "https://mstdn.jp/",
             domain: "mstdn.jp",
             apiKey: {
-                ApiKey: "e9a00b4f0006783b55e9c2c7dca4ca75c7ff3cdfd0e13dafe190758083d0641a",
+                ApiKey: "5e0f667fb4da4b6e06cff473f8fdbce51f86c2af9c56ccd90b2fcad5160aeab8",
             },
             authorization: {
-                apiUrl: "https://mstdn.net/",
+                apiUrl: "https://mstdn.jp/",
                 oauthVersion: OAuthVersion.OAuth2,
                 signSpace: SignSpace.Header,
                 signMethod: SignMethod.plain,
                 callback: "urn:ietf:wg:oauth:2.0:oob",
-                requestAuthorizePagePath: "oauth/authorize",
-                requestAccessTokenPath: "oauth/token",
+                requestAuthorizeTokenLambda: "https://tempest-authorizer.origamium.net/api/mastodon/v1/request_token",
             },
         },
         {
@@ -117,8 +133,7 @@ export default {
                 signSpace: SignSpace.Header,
                 signMethod: SignMethod.plain,
                 callback: "urn:ietf:wg:oauth:2.0:oob",
-                requestAuthorizePagePath: "oauth/authorize",
-                requestAccessTokenPath: "oauth/token",
+                requestAuthorizeTokenLambda: "https://tempest-authorizer.origamium.net/api/mastodon/v1/request_token",
             },
         },
     ] as ProviderObject,

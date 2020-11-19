@@ -62,12 +62,9 @@ const apiSet = {
 
 const dataSet: DataSetsObject = {
     oauth_request_token: {
-        key: "oauth_request_token",
-        schemaDef: {
+        transform: {
             schema: {
                 name: "oauth_token",
-                elementType: SchemaElementType.flat,
-                type: schemaTypes.Entity,
                 idAttribute: "oauth_token",
                 transform: {
                     oauth_token: "oauth_token",
@@ -79,70 +76,33 @@ const dataSet: DataSetsObject = {
         dataFormat: DataFormat.qs,
     },
     status: {
-        key: "status",
-        schemaDef: {
+        transform: {
             schema: {
-                name: "contents",
-                elementType: SchemaElementType.dyna,
-                type: schemaTypes.Entity,
-                idAttribute: "id_str",
-                transform: {
-                    id: "id_str",
-                    date: "created_at",
-                    content: {
-                        text: "text",
-                        entity: "entities",
-                    },
+                id: "id_str",
+                date: "created_at",
+                content: {
+                    text: "text",
+                    entity: "entities",
                 },
             },
         },
     },
     statusList: {
-        key: "status",
-        schemaDef: {
+        transform: {
             schema: {
-                name: "contents",
-                elementType: SchemaElementType.dyna,
-                type: schemaTypes.Array,
-                idAttribute: "id_str",
-                transform: {
-                    id: "id_str",
-                    date: "created_at",
-                    content: {
-                        text: "text",
-                        entity: "entities",
-                    },
-                },
-                definition: {
-                    user: {
-                        name: "users",
-                        elementType: SchemaElementType.dyna,
-                        type: schemaTypes.Entity,
-                        idAttribute: "id_str",
-                        transform: {
-                            id: "id_str",
-                            screen_name: "screen_name",
-                            display_name: "name",
-                            icon: "profile_image_url_https",
-                            header: "profile_background_image_url_https",
-                            bio: "description",
-                        },
-                    },
+                id: "id_str",
+                date: "created_at",
+                content: {
+                    text: "text",
+                    entity: "entities",
                 },
             },
         },
     },
     user: {
-        key: "user",
-        schemaDef: {
+        transform: {
             schema: {
-                name: "user",
-                elementType: SchemaElementType.dyna,
-                type: schemaTypes.Entity,
-                idAttribute: "id_str",
-                transform: {
-                    id: "id_str",
-                },
+                id: "id_str",
             },
         },
     },

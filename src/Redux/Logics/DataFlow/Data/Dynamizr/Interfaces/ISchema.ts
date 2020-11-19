@@ -1,29 +1,20 @@
-import { TransformData } from "./TransformData";
 import { schemaTypes } from "../../../Types/SchemaTypes";
+import { TransformSchema } from "./TransformData";
 
 export interface ISchema {
     target?: string;
     errorCheckParam?: string;
-    schema: IDynaSchemaElement | IFlatSchemaElement;
+    schema: IRecursiveSchema;
 }
 
 export interface IRecursiveSchema {
-    [key: string]: IDynaSchemaElement | IFlatSchemaElement;
+    [key: string]: SchemaElement;
 }
 
-interface ISchemaElementBase {
-    definition?: IRecursiveSchema;
-    transform: TransformData;
-}
-
-export interface IDynaSchemaElement extends ISchemaElementBase {
+export type SchemaElement = {
     name: string;
     type: schemaTypes;
     idAttribute?: string;
-}
-
-export interface IFlatSchemaElement extends ISchemaElementBase {
-    name: string;
-}
-
-export type SchemaElement = IDynaSchemaElement | IFlatSchemaElement;
+    definition?: ISchema;
+    transform: TransformSchema;
+};

@@ -1,11 +1,11 @@
 import * as qs from "querystring";
-import dynamize, { dynaSchemaCreator } from "./Dynamizr";
 import { ReturnedDatumInfoType } from "../Types/ReturnedDatumInfoType";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { UnexpectedDataKey } from "../../../Exceptions";
 import { ISolvedData } from "./Dynamizr/Interfaces/ISolvedData";
-import { ISchema } from "./Dynamizr/Interfaces/ISchema";
 import { Exportable } from "../../HelperType/Exportable";
+import { TransformSchema } from "./Dynamizr/Interfaces/TransformData";
+import { dynamize } from "./Dynamizr/dynamize";
 
 export enum DataFormat {
     json = "json",
@@ -13,10 +13,9 @@ export enum DataFormat {
 }
 
 export type DataSetObject = {
-    key: string;
     targetDataKey?: string;
     extendErrorKey?: string;
-    schemaDef: ISchema;
+    transform: TransformSchema;
     dataFormat?: DataFormat; // default as json
 };
 
@@ -35,7 +34,11 @@ export class DataSetControl implements Exportable<DataSetsObject> {
                 const dataInfo = source[key];
                 if (dataInfo) {
                     this._receivedDataInfo[key] = {
-                        schema: dynaSchemaCreator(dataInfo.schemaDef),
+                        schema: {
+                            transformerSchema: dataInfo.transform,
+                            extendErrorCheck: dataInfo.extendErrorKey,
+                            targetParameterName: dataInfo.targetDataKey,
+                        },
                         format: dataInfo.dataFormat ?? DataFormat.json,
                     };
                 }
