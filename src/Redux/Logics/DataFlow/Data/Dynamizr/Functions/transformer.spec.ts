@@ -81,7 +81,6 @@ const dataset = {
 };
 
 describe("transform combined test", () => {
-    /*
     test("simple object", () => {
         const result = _reduce({}, schemaset.a, dataset.a);
         expect(result).toEqual({
@@ -99,7 +98,7 @@ describe("transform combined test", () => {
             ],
         });
     });
-    */
+
     test("simply combined", () => {
         const result = _reduce({}, schemaset.c, dataset.c);
         expect(result).toEqual({
