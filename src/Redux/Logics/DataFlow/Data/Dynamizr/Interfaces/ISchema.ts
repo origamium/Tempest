@@ -11,13 +11,7 @@ export interface IRecursiveSchema {
     [key: string]: IDynaSchemaElement | IFlatSchemaElement;
 }
 
-export enum SchemaElementType {
-    dyna = "dyna",
-    flat = "flat",
-}
-
 interface ISchemaElementBase {
-    elementType: SchemaElementType;
     definition?: IRecursiveSchema;
     transform: TransformData;
 }
