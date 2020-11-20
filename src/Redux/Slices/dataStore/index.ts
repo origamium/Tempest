@@ -2,6 +2,7 @@ import { RequestRestoreActionType } from "./requestRestore";
 import { FinishRestoreActionType } from "./finishRestore";
 import { RequestSaveDataStoreActionType } from "./requestSaveDataStore";
 import { RequestInitializeActionType } from "./requestInitialize";
+import { AddAccountActionType } from "./addAccount";
 
 export enum dataStoreActionsIdentifier {
     REQUEST_RESTORE = "REQUEST_RESTORE",
@@ -14,4 +15,5 @@ export type dataStoreActions =
     | RequestRestoreActionType
     | FinishRestoreActionType
     | RequestSaveDataStoreActionType
-    | RequestInitializeActionType;
+    | RequestInitializeActionType
+    | AddAccountActionType;

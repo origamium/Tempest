@@ -2,8 +2,9 @@ import { authorizationActionsIdentifier } from "./index";
 import { Action } from "redux";
 import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
-import { select, call } from "redux-saga/effects";
+import { select, call, put } from "redux-saga/effects";
 import { StoreType } from "../../Store/StoreType";
+import { addAccountAction } from "../dataStore/addAccount";
 
 export interface RequestActivateCode extends Action {
     type: authorizationActionsIdentifier.REQUEST_CODE_ACTIVATE;
@@ -65,5 +66,5 @@ export function* requestActivateCodeSaga(action: RequestActivateCode) {
 
     const res = yield call(fetch, provider.authorization.authorizeLambda.requestAuthorizeTokenLambda ?? info, init);
     const parsedResponse = yield call([service, service.parseResponse], getToken, res);
-    console.log(parsedResponse);
+    yield put(addAccountAction(service.serviceName, provider.providerKey, parsedResponse));
 }
