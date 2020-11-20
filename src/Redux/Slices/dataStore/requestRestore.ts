@@ -9,10 +9,10 @@ import { TabControl } from "../../Logics/DataFlow/UI/TabControl";
 import { ColumnControl } from "../../Logics/DataFlow/UI/ColumnControl";
 import { MuteControl } from "../../Logics/DataFlow/UI/MuteControl";
 import { finishRestoreAction } from "./finishRestore";
-import { AccountControl, Accounts } from "../../Logics/DataFlow/Account/AccountControl";
-import { ServiceControl, Services } from "../../Logics/DataFlow/Service/ServiceControl";
-import { ProviderControl, Providers } from "../../Logics/DataFlow/Provider/ProviderControl";
-import { ContentsControl, ContentsControlObject } from "../../Logics/DataFlow/Contents/ContentsControl";
+import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
+import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
+import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
+import { ContentsControl } from "../../Logics/DataFlow/Contents/ContentsControl";
 
 export interface RequestRestoreActionType extends Action {
     type: dataStoreActionsIdentifier.REQUEST_RESTORE;
@@ -26,26 +26,11 @@ export function* requestRestoreSaga() {
     const keys = yield call(SettingStore.keys);
 
     if (keys.length > 0) {
-        const uiObj: UIObject = yield call<(key: dbKeys.ui) => Promise<UIObject | null>>(
-            SettingStore.getItem,
-            dbKeys.ui
-        );
-        const accountObj = yield call<(key: dbKeys.account) => Promise<Accounts | null>>(
-            SettingStore.getItem,
-            dbKeys.account
-        );
-        const serviceObj = yield call<(key: dbKeys.service) => Promise<Services | null>>(
-            SettingStore.getItem,
-            dbKeys.service
-        );
-        const providerObj = yield call<(key: dbKeys.provider) => Promise<Providers | null>>(
-            SettingStore.getItem,
-            dbKeys.provider
-        );
-        const contentObj = yield call<(key: dbKeys.content) => Promise<ContentsControlObject | null>>(
-            SettingStore.getItem,
-            dbKeys.content
-        );
+        const uiObj: UIObject = yield call([SettingStore, SettingStore.getItem], dbKeys.ui);
+        const accountObj = yield call([SettingStore, SettingStore.getItem], dbKeys.account);
+        const serviceObj = yield call([SettingStore, SettingStore.getItem], dbKeys.service);
+        const providerObj = yield call([SettingStore, SettingStore.getItem], dbKeys.provider);
+        const contentObj = yield call([SettingStore, SettingStore.getItem], dbKeys.content);
 
         const page = new PageControl(uiObj.page, uiObj.columns, uiObj.mutes);
         const tabs = uiObj.tabs.map((v) => new TabControl(v, uiObj.columns, uiObj.mutes));
