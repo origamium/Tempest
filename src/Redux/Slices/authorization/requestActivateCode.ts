@@ -5,6 +5,7 @@ import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl"
 import { select, call, put } from "redux-saga/effects";
 import { StoreType } from "../../Store/StoreType";
 import { addAccountAction } from "../dataStore/addAccount";
+import { requestSaveDataStore } from "../dataStore/requestSaveDataStore";
 
 export interface RequestActivateCode extends Action {
     type: authorizationActionsIdentifier.REQUEST_CODE_ACTIVATE;
@@ -67,4 +68,5 @@ export function* requestActivateCodeSaga(action: RequestActivateCode) {
     const res = yield call(fetch, provider.authorization.authorizeLambda.requestAuthorizeTokenLambda ?? info, init);
     const parsedResponse = yield call([service, service.parseResponse], getToken, res);
     yield put(addAccountAction(service.serviceName, provider.providerKey, parsedResponse));
+    yield put(requestSaveDataStore());
 }
