@@ -62,7 +62,6 @@ export class DataSetControl implements Exportable<DataSetsObject> {
                 return (qs.parse(await res.text()) as any) as T; // OH MY GOD
             case DataFormat.json:
             default:
-                console.log(Array.isArray(await res.json()));
                 return dynamize(dataInfo.schema, await res.json());
         }
     }
