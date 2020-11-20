@@ -2,17 +2,16 @@ import { IUser } from "../../../../datatype/Contents/User";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { AuthorizationDataObject } from "../Authorization/Authorization";
 import { Exportable } from "../../HelperType/Exportable";
+import { nanoid } from "nanoid";
 import arrayMove from "array-move";
 
 export type AccountObject = {
-    id: string;
     service: string;
     provider: string;
     authData: AuthorizationDataObject;
     latestAccountInfo?: IUser;
 };
 
-// keyは [provider.domain + id] です。idの重複を避けるためにprovider.domainがかぶせてあります。
 export type Accounts = {
     account: UndefinedablePairOfObject<AccountObject>;
     lineup: string[];
@@ -25,7 +24,7 @@ export class AccountControl implements Exportable<Accounts> {
     constructor(source: Accounts) {
         this._accounts = Object.entries(source.account)
             .filter(([, value]) => value)
-            .reduce((accm, [, curr]) => ({ ...accm, [curr!.id]: curr }), {});
+            .reduce((accm, [key, value]) => ({ ...accm, [key]: value }), {});
         this._lineup = source.lineup;
     }
 
@@ -42,9 +41,10 @@ export class AccountControl implements Exportable<Accounts> {
     }
 
     public addAccount(source: AccountObject): AccountControl {
+        const newKey = nanoid();
         return new AccountControl({
-            account: { ...this._accounts, [source.id]: source },
-            lineup: [...this._lineup, source.id],
+            account: { ...this._accounts, [newKey]: source },
+            lineup: [...this._lineup, newKey],
         });
     }
 

@@ -14,6 +14,7 @@ import { APISet } from "../API/APISet";
 export type AuthorizationDataObject = {
     token: string;
     tokenSecret?: string;
+    expire?: number;
     refreshTokenObject?: RefreshTokenObject;
 };
 
