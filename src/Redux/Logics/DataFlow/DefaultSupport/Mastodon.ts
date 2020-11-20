@@ -93,8 +93,6 @@ export default {
             oauth_token: {
                 transform: {
                     access_token: "token",
-                    token_type: "token_type",
-                    scope: "scope",
                 },
             },
         },
