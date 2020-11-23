@@ -1,4 +1,3 @@
-import { IUser } from "../../../../datatype/Contents/User";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { AuthorizationDataObject } from "../Authorization/Authorization";
 import { Exportable } from "../../HelperType/Exportable";
@@ -9,7 +8,6 @@ export type AccountObject = {
     service: string;
     provider: string;
     authData: AuthorizationDataObject;
-    latestAccountInfo?: IUser;
 };
 
 export type Accounts = {
@@ -59,18 +57,6 @@ export class AccountControl implements Exportable<Accounts> {
 
         // TODO: error
 
-        return this;
-    }
-
-    public updateAccountInfo(key: string, accountInfo: IUser): AccountControl | never {
-        const baseAccount = this.getAccount(key);
-        if (baseAccount) {
-            return new AccountControl({
-                account: { ...this._accounts, [key]: { ...baseAccount, latestAccountInfo: accountInfo } },
-                lineup: [...this._lineup],
-            });
-        }
-        // TODO: error
         return this;
     }
 
