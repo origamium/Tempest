@@ -3,6 +3,7 @@ import { AuthorizationDataObject } from "../Authorization/Authorization";
 import { Exportable } from "../../HelperType/Exportable";
 import { nanoid } from "nanoid";
 import arrayMove from "array-move";
+import { TokenType } from "../Types/APIKeyType";
 
 export type AccountObject = {
     service: string;
@@ -36,6 +37,14 @@ export class AccountControl implements Exportable<Accounts> {
 
     public getAccount(key: string): AccountObject | undefined {
         return this._accounts[key];
+    }
+
+    public getAccountToken(key: string): TokenType | undefined {
+        const account = this._accounts[key];
+        if (account) {
+            return { Token: account.authData.token, TokenSecret: account.authData.tokenSecret };
+        }
+        return undefined;
     }
 
     public addAccount(source: AccountObject): AccountControl {

@@ -70,6 +70,7 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
         const service = services?.getService(serviceKey);
         const provider = providers?.getProvider(providerKey);
         const account = accounts?.getAccount(accountKey);
+        const token = accounts?.getAccountToken(accountKey);
 
         if (!provider || !service || !account) {
             throw new Error("");
@@ -84,7 +85,11 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
 
         const transformedParameter = simplyTransformer(uiaction.schema, parameters);
 
-        const [requestInfo, requestInit] = api.createRequest(provider.baseUri, transformedParameter);
+        const authorization = token
+            ? provider.authorization.getAuthorizationData(provider.baseUri, api, token, transformedParameter)
+            : undefined;
+
+        const [requestInfo, requestInit] = api.createRequest(provider.baseUri, transformedParameter, authorization);
         const response = yield call(fetch, requestInfo, requestInit);
         const data = service.parseResponse(api, response);
 

@@ -6,6 +6,7 @@ import { HttpMethods } from "../Types/HttpMethods";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { TRequest } from "./Request/Request";
 import { APIPayloadType } from "../Types/APIPayloadType";
+import { CombinedParameterDataType } from "../Types/CombinedParameterDataType";
 
 export class APISet implements Exportable<APISetObject> {
     // @ts-ignore
@@ -39,8 +40,12 @@ export class APISet implements Exportable<APISetObject> {
             );
     }
 
-    public createRequest = (baseUri: string, payload: APIPayloadType): [RequestInfo, RequestInit, boolean] => {
-        return TRequest.createRequest(baseUri, this._api, payload);
+    public createRequest = (
+        baseUri: string,
+        payload: APIPayloadType,
+        cert?: CombinedParameterDataType
+    ): [RequestInfo, RequestInit, boolean] => {
+        return TRequest.createRequest(baseUri, this._api, payload, cert);
     };
 
     get dataKey(): string | undefined {
