@@ -52,7 +52,7 @@ export const successRESTAction = (targetContentKey: string, data: any): SuccessR
     },
 });
 
-export function* RESTRequestSaga(action: RequestRESTActions) {
+export function* requestRESTRSaga(action: RequestRESTActions) {
     try {
         const { accountKey, serviceKey, providerKey, uiaction, parameters } = action.payload;
 
