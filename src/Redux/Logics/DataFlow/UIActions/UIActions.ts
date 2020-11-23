@@ -1,10 +1,12 @@
 import { Exportable } from "../../HelperType/Exportable";
+import { TransformSchema } from "../Data/Dynamizr/Interfaces/TransformData";
 
 export type UIActionElement = {
     targetApiKey: string;
     targetContentKey: string;
     name: string;
     description?: string;
+    schema: TransformSchema;
 };
 
 export type UIActionsTemplate = {

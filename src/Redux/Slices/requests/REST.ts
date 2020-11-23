@@ -7,6 +7,7 @@ import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl"
 import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
 import { ContentsControl } from "../../Logics/DataFlow/Contents/ContentsControl";
 import { Action } from "redux";
+import { simplyTransformer } from "../../Logics/DataFlow/Data/Dynamizr/Functions/transformer";
 
 export interface RequestRESTActions extends Action {
     type: requestActionIdentifier.REQUEST_REST;
@@ -81,7 +82,9 @@ export function* RESTRequestSaga(action: RequestRESTActions) {
             throw new Error(`API key ${uiaction.targetApiKey} is undefined`);
         }
 
-        const [requestInfo, requestInit] = api.createRequest(provider.baseUri, parameters);
+        const transformedParameter = simplyTransformer(uiaction.schema, parameters);
+
+        const [requestInfo, requestInit] = api.createRequest(provider.baseUri, transformedParameter);
         const response = yield call(fetch, requestInfo, requestInit);
         const data = service.parseResponse(api, response);
 

@@ -27,6 +27,9 @@ export const _reduce = (accumulator: any, schemaValue: TransformSchema, target: 
     }
 };
 
+export const simplyTransformer = (schema: TransformSchema, target: any) =>
+    _reduce(arrayOrObject(target), schema, target);
+
 export const transformer = (dynaSchemaData: ReturnedDatumInfoType, target_: any): any => {
     const schema = dynaSchemaData.transformerSchema;
     const targetIsArray = Array.isArray(dynaSchemaData.transformerSchema);
