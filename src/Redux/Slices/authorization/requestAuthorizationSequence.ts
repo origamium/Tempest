@@ -26,26 +26,27 @@ export const successAuthorizationSequenceAction = (): SuccessRequestAuthorizatio
 });
 
 export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSequence) {
-    const [serviceKey, providerKey] = action.payload.key.split(",");
-    if (!serviceKey || !providerKey) {
-        return;
-    }
-    const [services, providers]: [
-        ServiceControl | undefined,
-        ProviderControl | undefined
-    ] = yield select((state: StoreType) =>
-        state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined]
-    );
+    try {
+        const [serviceKey, providerKey] = action.payload.key.split(",");
+        if (!serviceKey || !providerKey) {
+            return;
+        }
+        const [services, providers]: [
+            ServiceControl | undefined,
+            ProviderControl | undefined
+        ] = yield select((state: StoreType) =>
+            state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined]
+        );
 
-    const service = services?.getService(serviceKey);
-    const provider = providers?.getProvider(providerKey);
+        const service = services?.getService(serviceKey);
+        const provider = providers?.getProvider(providerKey);
 
-    if (!service || !provider) {
-        // TODO: エラー処理
-        return;
-    }
+        if (!service || !provider) {
+            // TODO: エラー処理
+            return;
+        }
 
-    /*
+        /*
     ** TODO
 
     const requestAuthTokenKey = "requestAuthToken";
@@ -71,13 +72,16 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
 
     */
 
-    const key = "authorizeUri";
-    const getAuthorizeUriApi = service.getApiSet(key);
-    if (!getAuthorizeUriApi) {
-        throw new Error(`ApiSetControl.getApiSet(${key}) is undefined`);
-    }
+        const key = "authorizeUri";
+        const getAuthorizeUriApi = service.getApiSet(key);
+        if (!getAuthorizeUriApi) {
+            throw new Error(`ApiSetControl.getApiSet(${key}) is undefined`);
+        }
 
-    const url = provider.authorization.getAuthorizeUri(getAuthorizeUriApi, provider.baseUri);
-    window.open(url);
-    yield put(nextPageAction());
+        const url = provider.authorization.getAuthorizeUri(getAuthorizeUriApi, provider.baseUri);
+        window.open(url);
+        yield put(nextPageAction());
+    } catch (e) {
+        console.error(e);
+    }
 }

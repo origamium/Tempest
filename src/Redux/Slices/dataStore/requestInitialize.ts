@@ -21,14 +21,18 @@ export const requestInitializeAction = (): RequestInitializeActionType => ({
 });
 
 export function* requestInitializeSaga() {
-    // initialization
-    const service = new ServiceControl({ twitter: twitter.service, mastodon: mastodon.Service });
-    const provider = new ProviderControl({ twitter: twitter.provider, mastodon: mastodon.Provider });
-    const account = new AccountControl({ account: {}, lineup: [] });
-    const content = new ContentsControl({});
-    const page = new PageControl({ tabs: [] }, [], {});
-    const tabs = [];
-    const columns = [];
-    const mutes = new MuteControl({});
-    yield put(finishRestoreAction({ page, tabs, columns, mutes, account, content, service, provider }));
+    try {
+        // initialization
+        const service = new ServiceControl({ twitter: twitter.service, mastodon: mastodon.Service });
+        const provider = new ProviderControl({ twitter: twitter.provider, mastodon: mastodon.Provider });
+        const account = new AccountControl({ account: {}, lineup: [] });
+        const content = new ContentsControl({});
+        const page = new PageControl({ tabs: [] }, [], {});
+        const tabs = [];
+        const columns = [];
+        const mutes = new MuteControl({});
+        yield put(finishRestoreAction({ page, tabs, columns, mutes, account, content, service, provider }));
+    } catch (e) {
+        console.error(e);
+    }
 }

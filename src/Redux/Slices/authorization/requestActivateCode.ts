@@ -6,6 +6,7 @@ import { select, call, put } from "redux-saga/effects";
 import { StoreType } from "../../Store/StoreType";
 import { addAccountAction } from "../dataStore/addAccount";
 import { requestSaveDataStore } from "../dataStore/requestSaveDataStore";
+import { closeDialogAction } from "../dialog";
 
 export interface RequestActivateCode extends Action {
     type: authorizationActionsIdentifier.REQUEST_CODE_ACTIVATE;
@@ -37,36 +38,41 @@ export const failedActivateCode = (): FailedActivateCode => ({
 });
 
 export function* requestActivateCodeSaga(action: RequestActivateCode) {
-    const { key, code } = action.payload;
+    try {
+        const { key, code } = action.payload;
 
-    const [serviceKey, providerKey] = key.split(",");
+        const [serviceKey, providerKey] = key.split(",");
 
-    const [services, providers]: [
-        ServiceControl | undefined,
-        ProviderControl | undefined
-    ] = yield select((state: StoreType) =>
-        state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined]
-    );
+        const [services, providers]: [
+            ServiceControl | undefined,
+            ProviderControl | undefined
+        ] = yield select((state: StoreType) =>
+            state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined]
+        );
 
-    const service = services?.getService(serviceKey);
-    const provider = providers?.getProvider(providerKey);
+        const service = services?.getService(serviceKey);
+        const provider = providers?.getProvider(providerKey);
 
-    if (!provider || !service) {
-        // TODO: error
-        return;
+        if (!provider || !service) {
+            // TODO: error
+            return;
+        }
+
+        const apiKey = "requestToken";
+        const getToken = service?.getApiSet(apiKey);
+
+        if (!getToken) {
+            throw new Error(`ApiSetControl.getApiSet(${apiKey}) is undefined`);
+        }
+
+        const [info, init] = provider.authorization.requestToken(getToken, code, providerKey);
+
+        const res = yield call(fetch, provider.authorization.authorizeLambda.requestAuthorizeTokenLambda ?? info, init);
+        const parsedResponse = yield call([service, service.parseResponse], getToken, res);
+        yield put(addAccountAction(service.serviceName, provider.providerKey, parsedResponse));
+        yield put(requestSaveDataStore());
+        yield put(closeDialogAction());
+    } catch (e) {
+        yield put(failedActivateCode());
     }
-
-    const apiKey = "requestToken";
-    const getToken = service?.getApiSet(apiKey);
-
-    if (!getToken) {
-        throw new Error(`ApiSetControl.getApiSet(${apiKey}) is undefined`);
-    }
-
-    const [info, init] = provider.authorization.requestToken(getToken, code, providerKey);
-
-    const res = yield call(fetch, provider.authorization.authorizeLambda.requestAuthorizeTokenLambda ?? info, init);
-    const parsedResponse = yield call([service, service.parseResponse], getToken, res);
-    yield put(addAccountAction(service.serviceName, provider.providerKey, parsedResponse));
-    yield put(requestSaveDataStore());
 }
