@@ -5,6 +5,7 @@ export type ContentsStruct = {
     account: string;
     maxListLength: number; //default: 1000
     contentsKey: string;
+    content?: any;
 };
 
 export type ContentsControlObject = UndefinedablePairOfObject<ContentsStruct>;
@@ -12,17 +13,15 @@ export type ContentsControlObject = UndefinedablePairOfObject<ContentsStruct>;
 export class Contents implements Exportable<ContentsStruct> {
     private _account: string;
     private _contentsKey: string;
-    private _contents: unknown[];
+    private _contents: any;
     private _maxListLength: number;
 
-    constructor(source: ContentsStruct, contentList?: { content: unknown[] }) {
+    constructor(source: ContentsStruct, update?: { content: any }) {
         this._account = source.account;
         this._maxListLength = source.maxListLength;
         this._contentsKey = source.contentsKey;
-        if (contentList) {
-            this._contents = contentList.content;
-        } else {
-            this._contents = [];
+        if (source.content) {
+            this._contents = source.content;
         }
     }
 
@@ -34,8 +33,12 @@ export class Contents implements Exportable<ContentsStruct> {
         return this._contents;
     }
 
-    public updateContent(update: { content: unknown[] }): Contents {
-        return new Contents(this.export(), { content: [...this._contents, ...update.content] });
+    public updateContent(update: { content: any | any[] }): Contents {
+        if (Array.isArray(update.content)) {
+            return new Contents(this.export(), { content: [...this._contents, ...update.content] });
+        } else {
+            return new Contents(this.export(), { content: update.content });
+        }
     }
 
     export(): ContentsStruct {
