@@ -3,12 +3,14 @@ import { APISetsObject } from "./ApiSet/APISetObject";
 import { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { DataSetControl, DataSetsObject } from "../Data/DataSetControl";
 import { Exportable } from "../../HelperType/Exportable";
+import { UIActionControl, UIActionsObject } from "../UIActions/UIActionControl";
 
 export type ServiceObject = {
     serviceKey: string; // is equal key
     serviceName: string;
     apiSet: APISetsObject;
     dataSet: DataSetsObject;
+    uiActionSet: UIActionsObject;
     officialKey?: string;
 };
 
@@ -20,12 +22,14 @@ export class Service implements Exportable<ServiceObject> {
     private readonly _serviceName: string;
     private readonly _apiSet: APISetControl;
     private readonly _dataSet: DataSetControl;
+    private readonly _uiSet: UIActionControl;
 
     constructor({ source, officialServiceKey }: { source: ServiceObject; officialServiceKey?: unknown }) {
         this._serviceKey = source.serviceKey;
         this._serviceName = source.serviceName;
         this._apiSet = new APISetControl(source.apiSet);
         this._dataSet = new DataSetControl(source.dataSet);
+        this._uiSet = new UIActionControl(source.uiActionSet);
     }
 
     get serviceKey() {
@@ -52,6 +56,7 @@ export class Service implements Exportable<ServiceObject> {
             serviceName: this._serviceName,
             apiSet: this._apiSet.export(),
             dataSet: this._dataSet.export(),
+            uiActionSet: this._uiSet.export(),
             officialKey: undefined,
         };
     }

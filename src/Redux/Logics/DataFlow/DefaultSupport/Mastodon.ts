@@ -6,6 +6,8 @@ import { OAuthVersion } from "../Types/Authorization/OAuthVersion";
 import { SignSpace } from "../Types/Authorization/SignSpace";
 import { SignMethod } from "../Types/Authorization/SignMethod";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
+import { UIActionsObject } from "../UIActions/UIActionControl";
+import { DataSetsObject } from "../Data/DataSetControl";
 
 const serviceKey = "mastodon";
 
@@ -88,6 +90,12 @@ export default {
                     },
                 },
             },
+            getCredentials: {
+                path: "api/v1/accounts/verify_credentials",
+                protocol: Protocol.rest,
+                httpMethod: HttpMethods.GET,
+                parameterDef: {},
+            },
         } as APISetsObject,
         dataSet: {
             oauth_token: {
@@ -95,7 +103,27 @@ export default {
                     access_token: "token",
                 },
             },
-        },
+            userData: {
+                transform: {
+                    id: "id",
+                    display_name: "displayName",
+                    name: "screenName",
+                    locked: "locked",
+                    avatar: "avatar",
+                },
+            },
+        } as DataSetsObject,
+        uiActionSet: {
+            account: {
+                getInfo: {
+                    name: "get user info",
+                    targetApiKey: "getCredentials",
+                    targetContentKey: "userData",
+                    dataPoolKey: "self.account",
+                    schema: {},
+                },
+            },
+        } as UIActionsObject,
     },
     Provider: [
         {

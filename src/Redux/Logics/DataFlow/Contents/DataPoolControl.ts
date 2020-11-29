@@ -9,9 +9,9 @@ export type ContentsStruct = {
     content?: any;
 };
 
-export type ContentsControlObject = UndefinedablePairOfObject<ContentsStruct>;
+export type DataPoolObject = UndefinedablePairOfObject<ContentsStruct>;
 
-export class Contents implements Exportable<ContentsStruct> {
+export class DataPool implements Exportable<ContentsStruct> {
     private _account: string;
     private _contentsKey: string;
     private _contents: any;
@@ -36,16 +36,27 @@ export class Contents implements Exportable<ContentsStruct> {
         return this._contents;
     }
 
-    public updateContent(update: { content: any | any[] }): Contents {
+    public updateContent(update: { data: any | any[] }): DataPool {
         if (this._isList) {
-            return new Contents(this.export(), { content: [...this._contents, ...update.content] });
+            return new DataPool(this.export(), { content: [...this._contents, ...update.data] });
         } else {
-            return new Contents(this.export(), { content: update.content });
+            return new DataPool(this.export(), { content: update.data });
         }
     }
 
-    public renew(): Contents {
-        return new Contents(this.export(), { content: this.contents });
+    public clearCache(): DataPool {
+        return new DataPool(this.export());
+    }
+
+    public adjustCache(): DataPool {
+        if (this._isList) {
+            return new DataPool(this.export(), { content: this.contents.splice(0, this._maxListLength) });
+        }
+        return new DataPool(this.export(), { content: this.contents });
+    }
+
+    public renew(): DataPool {
+        return new DataPool(this.export(), { content: this.contents });
     }
 
     export(): ContentsStruct {
@@ -58,10 +69,10 @@ export class Contents implements Exportable<ContentsStruct> {
     }
 }
 
-export class ContentsControl implements Exportable<ContentsControlObject> {
-    private contents: PairOfObject<Contents>;
+export class DataPoolControl implements Exportable<DataPoolObject> {
+    private contents: PairOfObject<DataPool>;
 
-    constructor(source: ContentsControlObject, exists?: PairOfObject<Contents>) {
+    constructor(source: DataPoolObject, exists?: PairOfObject<DataPool>) {
         if (exists) {
             this.contents = { ...exists };
         } else {
@@ -77,8 +88,8 @@ export class ContentsControl implements Exportable<ContentsControlObject> {
         }
     }
 
-    public updateContent(key: string, content: any): ContentsControl {
-        return new ContentsControl(
+    public updateContent(key: string, content: any): DataPoolControl {
+        return new DataPoolControl(
             {},
             Object.entries(this.contents).reduce(
                 (accm, [currKey, currValue]) => ({
@@ -90,7 +101,7 @@ export class ContentsControl implements Exportable<ContentsControlObject> {
         );
     }
 
-    export(): ContentsControlObject {
+    export(): DataPoolObject {
         return Object.entries(this.contents).reduce(
             (accm, [, curr]) => ({ ...accm, [curr.contentsKey]: curr.export() }),
             {}

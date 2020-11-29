@@ -6,14 +6,14 @@ import { dataStoreActions, dataStoreActionsIdentifier } from "./index";
 import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
 import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
-import { ContentsControl } from "../../Logics/DataFlow/Contents/ContentsControl";
+import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import { accountActionIdentifier } from "./addAccount";
 
 export type DataStoreType = {
     page: PageControl;
     tabs: TabControl[];
     columns: ColumnControl[];
-    content: ContentsControl;
+    content: DataPoolControl;
     mutes: MuteControl;
     account: AccountControl;
     service: ServiceControl;

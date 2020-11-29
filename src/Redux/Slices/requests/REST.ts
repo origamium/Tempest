@@ -1,11 +1,11 @@
 import { requestActionIdentifier } from "./index";
 import { call, put, select } from "redux-saga/effects";
-import { UIActionElement } from "../../Logics/DataFlow/UIActions/UIActions";
+import { UIActionElement } from "../../Logics/DataFlow/UIActions/UIActionControl";
 import { StoreType } from "../../Store/StoreType";
 import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
-import { ContentsControl } from "../../Logics/DataFlow/Contents/ContentsControl";
+import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import { Action } from "redux";
 import { simplyTransformer } from "../../Logics/DataFlow/Data/Dynamizr/Functions/transformer";
 
@@ -60,7 +60,7 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
             ServiceControl | undefined,
             ProviderControl | undefined,
             AccountControl | undefined,
-            ContentsControl | undefined
+            DataPoolControl | undefined
         ] = yield select((state: StoreType) =>
             state.dataStore
                 ? [state.dataStore.service, state.dataStore.provider, state.dataStore.account, state.dataStore.content]

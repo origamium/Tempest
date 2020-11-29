@@ -3,14 +3,14 @@ import { UIObject } from "../../Logics/DataFlow/UI/UIObject";
 import { Accounts } from "../../Logics/DataFlow/Account/AccountControl";
 import { Providers } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { Services } from "../../Logics/DataFlow/Service/ServiceControl";
-import { ContentsControlObject } from "../../Logics/DataFlow/Contents/ContentsControl";
+import { DataPoolObject } from "../../Logics/DataFlow/Contents/DataPoolControl";
 
 export type ControlObject = {
     [dbKeys.account]: Accounts;
     [dbKeys.service]: Services;
     [dbKeys.provider]: Providers;
     [dbKeys.ui]: UIObject;
-    [dbKeys.content]: ContentsControlObject;
+    [dbKeys.content]: DataPoolObject;
     [dbKeys.setting]: unknown;
     [dbKeys.credentials]: unknown;
 };

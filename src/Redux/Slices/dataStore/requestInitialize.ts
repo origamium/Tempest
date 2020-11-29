@@ -2,7 +2,7 @@ import { Action } from "redux";
 import { dataStoreActionsIdentifier } from "./index";
 import { PageControl } from "../../Logics/DataFlow/UI/PageControl";
 import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
-import { ContentsControl } from "../../Logics/DataFlow/Contents/ContentsControl";
+import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { put } from "redux-saga/effects";
@@ -26,7 +26,7 @@ export function* requestInitializeSaga() {
         const service = new ServiceControl({ twitter: twitter.service, mastodon: mastodon.Service });
         const provider = new ProviderControl({ twitter: twitter.provider, mastodon: mastodon.Provider });
         const account = new AccountControl({ account: {}, lineup: [] });
-        const content = new ContentsControl({});
+        const content = new DataPoolControl({});
         const page = new PageControl({ tabs: [] }, [], {});
         const tabs = [];
         const columns = [];

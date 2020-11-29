@@ -12,7 +12,7 @@ import { finishRestoreAction } from "./finishRestore";
 import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
 import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
-import { ContentsControl } from "../../Logics/DataFlow/Contents/ContentsControl";
+import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import twitter from "../../Logics/DataFlow/DefaultSupport/Twitter";
 import mastodon from "../../Logics/DataFlow/DefaultSupport/Mastodon";
 
@@ -47,7 +47,7 @@ export function* requestRestoreSaga() {
             const mutes = new MuteControl(uiObj.mutes);
 
             const account = new AccountControl(accountObj);
-            const content = new ContentsControl(contentObj);
+            const content = new DataPoolControl(contentObj);
 
             yield put(finishRestoreAction({ page, tabs, columns, mutes, account, content, service, provider }));
         } else {
