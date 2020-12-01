@@ -31,7 +31,7 @@ export function* requestInitializeSaga() {
         const tabs = [];
         const columns = [];
         const mutes = new MuteControl({});
-        yield put(finishRestoreAction({ page, tabs, columns, mutes, account, content, service, provider }));
+        yield put(finishRestoreAction({ page, tabs, columns, mutes, account, datapool: content, service, provider }));
     } catch (e) {
         console.error(e);
     }

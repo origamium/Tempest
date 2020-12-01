@@ -26,7 +26,7 @@ export function* requestSaveDataStoreSaga() {
             yield call([SettingStore, SettingStore.setItem], dbKeys.account, data.account.export());
             yield call([SettingStore, SettingStore.setItem], dbKeys.service, data.service.export());
             yield call([SettingStore, SettingStore.setItem], dbKeys.provider, data.provider.export());
-            yield call([SettingStore, SettingStore.setItem], dbKeys.content, data.content.export());
+            yield call([SettingStore, SettingStore.setItem], dbKeys.content, data.datapool.export());
         }
     } catch (e) {
         console.error(e);

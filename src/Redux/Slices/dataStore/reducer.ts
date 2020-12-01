@@ -14,7 +14,7 @@ export type DataStoreType = {
     page: PageControl;
     tabs: TabControl[];
     columns: ColumnControl[];
-    content: DataPoolControl;
+    datapool: DataPoolControl;
     mutes: MuteControl;
     account: AccountControl;
     service: ServiceControl;
@@ -44,7 +44,7 @@ export const dataStoreReducer = (
         case requestActionIdentifier.SUCCESS_REST:
             if (state) {
                 const { targetContentKey, data } = action.payload;
-                return { ...state, content: state.content.updateContent(targetContentKey, data) };
+                return { ...state, datapool: state.datapool.updateContent(targetContentKey, data) };
             }
             return state;
         default:

@@ -49,7 +49,9 @@ export function* requestRestoreSaga() {
             const account = new AccountControl(accountObj);
             const content = new DataPoolControl(contentObj);
 
-            yield put(finishRestoreAction({ page, tabs, columns, mutes, account, content, service, provider }));
+            yield put(
+                finishRestoreAction({ page, tabs, columns, mutes, account, datapool: content, service, provider })
+            );
         } else {
             // initialization
             yield put(requestInitializeAction());

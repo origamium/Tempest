@@ -28,7 +28,7 @@ export class AccountControl implements Exportable<Accounts> {
     }
 
     get accountKeys() {
-        return Object.keys(this._accounts);
+        return this._lineup;
     }
 
     get accountList(): AccountObject[] {

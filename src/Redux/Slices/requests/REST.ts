@@ -63,7 +63,7 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
             DataPoolControl | undefined
         ] = yield select((state: StoreType) =>
             state.dataStore
-                ? [state.dataStore.service, state.dataStore.provider, state.dataStore.account, state.dataStore.content]
+                ? [state.dataStore.service, state.dataStore.provider, state.dataStore.account, state.dataStore.datapool]
                 : [undefined, undefined, undefined, undefined]
         );
 

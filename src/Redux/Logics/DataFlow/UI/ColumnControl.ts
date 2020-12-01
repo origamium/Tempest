@@ -14,7 +14,7 @@ export class ColumnControl implements Exportable<ColumnControlObject> {
     private _accountId: string[];
     private _mute: MuteControl;
     private _collapsed: boolean;
-    private _contentCollapse: number; // 0: not collapse. 1,2,3...: line-clamp and other content collapsing
+    private _contentCollapse: number; // 0: not collapse. 1,2,3...: line-clamp and other datapool collapsing
 
     constructor({ id, accountId, muteId, collapsed, contentCollapse }: ColumnControlObject, mutes: MuteControlObject) {
         const muteInstances = muteId.map((v) => mutes[v]);
