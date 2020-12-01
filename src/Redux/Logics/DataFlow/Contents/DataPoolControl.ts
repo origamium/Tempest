@@ -1,35 +1,35 @@
 import type { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { Exportable } from "../../HelperType/Exportable";
 
-export type ContentsStruct = {
-    account: string;
+export type DataPoolStruct = {
+    accountKey: string;
     maxListLength: number; //default: 1000
-    contentsKey: string;
-    isList: boolean;
+    poolKey: string;
     content?: any;
 };
 
-export type DataPoolObject = UndefinedablePairOfObject<ContentsStruct>;
+export type DataPoolObject = UndefinedablePairOfObject<DataPoolStruct>;
 
-export class DataPool implements Exportable<ContentsStruct> {
-    private _account: string;
-    private _contentsKey: string;
+export class DataPool implements Exportable<DataPoolStruct> {
+    private _accountKey: string;
+    private _poolKey: string;
     private _contents: any;
-    private _isList: boolean;
     private _maxListLength: number;
 
-    constructor(source: ContentsStruct, renew?: { content: any }) {
-        this._account = source.account;
+    constructor(source: DataPoolStruct, renew?: { content: any }) {
+        this._accountKey = source.accountKey;
         this._maxListLength = source.maxListLength;
-        this._contentsKey = source.contentsKey;
-        this._isList = source.isList;
-        if (source.content) {
+        this._poolKey = source.poolKey;
+
+        if (renew) {
+            this._contents = renew.content;
+        } else if (source.content) {
             this._contents = source.content;
         }
     }
 
-    get contentsKey() {
-        return this._contentsKey;
+    get poolKey() {
+        return this._poolKey;
     }
 
     get contents() {
@@ -37,8 +37,12 @@ export class DataPool implements Exportable<ContentsStruct> {
     }
 
     public updateContent(update: { data: any | any[] }): DataPool {
-        if (this._isList) {
+        const updateDataIsList = Array.isArray(update.data);
+        const sourceDataIsList = Array.isArray(this._contents);
+        if (updateDataIsList && sourceDataIsList) {
             return new DataPool(this.export(), { content: [...this._contents, ...update.data] });
+        } else if (!updateDataIsList && sourceDataIsList) {
+            return new DataPool(this.export(), { content: [...this.contents, update.data] });
         } else {
             return new DataPool(this.export(), { content: update.data });
         }
@@ -49,49 +53,68 @@ export class DataPool implements Exportable<ContentsStruct> {
     }
 
     public adjustCache(): DataPool {
-        if (this._isList) {
-            return new DataPool(this.export(), { content: this.contents.splice(0, this._maxListLength) });
+        if (Array.isArray(this._contents)) {
+            return new DataPool(this.export(), { content: this._contents.splice(0, this._maxListLength) });
         }
-        return new DataPool(this.export(), { content: this.contents });
+        return new DataPool(this.export(), { content: this._contents });
     }
 
     public renew(): DataPool {
-        return new DataPool(this.export(), { content: this.contents });
+        return new DataPool(this.export(), { content: this._contents });
     }
 
-    export(): ContentsStruct {
+    export(): DataPoolStruct {
         return {
-            account: this._account,
+            accountKey: this._accountKey,
             maxListLength: this._maxListLength,
-            contentsKey: this._contentsKey,
-            isList: this._isList,
+            poolKey: this._poolKey,
         };
     }
 }
 
 export class DataPoolControl implements Exportable<DataPoolObject> {
-    private contents: PairOfObject<DataPool>;
+    private _pools: PairOfObject<DataPool>;
 
     constructor(source: DataPoolObject, exists?: PairOfObject<DataPool>) {
         if (exists) {
-            this.contents = { ...exists };
+            this._pools = { ...exists };
         } else {
-            this.contents = Object.entries(source)
+            this._pools = Object.entries(source)
                 .filter(([, value]) => value)
                 .reduce(
                     (accm, [, curr]) => ({
                         ...accm,
-                        [curr!.contentsKey]: curr!,
+                        [curr!.poolKey + "," + curr!.accountKey]: curr!,
                     }),
                     {}
                 );
         }
     }
 
+    public addContent(
+        key: string,
+        account: string,
+        option: { isList: boolean; maxListLength: number },
+        data?: any
+    ): DataPoolControl {
+        return new DataPoolControl(
+            {},
+            {
+                ...this._pools,
+                [key]: new DataPool({
+                    poolKey: key,
+                    accountKey: account,
+                    maxListLength: option.maxListLength,
+                    content: data,
+                }),
+            }
+        );
+    }
+
     public updateContent(key: string, data: any): DataPoolControl {
         return new DataPoolControl(
             {},
-            Object.entries(this.contents).reduce(
+            Object.entries(this._pools).reduce(
                 (accm, [currKey, currValue]) => ({
                     ...accm,
                     [currKey]: currKey === key ? currValue.updateContent({ data }) : currValue.renew(),
@@ -101,10 +124,11 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
         );
     }
 
+    public getContent(key: string, account: string): any | undefined {
+        return this._pools[key + "," + account]?.contents;
+    }
+
     export(): DataPoolObject {
-        return Object.entries(this.contents).reduce(
-            (accm, [, curr]) => ({ ...accm, [curr.contentsKey]: curr.export() }),
-            {}
-        );
+        return Object.entries(this._pools).reduce((accm, [, curr]) => ({ ...accm, [curr.poolKey]: curr.export() }), {});
     }
 }
