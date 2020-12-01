@@ -8,6 +8,7 @@ import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import { accountActionIdentifier } from "./addAccount";
+import { requestActionIdentifier } from "../requests";
 
 export type DataStoreType = {
     page: PageControl;
@@ -28,16 +29,22 @@ export const dataStoreReducer = (
         case dataStoreActionsIdentifier.FINISH_RESTORE:
             return action.payload.dataStore;
         case accountActionIdentifier.ADD_ACCOUNT:
-            const newAccountControl = state?.account.addAccount({
-                service: action.payload.service,
-                provider: action.payload.provider,
-                authData: action.payload.authorizations,
-            });
-            if (newAccountControl && state) {
+            if (state) {
+                const newAccountControl = state.account.addAccount({
+                    service: action.payload.service,
+                    provider: action.payload.provider,
+                    authData: action.payload.authorizations,
+                });
                 return {
                     ...state,
                     account: newAccountControl,
                 };
+            }
+            return state;
+        case requestActionIdentifier.SUCCESS_REST:
+            if (state) {
+                const { targetContentKey, data } = action.payload;
+                return { ...state, content: state.content.updateContent(targetContentKey, data) };
             }
             return state;
         default:

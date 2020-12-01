@@ -88,13 +88,13 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
         }
     }
 
-    public updateContent(key: string, content: any): DataPoolControl {
+    public updateContent(key: string, data: any): DataPoolControl {
         return new DataPoolControl(
             {},
             Object.entries(this.contents).reduce(
                 (accm, [currKey, currValue]) => ({
                     ...accm,
-                    [currKey]: currKey === key ? currValue.updateContent({ content }) : currValue.renew(),
+                    [currKey]: currKey === key ? currValue.updateContent({ data }) : currValue.renew(),
                 }),
                 {}
             )
