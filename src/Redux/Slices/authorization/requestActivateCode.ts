@@ -69,7 +69,7 @@ export function* requestActivateCodeSaga(action: RequestActivateCode) {
 
         const res = yield call(fetch, provider.authorization.authorizeLambda.requestAuthorizeTokenLambda ?? info, init);
         const parsedResponse = yield call([service, service.parseResponse], getToken, res);
-        yield put(addAccountAction(service.serviceName, provider.providerKey, parsedResponse));
+        yield put(addAccountAction(service.serviceKey, provider.providerKey, parsedResponse));
         yield put(requestSaveDataStore());
         yield put(closeDialogAction());
     } catch (e) {
