@@ -49,7 +49,7 @@ export const Body: React.FC = () => {
 
     return (
         <Styled.Root>
-            <Sidebar accounts={[]} addAction={() => {}} settingAction={() => {}} />
+            <Sidebar />
             <Styled.Body>
                 <Tabs
                     value={tabIndex}

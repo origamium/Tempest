@@ -12,9 +12,7 @@ export interface IAccountProps {
     uiCommonAttr: IUICommonAttribute;
 }
 
-export interface IAccountListProps {
-    accounts: IAccountProps[];
-}
+export interface IAccountListProps {}
 
 const Styled = {
     Root: styled.div`

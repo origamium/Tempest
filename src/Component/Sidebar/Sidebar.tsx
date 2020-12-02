@@ -1,14 +1,11 @@
 import React from "react";
 import { styled } from "../../Theme";
 import { Paper, IconButton } from "@material-ui/core";
-import { AccountList, IAccountProps } from "./AccountList";
+import { AccountList } from "./AccountList";
 import { Settings } from "@material-ui/icons";
 import { SidebarAddButton } from "./Buttons/Add";
 
-export interface ISidebarProps {
-    accounts: IAccountProps[];
-    settingAction: () => void;
-}
+export interface ISidebarProps {}
 
 const Styled = {
     Root: styled.div<{ width: number }>`
@@ -34,6 +31,8 @@ export const Sidebar: React.FC<ISidebarProps> = (props: ISidebarProps) => {
         setSidebarClientWidth(calcSidebarBodyWidth());
     }, [calcSidebarBodyWidth]);
 
+    const handleSettingButtonClick = React.useCallback(() => {}, []);
+
     return (
         <Styled.Root width={sidebarClientWidth}>
             <Paper ref={sidebarBodyRef}>
@@ -41,10 +40,10 @@ export const Sidebar: React.FC<ISidebarProps> = (props: ISidebarProps) => {
                     <SidebarAddButton />
                 </div>
                 <div>
-                    <AccountList accounts={props.accounts} />
+                    <AccountList />
                 </div>
                 <div>
-                    <IconButton onClick={props.settingAction}>
+                    <IconButton onClick={handleSettingButtonClick}>
                         <Settings />
                     </IconButton>
                 </div>
