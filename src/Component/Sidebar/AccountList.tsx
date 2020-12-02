@@ -5,8 +5,6 @@ import { IUser } from "../../datatype/Contents/User";
 import { UIAction } from "../../datatype/UI/UIAction";
 import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 import { useAccountListData } from "../../Redux/Selector/Account/getAccountData";
-import { useDispatch } from "react-redux";
-import { requestRESTAction } from "../../Redux/Slices/requests/REST";
 
 export interface IAccountProps {
     user: IUser;
@@ -33,7 +31,6 @@ const Styled = {
 
 export const AccountList: React.FC<IAccountListProps> = (props) => {
     const accounts = useAccountListData();
-    const uiActions =
 
     return (
         <Styled.Root>
