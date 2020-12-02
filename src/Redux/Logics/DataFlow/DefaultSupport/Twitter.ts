@@ -6,9 +6,10 @@ import { HttpMethods } from "../Types/HttpMethods";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { Protocol } from "../Types/Protocol";
 import { ProviderObject } from "../Provider/ProviderControl";
-import { ServiceObject } from "../Service/ServiceControl";
 import { DataFormat, DataSetsObject } from "../Data/DataSetControl";
 
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const apiSet = {
     requestAuthToken: {
         path: "oauth/request_token",
@@ -58,6 +59,8 @@ const apiSet = {
     },
 };
 
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const dataSet: DataSetsObject = {
     oauth_request_token: {
         transform: {
@@ -108,13 +111,8 @@ const dataSet: DataSetsObject = {
 
 const serviceKey = "twitter";
 
-const service: ServiceObject = {
-    serviceKey,
-    serviceName: "Twitter",
-    apiSet,
-    dataSet,
-};
-
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const provider: ProviderObject = {
     serviceKey,
     providerName: "twitter.com",
@@ -130,9 +128,4 @@ const provider: ProviderObject = {
         callback: "https://tsuru-twitter-oauth1-v1.origamium.net",
     },
     apiKey: { ApiKey: "teMvsH7tcmvrJSbKNJvOTIKsc" },
-};
-
-export default {
-    service,
-    provider,
 };
