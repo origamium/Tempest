@@ -1,4 +1,3 @@
-import OAuth1 from "./OAuth1";
 import OAuth2 from "./OAuth2";
 import { AuthInfoType } from "../Types/AuthInfoType";
 import { AuthorizationUnitObject } from "../Service/ApiSet/AuthorizationUnitObject";
@@ -34,7 +33,7 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
     private readonly _info: AuthInfoType;
     private readonly _scopeOriginal?: string[];
     private readonly _authorizePaths: AuthorizePaths;
-    public auth: OAuth1 | OAuth2;
+    public auth: OAuth2;
 
     constructor(source: AuthorizationUnitObject, optional: { apiKey: APIKeyType }) {
         this._info = {
@@ -56,9 +55,6 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         };
 
         switch (this._info.oauthVersion) {
-            case OAuthVersion.OAuth1:
-                this.auth = new OAuth1();
-                break;
             case OAuthVersion.OAuth2:
                 this.auth = new OAuth2();
                 break;
@@ -90,13 +86,6 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         payload: APIPayloadType
     ): CombinedParameterDataType {
         return this.auth.getAuthorizationData(baseUri, api, this._info, token, payload);
-    }
-
-    public authToken(api: APISet, baseUri?: string): CombinedParameterDataType | undefined {
-        if (this.auth instanceof OAuth1) {
-            return this.auth.requestAuthToken(this.getBaseUri(baseUri), api, this._info, this.authorizeLambda);
-        }
-        return;
     }
 
     public getAuthorizeUri(api: APISet, baseUri?: string): string {

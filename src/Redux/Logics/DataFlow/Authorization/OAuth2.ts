@@ -8,7 +8,6 @@ import { TokenType } from "../Types/APIKeyType";
 import { SignSpace } from "../Types/Authorization/SignSpace";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { UnknownOAuthSignatureSpace } from "../../../Exceptions";
-import { APISetObject } from "../Service/ApiSet/APISetObject";
 import { APIParameterDefTypes } from "../Service/ApiSet/APIParameterDefTypes";
 import { APISet } from "../API/APISet";
 import { AuthorizePaths } from "./Authorization";
@@ -54,7 +53,7 @@ export default class OAuth2 implements OAuth {
 
     public getAuthorizationData(
         baseUri: string,
-        apiData: APISetObject,
+        apiData: APISet,
         authInfo: AuthInfoType,
         token: TokenType,
         payload: APIPayloadType

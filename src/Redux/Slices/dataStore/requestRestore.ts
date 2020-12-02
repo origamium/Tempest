@@ -13,7 +13,6 @@ import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
 import { ServiceControl } from "../../Logics/DataFlow/Service/ServiceControl";
 import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl";
 import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
-import twitter from "../../Logics/DataFlow/DefaultSupport/Twitter";
 import mastodon from "../../Logics/DataFlow/DefaultSupport/Mastodon";
 
 export interface RequestRestoreActionType extends Action {
@@ -36,8 +35,8 @@ export function* requestRestoreSaga() {
             // const serviceObj = yield call([SettingStore, SettingStore.getItem], dbKeys.service);
             // const providerObj = yield call([SettingStore, SettingStore.getItem], dbKeys.provider);
 
-            const service = new ServiceControl({ twitter: twitter.service, mastodon: mastodon.Service });
-            const provider = new ProviderControl({ twitter: twitter.provider, mastodon: mastodon.Provider });
+            const service = new ServiceControl({ mastodon: mastodon.Service });
+            const provider = new ProviderControl({ mastodon: mastodon.Provider });
 
             const contentObj = yield call([SettingStore, SettingStore.getItem], dbKeys.content);
 
