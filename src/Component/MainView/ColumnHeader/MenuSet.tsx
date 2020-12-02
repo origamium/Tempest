@@ -2,12 +2,10 @@ import React, { useState, useCallback } from "react";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { PopOverMenu } from "../../Common/Action/PopoverMenus";
-import { UIAction } from "../../../datatype/UI/UIAction";
-import { IUICommonAttribute } from "../../../datatype/UI/UICommonAttribute";
+import { UIActionElement } from "../../../Redux/Logics/DataFlow/UIActions/UIActionControl";
 
 export interface MenuProps {
-    uiCommonAttr: IUICommonAttribute;
-    uiActions: UIAction[];
+    uiActions: UIActionElement[];
 }
 
 export const MenuSet: React.FC<MenuProps> = (props) => {
@@ -26,7 +24,11 @@ export const MenuSet: React.FC<MenuProps> = (props) => {
                 <MenuIcon />
             </IconButton>
             <PopOverMenu
-                uiCommonAttr={props.uiCommonAttr}
+                keys={
+                    {
+                        /*TODO*/
+                    }
+                }
                 anchorEl={anchorEl}
                 handleMenuClose={handleClose}
                 uiActions={props.uiActions}

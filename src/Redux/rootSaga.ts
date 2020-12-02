@@ -8,6 +8,7 @@ import { requestActivateCodeSaga } from "./Slices/authorization/requestActivateC
 import { requestSaveDataStoreSaga } from "./Slices/dataStore/requestSaveDataStore";
 import { requestActionIdentifier } from "./Slices/requests";
 import { requestRESTRSaga } from "./Slices/requests/REST";
+import { requestDispatchUIActionSaga, uiactionsActionIdentifier } from "./Slices/uiaction/uiaction";
 
 export function* rootSaga() {
     yield takeLatest(dataStoreActionsIdentifier.REQUEST_RESTORE, requestRestoreSaga);
@@ -16,4 +17,5 @@ export function* rootSaga() {
     yield takeLatest(authorizationActionsIdentifier.REQUEST_AUTHORIZATION_SEQUENCE, requestAuthorizationSequenceSaga);
     yield takeLatest(authorizationActionsIdentifier.REQUEST_CODE_ACTIVATE, requestActivateCodeSaga);
     yield takeEvery(requestActionIdentifier.REQUEST_REST, requestRESTRSaga);
+    yield takeEvery(uiactionsActionIdentifier.REQUEST_DISPATCH_UIACTION, requestDispatchUIActionSaga);
 }

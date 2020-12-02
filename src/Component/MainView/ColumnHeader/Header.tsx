@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
         <Styled.Root>
             <Toolbar style={{ justifyContent: "space-between" }}>
                 <Title owner={props.owner} columnName={props.columnName} />
-                <MenuSet uiActions={props.uiActions} uiCommonAttr={props.uiColumnAttr} />
+                <MenuSet uiActions={props.uiActions} />
             </Toolbar>
             <StatusColorBar status={props.status} />
             <Styled.DragHandle {...props.handle} />

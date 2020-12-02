@@ -1,35 +1,35 @@
 import React from "react";
 import { MenuItem, MenuList, Popover } from "@material-ui/core";
 import { PopoverOrigin } from "@material-ui/core/Popover";
-import { UIAction } from "../../../datatype/UI/UIAction";
+import { UIActionElement } from "../../../Redux/Logics/DataFlow/UIActions/UIActionControl";
+import { useDispatch } from "react-redux";
+import { requestDispatchUIAction } from "../../../Redux/Slices/uiaction/uiaction";
 
 export interface PopoverMenuProps {
-    accountKey: string;
+    keys: { account: string; service: string; provider: string };
     anchorEl: HTMLElement | null;
     handleMenuClose: () => void;
-    uiActions: UIAction[];
+    uiActions: UIActionElement[];
     anchorOrigin?: PopoverOrigin;
     transformOrigin?: PopoverOrigin;
 }
 
-interface IPopoverMenuItemProps extends Pick<PopoverMenuProps, "accountKey" | "handleMenuClose"> {
-    uiAction: UIAction;
+interface IPopoverMenuItemProps extends Pick<PopoverMenuProps, "keys" | "handleMenuClose"> {
+    uiAction: UIActionElement;
 }
 
-export const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = ({ uiAction, accountKey, handleMenuClose }) => {
+export const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = ({ uiAction, keys, handleMenuClose }) => {
+    const dispatch = useDispatch();
     const handleClick = React.useCallback(() => {
-        uiAction.action({
-            accountKey,
-            uiActionId: uiAction.id,
-        });
+        dispatch(requestDispatchUIAction(uiAction, keys, {}));
         handleMenuClose();
-    }, [accountKey, handleMenuClose, uiAction]);
+    }, [dispatch, uiAction, keys, handleMenuClose]);
 
     return <MenuItem onClick={handleClick}>{uiAction.name}</MenuItem>;
 };
 
 export const PopOverMenu: React.FC<PopoverMenuProps> = ({
-    accountKey,
+    keys,
     anchorEl,
     anchorOrigin,
     transformOrigin,
@@ -48,12 +48,7 @@ export const PopOverMenu: React.FC<PopoverMenuProps> = ({
             <MenuList>
                 {uiActions.length > 0 ? (
                     uiActions.map((v, i) => (
-                        <PopOverMenuItem
-                            key={i}
-                            handleMenuClose={handleMenuClose}
-                            uiAction={v}
-                            accountKey={accountKey}
-                        />
+                        <PopOverMenuItem key={i} handleMenuClose={handleMenuClose} uiAction={v} keys={keys} />
                     ))
                 ) : (
                     <MenuItem>{"account actions not registered"}</MenuItem>

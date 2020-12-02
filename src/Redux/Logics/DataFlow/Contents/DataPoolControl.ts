@@ -112,6 +112,8 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
     }
 
     public updateContent(key: string, data: any): DataPoolControl {
+        console.log(key);
+        console.log(data);
         return new DataPoolControl(
             {},
             Object.entries(this._pools).reduce(

@@ -1,16 +1,7 @@
 import React from "react";
 import { styled } from "../../Theme";
 import { AccountIcon } from "./AccountIcon";
-import { IUser } from "../../datatype/Contents/User";
-import { UIAction } from "../../datatype/UI/UIAction";
-import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 import { useAccountListData } from "../../Redux/Selector/Account/getAccountData";
-
-export interface IAccountProps {
-    user: IUser;
-    actions: UIAction[];
-    uiCommonAttr: IUICommonAttribute;
-}
 
 export interface IAccountListProps {}
 
@@ -33,7 +24,7 @@ export const AccountList: React.FC<IAccountListProps> = (props) => {
     return (
         <Styled.Root>
             {accounts.map((v) => (
-                <AccountIcon key={v.key} uiActions={[]} user={v.userData} />
+                <AccountIcon key={v.key.account} keys={v.key} uiActions={v.uiActions || []} user={v.userData} />
             ))}
         </Styled.Root>
     );

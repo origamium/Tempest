@@ -94,6 +94,7 @@ export default {
                 path: "api/v1/accounts/verify_credentials",
                 protocol: Protocol.rest,
                 httpMethod: HttpMethods.GET,
+                returnedDataKey: "userData",
                 parameterDef: {},
             },
         } as APISetsObject,

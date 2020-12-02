@@ -5,11 +5,11 @@ import { TooltipProps } from "@material-ui/core/Tooltip";
 import { TypographyProps } from "@material-ui/core/Typography";
 import { PopOverMenu } from "../Common/Action/PopoverMenus";
 import { IUser, UserProperties } from "../../datatype/Contents/User";
-import { UIAction } from "../../datatype/UI/UIAction";
-import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
+import { UIActionElement } from "../../Redux/Logics/DataFlow/UIActions/UIActionControl";
 
 interface AccountIconProps {
-    uiActions: UIAction[];
+    keys: { account: string; provider: string; service: string };
+    uiActions: UIActionElement[];
     user?: IUser;
 }
 
@@ -67,6 +67,7 @@ export const AccountIcon: React.FC<AccountIconProps> = (props) => {
                 </div>
             </Styled.Root>
             <PopOverMenu
+                keys={props.keys}
                 anchorEl={anchorEl}
                 handleMenuClose={handleMenuClose}
                 uiActions={props.uiActions}

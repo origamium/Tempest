@@ -14,7 +14,7 @@ const getAccountList = createSelector(
     contentsObject,
     (services, providers, accounts, contents) => {
         return (accounts?.accountList || []).map((v) => ({
-            key: v.key,
+            key: { account: v.key, service: v.service, provider: v.provider },
             userData: contents?.getContent("self.account", v.key),
             uiActions: services?.getService(v.service)?.uiActions.accountListUIActions,
         }));

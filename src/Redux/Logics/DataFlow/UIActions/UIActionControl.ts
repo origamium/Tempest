@@ -34,7 +34,7 @@ export class UIActionControl implements Exportable<UIActionsObject> {
     }
 
     get accountListUIActions() {
-        return { getInfo: this._uiActions.account.getInfo };
+        return [this._uiActions.account.getInfo];
     }
 
     export() {

@@ -112,8 +112,11 @@ export class TRequest {
             );
     }
 
-    public static createBodyString(parameters: CombinedParameterDataType, keys: IParameterKeysObject): string {
-        return formurlencoded(
+    public static createBodyString(
+        parameters: CombinedParameterDataType,
+        keys: IParameterKeysObject
+    ): string | undefined {
+        const base = formurlencoded(
             keys.body
                 .filter((key) => parameters.payload[key])
                 .reduce(
@@ -124,6 +127,8 @@ export class TRequest {
                     {}
                 )
         );
+
+        return base === "" ? undefined : base;
     }
 
     public static createRequest(
@@ -151,12 +156,14 @@ export class TRequest {
         const classifiedKey: IParameterKeysObject = this.getParameterClassifier(combinedParameter.definition);
         this.parameterChecker(combinedParameter, classifiedKey);
 
+        const body = this.createBodyString(combinedParameter, classifiedKey);
+
         return [
             this.createUri(baseUri, data, combinedParameter, classifiedKey),
             {
                 method: data.httpMethod,
                 headers: this.createHeaderObject(combinedParameter, classifiedKey),
-                body: this.createBodyString(combinedParameter, classifiedKey),
+                ...(body ? { body } : {}),
             },
             data.open ?? false,
         ];

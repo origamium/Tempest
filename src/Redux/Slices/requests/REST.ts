@@ -91,7 +91,8 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
 
         const [requestInfo, requestInit] = api.createRequest(provider.baseUri, transformedParameter, authorization);
         const response = yield call(fetch, requestInfo, requestInit);
-        const data = service.parseResponse(api, response);
+        console.log(api);
+        const data = yield call([service, service.parseResponse], api, response);
 
         yield put(successRESTAction(targetContentKey, data));
     } catch (e) {
