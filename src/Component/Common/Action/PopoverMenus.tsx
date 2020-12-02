@@ -2,10 +2,9 @@ import React from "react";
 import { MenuItem, MenuList, Popover } from "@material-ui/core";
 import { PopoverOrigin } from "@material-ui/core/Popover";
 import { UIAction } from "../../../datatype/UI/UIAction";
-import { IUICommonAttribute } from "../../../datatype/UI/UICommonAttribute";
 
 export interface PopoverMenuProps {
-    uiCommonAttr: IUICommonAttribute;
+    accountKey: string;
     anchorEl: HTMLElement | null;
     handleMenuClose: () => void;
     uiActions: UIAction[];
@@ -13,24 +12,24 @@ export interface PopoverMenuProps {
     transformOrigin?: PopoverOrigin;
 }
 
-interface IPopoverMenuItemProps extends Pick<PopoverMenuProps, "uiCommonAttr" | "handleMenuClose"> {
+interface IPopoverMenuItemProps extends Pick<PopoverMenuProps, "accountKey" | "handleMenuClose"> {
     uiAction: UIAction;
 }
 
-export const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = ({ uiAction, uiCommonAttr, handleMenuClose }) => {
+export const PopOverMenuItem: React.FC<IPopoverMenuItemProps> = ({ uiAction, accountKey, handleMenuClose }) => {
     const handleClick = React.useCallback(() => {
         uiAction.action({
-            ...uiCommonAttr,
+            accountKey,
             uiActionId: uiAction.id,
         });
         handleMenuClose();
-    }, [handleMenuClose, uiAction, uiCommonAttr]);
+    }, [accountKey, handleMenuClose, uiAction]);
 
     return <MenuItem onClick={handleClick}>{uiAction.name}</MenuItem>;
 };
 
 export const PopOverMenu: React.FC<PopoverMenuProps> = ({
-    uiCommonAttr,
+    accountKey,
     anchorEl,
     anchorOrigin,
     transformOrigin,
@@ -53,7 +52,7 @@ export const PopOverMenu: React.FC<PopoverMenuProps> = ({
                             key={i}
                             handleMenuClose={handleMenuClose}
                             uiAction={v}
-                            uiCommonAttr={uiCommonAttr}
+                            accountKey={accountKey}
                         />
                     ))
                 ) : (

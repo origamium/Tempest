@@ -8,9 +8,9 @@ import { IUser, UserProperties } from "../../datatype/Contents/User";
 import { UIAction } from "../../datatype/UI/UIAction";
 import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
 
-interface AccountIconProps extends IUser {
-    uiCommonAttr: IUICommonAttribute;
+interface AccountIconProps {
     uiActions: UIAction[];
+    user?: IUser;
 }
 
 const Styled = {
@@ -70,7 +70,6 @@ export const AccountIcon: React.FC<AccountIconProps> = (props) => {
                 anchorEl={anchorEl}
                 handleMenuClose={handleMenuClose}
                 uiActions={props.uiActions}
-                uiCommonAttr={props.uiCommonAttr}
                 anchorOrigin={{
                     vertical: "bottom",
                     horizontal: "right",
