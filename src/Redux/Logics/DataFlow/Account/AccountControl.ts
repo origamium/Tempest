@@ -5,10 +5,14 @@ import { nanoid } from "nanoid";
 import arrayMove from "array-move";
 import { TokenType } from "../Types/APIKeyType";
 
-export type AccountObject = {
+export type AccountObjectWithoutKey = {
     service: string;
     provider: string;
     authData: AuthorizationDataObject;
+};
+
+export type AccountObject = AccountObjectWithoutKey & {
+    key: string;
 };
 
 export type Accounts = {
@@ -23,7 +27,7 @@ export class AccountControl implements Exportable<Accounts> {
     constructor(source: Accounts) {
         this._accounts = Object.entries(source.account)
             .filter(([, value]) => value)
-            .reduce((accm, [key, value]) => ({ ...accm, [key]: value }), {});
+            .reduce((accm, [key, value]) => ({ ...accm, [key]: { key, ...value } }), {});
         this._lineup = source.lineup;
     }
 
@@ -32,7 +36,10 @@ export class AccountControl implements Exportable<Accounts> {
     }
 
     get accountList(): AccountObject[] {
-        return this._lineup.map((v) => this._accounts[v]).filter(Boolean);
+        return this._lineup.reduce((accm: AccountObject[], curr) => {
+            const account = this.getAccount(curr);
+            return account ? [...accm, account] : accm;
+        }, []);
     }
 
     public getAccount(key: string): AccountObject | undefined {
@@ -47,10 +54,10 @@ export class AccountControl implements Exportable<Accounts> {
         return undefined;
     }
 
-    public addAccount(source: AccountObject): AccountControl {
+    public addAccount(source: AccountObjectWithoutKey): AccountControl {
         const newKey = nanoid();
         return new AccountControl({
-            account: { ...this._accounts, [newKey]: source },
+            account: { ...this._accounts, [newKey]: { key: newKey, ...source } },
             lineup: [...this._lineup, newKey],
         });
     }

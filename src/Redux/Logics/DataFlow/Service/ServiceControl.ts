@@ -40,6 +40,10 @@ export class Service implements Exportable<ServiceObject> {
         return this._serviceName;
     }
 
+    get uiActions() {
+        return this._uiSet;
+    }
+
     public getApiSet(key: string): APISet | undefined {
         return this._apiSet.getAPI(key);
     }
