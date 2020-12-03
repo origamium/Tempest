@@ -43,8 +43,8 @@ export const dataStoreReducer = (
             return state;
         case requestActionIdentifier.SUCCESS_REST:
             if (state) {
-                const { targetContentKey, data } = action.payload;
-                return { ...state, datapool: state.datapool.updateContent(targetContentKey, data) };
+                const { uiActionElement, keys, data } = action.payload;
+                return { ...state, datapool: state.datapool.updateContent(uiActionElement, keys, data) };
             }
             return state;
         default:

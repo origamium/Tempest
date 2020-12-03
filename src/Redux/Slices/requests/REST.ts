@@ -40,14 +40,20 @@ export const requestRESTAction = (
 export interface SuccessRESTAction extends Action {
     type: requestActionIdentifier.SUCCESS_REST;
     payload: {
-        targetContentKey: string;
+        uiActionElement: UIActionElement;
+        keys: { account: string };
         data: any;
     };
 }
-export const successRESTAction = (targetContentKey: string, data: any): SuccessRESTAction => ({
+export const successRESTAction = (
+    uiActionElement: UIActionElement,
+    keys: { account: string },
+    data: any
+): SuccessRESTAction => ({
     type: requestActionIdentifier.SUCCESS_REST,
     payload: {
-        targetContentKey,
+        uiActionElement,
+        keys,
         data,
     },
 });
@@ -77,7 +83,6 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
         }
 
         const api = service.getApiSet(uiaction.targetApiKey);
-        const targetContentKey = uiaction.targetContentKey;
 
         if (!api) {
             throw new Error(`API key ${uiaction.targetApiKey} is undefined`);
@@ -91,10 +96,9 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
 
         const [requestInfo, requestInit] = api.createRequest(provider.baseUri, transformedParameter, authorization);
         const response = yield call(fetch, requestInfo, requestInit);
-        console.log(api);
         const data = yield call([service, service.parseResponse], api, response);
 
-        yield put(successRESTAction(targetContentKey, data));
+        yield put(successRESTAction(uiaction, { account: accountKey }, data));
     } catch (e) {
         // TODO;
         console.error(e);

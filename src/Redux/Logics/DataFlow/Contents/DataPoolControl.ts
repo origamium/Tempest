@@ -1,10 +1,12 @@
 import type { PairOfObject, UndefinedablePairOfObject } from "../../HelperType/PairOfObject";
 import { Exportable } from "../../HelperType/Exportable";
+import { UIActionElement } from "../UIActions/UIActionControl";
 
 export type DataPoolStruct = {
     accountKey: string;
     maxListLength: number; //default: 1000
     poolKey: string;
+    dataPoolSourceKey?: string;
     content?: any;
 };
 
@@ -13,6 +15,7 @@ export type DataPoolObject = UndefinedablePairOfObject<DataPoolStruct>;
 export class DataPool implements Exportable<DataPoolStruct> {
     private _accountKey: string;
     private _poolKey: string;
+    private _dataPoolSourceKey: string | undefined;
     private _contents: any;
     private _maxListLength: number;
 
@@ -20,6 +23,7 @@ export class DataPool implements Exportable<DataPoolStruct> {
         this._accountKey = source.accountKey;
         this._maxListLength = source.maxListLength;
         this._poolKey = source.poolKey;
+        this._dataPoolSourceKey = source.dataPoolSourceKey;
 
         if (renew) {
             this._contents = renew.content;
@@ -68,6 +72,18 @@ export class DataPool implements Exportable<DataPoolStruct> {
             accountKey: this._accountKey,
             maxListLength: this._maxListLength,
             poolKey: this._poolKey,
+            dataPoolSourceKey: this._dataPoolSourceKey,
+            content: this._contents,
+        };
+    }
+
+    exportAll(): DataPoolStruct {
+        return {
+            accountKey: this._accountKey,
+            maxListLength: this._maxListLength, //default: 1000
+            poolKey: this._poolKey,
+            dataPoolSourceKey: this._dataPoolSourceKey,
+            content: this._contents,
         };
     }
 }
@@ -84,11 +100,22 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
                 .reduce(
                     (accm, [, curr]) => ({
                         ...accm,
-                        [curr!.poolKey + "," + curr!.accountKey]: curr!,
+                        [curr!.poolKey + "," + curr!.accountKey]: new DataPool(curr!),
                     }),
                     {}
                 );
         }
+    }
+
+    public static generateKey(uiElement: UIActionElement, account: string) {
+        return `${uiElement.dataPoolKey},${uiElement.dataPoolSourceKey ?? ""},${account}`;
+    }
+
+    public static parseKey(
+        key: string
+    ): { dataPoolKey: string; dataPoolSourceKey: string | undefined; account: string } {
+        const keys = key.split(",");
+        return { dataPoolKey: keys[0]!, dataPoolSourceKey: keys[1]! === "" ? undefined : keys[1]!, account: keys[2]! };
     }
 
     public addContent(
@@ -111,19 +138,36 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
         );
     }
 
-    public updateContent(key: string, data: any): DataPoolControl {
-        console.log(key);
-        console.log(data);
-        return new DataPoolControl(
-            {},
-            Object.entries(this._pools).reduce(
-                (accm, [currKey, currValue]) => ({
-                    ...accm,
-                    [currKey]: currKey === key ? currValue.updateContent({ data }) : currValue.renew(),
-                }),
-                {}
-            )
-        );
+    public updateContent(uiElement: UIActionElement, keys: { account: string }, data: any): DataPoolControl {
+        const key = DataPoolControl.generateKey(uiElement, keys.account);
+        const pool = this._pools[key];
+
+        if (pool) {
+            return new DataPoolControl(
+                {},
+                Object.entries(this._pools).reduce(
+                    (accm, [currKey, currValue]) => ({
+                        ...accm,
+                        [currKey]: currKey === key ? currValue.updateContent({ data }) : currValue.renew(),
+                    }),
+                    {}
+                )
+            );
+        } else {
+            return new DataPoolControl(
+                {},
+                {
+                    ...this.exportDataPools(),
+                    [key]: new DataPool({
+                        accountKey: keys.account,
+                        content: data,
+                        maxListLength: 1000,
+                        poolKey: uiElement.dataPoolKey,
+                        dataPoolSourceKey: uiElement.dataPoolSourceKey,
+                    }),
+                }
+            );
+        }
     }
 
     public getContent(key: string, account: string): any | undefined {
@@ -132,5 +176,9 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
 
     export(): DataPoolObject {
         return Object.entries(this._pools).reduce((accm, [, curr]) => ({ ...accm, [curr.poolKey]: curr.export() }), {});
+    }
+
+    exportDataPools(): PairOfObject<DataPool> {
+        return this._pools;
     }
 }
