@@ -8,6 +8,7 @@ export type UIActionElement = {
     description?: string;
     schema: TransformSchema;
     dataPoolKey: string;
+    dataPoolSourceKey?: string;
 };
 
 export type UIActionsObject = {

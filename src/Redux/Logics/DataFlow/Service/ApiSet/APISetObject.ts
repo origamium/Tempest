@@ -10,6 +10,7 @@ export type APISetObject = {
     parameterDef?: APIParameterDefTypes;
     open?: boolean;
     returnedDataKey?: string; // related SchemaObject.
+    sourceKey?: string;
     errorKey?: string; // use SchemaObject
 };
 
