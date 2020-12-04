@@ -100,7 +100,7 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
                 .reduce(
                     (accm, [, curr]) => ({
                         ...accm,
-                        [curr!.poolKey + "," + curr!.accountKey]: new DataPool(curr!),
+                        [`${curr!.poolKey},${curr!.dataPoolSourceKey ?? ""},${curr!.accountKey}`]: new DataPool(curr!),
                     }),
                     {}
                 );
@@ -170,8 +170,8 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
         }
     }
 
-    public getContent(key: string, account: string): any | undefined {
-        return this._pools[key + "," + account]?.contents;
+    public getContent(key: string): any | undefined {
+        return this._pools[key]?.contents;
     }
 
     export(): DataPoolObject {
