@@ -29,14 +29,15 @@ const Styled = {
 export const AccountIcon: React.FC<AccountIconProps> = (props) => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
     const [tooltipOpen, setTooltipOpen] = React.useState<boolean>(false);
-    const avatar = props[UserProperties.avatarImage];
+    const user = useMemo(() => props.user, [props.user]);
+    const avatar = useMemo(() => user?.[UserProperties.avatarImage], []);
 
     const name = useMemo(
         () =>
-            `${props[UserProperties.providerDomain] ? `${props[UserProperties.providerDomain]}@` : ""}${
-                props[UserProperties.screenName]
+            `${user?.[UserProperties.providerDomain] ? user?.[UserProperties.providerDomain] : ""}@${
+                user?.[UserProperties.screenName]
             }`,
-        [props]
+        [user]
     );
 
     const handleMouseOver = useCallback(() => {

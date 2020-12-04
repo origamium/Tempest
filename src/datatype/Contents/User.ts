@@ -9,6 +9,7 @@ export enum UserProperties {
     location = "location",
     userWebPageUrl = "userWebPageUrl",
     pinnedObject = "pinnedObject",
+    locked = "locked",
 }
 
 export interface IUser {
@@ -26,4 +27,5 @@ export interface IUser {
     [UserProperties.userWebPageUrl]?: string;
 
     [UserProperties.pinnedObject]?: object[];
+    [UserProperties.locked]?: boolean;
 }
