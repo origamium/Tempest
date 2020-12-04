@@ -8,6 +8,7 @@ import { AccountControl } from "../../Logics/DataFlow/Account/AccountControl";
 import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import { Action } from "redux";
 import { simplyTransformer } from "../../Logics/DataFlow/Data/Dynamizr/Functions/transformer";
+import { requestSaveDataStore } from "../dataStore/requestSaveDataStore";
 
 export interface RequestRESTActions extends Action {
     type: requestActionIdentifier.REQUEST_REST;
@@ -99,6 +100,7 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
         const data = yield call([service, service.parseResponse], api, response);
 
         yield put(successRESTAction(uiaction, { account: accountKey }, data));
+        yield put(requestSaveDataStore());
     } catch (e) {
         // TODO;
         console.error(e);
