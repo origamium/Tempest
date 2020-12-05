@@ -2184,7 +2184,15 @@
     babel-preset-react-app "^9.1.2"
     react-app-polyfill "^1.0.6"
 
-"@snowpack/plugin-babel@2.1.4", "@snowpack/plugin-babel@^2.1.4":
+"@snowpack/plugin-babel@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-babel/-/plugin-babel-2.1.5.tgz#ecf84d227d9b471f2e6b122c375a47647a4f6785"
+  integrity sha512-mG1jPixFhcek0tR7RO3qO0/US8vy+nNa4woTnTtmVPPnE14A7A4PjQ8NSed0y5m6kZUDCIrxoJCs18hrRVYQIQ==
+  dependencies:
+    "@babel/core" "^7.10.5"
+    workerpool "^6.0.0"
+
+"@snowpack/plugin-babel@^2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-babel/-/plugin-babel-2.1.4.tgz#4adabbc447de644b560271c7515be1cf71e31e23"
   integrity sha512-Xzn5VKmpERh8wLqVRcW6aRgQMYIOG/AV/W4JdgKUrBGo/ByL/jxVb69OOFaLzVGdrEIyInPlI/PNoctk35iynQ==
