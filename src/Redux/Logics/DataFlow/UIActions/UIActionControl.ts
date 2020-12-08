@@ -19,7 +19,7 @@ export type UIActionsObject = {
     sources: {
         [key: string]: UIActionElement;
     };
-    threads: {
+    threads?: {
         [key: string]: UIActionElement;
     };
 };

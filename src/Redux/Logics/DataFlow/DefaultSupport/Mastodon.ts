@@ -6,7 +6,6 @@ import { OAuthVersion } from "../Types/Authorization/OAuthVersion";
 import { SignSpace } from "../Types/Authorization/SignSpace";
 import { SignMethod } from "../Types/Authorization/SignMethod";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
-import { UIActionsObject } from "../UIActions/UIActionControl";
 import { DataSetsObject } from "../Data/DataSetControl";
 import { UserProperties } from "../../../../datatype/Contents/User";
 
@@ -98,6 +97,13 @@ export default {
                 returnedDataKey: "userData",
                 parameterDef: {},
             },
+            home_timeline: {
+                path: "api/v1/timelines/home",
+                protocol: Protocol.rest,
+                httpMethod: HttpMethods.GET,
+                returnedDataKey: "status",
+                parameterDef: {},
+            },
         } as APISetsObject,
         dataSet: {
             oauth_token: {
@@ -115,6 +121,9 @@ export default {
                     header: UserProperties.headerImage,
                 },
             },
+            status: {
+                transform: {},
+            },
         } as DataSetsObject,
         uiActionSet: {
             account: {
@@ -126,7 +135,17 @@ export default {
                     schema: {},
                 },
             },
-        } as UIActionsObject,
+            sources: {
+                home_timeline: {
+                    name: "Home Timeline",
+                    targetApiKey: "home_timeline",
+                    targetContentKey: "status",
+                    dataPoolKey: "timeline",
+                    dataPoolSourceKey: "home_timeline",
+                    schema: {},
+                },
+            },
+        },
     },
     Provider: [
         {
