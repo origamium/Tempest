@@ -10,6 +10,7 @@ export interface PopoverMenuProps {
     anchorEl: HTMLElement | null;
     handleMenuClose: () => void;
     uiActions: UIActionElement[];
+    updateAllContent: () => void;
     anchorOrigin?: PopoverOrigin;
     transformOrigin?: PopoverOrigin;
 }
@@ -34,6 +35,7 @@ export const PopOverMenu: React.FC<PopoverMenuProps> = ({
     anchorOrigin,
     transformOrigin,
     uiActions,
+    updateAllContent,
     handleMenuClose,
 }) => {
     const isOpen = !!anchorEl;
@@ -46,13 +48,12 @@ export const PopOverMenu: React.FC<PopoverMenuProps> = ({
             transformOrigin={transformOrigin}
         >
             <MenuList>
-                {uiActions.length > 0 ? (
-                    uiActions.map((v, i) => (
-                        <PopOverMenuItem key={i} handleMenuClose={handleMenuClose} uiAction={v} keys={keys} />
-                    ))
-                ) : (
-                    <MenuItem>{"account actions not registered"}</MenuItem>
-                )}
+                {uiActions.length > 0
+                    ? uiActions.map((v, i) => (
+                          <PopOverMenuItem key={i} handleMenuClose={handleMenuClose} uiAction={v} keys={keys} />
+                      ))
+                    : undefined}
+                <MenuItem onClick={updateAllContent}>{"Update Column Content"}</MenuItem>
             </MenuList>
         </Popover>
     );

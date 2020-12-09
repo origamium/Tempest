@@ -1,6 +1,5 @@
 import * as React from "react";
 import { styled } from "./Theme";
-import { Tabs, Tab } from "@material-ui/core";
 import { Sidebar } from "./Component/Sidebar/Sidebar";
 import { Columns } from "./Component/MainView/Columns";
 
@@ -51,6 +50,8 @@ export const Body: React.FC = () => {
         <Styled.Root>
             <Sidebar />
             <Styled.Body>
+                <Columns />
+                {/*
                 <Tabs
                     value={tabIndex}
                     onChange={handleTabChange}
@@ -63,6 +64,7 @@ export const Body: React.FC = () => {
                     <Tab label={"Twitter"} />
                 </Tabs>
                 <TabPanel index={1} value={1} />
+                    */}
             </Styled.Body>
         </Styled.Root>
     );

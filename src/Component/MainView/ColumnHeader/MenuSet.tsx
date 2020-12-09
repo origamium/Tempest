@@ -6,6 +6,7 @@ import { UIActionElement } from "../../../Redux/Logics/DataFlow/UIActions/UIActi
 
 export interface MenuProps {
     uiActions: UIActionElement[];
+    updateAllContent: () => void;
 }
 
 export const MenuSet: React.FC<MenuProps> = (props) => {
@@ -32,6 +33,7 @@ export const MenuSet: React.FC<MenuProps> = (props) => {
                 anchorEl={anchorEl}
                 handleMenuClose={handleClose}
                 uiActions={props.uiActions}
+                updateAllContent={props.updateAllContent}
                 anchorOrigin={{
                     vertical: "bottom",
                     horizontal: "right",

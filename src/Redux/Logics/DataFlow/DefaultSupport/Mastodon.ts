@@ -102,7 +102,7 @@ export default {
                 path: "api/v1/timelines/home",
                 protocol: Protocol.rest,
                 httpMethod: HttpMethods.GET,
-                returnedDataKey: "status",
+                returnedDataKey: "statusList",
                 parameterDef: {},
             },
         } as APISetsObject,

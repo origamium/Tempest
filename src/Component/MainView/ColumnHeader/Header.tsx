@@ -5,16 +5,15 @@ import { Title } from "./Title";
 import { progressStatus, StatusColorBar } from "./StatusColorBar";
 import { MenuSet } from "./MenuSet";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
-import { UIAction } from "../../../datatype/UI/UIAction";
 import { IUser } from "../../../datatype/Contents/User";
-import { IUICommonAttribute } from "../../../datatype/UI/UICommonAttribute";
+import { UIActionElement } from "../../../Redux/Logics/DataFlow/UIActions/UIActionControl";
 
 export interface HeaderProps {
     handle?: DraggableProvidedDragHandleProps | {};
-    uiColumnAttr: IUICommonAttribute;
-    uiActions: UIAction[];
+    uiActions: UIActionElement[];
+    updateAllContent: () => void;
     columnName: string;
-    owner: IUser;
+    owner?: IUser;
     status: progressStatus;
 }
 
@@ -38,8 +37,8 @@ export const Header: React.FC<HeaderProps> = (props) => {
     return (
         <Styled.Root>
             <Toolbar style={{ justifyContent: "space-between" }}>
-                <Title owner={props.owner} columnName={props.columnName} />
-                <MenuSet uiActions={props.uiActions} />
+                <Title columnName={props.columnName} />
+                <MenuSet uiActions={props.uiActions} updateAllContent={props.updateAllContent} />
             </Toolbar>
             <StatusColorBar status={props.status} />
             <Styled.DragHandle {...props.handle} />

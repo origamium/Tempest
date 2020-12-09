@@ -18,7 +18,8 @@ import {
 import { UserProperties } from "../../../datatype/Contents/User";
 import { UIActionElement } from "../../../Redux/Logics/DataFlow/UIActions/UIActionControl";
 import { useDispatch } from "react-redux";
-import { addColumnAction, addColumnSourceElement } from "../../../Redux/Slices/dataStore/column";
+import { addColumnAction, ColumnSourceElement } from "../../../Redux/Slices/dataStore/column";
+import { requestSaveDataStore } from "../../../Redux/Slices/dataStore/requestSaveDataStore";
 
 type AddColumnProps = {
     handleClose: () => void;
@@ -43,7 +44,7 @@ const Styled = {
 
 export const AddColumn: React.FC<AddColumnProps> = ({ handleClose }) => {
     const [selectedAccountIndex, setSelectedAccountIndex] = React.useState<number>();
-    const [selectedSource, setSelectedSource] = React.useState<addColumnSourceElement[]>([]);
+    const [selectedSource, setSelectedSource] = React.useState<ColumnSourceElement[]>([]);
     const [columnName, setColumnName] = React.useState<string>("");
 
     const handleChangeColumnName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +110,8 @@ export const AddColumn: React.FC<AddColumnProps> = ({ handleClose }) => {
     const handleConfirm = React.useCallback(() => {
         handleClose();
         dispatch(addColumnAction(columnName, selectedSource));
-    }, [dispatch, handleClose]);
+        dispatch(requestSaveDataStore());
+    }, [columnName, dispatch, handleClose, selectedSource]);
 
     return (
         <>

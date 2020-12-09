@@ -4,19 +4,20 @@ import { Paper } from "@material-ui/core";
 import { PaperProps } from "@material-ui/core/Paper";
 import { Header } from "./ColumnHeader/Header";
 import { progressStatus } from "./ColumnHeader/StatusColorBar";
-import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
-import { UIAction } from "../../datatype/UI/UIAction";
-import { IUser } from "../../datatype/Contents/User";
-import { IUICommonAttribute } from "../../datatype/UI/UICommonAttribute";
+import { ColumnControl } from "../../Redux/Logics/DataFlow/UI/ColumnControl";
+import { useDispatch, useSelector } from "react-redux";
+import { requestRESTAction } from "../../Redux/Slices/requests/REST";
+import { StoreType } from "../../Redux/Store/StoreType";
+import { DataPoolControl } from "../../Redux/Logics/DataFlow/Contents/DataPoolControl";
+import { ContentList } from "./ContentList";
 
 export interface ColumnProps {
-    handle?: DraggableProvidedDragHandleProps;
-    uiColumnAttr: IUICommonAttribute;
-    columnUiActions: UIAction[];
-    name: string;
-    owner: IUser;
-    status: progressStatus;
-    width: number;
+    column: ColumnControl;
+    // handle?: DraggableProvidedDragHandleProps;
+    // columnUiActions: UIAction[];
+    // owner: IUser;
+    //status: progressStatus;
+    // width: number;
 }
 
 const Styled = {
@@ -46,20 +47,42 @@ const Styled = {
     `,
 };
 
-export const Column: React.FC<ColumnProps> = (props) => {
-    const { uiColumnAttr, columnUiActions, width, owner, name, status, handle } = props;
+export const Column: React.FC<ColumnProps> = ({ column }) => {
+    const name = column.name;
+    const store = useSelector((store: StoreType) => store.dataStore);
+    const dispatch = useDispatch();
+    const updateColumn = React.useCallback(() => {
+        const sourceElement = column.sourceElement;
+        sourceElement.forEach((v) => {
+            if (store) {
+                const account = store.account.getAccount(v.accountKey);
+                if (account) {
+                    dispatch(requestRESTAction(v.accountKey, account.service, account.provider, v.uiAction, {}));
+                }
+            }
+        }, []);
+    }, [column.sourceElement, dispatch, store]);
+
+    const contents = React.useMemo(() => {
+        const todoContent = column.sourceElement[0];
+        const datapool =
+            store?.datapool.getContent(
+                DataPoolControl.generateKeyFromUIElement(todoContent.uiAction, todoContent.accountKey)
+            ) || [];
+        return { articles: datapool, column: column.id, account: todoContent.accountKey };
+    }, [column.id, column.sourceElement, store?.datapool]);
+
     return (
-        <Styled.Root width={width}>
+        <Styled.Root width={320}>
             <Styled.Paper>
                 <Header
-                    handle={handle}
+                    handle={{}}
                     columnName={name}
-                    status={status}
-                    owner={owner}
-                    uiActions={columnUiActions}
-                    uiColumnAttr={uiColumnAttr}
+                    status={progressStatus.none}
+                    uiActions={[]}
+                    updateAllContent={updateColumn}
                 />
-                <main />
+                <ContentList {...contents} />
             </Styled.Paper>
         </Styled.Root>
     );

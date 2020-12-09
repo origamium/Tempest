@@ -3,14 +3,17 @@ import { Typography } from "@material-ui/core";
 import { IUser, UserProperties } from "../../../datatype/Contents/User";
 
 interface IHeaderProps {
-    owner: IUser;
+    owner?: IUser;
     columnName: string;
 }
 
 export const Title: React.FC<IHeaderProps> = (props: IHeaderProps) => {
     const ownerString = React.useMemo(
-        () => (props.owner[UserProperties.providerDomain] || "") + "@" + props.owner[UserProperties.screenName],
-        []
+        () =>
+            props.owner
+                ? (props.owner?.[UserProperties.providerDomain] || "") + "@" + props.owner?.[UserProperties.screenName]
+                : "",
+        [props.owner]
     );
 
     return (

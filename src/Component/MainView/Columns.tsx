@@ -1,8 +1,8 @@
 import * as React from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { styled } from "../../Theme";
 import { Column, ColumnProps } from "./Column";
-import { useColumns } from "../../hooks/useColumns";
+import { StoreType } from "../../Redux/Store/StoreType";
+import { useSelector } from "react-redux";
 
 export interface ColumnsProps {
     tabId: string;
@@ -18,8 +18,13 @@ const Styled = {
     `,
 };
 
-export const Columns: React.FC<ColumnsProps> = (props) => {
-    const { columns, handleBeforeDragStart, handleDragStart, handleDragUpdate, handleDragEnd } = useColumns();
+export const Columns: React.FC = () => {
+    const columns = useSelector((store: StoreType) => store.dataStore?.columns ?? []);
+
+    return columns.map((v) => <Column key={v.id} column={v} />);
+};
+
+/*
 
     return (
         <DragDropContext
@@ -51,3 +56,4 @@ export const Columns: React.FC<ColumnsProps> = (props) => {
         </DragDropContext>
     );
 };
+*/
