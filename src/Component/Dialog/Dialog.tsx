@@ -4,6 +4,7 @@ import { AddAccount } from "./AddAccount/AddAccount";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "../../Redux/Store/StoreType";
 import { closeDialogAction, dialogKeys } from "../../Redux/Slices/dialog";
+import { AddColumn } from "./AddColumn/AddColumn";
 
 type DialogContentsProps = {
     dialogKey: dialogKeys;
@@ -22,7 +23,7 @@ const DialogContents: React.FC<DialogContentsProps> = ({ dialogKey, pageNumber, 
         case "add-account":
             return <AddAccount pageNumber={pageNumber} handleClose={handleClose} />;
         case "add-column":
-            return <div />;
+            return <AddColumn handleClose={handleClose} />;
         case undefined:
             return <div />;
         default:
