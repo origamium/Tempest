@@ -34,6 +34,10 @@ export class UIActionControl implements Exportable<UIActionsObject> {
         return new UIActionControl({ ...this._uiActions, sources: { ...this._uiActions.sources, ...source } });
     }
 
+    get sources() {
+        return { ...this._uiActions.sources, ...this._uiActions.threads };
+    }
+
     get accountListUIActions() {
         return [this._uiActions.account.getInfo];
     }

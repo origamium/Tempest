@@ -139,6 +139,28 @@ export default {
                     },
                 },
             },
+            statusList: {
+                transform: [
+                    {
+                        _key: "_root",
+                        schema: {
+                            id: StatusProperties.id,
+                            content: StatusProperties.text,
+                            account: {
+                                _key: StatusProperties.user,
+                                schema: {
+                                    id: UserProperties.id,
+                                    display_name: UserProperties.displayName,
+                                    username: UserProperties.screenName,
+                                    locked: UserProperties.locked,
+                                    avatar: UserProperties.avatarImage,
+                                    header: UserProperties.headerImage,
+                                },
+                            },
+                        },
+                    },
+                ],
+            },
         } as DataSetsObject,
         uiActionSet: {
             account: {
@@ -154,7 +176,7 @@ export default {
                 home_timeline: {
                     name: "Home Timeline",
                     targetApiKey: "home_timeline",
-                    targetContentKey: "status",
+                    targetContentKey: "statusList",
                     dataPoolKey: "timeline",
                     dataPoolSourceKey: "home_timeline",
                     schema: {},

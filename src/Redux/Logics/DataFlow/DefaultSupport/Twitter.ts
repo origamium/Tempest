@@ -91,7 +91,7 @@ const dataSet: DataSetsObject = {
     statusList: {
         transform: [
             {
-                key: "_root",
+                _key: "_root",
                 schema: {
                     id_str: "id",
                     created_at: "created_at",
