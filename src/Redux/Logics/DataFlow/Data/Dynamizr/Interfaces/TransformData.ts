@@ -1,8 +1,15 @@
-export type TransformArraySchema = { key: string; schema: TransformSchemaObject };
+export type TransformArraySchema = { _key: string; schema: TransformObjectSchema };
 
-export type TransformSchemaObject = {
-    [key: string]: TransformSchema;
-};
+export type TransformObjectSchema =
+    | {
+          _key: string;
+          schema: {
+              [key: string]: TransformSchema;
+          };
+      }
+    | {
+          [key: string]: TransformSchema;
+      };
 
 // important: TransformSchemaObject[]の配列の長さは常に1
-export type TransformSchema = string | TransformSchemaObject | TransformArraySchema[];
+export type TransformSchema = string | TransformObjectSchema | TransformArraySchema[];

@@ -8,7 +8,7 @@ const schemaset = {
     },
     b: [
         {
-            key: "_root",
+            _key: "_root",
             schema: {
                 NETFLIX: "netflix",
                 HULU: "hulu",
@@ -19,7 +19,7 @@ const schemaset = {
     c: {
         ancestors: [
             {
-                key: "prev",
+                _key: "prev",
                 schema: {
                     id: "id",
                     created_at: "date",
@@ -30,7 +30,7 @@ const schemaset = {
         ],
         descendants: [
             {
-                key: "after",
+                _key: "after",
                 schema: {
                     id: "id",
                     created_at: "date",
@@ -39,6 +39,16 @@ const schemaset = {
                 },
             },
         ],
+    },
+    d: {
+        id_unique: "id",
+        user_data: {
+            _key: "user",
+            schema: {
+                id_str: "id",
+                status: "status",
+            },
+        },
     },
 };
 
@@ -78,6 +88,13 @@ const dataset = {
             },
         ],
     },
+    d: {
+        id_unique: "99999",
+        user_data: {
+            id_str: "12345",
+            status: "unique status",
+        },
+    },
 };
 
 describe("transform combined test", () => {
@@ -89,6 +106,18 @@ describe("transform combined test", () => {
             netflix: "woo",
         });
     });
+
+    test("inline object", () => {
+        const result = _reduce({}, schemaset.d, dataset.d);
+        expect(result).toEqual({
+            id: "99999",
+            user: {
+                id: "12345",
+                status: "unique status",
+            },
+        });
+    });
+
     test("simple array", () => {
         const result = _reduce([], schemaset.b, dataset.b);
         expect(result).toEqual({

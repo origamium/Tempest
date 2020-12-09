@@ -1,5 +1,5 @@
 import { ReturnedDatumInfoType } from "../../../Types/ReturnedDatumInfoType";
-import { TransformArraySchema, TransformSchema, TransformSchemaObject } from "../Interfaces/TransformData";
+import { TransformArraySchema, TransformSchema, TransformObjectSchema } from "../Interfaces/TransformData";
 
 const arrayOrObject = (v: Array<any> | Object): [] | {} => (Array.isArray(v) ? [] : {});
 
@@ -8,13 +8,17 @@ const addValue = (source: any, value: any, isArray: boolean): any =>
 
 export const _reduceArray = (schemaValue: TransformArraySchema[], target: Array<any>) => {
     const schema = schemaValue[0]!;
-    return { [schema.key]: target.map((v) => _reduce({}, schema.schema, v)) };
+    return { [schema._key]: target.map((v) => _reduce({}, schema.schema, v)) };
 };
 
-export const _reduceObject = (accumulator: any, schemaValue: TransformSchemaObject, target: any) => {
-    return Object.entries(schemaValue).reduce((innerAccm, [innerSchemaKey, innerSchemaValue]) => {
-        return _reduce(innerAccm, innerSchemaValue, target[innerSchemaKey]);
-    }, {});
+export const _reduceObject = (accumulator: any, schemaValue: TransformObjectSchema, target: any) => {
+    if (typeof schemaValue._key === "string") {
+        return { ...accumulator, [schemaValue._key]: _reduce(accumulator, schemaValue.schema, target) };
+    } else {
+        return Object.entries(schemaValue).reduce((innerAccm, [innerSchemaKey, innerSchemaValue]) => {
+            return _reduce(innerAccm, innerSchemaValue, target[innerSchemaKey]);
+        }, {});
+    }
 };
 
 export const _reduce = (accumulator: any, schemaValue: TransformSchema, target: any) => {
