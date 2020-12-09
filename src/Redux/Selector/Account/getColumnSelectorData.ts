@@ -1,7 +1,7 @@
 import { StoreType } from "../../Store/StoreType";
 import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
-import { DataPool, DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
+import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import { IUser } from "../../../datatype/Contents/User";
 
 const service = (state: StoreType) => state.dataStore?.service;
