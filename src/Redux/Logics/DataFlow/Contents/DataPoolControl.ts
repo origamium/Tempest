@@ -107,8 +107,11 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
         }
     }
 
-    public static generateKey(uiElement: UIActionElement, account: string) {
+    public static generateKeyFromUIElement(uiElement: UIActionElement, account: string) {
         return `${uiElement.dataPoolKey},${uiElement.dataPoolSourceKey ?? ""},${account}`;
+    }
+    public static generateKey(account: string, datapoolKey: string, datapoolSourceKey?: string) {
+        return `${datapoolKey},${datapoolSourceKey ?? ""},${account}`;
     }
 
     public static parseKey(
@@ -139,7 +142,7 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
     }
 
     public updateContent(uiElement: UIActionElement, keys: { account: string }, data: any): DataPoolControl {
-        const key = DataPoolControl.generateKey(uiElement, keys.account);
+        const key = DataPoolControl.generateKeyFromUIElement(uiElement, keys.account);
         const pool = this._pools[key];
 
         if (pool) {
