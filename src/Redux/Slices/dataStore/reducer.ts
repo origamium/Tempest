@@ -9,6 +9,7 @@ import { ProviderControl } from "../../Logics/DataFlow/Provider/ProviderControl"
 import { DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
 import { accountActionIdentifier } from "./addAccount";
 import { requestActionIdentifier } from "../requests";
+import { addColumnReducer, columnActionIdentifier } from "./column";
 
 export type DataStoreType = {
     page: PageControl;
@@ -47,6 +48,8 @@ export const dataStoreReducer = (
                 return { ...state, datapool: state.datapool.updateContent(uiActionElement, keys, data) };
             }
             return state;
+        case columnActionIdentifier.ADD_COLUMN:
+            return addColumnReducer(state, action);
         default:
             return state;
     }
