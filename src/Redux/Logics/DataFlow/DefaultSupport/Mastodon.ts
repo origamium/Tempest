@@ -8,6 +8,7 @@ import { SignMethod } from "../Types/Authorization/SignMethod";
 import { ApiParameterMethods } from "../Types/ApiParameterMethods";
 import { DataSetsObject } from "../Data/DataSetControl";
 import { UserProperties } from "../../../../datatype/Contents/User";
+import { StatusProperties } from "../../../../datatype/Contents/Article/Status";
 
 const serviceKey = "mastodon";
 
@@ -113,7 +114,7 @@ export default {
             },
             userData: {
                 transform: {
-                    id: "id",
+                    id: UserProperties.id,
                     display_name: UserProperties.displayName,
                     username: UserProperties.screenName,
                     locked: UserProperties.locked,
@@ -122,7 +123,21 @@ export default {
                 },
             },
             status: {
-                transform: {},
+                transform: {
+                    id: StatusProperties.id,
+                    content: StatusProperties.text,
+                    account: {
+                        _key: StatusProperties.user,
+                        schema: {
+                            id: UserProperties.id,
+                            display_name: UserProperties.displayName,
+                            username: UserProperties.screenName,
+                            locked: UserProperties.locked,
+                            avatar: UserProperties.avatarImage,
+                            header: UserProperties.headerImage,
+                        },
+                    },
+                },
             },
         } as DataSetsObject,
         uiActionSet: {
