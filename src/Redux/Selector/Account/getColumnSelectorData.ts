@@ -1,6 +1,8 @@
 import { StoreType } from "../../Store/StoreType";
 import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
+import { DataPool, DataPoolControl } from "../../Logics/DataFlow/Contents/DataPoolControl";
+import { IUser } from "../../../datatype/Contents/User";
 
 const service = (state: StoreType) => state.dataStore?.service;
 const provider = (state: StoreType) => state.dataStore?.provider;
@@ -13,17 +15,12 @@ const getColumnSelectorData = createSelector(
     accountList,
     contentsPool,
     (services, providers, accounts, contents) => {
-        return accounts?.accountList.reduce(
-            (accm, curr) => ({
-                ...accm,
-                [curr.key]: {
-                    account: curr,
-                    provider: providers?.getProvider(curr.provider),
-                    sources: services?.getService(curr.service)?.uiActions.sources,
-                },
-            }),
-            {}
-        );
+        return (accounts?.accountList ?? []).map((v) => ({
+            account: v,
+            accountData: contents?.getContent(DataPoolControl.generateKey(v.key, "self.account")) as IUser,
+            provider: providers?.getProvider(v.provider),
+            sources: services?.getService(v.service)?.uiActions.sources,
+        }));
     }
 );
 
