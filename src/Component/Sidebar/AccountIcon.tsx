@@ -30,7 +30,9 @@ export const AccountIcon: React.FC<AccountIconProps> = (props) => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
     const [tooltipOpen, setTooltipOpen] = React.useState<boolean>(false);
     const user = useMemo(() => props.user, [props.user]);
-    const avatar = useMemo(() => user?.[UserProperties.avatarImage], []);
+    const avatar = useMemo(() => user?.[UserProperties.avatarImage], [user]);
+
+    console.log(avatar);
 
     const name = useMemo(
         () =>

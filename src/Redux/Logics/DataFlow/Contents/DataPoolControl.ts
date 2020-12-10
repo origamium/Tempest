@@ -178,7 +178,7 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
     }
 
     export(): DataPoolObject {
-        return Object.entries(this._pools).reduce((accm, [, curr]) => ({ ...accm, [curr.poolKey]: curr.export() }), {});
+        return Object.entries(this._pools).reduce((accm, [key, curr]) => ({ ...accm, [key]: curr.export() }), {});
     }
 
     exportDataPools(): PairOfObject<DataPool> {
