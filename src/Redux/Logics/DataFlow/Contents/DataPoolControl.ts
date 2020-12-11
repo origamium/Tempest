@@ -52,6 +52,19 @@ export class DataPool implements Exportable<DataPoolStruct> {
         }
     }
 
+    public updateContentWithoutRendering(update: { data: any | any[] }): DataPool {
+        const updateDataIsList = Array.isArray(update.data);
+        const sourceDataIsList = Array.isArray(this._contents);
+        if (updateDataIsList && sourceDataIsList) {
+            this._contents = [...this._contents, ...update.data];
+        } else if (!updateDataIsList && sourceDataIsList) {
+            this._contents = [...this.contents, update.data];
+        } else {
+            this._contents = update.data;
+        }
+        return this;
+    }
+
     public clearCache(): DataPool {
         return new DataPool(this.export());
     }
