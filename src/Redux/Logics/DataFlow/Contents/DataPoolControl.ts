@@ -56,9 +56,9 @@ export class DataPool implements Exportable<DataPoolStruct> {
         const updateDataIsList = Array.isArray(update.data);
         const sourceDataIsList = Array.isArray(this._contents);
         if (updateDataIsList && sourceDataIsList) {
-            this._contents = [...this._contents, ...update.data];
+            this._contents = [...update.data, ...this._contents];
         } else if (!updateDataIsList && sourceDataIsList) {
-            this._contents = [...this.contents, update.data];
+            this._contents = [update.data, ...this._contents];
         } else {
             this._contents = update.data;
         }
