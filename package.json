@@ -103,7 +103,7 @@
     "@types/redux-logger": "3.0.8",
     "@types/redux-saga": "0.10.5",
     "@types/snowpack-env": "2.3.2",
-    "@types/styled-components": "5.1.4",
+    "@types/styled-components": "5.1.7",
     "@types/twitter-text": "2.0.0",
     "@typescript-eslint/eslint-plugin": "4.14.2",
     "@typescript-eslint/parser": "4.14.2",
