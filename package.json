@@ -90,7 +90,7 @@
     "@testing-library/user-event": "12.5.0",
     "@types/crypto-js": "4.0.1",
     "@types/form-urlencoded": "2.0.1",
-    "@types/jest": "26.0.16",
+    "@types/jest": "26.0.20",
     "@types/node": "14.14.10",
     "@types/normalizr": "2.0.18",
     "@types/react": "17.0.0",
