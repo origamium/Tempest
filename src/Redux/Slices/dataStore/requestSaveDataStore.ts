@@ -18,7 +18,7 @@ export function* requestSaveDataStoreSaga() {
         const data: DataStoreType | null = yield select((store: StoreType) => store.dataStore);
         if (data) {
             yield call([SettingStore, SettingStore.setItem], dbKeys.ui, {
-                tabs: data.tabs.map((v) => v.export()),
+                tabs: data.tabs.export(),
                 columns: data.columns.map((v) => v.export()),
                 mutes: data.mutes.export(),
             });
