@@ -7,7 +7,6 @@ import { configureStore, sagaMiddleware } from "./Redux/Store/configureStore";
 import { rootSaga } from "./Redux/rootSaga";
 import { Theme, ThemeProvider } from "./Theme";
 import "ress";
-import { Auth0Provider } from "@auth0/auth0-react";
 import localforage from "localforage";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from "firebase/app";
@@ -46,15 +45,9 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Auth0Provider
-            domain="lisp.auth0.com"
-            clientId="BmXHS2fMDer91hNjqLIEquULdS3EHib6"
-            redirectUri={window.location.origin}
-        >
-            <ThemeProvider theme={Theme.Light}>
-                <App />
-            </ThemeProvider>
-        </Auth0Provider>
+        <ThemeProvider theme={Theme.Light}>
+            <App />
+        </ThemeProvider>
     </Provider>,
     document.getElementById("root")
 );
