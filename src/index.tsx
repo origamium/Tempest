@@ -9,6 +9,28 @@ import { Theme, ThemeProvider } from "./Theme";
 import "ress";
 import { Auth0Provider } from "@auth0/auth0-react";
 import localforage from "localforage";
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import firebase from "firebase/app";
+// If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
+// import * as firebase from "firebase/app"
+
+// If you enabled Analytics in your project, add the Firebase SDK for Analytics
+import "firebase/analytics";
+
+// Add the Firebase products that you want to use
+import "firebase/auth";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyD6VaIyeLLFksZloTeKZ4VMrVLEh6s26ao",
+    authDomain: "tempest-303711.firebaseapp.com",
+    projectId: "tempest-303711",
+    storageBucket: "tempest-303711.appspot.com",
+    messagingSenderId: "94271144358",
+    appId: "1:94271144358:web:cc4368093cdf5ea9514f67",
+    measurementId: "G-W1SW2L925F",
+};
+
+firebase.initializeApp(firebaseConfig);
 
 localforage.config({
     driver: localforage.INDEXEDDB,

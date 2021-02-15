@@ -32,8 +32,6 @@ export const AccountIcon: React.FC<AccountIconProps> = (props) => {
     const user = useMemo(() => props.user, [props.user]);
     const avatar = useMemo(() => user?.[UserProperties.avatarImage], [user]);
 
-    console.log(avatar);
-
     const name = useMemo(
         () =>
             `${user?.[UserProperties.providerDomain] ? user?.[UserProperties.providerDomain] : ""}@${
