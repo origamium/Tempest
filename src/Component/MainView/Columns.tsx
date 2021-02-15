@@ -1,13 +1,13 @@
 import * as React from "react";
 import { styled } from "../../Theme";
-import { Column, ColumnProps } from "./Column";
-import { StoreType } from "../../Redux/Store/StoreType";
-import { useSelector } from "react-redux";
+import { Column } from "./Column";
+import { useColumns } from "../../hooks/useColumns";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
-export interface ColumnsProps {
+export type ColumnsProps = {
     tabId: string;
-    handleUpdate: (result: ColumnProps[]) => void;
-}
+    handleUpdate: () => void;
+};
 
 const Styled = {
     Container: styled.main`
@@ -18,13 +18,8 @@ const Styled = {
     `,
 };
 
-export const Columns: React.FC = () => {
-    const columns = useSelector((store: StoreType) => store.dataStore?.columns ?? []);
-
-    return columns.map((v) => <Column key={v.id} column={v} />);
-};
-
-/*
+export const Columns: React.FC<ColumnsProps> = ({ tabId, handleUpdate }) => {
+    const { columns, handleBeforeDragStart, handleDragEnd, handleDragStart, handleDragUpdate } = useColumns();
 
     return (
         <DragDropContext
@@ -33,18 +28,18 @@ export const Columns: React.FC = () => {
             onDragUpdate={handleDragUpdate}
             onDragEnd={handleDragEnd}
         >
-            <Droppable droppableId={props.tabId} direction="horizontal">
+            <Droppable droppableId={tabId} direction="horizontal">
                 {(provided) => (
                     <Styled.Container ref={provided.innerRef} {...provided.droppableProps}>
                         {columns.map((v, i) => (
-                            <Draggable key={v.uiColumnAttr.column} index={i} draggableId={v.uiColumnAttr.column}>
+                            <Draggable key={v.id} index={i} draggableId={v.id}>
                                 {(provided) => (
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         style={{ ...provided.draggableProps.style }}
                                     >
-                                        <Column handle={provided.dragHandleProps} {...v} />
+                                        <Column handle={provided.dragHandleProps} column={v} />
                                     </div>
                                 )}
                             </Draggable>
@@ -56,4 +51,3 @@ export const Columns: React.FC = () => {
         </DragDropContext>
     );
 };
-*/

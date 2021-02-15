@@ -5,7 +5,6 @@ import { Header } from "./Component/Header/Header";
 import { useDispatch } from "react-redux";
 import { requestRestoreAction } from "./Redux/Slices/dataStore/requestRestore";
 import { TabDataProvider } from "./hooks/useTabs";
-import { ColumnDataProvider } from "./hooks/useColumns";
 import { TempestDialog } from "./Component/Dialog/Dialog";
 
 const Styled = {
@@ -30,11 +29,9 @@ export const App: React.FC = () => {
     return (
         <Styled.Root>
             <TabDataProvider value={undefined}>
-                <ColumnDataProvider value={{ columns: [], updateColumns: () => {} }}>
-                    <Header />
-                    <Body />
-                    <TempestDialog />
-                </ColumnDataProvider>
+                <Header />
+                <Body />
+                <TempestDialog />
             </TabDataProvider>
         </Styled.Root>
     );

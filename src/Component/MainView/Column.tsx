@@ -10,14 +10,11 @@ import { requestRESTAction } from "../../Redux/Slices/requests/REST";
 import { StoreType } from "../../Redux/Store/StoreType";
 import { DataPoolControl } from "../../Redux/Logics/DataFlow/Contents/DataPoolControl";
 import { ContentList } from "./ContentList";
+import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
 
 export interface ColumnProps {
     column: ColumnControl;
-    // handle?: DraggableProvidedDragHandleProps;
-    // columnUiActions: UIAction[];
-    // owner: IUser;
-    //status: progressStatus;
-    // width: number;
+    handle?: DraggableProvidedDragHandleProps;
 }
 
 const Styled = {

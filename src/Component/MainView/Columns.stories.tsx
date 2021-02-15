@@ -13,7 +13,6 @@ export default {
 
 const UICAttrList: ColumnProps[] = [
     {
-        uiColumnAttr: { column: "32890930209", account: "230092309238023" },
         columnUiActions: [],
         name: "Home string",
         owner: User1,
@@ -21,7 +20,6 @@ const UICAttrList: ColumnProps[] = [
         width: 320,
     },
     {
-        uiColumnAttr: { column: "3289099", account: "230092309238023" },
         columnUiActions: [],
         name: "Home string 2",
         owner: User1,
@@ -29,7 +27,6 @@ const UICAttrList: ColumnProps[] = [
         width: 320,
     },
     {
-        uiColumnAttr: { column: "893189231", account: "230092309238023" },
         columnUiActions: [],
         name: "Civilization VI",
         owner: User2,

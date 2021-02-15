@@ -1,19 +1,10 @@
-import { createContext, useCallback, useContext } from "react";
+import { useCallback } from "react";
 import { DragStart, DragUpdate, DropResult, ResponderProvided } from "react-beautiful-dnd";
-import { ColumnProps } from "../Component/MainView/Column";
-
-export type ColumnDataContextType = { columns: ColumnProps[]; updateColumns: (columns: ColumnProps[]) => void };
-export const ColumnDataContext = createContext<ColumnDataContextType | undefined>(undefined);
-export const ColumnDataProvider = ColumnDataContext.Provider;
-
-export const useColumnDataCtx = (): ColumnDataContextType => {
-    const ctx = useContext(ColumnDataContext);
-    if (!ctx) throw new Error("Not children of DataContext.Provider");
-    return ctx;
-};
+import { useSelector } from "react-redux";
+import { StoreType } from "../Redux/Store/StoreType";
 
 export const useColumns = () => {
-    const { columns, updateColumns } = useColumnDataCtx();
+    const columns = useSelector((store: StoreType) => store.dataStore?.columns ?? []);
     const handleBeforeDragStart = useCallback((initial: DragStart) => {
         /*...*/
     }, []);
@@ -33,9 +24,9 @@ export const useColumns = () => {
             const [removed] = resultArr.splice(result.source.index, 1);
             resultArr.splice(result.destination.index, 0, removed);
 
-            updateColumns(resultArr);
+            // updateColumns(resultArr);
         },
-        [columns, updateColumns]
+        [columns]
     );
 
     return {

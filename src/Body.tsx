@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled } from "./Theme";
 import { Sidebar } from "./Component/Sidebar/Sidebar";
 import { Columns } from "./Component/MainView/Columns";
+import { Tab, Tabs } from "@material-ui/core";
 
 const Styled = {
     Root: styled.div`
@@ -50,8 +51,6 @@ export const Body: React.FC = () => {
         <Styled.Root>
             <Sidebar />
             <Styled.Body>
-                <Columns />
-                {/*
                 <Tabs
                     value={tabIndex}
                     onChange={handleTabChange}
@@ -61,10 +60,8 @@ export const Body: React.FC = () => {
                     scrollButtons="auto"
                 >
                     <Tab label={"Twitter"} />
-                    <Tab label={"Twitter"} />
                 </Tabs>
                 <TabPanel index={1} value={1} />
-                    */}
             </Styled.Body>
         </Styled.Root>
     );

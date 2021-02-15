@@ -12,6 +12,7 @@ export const ContentList: React.FC<ContentListProps> = ({ articles, ...uiAttr })
     const cache = React.useRef(new CellMeasurerCache({ minHeight: 60 }));
 
     const rowRenderer: ListRowRenderer = React.useMemo(
+        // eslint-disable-next-line react/display-name
         () => ({ index, key, parent, style }) => {
             return (
                 <CellMeasurer key={key} cache={cache.current} parent={parent} rowIndex={index} columnIndex={0}>
