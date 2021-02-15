@@ -3,7 +3,6 @@ import { Action } from "redux";
 import { dataStoreActionsIdentifier } from "./index";
 import { dbKeys, SettingStore } from "../../Store/indexedDB";
 import { requestInitializeAction } from "./requestInitialize";
-import { PageControl } from "../../Logics/DataFlow/UI/PageControl";
 import { UIObject } from "../../Logics/DataFlow/UI/UIObject";
 import { TabControl } from "../../Logics/DataFlow/UI/TabControl";
 import { ColumnControl } from "../../Logics/DataFlow/UI/ColumnControl";
@@ -40,7 +39,6 @@ export function* requestRestoreSaga() {
 
             const contentObj = yield call([SettingStore, SettingStore.getItem], dbKeys.content);
 
-            const page = new PageControl(uiObj.page, uiObj.columns, uiObj.mutes);
             const tabs = uiObj.tabs.map((v) => new TabControl(v, uiObj.columns, uiObj.mutes));
             const columns = uiObj.columns.map((v) => new ColumnControl(v, uiObj.mutes));
             const mutes = new MuteControl(uiObj.mutes);
@@ -48,9 +46,7 @@ export function* requestRestoreSaga() {
             const account = new AccountControl(accountObj);
             const content = new DataPoolControl(contentObj);
 
-            yield put(
-                finishRestoreAction({ page, tabs, columns, mutes, account, datapool: content, service, provider })
-            );
+            yield put(finishRestoreAction({ tabs, columns, mutes, account, datapool: content, service, provider }));
         } else {
             // initialization
             yield put(requestInitializeAction());

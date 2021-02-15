@@ -1,4 +1,3 @@
-import { PageControl } from "../../Logics/DataFlow/UI/PageControl";
 import { TabControl } from "../../Logics/DataFlow/UI/TabControl";
 import { ColumnControl } from "../../Logics/DataFlow/UI/ColumnControl";
 import { MuteControl } from "../../Logics/DataFlow/UI/MuteControl";
@@ -12,8 +11,7 @@ import { requestActionIdentifier } from "../requests";
 import { addColumnReducer, columnActionIdentifier } from "./column";
 
 export type DataStoreType = {
-    page: PageControl;
-    tabs: TabControl[];
+    tabs: TabControl;
     columns: ColumnControl[];
     datapool: DataPoolControl;
     mutes: MuteControl;
