@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
                                 <NetworkCheck style={{ fill: "white" }} />
                             </IconButton>
                             <Button variant={"contained"}>
-                                <Typography variant="button">Sign in(not implemented)</Typography>
+                                <Typography variant="button">Login</Typography>
                             </Button>
                         </div>
                     </Styled.Body>
