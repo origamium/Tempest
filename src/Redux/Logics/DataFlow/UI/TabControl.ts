@@ -20,11 +20,23 @@ export class TabControl implements Exportable<TabControlObject> {
         this._tabs = tabObject.tabs;
     }
 
+    get tabArray(): TabObject[] {
+        return this._tabs;
+    }
+
+    get tabKeys(): string[] {
+        return this._tabs.map((v) => v.id);
+    }
+
     get tabLength(): number {
         return this._tabs.length;
     }
 
-    public getTab(index: number): TabObject {
+    public getTabById(id: string): TabObject | undefined {
+        return this._tabs.find((v) => v.id === id);
+    }
+
+    public getTabByIndex(index: number): TabObject {
         return this._tabs[index];
     }
 
