@@ -39,14 +39,14 @@ export function* requestRestoreSaga() {
 
             const contentObj = yield call([SettingStore, SettingStore.getItem], dbKeys.content);
 
-            const tabs = uiObj.tabs.map((v) => new TabControl(v, uiObj.columns, uiObj.mutes));
+            const tabs = new TabControl(uiObj.tab.tabs);
             const columns = uiObj.columns.map((v) => new ColumnControl(v, uiObj.mutes));
             const mutes = new MuteControl(uiObj.mutes);
 
             const account = new AccountControl(accountObj);
-            const content = new DataPoolControl(contentObj);
+            const datapool = new DataPoolControl(contentObj);
 
-            yield put(finishRestoreAction({ tabs, columns, mutes, account, datapool: content, service, provider }));
+            yield put(finishRestoreAction({ tabs, columns, mutes, account, datapool, service, provider }));
         } else {
             // initialization
             yield put(requestInitializeAction());
