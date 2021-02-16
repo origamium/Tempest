@@ -39,7 +39,7 @@ export function* requestRestoreSaga() {
 
             const contentObj = yield call([SettingStore, SettingStore.getItem], dbKeys.content);
 
-            const tabs = new TabControl(uiObj.tab.tabs);
+            const tabs = new TabControl(uiObj.tab);
             const columns = uiObj.columns.map((v) => new ColumnControl(v, uiObj.mutes));
             const mutes = new MuteControl(uiObj.mutes);
 

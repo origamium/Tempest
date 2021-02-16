@@ -16,8 +16,8 @@ export type TabObject = {
 export class TabControl implements Exportable<TabControlObject> {
     private _tabs: TabObject[];
 
-    constructor(tabs: TabObject[]) {
-        this._tabs = tabs;
+    constructor(tabObject: TabControlObject) {
+        this._tabs = tabObject.tabs;
     }
 
     get tabLength(): number {
@@ -33,15 +33,15 @@ export class TabControl implements Exportable<TabControlObject> {
     }
 
     public moveTab(from: number, to: number): TabControl {
-        return new TabControl(arrayMove<TabObject>(this._tabs, from, to));
+        return new TabControl({ tabs: arrayMove<TabObject>(this._tabs, from, to) });
     }
 
     public appendTab(name: string, column?: string[]): TabControl {
-        return new TabControl([...this._tabs, { id: nanoid(), name, columns: column ?? [] }]);
+        return new TabControl({ tabs: [...this._tabs, { id: nanoid(), name, columns: column ?? [] }] });
     }
 
     public deleteTab(index: number): TabControl {
-        return new TabControl(removeArrayItem(this._tabs, index));
+        return new TabControl({ tabs: removeArrayItem(this._tabs, index) });
     }
 
     export(): TabControlObject {
