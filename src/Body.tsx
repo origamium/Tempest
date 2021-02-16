@@ -3,6 +3,7 @@ import { styled } from "./Theme";
 import { Sidebar } from "./Component/Sidebar/Sidebar";
 import { Columns } from "./Component/MainView/Columns";
 import { Tab, Tabs } from "@material-ui/core";
+import { useTab } from "./Redux/Selector/UI/getTabs";
 
 const Styled = {
     Root: styled.div`
@@ -25,14 +26,14 @@ const Styled = {
 
 interface TabPanelProps {
     index: number;
-    value: number;
+    selected: number;
 }
 
-const TabPanel: React.FC<TabPanelProps> = ({ index, value }) => {
+const TabPanel: React.FC<TabPanelProps> = ({ index, selected }) => {
     return (
         <Styled.TabPanelBody
             role="tabpanel"
-            hidden={value !== index}
+            hidden={selected !== index}
             id={`scrollable-auto-tabpanel-${index}`}
             aria-labelledby={`scrollable-auto-tab-${index}`}
         >
@@ -42,26 +43,27 @@ const TabPanel: React.FC<TabPanelProps> = ({ index, value }) => {
 };
 
 export const Body: React.FC = () => {
-    const [tabIndex, setTabIndex] = React.useState(0);
-    const handleTabChange = React.useCallback((e: React.ChangeEvent<any>, newValue: number) => {
-        setTabIndex(newValue);
-    }, []);
+    const { tab, selectedIndex } = useTab();
 
     return (
         <Styled.Root>
             <Sidebar />
             <Styled.Body>
                 <Tabs
-                    value={tabIndex}
-                    onChange={handleTabChange}
+                    value={0}
+                    onChange={() => {}}
                     indicatorColor="primary"
                     textColor="primary"
                     variant="scrollable"
                     scrollButtons="auto"
                 >
-                    <Tab label={"Twitter"} />
+                    {tab.map((v) => (
+                        <Tab key={v.id} label={v.name} />
+                    ))}
                 </Tabs>
-                <TabPanel index={1} value={1} />
+                {tab.map((v, i) => (
+                    <TabPanel key={v.id} index={i} selected={selectedIndex} />
+                ))}
             </Styled.Body>
         </Styled.Root>
     );
