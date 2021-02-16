@@ -5,6 +5,7 @@ import { removeArrayItem } from "../../../../Utility/removeArrayItem";
 
 export type TabControlObject = {
     tabs: TabObject[];
+    selected: number;
 };
 
 export type TabObject = {
@@ -15,9 +16,15 @@ export type TabObject = {
 
 export class TabControl implements Exportable<TabControlObject> {
     private _tabs: TabObject[];
+    private _selected: number;
 
     constructor(tabObject: TabControlObject) {
         this._tabs = tabObject.tabs;
+        this._selected = tabObject.selected;
+    }
+
+    get selected(): number {
+        return this._selected;
     }
 
     get tabArray(): TabObject[] {
@@ -40,23 +47,30 @@ export class TabControl implements Exportable<TabControlObject> {
         return this._tabs[index];
     }
 
-    public getIndex(id: string): number {
+    public getIndexById(id: string): number {
         return this._tabs.findIndex((v) => v.id === id);
     }
 
+    public setIndex(i: number): TabControl {
+        return new TabControl({ ...this.export(), selected: i });
+    }
+
     public moveTab(from: number, to: number): TabControl {
-        return new TabControl({ tabs: arrayMove<TabObject>(this._tabs, from, to) });
+        return new TabControl({ ...this.export(), tabs: arrayMove<TabObject>(this._tabs, from, to) });
     }
 
     public appendTab(name: string, column?: string[]): TabControl {
-        return new TabControl({ tabs: [...this._tabs, { id: nanoid(), name, columns: column ?? [] }] });
+        return new TabControl({
+            ...this.export(),
+            tabs: [...this._tabs, { id: nanoid(), name, columns: column ?? [] }],
+        });
     }
 
     public deleteTab(index: number): TabControl {
-        return new TabControl({ tabs: removeArrayItem(this._tabs, index) });
+        return new TabControl({ ...this.export(), tabs: removeArrayItem(this._tabs, index) });
     }
 
     export(): TabControlObject {
-        return { tabs: this._tabs };
+        return { tabs: this._tabs, selected: this._selected };
     }
 }

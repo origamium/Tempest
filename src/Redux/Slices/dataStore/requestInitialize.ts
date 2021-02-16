@@ -27,7 +27,7 @@ export function* requestInitializeSaga() {
         const provider = new ProviderControl({ mastodon: mastodon.Provider });
         const account = new AccountControl({ account: {}, lineup: [] });
         const datapool = new DataPoolControl({});
-        const tabs = new TabControl({ tabs: [{ id: nanoid(), name: "default", columns: [] }] });
+        const tabs = new TabControl({ tabs: [{ id: nanoid(), name: "default", columns: [] }], selected: 0 });
         const columns = [];
         const mutes = new MuteControl({});
         yield put(finishRestoreAction({ tabs, columns, mutes, account, datapool, service, provider }));
