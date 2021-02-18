@@ -3,7 +3,7 @@ import { MuteControlObject } from "./MuteControl";
 import { TabControlObject } from "./TabControl";
 
 export type UIObject = {
-    tab: TabControlObject;
+    tabs: TabControlObject;
     columns: ColumnControlObject[];
     mutes: MuteControlObject;
 };
