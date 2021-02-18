@@ -15,6 +15,7 @@ export interface ContentProps extends IUICommonAttribute {
 
 export const Content: React.FC<ContentProps> = ({ target, ...rest }) => {
     return <Status target={target as IStatus} {...rest} />;
+    // eslint-disable-next-line no-unreachable
     switch (target.article.articleType) {
         case ArticleIdentifier.status:
             return <Status target={target as IStatus} {...rest} />;

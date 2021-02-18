@@ -26,10 +26,11 @@ const Styled = {
 
 interface TabPanelProps {
     index: number;
+    id: string;
     selected: number;
 }
 
-const TabPanel: React.FC<TabPanelProps> = ({ index, selected }) => {
+const TabPanel: React.FC<TabPanelProps> = ({ index, id, selected }) => {
     return (
         <Styled.TabPanelBody
             role="tabpanel"
@@ -37,7 +38,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ index, selected }) => {
             id={`scrollable-auto-tabpanel-${index}`}
             aria-labelledby={`scrollable-auto-tab-${index}`}
         >
-            <Columns tabId={"394"} handleUpdate={() => {}} />
+            <Columns tabId={id} handleUpdate={() => {}} />
         </Styled.TabPanelBody>
     );
 };
@@ -62,7 +63,7 @@ export const Body: React.FC = () => {
                     ))}
                 </Tabs>
                 {tab.map((v, i) => (
-                    <TabPanel key={v.id} index={i} selected={selectedIndex} />
+                    <TabPanel key={v.id} index={i} id={v.id} selected={selectedIndex} />
                 ))}
             </Styled.Body>
         </Styled.Root>

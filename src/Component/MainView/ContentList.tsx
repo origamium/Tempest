@@ -29,18 +29,21 @@ export const ContentList: React.FC<ContentListProps> = ({ articles, ...uiAttr })
     );
 
     return (
-        <AutoSizer>
-            {({ height }) => (
-                <List
-                    deferredMeasurementCache={cache.current}
-                    rowHeight={cache.current.rowHeight}
-                    rowCount={articles.length}
-                    overscanRowCount={10}
-                    width={320}
-                    height={height}
-                    rowRenderer={rowRenderer}
-                />
-            )}
-        </AutoSizer>
+        <div style={{ height: "100%" }}>
+            <AutoSizer>
+                {({ height }) => (
+                    <List
+                        deferredMeasurementCache={cache.current}
+                        rowHeight={cache.current.rowHeight}
+                        rowCount={articles.length}
+                        overscanRowCount={10}
+                        width={320}
+                        height={height}
+                        rowRenderer={rowRenderer}
+                        style={{ outline: "none" }}
+                    />
+                )}
+            </AutoSizer>
+        </div>
     );
 };
