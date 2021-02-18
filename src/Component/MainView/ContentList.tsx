@@ -17,7 +17,7 @@ export const ContentList: React.FC<ContentListProps> = ({ articles, ...uiAttr })
             return (
                 <CellMeasurer key={key} cache={cache.current} parent={parent} rowIndex={index} columnIndex={0}>
                     {({ measure, registerChild }) => (
-                        <div ref={registerChild as any} style={style}>
+                        <div ref={registerChild as any} style={style} onLoad={measure}>
                             <Content target={articles[index]} {...uiAttr} measure={measure} />
                         </div>
                     )}
