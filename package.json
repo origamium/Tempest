@@ -60,13 +60,13 @@
     "snyk-protect": "snyk protect"
   },
   "devDependencies": {
-    "@babel/core": "7.12.16",
+    "@babel/core": "7.12.17",
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@babel/plugin-proposal-object-rest-spread": "7.12.13",
-    "@babel/plugin-transform-runtime": "7.12.15",
-    "@babel/preset-env": "7.12.16",
+    "@babel/plugin-transform-runtime": "7.12.17",
+    "@babel/preset-env": "7.12.17",
     "@babel/preset-react": "7.12.13",
-    "@babel/preset-typescript": "7.12.16",
+    "@babel/preset-typescript": "7.12.17",
     "@snowpack/app-scripts-react": "1.12.6",
     "@snowpack/plugin-babel": "2.1.6",
     "@snowpack/plugin-dotenv": "2.0.5",
