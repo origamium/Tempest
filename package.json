@@ -67,7 +67,7 @@
     "@babel/preset-env": "7.12.17",
     "@babel/preset-react": "7.12.13",
     "@babel/preset-typescript": "7.12.17",
-    "@snowpack/app-scripts-react": "1.12.6",
+    "@snowpack/app-scripts-react": "2.0.0",
     "@snowpack/plugin-babel": "2.1.6",
     "@snowpack/plugin-dotenv": "2.0.5",
     "@snowpack/plugin-react-refresh": "2.4.0",
