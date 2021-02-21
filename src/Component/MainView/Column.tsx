@@ -11,6 +11,7 @@ import { StoreType } from "../../Redux/Store/StoreType";
 import { DataPoolControl } from "../../Redux/Logics/DataFlow/Contents/DataPoolControl";
 import { ContentList } from "./ContentList";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
+import { Form } from "../Common/Form";
 
 export interface ColumnProps {
     column: ColumnControl;
@@ -69,6 +70,8 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
         return { articles: datapool, column: column.id, account: todoContent.accountKey };
     }, [column.id, column.sourceElement, store?.datapool]);
 
+    const isSingleOwner = React.useMemo(() => column.accountId.length <= 1, [column.accountId.length]);
+
     return (
         <Styled.Root width={320}>
             <Styled.Paper>
@@ -79,6 +82,7 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
                     uiActions={[]}
                     updateAllContent={updateColumn}
                 />
+                {isSingleOwner && <Form handleClickReply={() => {}} requestPost={() => {}} registerColumn={() => {}} />}
                 <ContentList {...contents} />
             </Styled.Paper>
         </Styled.Root>
