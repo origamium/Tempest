@@ -9666,7 +9666,7 @@ find-versions@^4.0.0:
   dependencies:
     semver-regex "^3.1.2"
 
-firebase@^8.2.7:
+firebase@8.2.7:
   version "8.2.7"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-8.2.7.tgz#c98c885ae45d7a341ed79ffc8190a6cf105c7b2c"
   integrity sha512-HSfaOQjSA//VKxPmPfjKmv8HMH5DwdckaKXKpBJCHSkBkqqFehP5dG9I7+06X1GTycXgg6U6i1zqqBSt6zWTxw==
