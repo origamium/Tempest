@@ -3,6 +3,6 @@
     "config:base"
   ],
   "npm": {
-    "schedule": ["every weekend"]
+    "schedule": ["before 2am"]
   }
 }
