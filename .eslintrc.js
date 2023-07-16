@@ -1,21 +1,22 @@
 module.exports = {
     parser: "@typescript-eslint/parser",
     parserOptions: {
-        ecmaVersion: 2018,
-        project: "./tsconfig.json",
+        ecmaVersion: 15,
+        tsconfigRootDir: __dirname,
+        project: "tsconfig.json",
         sourceType: "module",
-        createDefaultProgram: true,
     },
     env: {
-        es6: true,
         browser: true,
         node: true,
+        es6: true,
     },
     extends: [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
         "plugin:jest/recommended",
+        "plugin:storybook/recommended",
     ],
     plugins: ["@typescript-eslint", "react-hooks", "jest"],
     settings: {
@@ -34,9 +35,19 @@ module.exports = {
         {
             files: ["**/*.ts", "**/*.tsx"],
             rules: {
-                "no-console": ["warn", { allow: ["info", "warn", "error"] }],
+                "no-console": [
+                    "warn",
+                    {
+                        allow: ["info", "warn", "error"],
+                    },
+                ],
                 "no-unused-vars": 0,
-                "@typescript-eslint/no-unused-vars": [2, { args: "none" }],
+                "@typescript-eslint/no-unused-vars": [
+                    2,
+                    {
+                        args: "none",
+                    },
+                ],
                 "@typescript-eslint/no-require-imports": 2,
                 "@typescript-eslint/no-var-requires": 2,
                 "@typescript-eslint/consistent-type-assertions": 2,
