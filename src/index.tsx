@@ -1,17 +1,17 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./App";
-import { Theme, ThemeProvider } from "./Theme";
-import "ress";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "ress";
+import { RecoilRoot } from "recoil";
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
-    <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={Theme.Light}>
+    <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
             <App />
-        </ThemeProvider>
-    </QueryClientProvider>,
+        </QueryClientProvider>
+    </RecoilRoot>,
     document.getElementById("root"),
 );
