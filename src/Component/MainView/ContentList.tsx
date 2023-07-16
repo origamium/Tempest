@@ -13,19 +13,20 @@ export const ContentList: React.FC<ContentListProps> = ({ articles, ...uiAttr })
 
     const rowRenderer: ListRowRenderer = React.useMemo(
         // eslint-disable-next-line react/display-name
-        () => ({ index, key, parent, style }) => {
-            return (
-                <CellMeasurer key={key} cache={cache.current} parent={parent} rowIndex={index} columnIndex={0}>
-                    {({ measure, registerChild }) => (
-                        <div ref={registerChild as any} style={style} onLoad={measure}>
-                            <Content target={articles[index]} {...uiAttr} measure={measure} />
-                        </div>
-                    )}
-                </CellMeasurer>
-            );
-        },
+        () =>
+            ({ index, key, parent, style }) => {
+                return (
+                    <CellMeasurer key={key} cache={cache.current} parent={parent} rowIndex={index} columnIndex={0}>
+                        {({ measure, registerChild }) => (
+                            <div ref={registerChild as any} style={style} onLoad={measure}>
+                                <Content target={articles[index]} {...uiAttr} measure={measure} />
+                            </div>
+                        )}
+                    </CellMeasurer>
+                );
+            },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [uiAttr]
+        [uiAttr],
     );
 
     return (

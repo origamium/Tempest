@@ -7,7 +7,7 @@ export type DialogStoreType = {
 
 export const dialogReducer = (
     state: DialogStoreType | null = null,
-    action: dialogStoreActions
+    action: dialogStoreActions,
 ): DialogStoreType | null => {
     switch (action.type) {
         case dialogActionsIdentifier.OPEN_DIALOG:

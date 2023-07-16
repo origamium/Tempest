@@ -1,10 +1,8 @@
 /* tslint:disable */
 export default {
     short: "便利",
-    normal:
-        "To see a World in a Grain of Sand And a Heaven in a Wild Flower, Hold Infinity in the palm of your hand And Eternity in an hour.",
-    long:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis, odio in varius hendrerit, dolor dolor consequat lorem, eget tempor dolor nibh vitae sapien. Maecenas vulputate, arcu vitae vestibulum tempus, felis sem dignissim lacus, vitae molestie libero nisl eu ante. Integer congue velit eget est feugiat rutrum. Nunc sit amet ultricies massa.",
+    normal: "To see a World in a Grain of Sand And a Heaven in a Wild Flower, Hold Infinity in the palm of your hand And Eternity in an hour.",
+    long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis, odio in varius hendrerit, dolor dolor consequat lorem, eget tempor dolor nibh vitae sapien. Maecenas vulputate, arcu vitae vestibulum tempus, felis sem dignissim lacus, vitae molestie libero nisl eu ante. Integer congue velit eget est feugiat rutrum. Nunc sit amet ultricies massa.",
     tooLong:
         "昨日、近所の吉野家行ったんです。吉野家。 \n" +
         "そしたらなんか人がめちゃくちゃいっぱいで座れないんです。 \n" +

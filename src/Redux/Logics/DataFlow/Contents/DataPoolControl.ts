@@ -115,7 +115,7 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
                         ...accm,
                         [`${curr!.poolKey},${curr!.dataPoolSourceKey ?? ""},${curr!.accountKey}`]: new DataPool(curr!),
                     }),
-                    {}
+                    {},
                 );
         }
     }
@@ -127,9 +127,11 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
         return `${datapoolKey},${datapoolSourceKey ?? ""},${account}`;
     }
 
-    public static parseKey(
-        key: string
-    ): { dataPoolKey: string; dataPoolSourceKey: string | undefined; account: string } {
+    public static parseKey(key: string): {
+        dataPoolKey: string;
+        dataPoolSourceKey: string | undefined;
+        account: string;
+    } {
         const keys = key.split(",");
         return { dataPoolKey: keys[0]!, dataPoolSourceKey: keys[1]! === "" ? undefined : keys[1]!, account: keys[2]! };
     }
@@ -138,7 +140,7 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
         key: string,
         account: string,
         option: { isList: boolean; maxListLength: number },
-        data?: any
+        data?: any,
     ): DataPoolControl {
         return new DataPoolControl(
             {},
@@ -150,7 +152,7 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
                     maxListLength: option.maxListLength,
                     content: data,
                 }),
-            }
+            },
         );
     }
 
@@ -166,8 +168,8 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
                         ...accm,
                         [currKey]: currKey === key ? currValue.updateContent({ data }) : currValue.renew(),
                     }),
-                    {}
-                )
+                    {},
+                ),
             );
         } else {
             return new DataPoolControl(
@@ -181,7 +183,7 @@ export class DataPoolControl implements Exportable<DataPoolObject> {
                         poolKey: uiElement.dataPoolKey,
                         dataPoolSourceKey: uiElement.dataPoolSourceKey,
                     }),
-                }
+                },
             );
         }
     }

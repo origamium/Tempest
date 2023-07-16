@@ -18,7 +18,7 @@ export default class OAuth2 implements OAuth {
         apiData: APISet,
         authInfo: AuthInfoType,
         method: AuthorizeMethod,
-        option?: optionObject
+        option?: optionObject,
     ): string {
         return apiData.createRequest(baseUri, {
             client_id: authInfo.apiKey.ApiKey,
@@ -33,7 +33,7 @@ export default class OAuth2 implements OAuth {
         lambda: AuthorizePaths,
         verifier: string,
         provider?: string,
-        option?: optionObject
+        option?: optionObject,
     ): [RequestInfo, RequestInit, boolean] {
         const value: APIPayloadType = {
             client_id: authInfo.apiKey.ApiKey,
@@ -56,7 +56,7 @@ export default class OAuth2 implements OAuth {
         apiData: APISet,
         authInfo: AuthInfoType,
         token: TokenType,
-        payload: APIPayloadType
+        payload: APIPayloadType,
     ): CombinedParameterDataType {
         const template: APIParameterDefTypes = {};
         const value: APIPayloadType = {};

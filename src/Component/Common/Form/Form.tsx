@@ -165,7 +165,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         if (this.props.handleFileUpload) {
             this.props.handleFileUpload(
                 (source: string) => this.setState({ text: this.state.text + source }),
-                acceptFile
+                acceptFile,
             );
         } else {
             this.handleAddFile(acceptFile.map((v: File) => URL.createObjectURL(v)));

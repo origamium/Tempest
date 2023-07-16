@@ -25,12 +25,12 @@ storiesOf("Common Components/Thumbnail", module)
                 handleDelete={action("delete button is clicked!")}
             />
         ),
-        {}
+        {},
     )
     .add(
         "Thumbnail no deletable",
         () => <Thumbnail source={origamiIcon} index={1} measure={() => {}} handleClick={action("image is clicked!")} />,
-        {}
+        {},
     );
 
 storiesOf("Common Components/ThumbnailList", module)
@@ -50,5 +50,5 @@ storiesOf("Common Components/ThumbnailList", module)
                 />
             </div>
         ),
-        {}
+        {},
     );

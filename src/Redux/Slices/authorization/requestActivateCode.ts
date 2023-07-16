@@ -43,11 +43,9 @@ export function* requestActivateCodeSaga(action: RequestActivateCode) {
 
         const [serviceKey, providerKey] = key.split(",");
 
-        const [services, providers]: [
-            ServiceControl | undefined,
-            ProviderControl | undefined
-        ] = yield select((state: StoreType) =>
-            state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined]
+        const [services, providers]: [ServiceControl | undefined, ProviderControl | undefined] = yield select(
+            (state: StoreType) =>
+                state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined],
         );
 
         const service = services?.getService(serviceKey);

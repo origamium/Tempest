@@ -24,7 +24,7 @@ export const SidebarAddButton: React.FC = () => {
             }
             handleClose();
         },
-        [dispatch, handleClose]
+        [dispatch, handleClose],
     );
 
     return (

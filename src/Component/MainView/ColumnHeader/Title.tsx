@@ -13,7 +13,7 @@ export const Title: React.FC<IHeaderProps> = (props: IHeaderProps) => {
             props.owner
                 ? (props.owner?.[UserProperties.providerDomain] || "") + "@" + props.owner?.[UserProperties.screenName]
                 : "",
-        [props.owner]
+        [props.owner],
     );
 
     return (

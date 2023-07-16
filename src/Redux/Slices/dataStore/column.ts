@@ -30,7 +30,7 @@ export const addColumnAction = (name: string, source: ColumnSourceElement[]): Ad
 
 export const addColumnReducer = (
     state: DataStoreType | null = null,
-    action: AddColumnActionType
+    action: AddColumnActionType,
 ): DataStoreType | null => {
     if (state) {
         const { name, source } = action.payload;
@@ -48,7 +48,7 @@ export const addColumnReducer = (
                         collapsed: false,
                         contentCollapse: 0,
                     },
-                    {}
+                    {},
                 ),
             ],
         };

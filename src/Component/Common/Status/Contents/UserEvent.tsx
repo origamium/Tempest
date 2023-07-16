@@ -32,9 +32,9 @@ export const UserEvent: React.FC<UserEventComponentProps> = (props: UserEventCom
             props.sourceUser.reduce(
                 (prev, curr, i, source) =>
                     prev + curr[UserProperties.displayName] || "no name" + (source.length - 1 !== i ? ", " : ""),
-                ""
+                "",
             ),
-        [props.sourceUser]
+        [props.sourceUser],
     );
     return (
         <Styled.Root>

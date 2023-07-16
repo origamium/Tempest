@@ -43,7 +43,7 @@ storiesOf("Common Components/Button/ComponentButton/Buttons", module)
                 handleClick={action("clicked")}
             />
         ),
-        {}
+        {},
     )
     .add(
         "Repeat Button",
@@ -59,7 +59,7 @@ storiesOf("Common Components/Button/ComponentButton/Buttons", module)
                 handleClick={action("clicked")}
             />
         ),
-        {}
+        {},
     )
     .add(
         "Favorite Button",
@@ -75,5 +75,5 @@ storiesOf("Common Components/Button/ComponentButton/Buttons", module)
                 handleClick={action("clicked")}
             />
         ),
-        {}
+        {},
     );

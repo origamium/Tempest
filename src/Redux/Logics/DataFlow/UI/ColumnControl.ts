@@ -23,7 +23,7 @@ export class ColumnControl implements Exportable<ColumnControlObject> {
 
     constructor(
         { id, name, accountId, sourceElement, muteId, collapsed, contentCollapse }: ColumnControlObject,
-        mutes: MuteControlObject
+        mutes: MuteControlObject,
     ) {
         const muteInstances = muteId.map((v) => mutes[v]);
         // エラー処理あとで書いて
@@ -32,7 +32,7 @@ export class ColumnControl implements Exportable<ColumnControlObject> {
         this._accountId = accountId;
         this._sourceElement = sourceElement;
         this._mute = new MuteControl(
-            muteInstances.filter(Boolean).reduce((accm, curr) => ({ ...accm, [curr.id]: curr }), {})
+            muteInstances.filter(Boolean).reduce((accm, curr) => ({ ...accm, [curr.id]: curr }), {}),
         );
         this._collapsed = collapsed;
         this._contentCollapse = contentCollapse;

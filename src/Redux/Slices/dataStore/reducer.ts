@@ -22,7 +22,7 @@ export type DataStoreType = {
 
 export const dataStoreReducer = (
     state: DataStoreType | null = null,
-    action: dataStoreActions
+    action: dataStoreActions,
 ): DataStoreType | null => {
     switch (action.type) {
         case dataStoreActionsIdentifier.FINISH_RESTORE:

@@ -21,7 +21,7 @@ const getColumnSelectorData = createSelector(
             provider: providers?.getProvider(v.provider),
             sources: services?.getService(v.service)?.uiActions.sources,
         }));
-    }
+    },
 );
 
 export const useGetColumnSelectorData = () => {

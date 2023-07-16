@@ -113,7 +113,7 @@ export class MuteControl implements Exportable<MuteControlObject> {
     export(): MuteControlObject {
         return Object.entries(this._mutes).reduce(
             (accm, [, muteObject]) => ({ ...accm, [muteObject.id]: muteObject.export() }),
-            {}
+            {},
         );
     }
 }

@@ -38,7 +38,7 @@ export const StatusCard: React.FunctionComponent<Props> = ({ account, target, ha
                 });
             }
         },
-        [account, target, handleClick_]
+        [account, target, handleClick_],
     );
 
     return (

@@ -52,7 +52,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
                 });
             }
         },
-        [_handleClick, account, column, lists]
+        [_handleClick, account, column, lists],
     );
 
     const handleDelete = React.useCallback(
@@ -62,7 +62,7 @@ const Thumbnails: React.FunctionComponent<ThumbnailListProps> = ({
                 _handleDelete(index);
             }
         },
-        [_handleDelete]
+        [_handleDelete],
     );
 
     return (

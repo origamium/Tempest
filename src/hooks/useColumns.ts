@@ -26,7 +26,7 @@ export const useColumns = () => {
 
             // updateColumns(resultArr);
         },
-        [columns]
+        [columns],
     );
 
     return {

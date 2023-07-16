@@ -52,7 +52,7 @@ export const AddAccount: React.FC<AddAccountProps> = ({ pageNumber, handleClose 
                             })),
                     },
                 ],
-                []
+                [],
             );
         }
         return [];
@@ -63,14 +63,14 @@ export const AddAccount: React.FC<AddAccountProps> = ({ pageNumber, handleClose 
             setSelectedProvider(key);
             dispatch(requestAuthorizationSequenceAction(key));
         },
-        [dispatch]
+        [dispatch],
     );
 
     const handleSubmitPIN = React.useCallback(
         (key: string, code: string) => {
             dispatch(requestActivateCode({ key, code }));
         },
-        [dispatch]
+        [dispatch],
     );
 
     return (

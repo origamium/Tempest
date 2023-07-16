@@ -5,7 +5,7 @@ import { User1, User2 } from "../../../__testdata__/User";
 import { ThemeProviderDecorator } from "../../../../Theme";
 
 export default {
-    title: "Common Components|Content/UserEvent",
+    title: "Common Components/Content/UserEvent",
     decorators: [centered, ThemeProviderDecorator],
     component: UserEvent,
 };

@@ -20,7 +20,7 @@ class FormReplyComponent extends React.Component {
             id: text("id", sampleId),
             text: text(
                 "status text",
-                "To see a World in a Grain of Sand And a Heaven in a Wild Flower, Hold Infinity in the palm of your hand And Eternity in an hour."
+                "To see a World in a Grain of Sand And a Heaven in a Wild Flower, Hold Infinity in the palm of your hand And Eternity in an hour.",
             ),
             date: text("status date", "1234 56 78, 9:12.3"),
             user: {
@@ -53,7 +53,7 @@ storiesOf(StoryNamePrefix + "/Field", module)
     .add(
         "info",
         () => <Field id={text("id", sampleId)} value={text("value", "yeah")} handleChange={action("field onChange")} />,
-        {}
+        {},
     );
 storiesOf(StoryNamePrefix, module)
     .addDecorator(centered)
@@ -69,7 +69,7 @@ storiesOf(StoryNamePrefix, module)
                 registerColumn={action("registered!")}
             />
         ),
-        {}
+        {},
     )
     .add(
         "need file upload procedure",
@@ -84,6 +84,6 @@ storiesOf(StoryNamePrefix, module)
                 registerColumn={action("registered!")}
             />
         ),
-        {}
+        {},
     )
     .add("reply data", () => <FormReplyComponent />, {});

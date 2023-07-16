@@ -31,11 +31,9 @@ export function* requestAuthorizationSequenceSaga(action: RequestAuthorizationSe
         if (!serviceKey || !providerKey) {
             return;
         }
-        const [services, providers]: [
-            ServiceControl | undefined,
-            ProviderControl | undefined
-        ] = yield select((state: StoreType) =>
-            state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined]
+        const [services, providers]: [ServiceControl | undefined, ProviderControl | undefined] = yield select(
+            (state: StoreType) =>
+                state.dataStore ? [state.dataStore.service, state.dataStore.provider] : [undefined, undefined],
         );
 
         const service = services?.getService(serviceKey);

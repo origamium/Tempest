@@ -65,7 +65,7 @@ export const Column: React.FC<ColumnProps> = ({ column }) => {
         const todoContent = column.sourceElement[0];
         const datapool =
             store?.datapool.getContent(
-                DataPoolControl.generateKeyFromUIElement(todoContent.uiAction, todoContent.accountKey)
+                DataPoolControl.generateKeyFromUIElement(todoContent.uiAction, todoContent.accountKey),
             ) || [];
         return { articles: datapool, column: column.id, account: todoContent.accountKey };
     }, [column.id, column.sourceElement, store?.datapool]);

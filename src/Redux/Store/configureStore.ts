@@ -16,6 +16,6 @@ export const configureStore = (): Store<StoreType, RegisteredActions> => {
     return createStore<StoreType, RegisteredActions, any, any>(
         reducers,
         { dataStore: null, dialog: null },
-        applyMiddleware(sagaMiddleware, logger)
+        applyMiddleware(sagaMiddleware, logger),
     );
 };

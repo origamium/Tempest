@@ -83,7 +83,7 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         baseUri: string,
         api: APISet,
         token: TokenType,
-        payload: APIPayloadType
+        payload: APIPayloadType,
     ): CombinedParameterDataType {
         return this.auth.getAuthorizationData(baseUri, api, this._info, token, payload);
     }
@@ -96,7 +96,7 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
         api: APISet,
         verifier: string,
         provider?: string,
-        baseUri?: string
+        baseUri?: string,
     ): [RequestInfo, RequestInit, boolean] {
         return this.auth.requestToken(
             this.getBaseUri(baseUri),
@@ -104,7 +104,7 @@ export class Authorization implements Exportable<AuthorizationUnitObject> {
             this._info,
             this.authorizeLambda,
             verifier,
-            provider
+            provider,
         );
     }
 

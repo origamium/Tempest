@@ -26,7 +26,7 @@ export const requestRESTAction = (
     serviceKey: string,
     providerKey: string,
     uiaction: UIActionElement,
-    parameters: any
+    parameters: any,
 ): RequestRESTActions => ({
     type: requestActionIdentifier.REQUEST_REST,
     payload: {
@@ -49,7 +49,7 @@ export interface SuccessRESTAction extends Action {
 export const successRESTAction = (
     uiActionElement: UIActionElement,
     keys: { account: string },
-    data: any
+    data: any,
 ): SuccessRESTAction => ({
     type: requestActionIdentifier.SUCCESS_REST,
     payload: {
@@ -67,11 +67,11 @@ export function* requestRESTRSaga(action: RequestRESTActions) {
             ServiceControl | undefined,
             ProviderControl | undefined,
             AccountControl | undefined,
-            DataPoolControl | undefined
+            DataPoolControl | undefined,
         ] = yield select((state: StoreType) =>
             state.dataStore
                 ? [state.dataStore.service, state.dataStore.provider, state.dataStore.account, state.dataStore.datapool]
-                : [undefined, undefined, undefined, undefined]
+                : [undefined, undefined, undefined, undefined],
         );
 
         const service = services?.getService(serviceKey);

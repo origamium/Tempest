@@ -20,7 +20,7 @@ export interface AddAccountActionType extends Action {
 export const addAccountAction = (
     serviceKey: string,
     providerKey: string,
-    auth: AuthorizationDataObject
+    auth: AuthorizationDataObject,
 ): AddAccountActionType => ({
     type: accountActionIdentifier.ADD_ACCOUNT,
     payload: {

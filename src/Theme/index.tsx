@@ -24,7 +24,7 @@ export type ThemeProviderProps = {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ theme: theme_, children }) => {
     const theme = React.useMemo<ITheme>(
         () => (typeof theme_ === "string" ? Theme[theme_] : (deepmerge(Theme.Light, theme_) as ITheme)),
-        [theme_]
+        [theme_],
     );
 
     return <ThemeProvider_ theme={theme}>{children}</ThemeProvider_>;

@@ -34,7 +34,7 @@ export const Event: React.FC<EventComponentProps> = (props) => {
             props.target[EventProperties.sourceUser].reduce(
                 (prev, curr, i, source) =>
                     prev + (curr[UserProperties.displayName] || "no name") + (source.length - 1 !== i ? ", " : " "),
-                ""
+                "",
             ) + props.eventContext
         );
     }, [props.eventContext, props.target]);

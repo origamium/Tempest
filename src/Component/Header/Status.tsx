@@ -23,7 +23,7 @@ export const useStatusPopper = (): StatusPopperHooksType => {
                 setCheckButtonEl(e.currentTarget);
             }
         },
-        [checkButtonEl]
+        [checkButtonEl],
     );
 
     return { checkButtonEl, handleClickCheckButton };

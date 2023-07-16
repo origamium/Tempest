@@ -34,10 +34,10 @@ export const AccountIcon: React.FC<AccountIconProps> = (props) => {
 
     const name = useMemo(
         () =>
-            `${user?.[UserProperties.providerDomain] ? user?.[UserProperties.providerDomain] : ""}@${
-                user?.[UserProperties.screenName]
-            }`,
-        [user]
+            `${user?.[UserProperties.providerDomain] ? user?.[UserProperties.providerDomain] : ""}@${user?.[
+                UserProperties.screenName
+            ]}`,
+        [user],
     );
 
     const handleMouseOver = useCallback(() => {

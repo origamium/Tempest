@@ -60,7 +60,7 @@ export const UserCard: React.FC<Props> = ({
                 });
             }
         },
-        [_handleClick, account, id]
+        [_handleClick, account, id],
     );
 
     return (

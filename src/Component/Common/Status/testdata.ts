@@ -12,8 +12,7 @@ export const Status1: IStatus = {
     id: "1234567",
     user: User1,
     date: Date.now().toString(),
-    text:
-        "129010398098510924805839240180539174851907937180935479157849012983457809170593741092759018237490179832471058012484",
+    text: "129010398098510924805839240180539174851907937180935479157849012983457809170593741092759018237490179832471058012484",
     isThread: false,
 };
 
@@ -51,7 +50,7 @@ export const SampleStatus: IStatus = {
     },
     text: text(
         "text",
-        "1245690923480284340182304710735401485729304175984721905731928074589123705912470957140295701 #yeah https://superrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrlongurl.origamium.net"
+        "1245690923480284340182304710735401485729304175984721905731928074589123705912470957140295701 #yeah https://superrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrlongurl.origamium.net",
     ),
     date: Date.now().toString(),
     isThread: false,

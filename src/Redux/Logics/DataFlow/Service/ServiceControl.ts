@@ -72,7 +72,7 @@ export class ServiceControl implements Exportable<Services> {
     constructor(source: Services) {
         this._services = Object.entries(source).reduce(
             (accm, [key, source]) => ({ ...accm, [key]: new Service({ source } as { source: ServiceObject }) }),
-            {}
+            {},
         );
     }
 

@@ -22,7 +22,7 @@ export interface RequestDispatchUIAction extends Action {
 export const requestDispatchUIAction = (
     uiElement: UIActionElement,
     keys: { account: string; service: string; provider: string },
-    parameter: any
+    parameter: any,
 ): RequestDispatchUIAction => ({
     type: uiactionsActionIdentifier.REQUEST_DISPATCH_UIACTION,
     payload: {

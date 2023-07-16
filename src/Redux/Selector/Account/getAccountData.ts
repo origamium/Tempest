@@ -18,7 +18,7 @@ const getAccountList = createSelector(
             userData: contents?.getContent(`self.account,,${v.key}`),
             uiActions: services?.getService(v.service)?.uiActions.accountListUIActions,
         }));
-    }
+    },
 );
 
 export const useAccountListData = () => {

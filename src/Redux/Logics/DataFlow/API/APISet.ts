@@ -33,17 +33,17 @@ export class APISet implements Exportable<APISetObject> {
                     ...accm,
                     [key]: Object.assign(
                         { ...value },
-                        { type: value?.type ?? APISet.defaultMethod(source.httpMethod) }
+                        { type: value?.type ?? APISet.defaultMethod(source.httpMethod) },
                     ),
                 }),
-                {}
+                {},
             );
     }
 
     public createRequest = (
         baseUri: string,
         payload: APIPayloadType,
-        cert?: CombinedParameterDataType
+        cert?: CombinedParameterDataType,
     ): [RequestInfo, RequestInit, boolean] => {
         return TRequest.createRequest(baseUri, this._api, payload, cert);
     };
@@ -71,7 +71,7 @@ export class APISetControl implements Exportable<APISetsObject> {
     constructor(source: APISetsObject) {
         this._apiSet = Object.entries(source).reduce(
             (accm, [key, value]) => ({ ...accm, [key]: new APISet(value as APISetObject) }),
-            {}
+            {},
         );
     }
 

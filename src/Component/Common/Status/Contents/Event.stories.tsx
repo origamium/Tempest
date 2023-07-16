@@ -5,7 +5,7 @@ import { Event1, Event2, UIColumnAttr } from "../testdata";
 import { ThemeProviderDecorator } from "../../../../Theme";
 
 export default {
-    title: "Common Components|Content/Event",
+    title: "Common Components/Content/Event",
     decorators: [centered, ThemeProviderDecorator],
     component: Event,
 };

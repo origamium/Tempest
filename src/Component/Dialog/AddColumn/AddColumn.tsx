@@ -58,7 +58,7 @@ export const AddColumn: React.FC<AddColumnProps> = ({ handleClose }) => {
         (accountIndex: number) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
             setSelectedAccountIndex(accountIndex);
         },
-        []
+        [],
     );
 
     const selectedAccountSources = React.useMemo(() => {
@@ -82,7 +82,7 @@ export const AddColumn: React.FC<AddColumnProps> = ({ handleClose }) => {
         (source: UIActionElement & { key: string }, accountKey: string) => {
             return !!selectedSource?.find((v) => v.sourceKey === source.key && v.accountKey === accountKey);
         },
-        [selectedSource]
+        [selectedSource],
     );
 
     const handleClickSource = React.useCallback(
@@ -94,18 +94,19 @@ export const AddColumn: React.FC<AddColumnProps> = ({ handleClose }) => {
             const alreadyChecked = isSourceChecked(source, accountKey);
             if (alreadyChecked) {
                 setSelectedSource((prev) =>
-                    prev.filter((v) => v.sourceKey !== source.key && v.accountKey !== accountKey)
+                    prev.filter((v) => v.sourceKey !== source.key && v.accountKey !== accountKey),
                 );
             } else {
                 setSelectedSource((prev) => [...prev, target]);
             }
         },
-        [isSourceChecked]
+        [isSourceChecked],
     );
 
-    const isConfirmAllow = React.useMemo(() => selectedSource.length > 0 && columnName.length > 0, [
-        selectedSource.length,
-    ]);
+    const isConfirmAllow = React.useMemo(
+        () => selectedSource.length > 0 && columnName.length > 0,
+        [selectedSource.length],
+    );
 
     const handleConfirm = React.useCallback(() => {
         handleClose();

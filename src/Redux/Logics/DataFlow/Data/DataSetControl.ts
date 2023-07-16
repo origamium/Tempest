@@ -59,7 +59,7 @@ export class DataSetControl implements Exportable<DataSetsObject> {
 
         switch (dataInfo.format) {
             case DataFormat.qs:
-                return (qs.parse(await res.text()) as any) as T; // OH MY GOD
+                return qs.parse(await res.text()) as any as T; // OH MY GOD
             case DataFormat.json:
             default:
                 return dynamize(dataInfo.schema, await res.json());

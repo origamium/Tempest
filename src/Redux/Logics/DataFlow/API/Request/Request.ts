@@ -41,7 +41,7 @@ export class TRequest {
         for (const requiredKey of keys.required) {
             if (!payloadKeys.includes(requiredKey)) {
                 throw new Error(
-                    `missing required payload, ${JSON.stringify(keys.required)} but missing ${requiredKey}`
+                    `missing required payload, ${JSON.stringify(keys.required)} but missing ${requiredKey}`,
                 );
             }
         }
@@ -50,8 +50,8 @@ export class TRequest {
             if (!keys.key.includes(payloadKey)) {
                 throw new Error(
                     `unexpected payload. ${payloadKey} is not defined parameter. defined keys:${JSON.stringify(
-                        keys.key
-                    )} `
+                        keys.key,
+                    )} `,
                 );
             }
         }
@@ -64,13 +64,13 @@ export class TRequest {
     private static pickUpPathToRegexp(
         path: string,
         parameters: CombinedParameterDataType,
-        keys: IParameterKeysObject
+        keys: IParameterKeysObject,
     ): string {
         if (this.isIncludePathToRegexp(parameters)) {
             const toPath = compile(path); // TODO: ここでわざわざcompileするのはかなりパフォーマンス的に悪い
             const PathToRegexParam: { [key: string]: string } = keys.pathToRegexp?.reduce(
                 (prev, curr) => ({ ...prev, [curr]: parameters.payload[curr] }),
-                {}
+                {},
             );
             return toPath(PathToRegexParam);
         } else {
@@ -80,7 +80,7 @@ export class TRequest {
 
     private static pickUpQueryString(
         { query }: IParameterKeysObject,
-        payload: APIPayloadType
+        payload: APIPayloadType,
     ): { [key: string]: string } {
         return query.reduce((prev, curr) => {
             return { ...prev, ...(payload[curr] ? { [curr]: payload[curr] } : {}) };
@@ -91,7 +91,7 @@ export class TRequest {
         baseUri: string,
         data: APISetObject,
         parameters: CombinedParameterDataType,
-        keys: IParameterKeysObject
+        keys: IParameterKeysObject,
     ): string {
         const qs = querystring.stringify(this.pickUpQueryString(keys, parameters.payload));
         const qsString = qs.length !== 0 ? `?${qs}` : "";
@@ -108,13 +108,13 @@ export class TRequest {
                     ...prev,
                     ...{ [currKey]: parameters.payload[currKey] },
                 }),
-                {}
+                {},
             );
     }
 
     public static createBodyString(
         parameters: CombinedParameterDataType,
-        keys: IParameterKeysObject
+        keys: IParameterKeysObject,
     ): string | undefined {
         const base = formurlencoded(
             keys.body
@@ -124,8 +124,8 @@ export class TRequest {
                         ...prev,
                         ...{ [currKey]: parameters.payload[currKey] },
                     }),
-                    {}
-                )
+                    {},
+                ),
         );
 
         return base === "" ? undefined : base;
@@ -135,12 +135,12 @@ export class TRequest {
         baseUri: string,
         data: APISetObject,
         payload: APIPayloadType,
-        cert?: CombinedParameterDataType
+        cert?: CombinedParameterDataType,
     ): [RequestInfo, RequestInit, boolean] {
         const parameterDef = data.parameterDef ?? {};
         const defaultPayload = Object.entries(parameterDef).reduce(
             (accm, [key, value]) => (value?.default ? { ...accm, [key]: value.default } : accm),
-            {}
+            {},
         );
         let combinedParameter: CombinedParameterDataType = {
             definition: parameterDef,

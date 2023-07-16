@@ -88,11 +88,11 @@ export class ProviderControl implements Exportable<Providers> {
                 ...(Array.isArray(providers)
                     ? providers.reduce(
                           (accm2, value) => ({ ...accm2, [value.providerKey]: new Provider({ source: value }) }),
-                          {}
+                          {},
                       )
                     : { [providers.serviceKey]: new Provider({ source: providers }) }),
             }),
-            {}
+            {},
         );
     }
 

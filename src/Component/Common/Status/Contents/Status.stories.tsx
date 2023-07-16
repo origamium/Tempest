@@ -5,7 +5,7 @@ import { SampleStatus, UIColumnAttr } from "../testdata";
 import { Status } from "./Status";
 
 export default {
-    title: "Common Components|Content/status",
+    title: "Common Components/Content/status",
     decorators: [centered, ThemeProviderDecorator],
     component: Status,
 };

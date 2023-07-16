@@ -13,11 +13,10 @@ export type TextProps = {
 };
 
 const LinkText = styled.a`
-    ${({ theme }) =>
-        css`
-            color: ${theme.text.color.secondary};
-            text-decoration: ${theme.text.color.secondary} underline;
-        `}
+    ${({ theme }) => css`
+        color: ${theme.text.color.secondary};
+        text-decoration: ${theme.text.color.secondary} underline;
+    `}
     word-break: break-all;
     cursor: pointer;
 `;
@@ -32,7 +31,7 @@ export const Text: React.FC<TextProps> = ({ text, variant, maxLinkLength, handle
                     accm: Array<EntityWithIndices | string>,
                     curr: EntityWithIndices,
                     i: number,
-                    source: EntityWithIndices[]
+                    source: EntityWithIndices[],
                 ): Array<EntityWithIndices | string> => {
                     if (i !== 0 && i !== source.length - 1) {
                         return [...accm, text.slice(source[i - 1].indices[1], curr.indices[0]), curr];
@@ -55,18 +54,19 @@ export const Text: React.FC<TextProps> = ({ text, variant, maxLinkLength, handle
                         return accm;
                     }
                 },
-                []
+                [],
             )
             .filter((v) => v !== "");
     }, [text]);
 
     const handleAnchorClick = React.useCallback(
-        (v: EntityWithIndices) => (e: React.SyntheticEvent<HTMLAnchorElement>): void => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleLinkClick(v);
-        },
-        [handleLinkClick]
+        (v: EntityWithIndices) =>
+            (e: React.SyntheticEvent<HTMLAnchorElement>): void => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleLinkClick(v);
+            },
+        [handleLinkClick],
     );
 
     return (
@@ -82,7 +82,7 @@ export const Text: React.FC<TextProps> = ({ text, variant, maxLinkLength, handle
                             ("url" in v && v.url) ||
                             ("screenName" in v && `@${v.screenName}`)}
                     </LinkText>
-                )
+                ),
             )}
         </Typography>
     );
