@@ -1,9 +1,7 @@
 import * as React from "react";
-import { styled } from "./Theme";
+import styled from "styled-components";
 import { Body } from "./Body";
 import { Header } from "./Component/Header/Header";
-import { useDispatch } from "react-redux";
-import { requestRestoreAction } from "./Redux/Slices/dataStore/requestRestore";
 import { TabDataProvider } from "./hooks/useTabs";
 import { TempestDialog } from "./Component/Dialog/Dialog";
 
@@ -20,12 +18,6 @@ const Styled = {
 };
 
 export const App: React.FC = () => {
-    const dispatch = useDispatch();
-    React.useEffect(() => {
-        dispatch(requestRestoreAction());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     return (
         <Styled.Root>
             <TabDataProvider value={undefined}>

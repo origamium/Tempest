@@ -1,6 +1,5 @@
 import * as React from "react";
 import Dropzone, { FileRejection } from "react-dropzone";
-import { styled } from "../../../Theme";
 import Field from "./Field";
 import { ThumbnailList } from "../Thumbnail";
 import { ComponentButton } from "../IconButton/ReactionButton/ComponentButton";
@@ -9,6 +8,8 @@ import { IconButtonStyle } from "../IconButton/IconButton";
 import { StatusCard } from "../Card/StatusCard";
 import { IStatus } from "../../../datatype/Contents/Article/Status";
 import { IUICommonAttribute } from "../../../datatype/UI/UICommonAttribute";
+import styled from "styled-components";
+import { useCallback, useEffect } from "react";
 
 export interface FormProps extends IUICommonAttribute {
     /* accept file type.. */
@@ -71,22 +72,21 @@ const ButtonStyle: IconButtonStyle = {
     negativeColor: "#7D7D7D",
 };
 
+export const Form: React.FC<FormProps> = ({ account, column, accept, error, registerColumn }) => {
+    const fileInput = React.useRef<HTMLInputElement>(null);
+    const [text, setText] = React.useState<string>("");
+    const [warn, setWarn] = React.useState<string>();
+    const [replySource, setReplySource] = React.useState<IStatus>();
+    const [file, setFile] = React.useState<string[]>([]);
+
+    const handleAddReply = useCallback(() => {}, []);
+
+    useEffect(() => {
+        registerColumn({ handleAddReply });
+    }, [handleAddReply, registerColumn]);
+};
+
 class Form extends React.PureComponent<FormProps, FormState> {
-    public constructor(props: FormProps) {
-        super(props);
-        this.state = Form.defaultState;
-        this.fileInput = React.createRef();
-    }
-
-    private readonly fileInput: React.RefObject<HTMLInputElement>;
-
-    public static defaultState: FormState = {
-        text: "",
-        file: [],
-        replySource: undefined,
-        warn: undefined,
-    };
-
     public render() {
         const { account, column, accept, error } = this.props;
         const { text, warn, replySource } = this.state;

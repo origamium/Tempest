@@ -1,9 +1,9 @@
 import * as React from "react";
-import { styled } from "./Theme";
 import { Sidebar } from "./Component/Sidebar/Sidebar";
 import { Columns } from "./Component/MainView/Columns";
 import { Tab, Tabs } from "@material-ui/core";
 import { useTab } from "./Redux/Selector/UI/getTabs";
+import styled from "styled-components";
 
 const Styled = {
     Root: styled.div`
