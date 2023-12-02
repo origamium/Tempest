@@ -36,13 +36,6 @@ export interface FormProps extends IUICommonAttribute {
     registerColumn: (object: { handleAddReply: Function }) => void;
 }
 
-interface FormState {
-    text: string;
-    replySource?: IStatus;
-    file: string[];
-    warn?: string;
-}
-
 const Styled = {
     Body: styled.div`
         display: flex;
@@ -72,129 +65,118 @@ const ButtonStyle: IconButtonStyle = {
     negativeColor: "#7D7D7D",
 };
 
-export const Form: React.FC<FormProps> = ({ account, column, accept, error, registerColumn }) => {
+export const Form: React.FC<FormProps> = ({
+    account,
+    column,
+    accept,
+    error,
+    registerColumn,
+    handleFileUpload,
+    handleClickReply,
+    maxFileLength,
+    maxTextLength,
+    requestPost,
+}) => {
     const fileInput = React.useRef<HTMLInputElement>(null);
     const [text, setText] = React.useState<string>("");
     const [warn, setWarn] = React.useState<string>();
     const [replySource, setReplySource] = React.useState<IStatus>();
     const [file, setFile] = React.useState<string[]>([]);
 
-    const handleAddReply = useCallback(() => {}, []);
-
     useEffect(() => {
         registerColumn({ handleAddReply });
-    }, [handleAddReply, registerColumn]);
-};
+    }, [registerColumn]);
 
-class Form extends React.PureComponent<FormProps, FormState> {
-    public render() {
-        const { account, column, accept, error } = this.props;
-        const { text, warn, replySource } = this.state;
-        return (
-            <Dropzone accept={accept} onDrop={this.handleFileDrop}>
-                {({ getRootProps, getInputProps }) => (
-                    <Styled.Body {...getRootProps()}>
-                        <Styled.Input {...getInputProps()} ref={this.fileInput} />
-                        <Styled.Row>
-                            <Field
-                                id={column}
-                                value={text}
-                                warn={warn}
-                                error={error}
-                                handleChange={this.handleFieldChange}
-                            />
-                            <Styled.Buttons>
-                                <ComponentButton
-                                    style={ButtonStyle}
-                                    id={column}
-                                    handleClick={this.handleAddFileClicked}
-                                >
-                                    <ClipIcon />
-                                </ComponentButton>
-                                <ComponentButton style={ButtonStyle} id={column} handleClick={this.handleRequestPost}>
-                                    <SendIcon />
-                                </ComponentButton>
-                            </Styled.Buttons>
-                        </Styled.Row>
-                        <Styled.Row>
-                            <ThumbnailList
-                                account={account}
-                                column={column}
-                                lists={this.state.file}
-                                isDeletable={true}
-                                handleDelete={this.handleDeleteFile}
-                            />
-                        </Styled.Row>
-                        <Styled.Row>
-                            {replySource ? <StatusCard account={account} target={replySource} /> : <div />}
-                        </Styled.Row>
-                    </Styled.Body>
-                )}
-            </Dropzone>
-        );
-    }
+    const handleFieldChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
+        setText(event.target.value);
+    }, []);
 
-    public componentDidMount() {
-        this.props.registerColumn({ handleAddReply: this.handleAddReply });
-    }
-
-    public handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({ text: event.target.value });
+    const handleAddReply = (source: IStatus): void => {
+        setReplySource(source);
     };
 
-    public handleAddReply = (source: IStatus): void => {
-        this.setState({
-            replySource: source,
-        });
-    };
-
-    public handleAddFileClicked = (event: React.SyntheticEvent<HTMLButtonElement>) => {
+    const handleAddFileClicked = useCallback((event: React.SyntheticEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        if (this.fileInput && this.fileInput.current) {
-            this.fileInput.current.click();
+        if (fileInput && fileInput.current) {
+            fileInput.current.click();
         }
-    };
+    }, []);
 
-    public handleDeleteReply = (): void => {
-        this.setState({
-            replySource: undefined,
-        });
-    };
+    const handleDeleteReply = useCallback((): void => {
+        setReplySource(undefined);
+    }, []);
 
-    public handleFileDrop = (acceptFile: File[], rejectedFile: FileRejection[]): void => {
-        if (this.props.handleFileUpload) {
-            this.props.handleFileUpload(
-                (source: string) => this.setState({ text: this.state.text + source }),
-                acceptFile,
-            );
-        } else {
-            this.handleAddFile(acceptFile.map((v: File) => URL.createObjectURL(v)));
-        }
-    };
+    const handleAddFile = useCallback((file: string[]): void => {
+        setFile((prev) => [...prev, ...file]);
+    }, []);
 
-    public handleAddFile = (file: string[]): void => {
-        this.setState({ file: [...this.state.file, ...file] });
-    };
+    const handleFileDrop = useCallback(
+        (acceptFile: File[], rejectedFile: FileRejection[]): void => {
+            if (handleFileUpload) {
+                handleFileUpload((source: string) => setText((prev) => prev + source), acceptFile);
+            } else {
+                handleAddFile(acceptFile.map((v: File) => URL.createObjectURL(v)));
+            }
+        },
+        [handleAddFile, handleFileUpload],
+    );
 
-    public handleDeleteFile = (index: number): void => {
-        const newFileArray = this.state.file.concat();
-        newFileArray.splice(index, 1).forEach((v: string) => URL.revokeObjectURL(v));
-        this.setState({
-            file: newFileArray,
-        });
-    };
+    const handleDeleteFile = useCallback(
+        (index: number): void => {
+            const newFileArray = file.concat();
+            newFileArray.splice(index, 1).forEach((v: string) => URL.revokeObjectURL(v));
+            setFile(newFileArray);
+        },
+        [file],
+    );
 
-    public handleClear = (): void => {
-        this.state.file.forEach((v: string) => URL.revokeObjectURL(v));
-        this.setState(Form.defaultState);
-    };
+    const handleClear = useCallback((): void => {
+        file.forEach((v: string) => URL.revokeObjectURL(v));
+        setFile([]);
+        setText("");
+        setReplySource(undefined);
+    }, [file]);
 
-    public handleRequestPost = (e: React.SyntheticEvent<HTMLButtonElement>): void => {
-        e.preventDefault();
-        const { account, column } = this.props;
-        const { text, file } = this.state;
-        this.props.requestPost({ handleClear: this.handleClear, account, column, text, file });
-    };
-}
+    const handleRequestPost = useCallback(
+        (e: React.SyntheticEvent<HTMLButtonElement>): void => {
+            e.preventDefault();
+            requestPost({ handleClear, account, column, text, file });
+        },
+        [account, column, file, handleClear, requestPost, text],
+    );
+
+    return (
+        <Dropzone accept={accept} onDrop={handleFileDrop}>
+            {({ getRootProps, getInputProps }) => (
+                <Styled.Body {...getRootProps()}>
+                    <Styled.Input {...getInputProps()} ref={fileInput} />
+                    <Styled.Row>
+                        <Field id={column} value={text} warn={warn} error={error} handleChange={handleFieldChange} />
+                        <Styled.Buttons>
+                            <ComponentButton style={ButtonStyle} id={column} handleClick={handleAddFileClicked}>
+                                <ClipIcon />
+                            </ComponentButton>
+                            <ComponentButton style={ButtonStyle} id={column} handleClick={handleRequestPost}>
+                                <SendIcon />
+                            </ComponentButton>
+                        </Styled.Buttons>
+                    </Styled.Row>
+                    <Styled.Row>
+                        <ThumbnailList
+                            account={account}
+                            column={column}
+                            lists={file}
+                            isDeletable={true}
+                            handleDelete={handleDeleteFile}
+                        />
+                    </Styled.Row>
+                    <Styled.Row>
+                        {replySource ? <StatusCard account={account} target={replySource} /> : <div />}
+                    </Styled.Row>
+                </Styled.Body>
+            )}
+        </Dropzone>
+    );
+};
 
 export default Form;

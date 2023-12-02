@@ -13,6 +13,7 @@ export interface IconButtonProps {
     id: string;
     active?: boolean;
     handleClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
+    children?: React.ReactNode;
 }
 
 export const SendButton: React.FC<IconButtonProps> = (props) => (
