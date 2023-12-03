@@ -1,31 +1,32 @@
 import * as React from "react";
-import { styled, css } from "../../../../Theme";
-import ButtonBase, { ButtonBaseProps } from "@material-ui/core/ButtonBase";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import { IconButtonProps } from "../IconButton";
+import { useMemo } from "react";
+import { css } from "@emotion/react";
 
-type StyledButtonAttr = { size: string | number; color: string };
-const StyledButton = styled(ButtonBase)<StyledButtonAttr>`
-    && {
-        ${({ size, color }) => css`
-            width: ${size};
-            height: ${size};
-            border-radius: 50%;
+export const ComponentButton: React.FC<IconButtonProps> = (props) => {
+    const color = useMemo(
+        () => (props.active ? props.style.activeColor || props.style.negativeColor : props.style.negativeColor),
+        [props.active, props.style.activeColor, props.style.negativeColor],
+    );
+    const size = props.style.size;
 
-            & > * {
-                width: 100%;
-                height: 100%;
-                fill: ${color};
-            }
-        `}
-    }
-` as React.FC<StyledButtonAttr & ButtonBaseProps & React.HTMLAttributes<HTMLButtonElement>>;
+    return (
+        <ButtonBase
+            onClick={props.handleClick}
+            css={css`
+                width: ${size};
+                height: ${size};
+                border-radius: 50%;
 
-export const ComponentButton: React.FC<IconButtonProps> = (props) => (
-    <StyledButton
-        color={props.active ? props.style.activeColor || props.style.negativeColor : props.style.negativeColor}
-        size={props.style.size}
-        onClick={props.handleClick}
-    >
-        {props.children}
-    </StyledButton>
-);
+                & > * {
+                    width: 100%;
+                    height: 100%;
+                    fill: ${color};
+                }
+            `}
+        >
+            {props.children}
+        </ButtonBase>
+    );
+};
