@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Paper, Avatar, Typography } from "@material-ui/core";
-import { PaperProps } from "@material-ui/core/Paper";
-import { styled, ITheme } from "../../../Theme";
 import { useCallback } from "react";
+import { css } from "@emotion/react";
 
 interface Props {
     account: string;
@@ -13,33 +12,6 @@ interface Props {
     header?: string;
     handleClick?: Function;
 }
-
-const Styled = {
-    Root: styled<Props | PaperProps | any>(Paper)`
-        && {
-            width: 100%;
-            height: 120px;
-            display: inline-flex;
-            flex-direction: column;
-            align-content: center;
-            align-items: center;
-            justify-items: center;
-            padding: 0.4em 0;
-
-            overflow-y: hidden;
-
-            ${({ header }: Props & { theme: ITheme }) =>
-                header ? "background-image: url(" + header + ")" : "background-color: white"}
-            background-size: cover;
-            background-position: top center;
-
-            & > * {
-                word-break: break-all;
-                word-wrap: break-spaces;
-            }
-        }
-    `,
-};
 
 export const UserCard: React.FC<Props> = ({
     account,
@@ -64,10 +36,34 @@ export const UserCard: React.FC<Props> = ({
     );
 
     return (
-        <Styled.Root header={header} onClick={handleClick}>
+        <Paper
+            onClick={handleClick}
+            css={css`
+                width: 100%;
+                height: 120px;
+                display: inline-flex;
+                flex-direction: column;
+                align-content: center;
+                align-items: center;
+                justify-items: center;
+                padding: 0.4em 0;
+
+                overflow-y: hidden;
+
+                background-size: cover;
+                background-position: top center;
+
+                ${header ? `background-image: url("${header}")` : "background-color: white"}
+
+                & > * {
+                    word-break: break-all;
+                    word-wrap: break-word;
+                }
+            `}
+        >
             {avatar ? <Avatar src={avatar} /> : <Avatar>{"?"}</Avatar>}
             <Typography variant={"body1"}>{displayName || ""}</Typography>
             <Typography variant={"caption"}>{screenName || ""}</Typography>
-        </Styled.Root>
+        </Paper>
     );
 };
