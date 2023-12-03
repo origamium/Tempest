@@ -1,5 +1,5 @@
 import * as React from "react";
-import Dropzone, { FileRejection } from "react-dropzone";
+import Dropzone, { FileRejection, Accept } from "react-dropzone";
 import Field from "./Field";
 import { ThumbnailList } from "../Thumbnail";
 import { ComponentButton } from "../IconButton/ReactionButton/ComponentButton";
@@ -13,7 +13,7 @@ import { useCallback, useEffect } from "react";
 
 export interface FormProps extends IUICommonAttribute {
     /* accept file type.. */
-    accept?: string;
+    accept?: Accept;
     /* open file upload dialog */
     handleFileUpload?: (Function, file: File[]) => void;
     /* max text length, will occur warn. */
