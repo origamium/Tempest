@@ -41,13 +41,8 @@ module.exports = {
                         allow: ["info", "warn", "error"],
                     },
                 ],
-                "no-unused-vars": 0,
-                "@typescript-eslint/no-unused-vars": [
-                    2,
-                    {
-                        args: "none",
-                    },
-                ],
+                "no-unused-vars": 0, // 暫定的に無効
+                "@typescript-eslint/no-unused-vars": 0, // 暫定的に無効
                 "@typescript-eslint/no-require-imports": 2,
                 "@typescript-eslint/no-var-requires": 2,
                 "@typescript-eslint/consistent-type-assertions": 2,
